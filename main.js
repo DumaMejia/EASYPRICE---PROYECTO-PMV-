@@ -32,13 +32,19 @@ var app = new Vue({
             materia5:''
         },
     },
+    
+    //Roger Alberto Chávez Zelaya USIS015320
+
+//Duma Roberto Zelaya Mejía USIS007420
+
+//Roberto Carlos Hernández Meléndez USIS016520
+
+//José Roberto del Rio Maravilla USIS015220
+
+//Flor Mabel Ariza Rodríguez USIS011120
     methods: {
         buscarAlumno(){
-            /*if( this.buscar.trim().length>0 ){
-                this.clientes = this.clientes.filter(item=>item.nombre.toLowerCase().indexOf(this.buscar.toLowerCase())>=0);
-            } else {
-                this.obtenerClientes();
-            }*/
+           
             this.obtenerAlumno(this.buscar);
         },
         guardarAlumno(){
@@ -70,7 +76,7 @@ var app = new Vue({
                             break;
                             
                         default:
-                            this.msg = `Error al procesar el cliente: ${error.message}`;
+                            this.msg = `Error al procesar el alumno: ${error.message}`;
                     }
                 });
             });
