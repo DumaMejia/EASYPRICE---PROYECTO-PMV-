@@ -1,154 +1,144 @@
-var db_sistema = openDatabase('dbsistema', '1.0', 'Sistema Educacion', 5 * 1024 * 1024);
+
+var db_sistema = openDatabase('db:USIS007420', '1.0', 'Sistema Libros', 5 * 1024 * 1024);
 if(!db_sistema){
     alert('Lo siento tu navegado NO soporta BD locales.');
 }
+Vue.component('v-select-autores',VueSelect.VueSelect);
 var app = new Vue({
-    el: '#appAlumno',
+    
+    el: '#appautor',
     data: {
-        alumnos: [],
+        autores: [],
         buscar: '',
         msg: 'Sistema Activo',
-        alumno: {
+        autor: {
             accion: 'nuevo',
-            idAlumno: '',
+            idAutor: '',
             codigo: '',
             nombre: '',
-            direccion: '',
+            pais: '',
             telefono: '',
-            dui: '',
-            carrera: '',
         },
-        materias: [],
+        libros: [],
+        autores2: [],
         buscar1: '',
         msg1:'Sistema Activo',
-         materia: {
-            idincripcion:'',
-            codigo1:'',
-            nombre1:'',
-            materia1:'',
-            materia2:'',
-            materia3:'',
-            materia4:'',
-            materia5:''
+         libro: {
+            idLibro:'',
+            idAutor1:'',
+            autores1: {
+                id: '',
+                label: '',
+            },
+            isbn:'',
+            titulo:'',
+            editorial:'',
+            edicion:''
         },
     },
-    
-    //Roger Alberto Chávez Zelaya USIS015320
 
-//Duma Roberto Zelaya Mejía USIS007420
-
-//Roberto Carlos Hernández Meléndez USIS016520
-
-//José Roberto del Rio Maravilla USIS015220
-
-//Flor Mabel Ariza Rodríguez USIS011120
     methods: {
-        buscarAlumno(){
+        buscarautor(){
            
-            this.obtenerAlumno(this.buscar);
+            this.obtenerautor(this.buscar);
         },
-        guardarAlumno(){
+        guardarautor(){
             let sql = '',
                 parametros = [];
-            if(this.alumno.accion == 'nuevo'){
-                sql = 'INSERT INTO alumnos (codigo, nombre, direccion, telefono, dui, carrera) VALUES (?,?,?,?,?,?)';
-                parametros = [this.alumno.codigo,this.alumno.nombre,this.alumno.direccion,this.alumno.telefono,this.alumno.dui,this.alumno.carrera];
-            }else if(this.alumno.accion == 'modificar'){
-                sql = 'UPDATE alumnos SET codigo=?, nombre=?, direccion=?, telefono=?, dui=?, carrera=? WHERE idAlumno=?';
-                parametros = [this.alumno.codigo,this.alumno.nombre,this.alumno.direccion,this.alumno.telefono,this.alumno.dui,this.alumno.carrera,this.alumno.idAlumno];
-            }else if(this.alumno.accion == 'eliminar'){
-                sql = 'DELETE FROM alumnos WHERE idAlumno=?';
-                parametros = [this.alumno.idAlumno];
+            if(this.autor.accion == 'nuevo'){
+                sql = 'INSERT INTO autor (codigo, nombre, pais, telefono) VALUES (?,?,?,?)';
+                parametros = [this.autor.codigo,this.autor.nombre,this.autor.pais,this.autor.telefono];
+            }else if(this.autor.accion == 'modificar'){
+                sql = 'UPDATE autor SET codigo=?, nombre=?, pais=?, telefono=? WHERE idAutor=?';
+                parametros = [this.autor.codigo,this.autor.nombre,this.autor.direccion,this.autor.telefono,this.autor.idAutor];
+            }else if(this.autor.accion == 'eliminar'){
+                sql = 'DELETE FROM autor WHERE idAutor=?';
+                parametros = [this.autor.idautor];
             }
             db_sistema.transaction(tx=>{
                 tx.executeSql(sql,
                     parametros,
 
                 (tx, results)=>{
-                    this.msg = 'Alumno Registrado Con Exito';
-                    this.nuevoAlumno();
-                    this.obtenerAlumno();
+                    this.msg = 'autor Registrado Con Exito';
+                    this.nuevoautor();
+                    this.obtenerautor();
                 },
                 (tx, error)=>{
                     switch(error.code){
                         case 6:
-                            this.msg = 'El codigo o el DUI ya existe, por favor digite otro';
+                            this.msg = 'El codigo o el Nombre ya existe, por favor digite otro';
                             break;
                             
                         default:
-                            this.msg = `Error al procesar el alumno: ${error.message}`;
+                            this.msg = `Error al procesar el autor: ${error.message}`;
                     }
                 });
             });
         },
-        modificarAlumno(data){
-            this.alumno = data;
-            this.alumno.accion = 'modificar';
+        modificarautor(data){
+            this.autor = data;
+            this.autor.accion = 'modificar';
         },
-        eliminarAlumno(data){
-            if( confirm(`¿Esta seguro de eliminar el alumno ${data.nombre}?`) ){
-                this.alumno.idAlumno = data.idAlumno;
-                this.alumno.accion = 'eliminar';
-                this.guardarAlumno();
+        eliminarautor(data){
+            if( confirm(`¿Esta seguro de eliminar el autor ${data.nombre}?`) ){
+                this.autor.idautor = data.idautor;
+                this.autor.accion = 'eliminar';
+                this.guardarautor();
             }
         },
-        obtenerAlumno(busqueda=''){
+        obtenerautor(busqueda=''){
             db_sistema.transaction(tx=>{
-                tx.executeSql(`SELECT * FROM alumnos WHERE nombre like "%${busqueda}%" OR codigo like "%${busqueda}%"`, [], (tx, results)=>{
-                    this.alumnos = results.rows;
-                    /*this.clientes = [];
-                    for(let i=0; i<results.rows.length; i++){
-                        this.clientes.push(results.rows.item(i));
-                    }*/
+                tx.executeSql(`SELECT * FROM autor WHERE nombre like "%${busqueda}%" OR codigo like "%${busqueda}%"`, [], (tx, results)=>{
+                    this.autores = results.rows;
+                  
                 });
             });
         },
-        nuevoAlumno(){
-            this.alumno.accion = 'nuevo';
-            this.alumno.idAlumno = '';
-            this.alumno.codigo = '';
-            this.alumno.nombre = '';
-            this.alumno.direccion = '';
-            this.alumno.telefono = '';
-            this.alumno.dui = '';
-            this.alumno.carrera ='Seleccionar Carrera';
-            console.log(this.alumno);
+        nuevoautor(){
+            this.autor.accion = 'nuevo';
+            this.autor.idautor = '';
+            this.autor.codigo = '';
+            this.autor.nombre = '';
+            this.autor.pais = '';
+            this.autor.telefono = '';
+            console.log(this.autor);
         },
 
-        //Administrar inscripcin alumnos
+        //Administrar inscripcin autores
 
         buscarIncripcion(){
            
             this.obtenerIncripcion(this.buscar1);
         },
         guardarInscripcion(){
-            if(this.materia.nombre1=='' || this.materia.codigo1==''){
-                this.msg1 = 'Seleccione alumno para inscribir materias';
+            if(this.libro.nombre1=='' || this.libro.codigo1==''){
+                this.msg1 = 'Seleccione autor para inscribir libros';
             }else{
                 let sql = '',
                 parametros = [];
-            if(this.alumno.accion == 'nuevo'){
-                sql = 'INSERT INTO inscripcion (codigo1, nombre1, materia1, materia2, materia3, materia4, materia5) VALUES (?,?,?,?,?,?,?)';
-                parametros = [this.materia.codigo1,this.materia.nombre1,this.materia.materia1,this.materia.materia2,this.materia.materia3,this.materia.materia4,this.materia.materia5];
-            }else if(this.alumno.accion == 'modificar'){
-                sql = 'UPDATE inscripcion SET codigo1=?, nombre1=?, materia1=?, materia2=?, materia3=?, materia4=?, materia5=? WHERE idincripcion=?';
-                parametros = [this.materia.codigo1,this.materia.nombre1,this.materia.materia1,this.materia.materia2,this.materia.materia3,this.materia.materia4,this.materia.materia5,this.materia.idincripcion];
-            }else if(this.alumno.accion == 'eliminar'){
-                sql = 'DELETE FROM inscripcion WHERE idincripcion=?';
-                parametros = [this.materia.idincripcion];
+            if(this.autor.accion == 'nuevo'){
+                sql = 'INSERT INTO libros (idAutor, isbn, titulo, editorial, edicion) VALUES (?,?,?,?,?)';
+                parametros = [this.libro.idAutor1,this.libro.isbn,this.libro.titulo,this.libro.editorial,this.libro.edicion];
+            }else if(this.autor.accion == 'modificar'){
+                sql = 'UPDATE libros SET idAutor=?, isbn=?, titulo=?, editorial=?, edicion=? WHERE idLibro=?';
+                parametros = [this.libro.idAutor1,this.libro.isbn,this.libro.titulo,this.libro.editorial,this.libro.edicion,this.libro.idLibro];
+            }else if(this.autor.accion == 'eliminar'){
+                sql = 'DELETE FROM libros WHERE idLibro=?';
+                parametros = [this.libro.idincripcion];
             }
             db_sistema.transaction(tx=>{
                 tx.executeSql(sql,
                     parametros,
 
                 (tx, results)=>{
-                    this.msg1 = 'Alumno procesado con exito';
+                    this.msg1 = 'autor procesado con exito';
                     this.nuevoInscripcion();
                     this.obtenerIncripcion();
                 },
                 (tx, error)=>{
                    
-                            this.materia.msg1 = `Error al procesar al Alumno: ${error.message}`;
+                            this.libro.msg1 = `Error al procesar al autor: ${error.message}`;
                     
                 });
             });
@@ -156,62 +146,61 @@ var app = new Vue({
             
         },
         modificarIncripcion(data){
-            this.materia.idincripcion = data.idincripcion;
-            this.materia.nombre1 = data.nombre1;
-            this.materia.codigo1 = data.codigo1;
-            this.materia.materia1 = data.materia1;
-            this.materia.materia2 = data.materia2;
-            this.materia.materia3 = data.materia3;
-            this.materia.materia4 = data.materia4;
-            this.materia.materia5 = data.materia5;
-            this.alumno.accion = 'modificar';
+            this.libro.idLibro = data.idLibro;
+            this.libro.idAutor1 = data.idAutor1;
+            this.libro.isbn = data.isbn;
+            this.libro.titulo = data.titulo;
+            this.libro.editorial = data.editorial;
+            this.libro.edicion = data.edicion;
+            this.autor.accion = 'modificar';
         },
         Inscripcion(data){
-            this.materia.nombre1 = data.nombre;
-            this.materia.codigo1= data.codigo;
+            this.libro.nombre1 = data.nombre;
+            this.libro.codigo1= data.codigo;
            
         },
         eliminarIncripcion(data){
-            if( confirm(`¿Esta seguro de eliminar el registro de ${data.nombre1}?`) ){
-                this.materia.idincripcion = data.idincripcion;
-                this.materia.nombre1 = data.nombre1;
-                this.materia.codigo1 = data.codigo1;
-                this.alumno.accion = 'eliminar';
+            if( confirm(`¿Esta seguro de eliminar el registro de ${data.titulo}?`) ){
+                this.libro.idLibro = data.idLibro;
+                this.autor.accion = 'eliminar';
                 this.guardarInscripcion();
             }
         },
         obtenerIncripcion(busqueda=''){
             db_sistema.transaction(tx=>{
-                tx.executeSql(`SELECT * FROM inscripcion WHERE nombre1 like "%${busqueda}%" OR codigo1 like "%${busqueda}%"`, [], (tx, results)=>{
-                    this.materias = results.rows;
+                tx.executeSql(`SELECT * FROM libros WHERE titulo like "%${busqueda}%" OR editorial like "%${busqueda}%"`, [], (tx, results)=>{
+                    this.libros = results.rows;
+                });
+            });
+
+            db_sistema.transaction(tx=>{
+                tx.executeSql(`SELECT * FROM autor`, [], (tx, results)=>{
+                    this.libros = results.rows;
                 });
             });
         },
         nuevoInscripcion(){
-            this.alumno.accion = 'nuevo';
-            this.materia.idincripcion = '';
-            this.materia.codigo1 = '';
-            this.materia.nombre1 = '';
-            this.materia.materia1 = '';
-            this.materia.materia2 = '';
-            this.materia.materia3 = '';
-            this.materia.materia4 ='';
-            this.materia.materia5 ='';
-            console.log(this.materia);
+            this.autor.accion = 'nuevo';
+            this.libro.idLibro = '';
+            this.libro.isbn = '';
+            this.libro.titulo = '';
+            this.libro.editorial = '';
+            this.libro.edicion = '';
+            console.log(this.libro);
         }
 
     },
     created(){
         db_sistema.transaction(tx=>{
-            tx.executeSql('CREATE TABLE IF NOT EXISTS alumnos(idAlumno INTEGER PRIMARY KEY AUTOINCREMENT, '+
-                'codigo char(10) unique, nombre char(75), direccion TEXT, telefono char(10), dui char(10) unique, carrera char(75))');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS autor(idAutor INTEGER PRIMARY KEY AUTOINCREMENT, '+
+                'codigo char(10) unique, nombre char(75), pais TEXT, telefono char(10))');
                 
-            tx.executeSql('CREATE TABLE IF NOT EXISTS inscripcion(idincripcion INTEGER PRIMARY KEY AUTOINCREMENT, '+
-                'codigo1 char(10) unique, nombre1 char(75), materia1 TEXT, materia2 TEXT, materia3 TEXT, materia4 TEXT, materia5 TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS libros(idLibro INTEGER PRIMARY KEY AUTOINCREMENT, '+
+                ' idAutor TEXT, isbn TEXT, titulo TEXT, editorial TEXT, edicion TEXT)');
         }, err=>{
             console.log('Error al crear la tabla de clientes', err);
         });
-        this.obtenerAlumno();
+        this.obtenerautor();
         this.obtenerIncripcion()
     }
 });
