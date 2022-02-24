@@ -77,10 +77,9 @@
                             <tr>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                <th>Direccion</th>
+                                <th>Pais</th>
                                 <th>Telefono</th>
-                                <th>DUI</th>
-                                <th>Carrera</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -89,8 +88,6 @@
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.pais}}</td>
                                 <td>{{item.telefono}}</td>
-                                <td>{{item.dui}}</td>
-                                <td>{{item.carrera}}</td>
                                 <td>
                                     <button type="button" class="btn btn-danger" @click="eliminarautor(item)">Eliminar</button>
                                     <button type="button" class="btn btn-success" @click="modificarautor(item)">Modificar</button>

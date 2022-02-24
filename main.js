@@ -49,10 +49,10 @@ var app = new Vue({
                 parametros = [this.autor.codigo,this.autor.nombre,this.autor.pais,this.autor.telefono];
             }else if(this.autor.accion == 'modificar'){
                 sql = 'UPDATE autor SET codigo=?, nombre=?, pais=?, telefono=? WHERE idAutor=?';
-                parametros = [this.autor.codigo,this.autor.nombre,this.autor.direccion,this.autor.telefono,this.autor.idAutor];
+                parametros = [this.autor.codigo,this.autor.nombre,this.autor.pais,this.autor.telefono,this.autor.idAutor];
             }else if(this.autor.accion == 'eliminar'){
                 sql = 'DELETE FROM autor WHERE idAutor=?';
-                parametros = [this.autor.idautor];
+                parametros = [this.autor.idAutor];
             }
             db_sistema.transaction(tx=>{
                 tx.executeSql(sql,
@@ -81,7 +81,7 @@ var app = new Vue({
         },
         eliminarautor(data){
             if( confirm(`¿Esta seguro de eliminar el autor ${data.nombre}?`) ){
-                this.autor.idautor = data.idautor;
+                this.autor.idAutor = data.idAutor;
                 this.autor.accion = 'eliminar';
                 this.guardarautor();
             }
