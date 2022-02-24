@@ -20,7 +20,6 @@ var app = new Vue({
             telefono: '',
         },
         libros: [],
-        autores2: [],
         buscar1: '',
         msg1:'Sistema Activo',
          libro: {
@@ -125,7 +124,7 @@ var app = new Vue({
                 parametros = [this.libro.idAutor1,this.libro.isbn,this.libro.titulo,this.libro.editorial,this.libro.edicion,this.libro.idLibro];
             }else if(this.autor.accion == 'eliminar'){
                 sql = 'DELETE FROM libros WHERE idLibro=?';
-                parametros = [this.libro.idincripcion];
+                parametros = [this.libro.idLibro];
             }
             db_sistema.transaction(tx=>{
                 tx.executeSql(sql,
@@ -173,11 +172,7 @@ var app = new Vue({
                 });
             });
 
-            db_sistema.transaction(tx=>{
-                tx.executeSql(`SELECT * FROM autor`, [], (tx, results)=>{
-                    this.libros = results.rows;
-                });
-            });
+           
         },
         nuevoInscripcion(){
             this.autor.accion = 'nuevo';
@@ -196,7 +191,7 @@ var app = new Vue({
                 'codigo char(10) unique, nombre char(75), pais TEXT, telefono char(10))');
                 
             tx.executeSql('CREATE TABLE IF NOT EXISTS libros(idLibro INTEGER PRIMARY KEY AUTOINCREMENT, '+
-                ' idAutor TEXT, isbn TEXT, titulo TEXT, editorial TEXT, edicion TEXT)');
+                'idAutor TEXT, isbn TEXT, titulo TEXT, editorial TEXT, edicion TEXT)');
         }, err=>{
             console.log('Error al crear la tabla de clientes', err);
         });

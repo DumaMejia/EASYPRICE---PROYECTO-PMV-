@@ -108,13 +108,6 @@
                     </div>
                     <div class="card-body">
                         <div class="row p-1">
-                            <div class="col col-md-1">Autor</div>
-                            <div class="col col-md-2">
-                                <v-select-autores v-model="libro.autores1" 
-                                    :options="autores2" placeholder="Seleccione una categoria"/>
-                            </div> 
-                        </div>
-                        <div class="row p-1">
                             <div class="col col-md-1">ISBN</div>
                             <div class="col col-md-2">
                                 <input v-model="libro.isbn"  placeholder="ISBN"  required title="Nombre de cliente" class="form-control" type="text">
@@ -170,7 +163,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>AUTOR</th>
                                 <th>ISBN</th>
                                 <th>TITULO</th>
                                 <th>EDITORIAL</th>
@@ -180,7 +172,6 @@
                         </thead>
                         <tbody>
                             <tr v-for="item in libros" :key="item.idLibro">
-                                <td>{{item.idAutor1}}</td>
                                 <td>{{item.isbn}}</td>
                                 <td>{{item.titulo}}</td>
                                 <td>{{item.editorial}}</td>
