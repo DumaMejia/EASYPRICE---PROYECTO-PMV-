@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::apiResources([
-    'alumno'=>alumnos::class,
+    'alumno'=>Alumnos::class,
 ]);
 
 Route::get('/', function () {
