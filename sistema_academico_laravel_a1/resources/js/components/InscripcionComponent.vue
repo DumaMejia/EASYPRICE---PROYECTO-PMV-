@@ -1,6 +1,6 @@
 <template>
-    <div id="appMateria">
-        <div class="card text-white" id="carMateria">
+    <div id="appInscripcion">
+        <div class="card text-white" id="carInscripcion">
             <div class="card-header bg-primary">
                 Registro de Alumnos
                 <button type="button" class="btn-close text-end" @click="cerrarForm"></button>

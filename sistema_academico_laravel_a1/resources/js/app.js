@@ -24,7 +24,7 @@ window.generarIdUnicoFecha = ()=>{
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('alumno-component', require('./components/AlumnoComponent.vue').default);
-Vue.component('matricula-component', require('./components/MatriculaComponent.vue').default);
+Vue.component('inscripcion-component', require('./components/InscripcionComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -63,6 +63,7 @@ const app = new Vue({
                 tblmateria = db.createObjectStore('materia', {keyPath:'idMateria'});
                 tbldocente = db.createObjectStore('docente', {keyPath:'idDocente'});
                 tblmatricula = db.createObjectStore('matricula', {keyPath:'idMatricula'});
+                tblinscripcion = db.createObjectStore('inscripcion', {keyPath:'idInscripcion'});
 
                 tblalumno.createIndex('idAlumno', 'idAlumno', {unique:true});
                 tblalumno.createIndex('codigo', 'codigo', {unique:false});
@@ -70,7 +71,7 @@ const app = new Vue({
                 tblmateria.createIndex('idMateria', 'idMateria', {unique:true});
                 tblmateria.createIndex('codigo', 'codigo', {unique:false});
 
-                tblmatricula.createIndex('idMatricula', 'idMatricula', {unique:true});
+                tblmatricula.createIndex('idIsnscripcion', 'idInscripcion', {unique:true});
                 tblmatricula.createIndex('idAlumno', 'idAlumno', {unique:false});
             };
             indexDb.onsuccess = e=>{
