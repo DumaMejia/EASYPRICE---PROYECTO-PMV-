@@ -1,5 +1,6 @@
 <?php
 
+use App\alumno;
 use App\Http\Controllers\Alumnos;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::apiResources([
-    'alumno'=>Alumnos::class,
+    'alumno'=>alumnos::class,
 ]);
 
 Route::get('/', function () {
