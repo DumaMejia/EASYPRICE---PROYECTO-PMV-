@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::apiResources([
-    'Alumnos'=>prueba::class,
+    'alumno'=>Alumnos::class,
 ]);
 
 Route::get('/', function () {
