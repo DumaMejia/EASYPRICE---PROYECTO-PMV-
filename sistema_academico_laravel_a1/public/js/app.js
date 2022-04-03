@@ -51407,8 +51407,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Usuario\Desktop\aqui tarea\Programacion-IV-2022\sistema_academico_laravel_a1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Usuario\Desktop\aqui tarea\Programacion-IV-2022\sistema_academico_laravel_a1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Usuario\Desktop\laravel 2 ptm\PROGRAMACION-IV\sistema_academico_laravel_a1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Usuario\Desktop\laravel 2 ptm\PROGRAMACION-IV\sistema_academico_laravel_a1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
