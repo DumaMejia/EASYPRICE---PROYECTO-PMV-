@@ -6,7 +6,7 @@ use App\alumno;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class alumnos extends Controller
+class prueba extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class alumnos extends Controller
      */
     public function index()
     {
-        return alumno::get();//select * from alumno
+        return alumno::get();//select * from alumnos
     }
 
     /**
