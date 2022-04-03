@@ -24,6 +24,7 @@ window.generarIdUnicoFecha = ()=>{
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('alumno-component', require('./components/AlumnoComponent.vue').default);
+Vue.component('matricula-component', require('./components/MatriculaComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

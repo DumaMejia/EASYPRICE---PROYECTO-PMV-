@@ -6,7 +6,7 @@ use App\alumno;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Alumno extends Controller
+class Alumnos extends Controller
 {
     /**
      * Display a listing of the resource.

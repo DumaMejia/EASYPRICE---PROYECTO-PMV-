@@ -2024,6 +2024,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form'],
   data: function data() {
@@ -2040,7 +2053,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         nombre: '',
         direccion: '',
         telefono: '',
-        dui: ''
+        dui: '',
+        carrera: ''
       }
     };
   },
@@ -2197,6 +2211,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.alumno.direccion = '';
       this.alumno.telefono = '';
       this.alumno.dui = '';
+      this.alumno.carrera = '';
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -38752,6 +38767,70 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row p-1" }, [
+              _c("div", { staticClass: "col col-md-2" }, [_vm._v("Carrera")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col col-md-2" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.alumno.carrera,
+                        expression: "alumno.carrera",
+                      },
+                    ],
+                    staticClass: "form-select form-select-sm",
+                    attrs: { "aria-label": ".form-select-sm example" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.alumno,
+                          "carrera",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { selected: "" } }, [
+                      _vm._v("Seleccionar Carrera"),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "option",
+                      {
+                        attrs: {
+                          value: "Ingenieria En Sistemas y Redes Informaticas",
+                        },
+                      },
+                      [_vm._v("Ingenieria En Sistemas")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Medicina" } }, [
+                      _vm._v("Medicina"),
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Artes Plasticas" } }, [
+                      _vm._v("Artes Plasticas"),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row p-1" }, [
               _c("div", { staticClass: "col col-md-5 text-center" }, [
                 _vm.alumno.mostrar_msg
                   ? _c(
@@ -38851,6 +38930,8 @@ var render = function () {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.dui))]),
                     _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.carrera))]),
+                    _vm._v(" "),
                     _c("td", [
                       _c(
                         "button",
@@ -38926,6 +39007,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("TEL")]),
       _vm._v(" "),
       _c("th", [_vm._v("DUI")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("CARRERA")]),
       _vm._v(" "),
       _c("th"),
     ])
