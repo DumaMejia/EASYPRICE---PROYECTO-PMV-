@@ -13,7 +13,7 @@
                             <div class="col col-md-2">
                                 <select v-model="inscripcion.nombre" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                     <option selected> Ninguna</option>
-                                    <option value="0"></option>
+                                   <option v-for="item in alumnos" :value="item.nombre" :key="item.nombre">{{item.nombre}}</option>
                                   </select>
                             </div> 
                         </div>
@@ -132,7 +132,8 @@
         buscar1: '',
          inscripcion: {
             accion: 'nuevo',
-            idIncripcion:'',
+            id: 0,
+            idInscripcion:'',
             nombre:'',
             materia1:'',
             materia2:'',
@@ -140,6 +141,16 @@
             materia4:'',
             materia5:''
             },
+            alumno:{
+                    id : 0,
+                    idAlumno : '',
+                    codigo: '',
+                    nombre1: '',
+                    direccion: '',
+                    telefono: '',
+                    dui: '',
+                    carrera: ''
+                },
         }
         },
         methods:{
@@ -242,8 +253,41 @@
                 };
                 data.onerror = e=>{
                     this.inscripcion.msg = `Error al obtener los inscripcions ${e.target.error}`;
+                }; 
+
+                let stores = this.abrirStore('alumno', 'readonly'),
+                    data1 = stores.getAll();
+                data1.onsuccess = e=>{
+                    if( data1.result.length<=0 ){
+                        fetch(`alumno`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(data1=>{
+                                this.alumnos = data1;
+                                data1.map(alumno=>{
+                                    let stores = this.abrirStore('alumno', 'readwrite'),
+                                        query = stores.put(alumno);
+                                    query.onsuccess = e=>{
+                                        console.log(`Inscripcion ${alumno.nombre} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar la inscripcion ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                this.inscripcion.msg = `Error al guardar el inscripcion ${err}`;
+                            });
+                    }
+                    //this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
+                data1.onerror = e=>{
+                    this.inscripcion.msg = `Error al obtener los inscripcions ${e.target.error}`;
+                }; 
+
             },
+    
+
             nuevoInscripcion(){
             this.inscripcion.accion = 'nuevo';
             this.inscripcion.idIncripcion = '';
@@ -259,7 +303,7 @@
             },
         },
         created(){
-            //this.obtenerDatos();
+            //this.obtenerDatosAlumno();
         },
     }
 </script>

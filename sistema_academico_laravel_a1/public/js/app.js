@@ -2373,13 +2373,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       buscar1: '',
       inscripcion: {
         accion: 'nuevo',
-        idIncripcion: '',
+        id: 0,
+        idInscripcion: '',
         nombre: '',
         materia1: '',
         materia2: '',
         materia3: '',
         materia4: '',
         materia5: ''
+      },
+      alumno: {
+        id: 0,
+        idAlumno: '',
+        codigo: '',
+        nombre: '',
+        direccion: '',
+        telefono: '',
+        dui: '',
+        carrera: ''
       }
     };
   },
@@ -2526,6 +2537,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data.onerror = function (e) {
         _this4.inscripcion.msg = "Error al obtener los inscripcions ".concat(e.target.error);
       };
+
+      var stores = this.abrirStore('alumno', 'readonly'),
+          data1 = stores.getAll();
+
+      data1.onsuccess = function (e) {
+        if (data1.result.length <= 0) {
+          fetch("alumno", {
+            credentials: 'same-origin'
+          }).then(function (res) {
+            return res.json();
+          }).then(function (data1) {
+            _this4.alumnos = data1;
+            data1.map(function (alumno) {
+              var stores = _this4.abrirStore('alumno', 'readwrite'),
+                  query = stores.put(alumno);
+
+              query.onsuccess = function (e) {
+                console.log("Inscripcion ".concat(alumno.nombre, " guardado"));
+              };
+
+              query.onerror = function (e) {
+                console.log("Error al guardar la inscripcion ".concat(e.target.error));
+              };
+            });
+          })["catch"](function (err) {
+            _this4.inscripcion.msg = "Error al guardar el inscripcion ".concat(err);
+          });
+        } //this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+
+      };
+
+      data1.onerror = function (e) {
+        _this4.inscripcion.msg = "Error al obtener los inscripcions ".concat(e.target.error);
+      };
     },
     nuevoInscripcion: function nuevoInscripcion() {
       this.inscripcion.accion = 'nuevo';
@@ -2540,7 +2585,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return db.transaction(store, modo).objectStore(store);
     }
   },
-  created: function created() {//this.obtenerDatos();
+  created: function created() {//this.obtenerDatosAlumno();
   }
 });
 
@@ -39426,8 +39471,18 @@ var render = function () {
                         _vm._v(" Ninguna"),
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "0" } }),
-                    ]
+                      _vm._l(_vm.alumnos, function (item) {
+                        return _c(
+                          "option",
+                          {
+                            key: item.nombre,
+                            domProps: { value: item.nombre },
+                          },
+                          [_vm._v(_vm._s(item.nombre))]
+                        )
+                      }),
+                    ],
+                    2
                   ),
                 ]),
               ]),
