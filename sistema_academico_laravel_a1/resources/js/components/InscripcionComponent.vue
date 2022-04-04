@@ -88,7 +88,7 @@
                 <thead>
                     <tr>
                         <td colspan="6">
-                            Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoInscripcion" v-model="buscar1" class="form-control" type="text">
+                            Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoInscripcion" v-model="buscar" class="form-control" type="text">
                         </td>
                     </tr>
                     <tr>
@@ -129,7 +129,7 @@
             return{
         inscripcions: [],
         alumnos: [],
-        buscar1: '',
+        buscar: '',
          inscripcion: {
             accion: 'nuevo',
             id: 0,

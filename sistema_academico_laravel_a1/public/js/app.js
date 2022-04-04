@@ -2370,7 +2370,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       inscripcions: [],
       alumnos: [],
-      buscar1: '',
+      buscar: '',
       inscripcion: {
         accion: 'nuevo',
         id: 0,
@@ -39804,8 +39804,8 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.buscar1,
-                          expression: "buscar1",
+                          value: _vm.buscar,
+                          expression: "buscar",
                         },
                       ],
                       staticClass: "form-control",
@@ -39813,14 +39813,14 @@ var render = function () {
                         title: "Introduzca el texto a buscar",
                         type: "text",
                       },
-                      domProps: { value: _vm.buscar1 },
+                      domProps: { value: _vm.buscar },
                       on: {
                         keyup: _vm.buscandoInscripcion,
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.buscar1 = $event.target.value
+                          _vm.buscar = $event.target.value
                         },
                       },
                     }),
