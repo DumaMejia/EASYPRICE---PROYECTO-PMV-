@@ -101,16 +101,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in Inscripcions" :key="item.idincripcion">
-                        <td>{{item.alumno.label}}</td>
+                    <tr  v-for="item in inscripcions" @click='modificarInscripcion( item )' :key="item.idInscripcion">
+                        <td>{{item.nombre}}</td>
                         <td>{{item.materia1}}</td>
                         <td>{{item.materia2}}</td>
                         <td>{{item.materia3}}</td>
                         <td>{{item.materia4}}</td>
                         <td>{{item.materia5}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger" @click="eliminarIncripcion(item)">Eliminar</button>
-                            <button type="button" class="btn btn-success" @click="modificarIncripcion(item)">Modificar</button>
+                            <button type="button" class="btn btn-danger" @click="eliminarInscripcion(item)">Eliminar</button>
+                            <button type="button" class="btn btn-success" @click="modificarInscripcion(item)">Modificar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -127,15 +127,13 @@
         props : ['form'],
          data:()=>{
             return{
-        incripcions: [],
+        inscripcions: [],
         alumnos: [],
         buscar1: '',
          inscripcion: {
             accion: 'nuevo',
             idIncripcion:'',
             nombre:'',
-            codigo1:'',
-            nombre1:'',
             materia1:'',
             materia2:'',
             materia3:'',
@@ -166,7 +164,7 @@
                 })
             },
             insertarLocal(inscripcion){
-                let store = this.abrirStore('alumno', 'readwrite'),
+                let store = this.abrirStore('inscripcion', 'readwrite'),
                     query = store.put(inscripcion);
                 query.onsuccess = e=>{
                     this.nuevoInscripcion();
@@ -181,9 +179,9 @@
                 this.obtenerDatos(this.buscar);
             },
             eliminarInscripcion(inscripcion){
-                if( confirm(`Esta seguro de eliminar el inscripcion ${alumno.nombre}?`) ){
+                if( confirm(`Esta seguro de eliminar el inscripcion ${inscripcion.nombre}?`) ){
                     inscripcion.accion = 'eliminar';
-                    let store = this.abrirStore('alumno', 'readwrite'),
+                    let store = this.abrirStore('inscripcion', 'readwrite'),
                         query = store.delete(inscripcion.idInscripcion),
                         metodo = 'DELETE',
                         url = `/inscripcion/${inscripcion.id}`;
@@ -216,7 +214,7 @@
                 this.insertarLocal(inscripcion);
             },
             obtenerDatos(valor=''){
-                let store = this.abrirStore('alumno', 'readonly'),
+                let store = this.abrirStore('inscripcion', 'readonly'),
                     data = store.getAll();
                 data.onsuccess = e=>{
                     if( data.result.length<=0 ){
@@ -226,7 +224,7 @@
                             .then(data=>{
                                 this.inscripcions = data;
                                 data.map(inscripcion=>{
-                                    let store = this.abrirStore('alumno', 'readwrite'),
+                                    let store = this.abrirStore('inscripcion', 'readwrite'),
                                         query = store.put(inscripcion);
                                     query.onsuccess = e=>{
                                         console.log(`Inscripcion ${inscripcion.nombre} guardado`);
@@ -257,7 +255,7 @@
             },
 
             abrirStore(store, modo){
-                return this.db.transaction(store, modo).objectStore(store);
+                return db.transaction(store, modo).objectStore(store);
             },
         },
         created(){

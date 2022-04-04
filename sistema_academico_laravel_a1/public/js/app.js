@@ -2368,15 +2368,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['form'],
   data: function data() {
     return {
-      incripcions: [],
+      inscripcions: [],
       alumnos: [],
       buscar1: '',
       inscripcion: {
         accion: 'nuevo',
         idIncripcion: '',
         nombre: '',
-        codigo1: '',
-        nombre1: '',
         materia1: '',
         materia2: '',
         materia3: '',
@@ -2426,7 +2424,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     insertarLocal: function insertarLocal(inscripcion) {
       var _this2 = this;
 
-      var store = this.abrirStore('alumno', 'readwrite'),
+      var store = this.abrirStore('inscripcion', 'readwrite'),
           query = store.put(inscripcion);
 
       query.onsuccess = function (e) {
@@ -2447,9 +2445,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     eliminarInscripcion: function eliminarInscripcion(inscripcion) {
       var _this3 = this;
 
-      if (confirm("Esta seguro de eliminar el inscripcion ".concat(alumno.nombre, "?"))) {
+      if (confirm("Esta seguro de eliminar el inscripcion ".concat(inscripcion.nombre, "?"))) {
         inscripcion.accion = 'eliminar';
-        var store = this.abrirStore('alumno', 'readwrite'),
+        var store = this.abrirStore('inscripcion', 'readwrite'),
             query = store["delete"](inscripcion.idInscripcion),
             metodo = 'DELETE',
             url = "/inscripcion/".concat(inscripcion.id);
@@ -2492,7 +2490,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var store = this.abrirStore('alumno', 'readonly'),
+      var store = this.abrirStore('inscripcion', 'readonly'),
           data = store.getAll();
 
       data.onsuccess = function (e) {
@@ -2504,7 +2502,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (data) {
             _this4.inscripcions = data;
             data.map(function (inscripcion) {
-              var store = _this4.abrirStore('alumno', 'readwrite'),
+              var store = _this4.abrirStore('inscripcion', 'readwrite'),
                   query = store.put(inscripcion);
 
               query.onsuccess = function (e) {
@@ -2539,7 +2537,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.inscripcion.materia5 = 'ninguna';
     },
     abrirStore: function abrirStore(store, modo) {
-      return this.db.transaction(store, modo).objectStore(store);
+      return db.transaction(store, modo).objectStore(store);
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -39776,50 +39774,61 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.Inscripcions, function (item) {
-                  return _c("tr", { key: item.idincripcion }, [
-                    _c("td", [_vm._v(_vm._s(item.alumno.label))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.materia1))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.materia2))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.materia3))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.materia4))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.materia5))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.eliminarIncripcion(item)
-                            },
-                          },
+                _vm._l(_vm.inscripcions, function (item) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.idInscripcion,
+                      on: {
+                        click: function ($event) {
+                          return _vm.modificarInscripcion(item)
                         },
-                        [_vm._v("Eliminar")]
-                      ),
+                      },
+                    },
+                    [
+                      _c("td", [_vm._v(_vm._s(item.nombre))]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.modificarIncripcion(item)
+                      _c("td", [_vm._v(_vm._s(item.materia1))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.materia2))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.materia3))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.materia4))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.materia5))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.eliminarInscripcion(item)
+                              },
                             },
                           },
-                        },
-                        [_vm._v("Modificar")]
-                      ),
-                    ]),
-                  ])
+                          [_vm._v("Eliminar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.modificarInscripcion(item)
+                              },
+                            },
+                          },
+                          [_vm._v("Modificar")]
+                        ),
+                      ]),
+                    ]
+                  )
                 }),
                 0
               ),
