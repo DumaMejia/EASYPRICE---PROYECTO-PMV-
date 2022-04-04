@@ -2564,8 +2564,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           })["catch"](function (err) {
             _this4.inscripcion.msg = "Error al guardar el inscripcion ".concat(err);
           });
-        } //this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+        }
 
+        _this4.alumnos = data1.result.filter(function (alumno) {
+          return alumno.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+        });
       };
 
       data1.onerror = function (e) {

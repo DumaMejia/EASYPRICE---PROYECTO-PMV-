@@ -145,7 +145,7 @@
                     id : 0,
                     idAlumno : '',
                     codigo: '',
-                    nombre1: '',
+                    nombre: '',
                     direccion: '',
                     telefono: '',
                     dui: '',
@@ -279,7 +279,7 @@
                                 this.inscripcion.msg = `Error al guardar el inscripcion ${err}`;
                             });
                     }
-                    //this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data1.onerror = e=>{
                     this.inscripcion.msg = `Error al obtener los inscripcions ${e.target.error}`;
