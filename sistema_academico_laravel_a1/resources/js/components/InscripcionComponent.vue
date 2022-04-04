@@ -1,204 +1,219 @@
 <template>
-    <div id="appInscripcion">
-        <div class="card text-white" id="carInscripcion">
-            <div class="card-header bg-primary">
-                Registro de Materias
-                <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
-            </div>
-            <div class="card-body text-dark">
-                <form method="post" @submit.prevent="guardarAlumno" @reset="nuevoAlumno">
-                    <div class="row p-1">
-                        <div class="col col-md-2">Codigo:</div>
-                        <div class="col col-md-2">
-                            <input title="Ingrese el codigo" v-model="alumno.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control">
-                        </div>
+   
+    <div id="appAlumno">
+        <div class="container-fluid">
+        <form @submit.prevent="guardarInscripcion" @reset.prevent="nuevoInscripcion" method="post" id="frmMaterias">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header text-white bg-dark">
+                        Administracion de Materias
                     </div>
-                    <div class="row p-1">
-                        <div class="col col-md-2">Nombre:</div>
-                        <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="alumno.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <div class="col col-md-2">Direccion:</div>
-                        <div class="col col-md-3">
-                            <input title="Ingrese la direccion" v-model="alumno.direccion" pattern="[A-Za-zñÑáéíóúü ]{3,100}" required type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <div class="col col-md-2">Telefono:</div>
-                        <div class="col col-md-2">
-                            <input title="Ingrese el tel" v-model="alumno.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <div class="col col-md-2">DUI:</div>
-                        <div class="col col-md-2">
-                            <input title="Ingrese el DUI" v-model="alumno.dui" pattern="[0-9]{8}-[0-9]{1}" required type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                            <div class="col col-md-2">Carrera</div>
+                    <div class="card-body">
+                        <div class="row p-1">
+                            <div class="col col-md-1">Nombre</div>
                             <div class="col col-md-2">
-                                <select v-model="alumno.carrera" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option  selected>Seleccionar Carrera</option>
-                                    <option value="Ingenieria En Sistemas y Redes Informaticas">Ingenieria En Sistemas</option>
-                                    <option value="Medicina">Medicina</option>
-                                    <option value="Artes Plasticas">Artes Plasticas</option>
+                                <select v-model="inscripcion.nombre" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected> Ninguna</option>
+                                    <option value="0"></option>
                                   </select>
                             </div> 
                         </div>
-                    <div class="row p-1">
-                        <div class="col col-md-5 text-center">
-                            <div v-if="alumno.mostrar_msg" class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ alumno.msg }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                        <div class="row p-1">
+                            <div class="col col-md-1">Materia 1</div>
+                            <div class="col col-md-2">
+                                <select v-model="inscripcion.materia1" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected> Ninguna</option>
+                                    <option value="Metodologia de la investigacion">Metodologia de la investigacion</option>
+                                    <option value="Sociologia">Sociologia</option>
+                                  </select>
+                            </div> 
+                        </div>
+                        
+                        <div class="row p-1">
+                            <div class="col col-md-1">Materia 2</div>
+                            <div class="col col-md-2">
+                                <select v-model="inscripcion.materia2" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option  selected>Ninguna</option>
+                                    <option value="Ingles Basico">Ingles Basico</option>
+                                    <option value="Ingles Tecnico">Ingles Tecnico</option>
+                                  </select>
+                            </div> 
+                        </div>
+                        <div class="row p-1">
+                            <div class="col col-md-1">Materia 3</div>
+                            <div class="col col-md-2">
+                                <select v-model="inscripcion.materia3" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option  selected>Ninguna</option>
+                                    <option value="Curso Superior de Gramatica">Curso Superior de Gramatica</option>
+                                    <option value="Matematica I">Matematica I</option>
+                                  </select>
+                            </div> 
+                        </div>
+                        <div class="row p-1">
+                            <div class="col col-md-1">Materia 4</div>
+                            <div class="col col-md-2">
+                                <select v-model="inscripcion.materia4" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option  selected>Ninguna</option>
+                                    <option value="Matematica II">Matematica II</option>
+                                    <option value="Fisica I">Fisica I</option>
+                                  </select>
+                            </div> 
+                        </div>
+                        <div class="row p-1">
+                            <div class="col col-md-1">Materia 5</div>
+                            <div class="col col-md-2">
+                                <select v-model="inscripcion.materia5" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option  selected>Ninguna</option>
+                                    <option value="Filosofia">Filosofia</option>
+                                    <option value="Sociedad e Historia">Sociedad e Historia</option>
+                                  </select>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-3 text-center">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="reset" class="btn btn-warning">Nuevo</button>
                             </div>
                         </div>
                     </div>
-                    <div class="row m-2">
-                        <div class="col col-md-5 text-center">
-                            <input class="btn btn-success" type="submit" value="Guardar">
-                            <input class="btn btn-warning" type="reset" value="Nuevo">
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
+    
+    <div class="card text-white bg-dark mb-3" id="cardBuscarCliente">
+        <div class="card-header text-white bg-dark">
+            Busqueda de Inscripcion de Materias
         </div>
-        <div class="card text-white" id="carBuscarAlumno">
-            <div class="card-header bg-primary">
-                Busqueda de Alumnos
-                <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarAlumno" aria-label="Close"></button>
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th colspan="6">
-                                Buscar: <input @keyup="buscandoAlumno" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>CODIGO</th>
-                            <th>NOMBRE</th>
-                            <th>DIRECCION</th>
-                            <th>TEL</th>
-                            <th>DUI</th>
-                            <th>CARRERA</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="item in alumnos" @click='modificarAlumno( item )' :key="item.idAlumno">
-                            <td>{{item.codigo}}</td>
-                            <td>{{item.nombre}}</td>
-                            <td>{{item.direccion}}</td>
-                            <td>{{item.telefono}}</td>
-                            <td>{{item.dui}}</td>
-                            <td>{{item.carrera}}</td>
-                            <td>
-                                <button class="btn btn-danger" @click="eliminarAlumno(item)">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="card-body">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <td colspan="6">
+                            Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoInscripcion" v-model="buscar1" class="form-control" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Materia 1</th>
+                        <th>Materia 2</th>
+                        <th>Materia 3</th>
+                        <th>Materia 4</th>
+                        <th>Materia 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in materias" :key="item.idincripcion">
+                        <td>{{item.alumno.label}}</td>
+                        <td>{{item.materia1}}</td>
+                        <td>{{item.materia2}}</td>
+                        <td>{{item.materia3}}</td>
+                        <td>{{item.materia4}}</td>
+                        <td>{{item.materia5}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" @click="eliminarIncripcion(item)">Eliminar</button>
+                            <button type="button" class="btn btn-success" @click="modificarIncripcion(item)">Modificar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+        </div>
+    </div>
+       
 </template>
 
 <script>
     export default {
         props : ['form'],
          data:()=>{
-            return {
-                buscar:'',
-                alumnos:[],
-                alumno:{
-                    accion : 'nuevo',
-                    mostrar_msg : false,
-                    msg : '',
-                    id : 0,
-                    idAlumno : '',
-                    codigo: '',
-                    nombre: '',
-                    direccion: '',
-                    telefono: '',
-                    dui: '',
-                    carrera: ''
-                }
-            }
+            return{
+        incripcions: [],
+        alumnos: [],
+        buscar1: '',
+         inscripcion: {
+            accion: 'nuevo',
+            idIncripcion:'',
+            nombre:'',
+            codigo1:'',
+            nombre1:'',
+            materia1:'',
+            materia2:'',
+            materia3:'',
+            materia4:'',
+            materia5:''
+            },
+        }
         },
         methods:{
             cerrarForm(){
-                this.form['alumno'].mostrar = false;
+                this.form['inscripcion'].mostrar = false;
             },
-            async sincronizarDatosServidor(alumno, metodo, url){
+            async sincronizarDatosServidor(inscripcion, metodo, url){
                 await axios({
                     method : metodo,
                     url,
-                    data : alumno
+                    data : inscripcion
                 })
                 .then(resp=>{
-                    if(alumno.accion=='nuevo'){
-                        alumno.id = resp.data.id;
-                        this.insertarLocal(alumno);//actualizar el id del alumno que se genero en el servidor con laravel y mysql
+                    if(inscripcion.accion=='nuevo'){
+                        inscripcion.id = resp.data.id;
+                        this.insertarLocal(inscripcion);//actualizar el id del inscripcion que se genero en el servidor con laravel y mysql
                     }
-                    this.alumno.msg = `Alumno procesado ${data.msg}`;
+                    this.inscripcion.msg = `Inscripcion procesado ${data.msg}`;
                 })
                 .catch(err=>{
-                    this.alumno.msg = `Error al procesar el alumno ${err}`;
+                    this.inscripcion.msg = `Error al procesar el inscripcion ${err}`;
                 })
             },
-            insertarLocal(alumno){
-                let store = this.abrirStore('alumno', 'readwrite'),
-                    query = store.put(alumno);
+            insertarLocal(inscripcion){
+                let store = this.abrirStore('inscripcion', 'readwrite'),
+                    query = store.put(inscripcion);
                 query.onsuccess = e=>{
-                    this.nuevoAlumno();
+                    this.nuevoInscripcion();
                     this.obtenerDatos();
-                    this.alumno.msg = 'Alumno procesado con exito';
+                    this.inscripcion.msg = 'Inscripcion procesado con exito';
                 };
                 query.onerror = e=>{
-                    this.alumno.msg = `Error al procesar el alumno ${e.target.error}`;
+                    this.inscripcion.msg = `Error al procesar el inscripcion ${e.target.error}`;
                 };
             },
-            buscandoAlumno(){
+            buscandoInscripcion(){
                 this.obtenerDatos(this.buscar);
             },
-            eliminarAlumno(alumno){
-                if( confirm(`Esta seguro de eliminar el alumno ${alumno.nombre}?`) ){
-                    alumno.accion = 'eliminar';
-                    let store = this.abrirStore('alumno', 'readwrite'),
-                        query = store.delete(alumno.idAlumno),
+            eliminarInscripcion(inscripcion){
+                if( confirm(`Esta seguro de eliminar el inscripcion ${alumno.nombre}?`) ){
+                    inscripcion.accion = 'eliminar';
+                    let store = this.abrirStore('inscripcion', 'readwrite'),
+                        query = store.delete(inscripcion.idInscripcion),
                         metodo = 'DELETE',
-                        url = `/alumno/${alumno.id}`;
-                    this.sincronizarDatosServidor(alumno, metodo, url);
+                        url = `/inscripcion/${inscripcion.id}`;
+                    this.sincronizarDatosServidor(inscripcion, metodo, url);
                     query.onsuccess = e=>{
-                        this.nuevoAlumno();
+                        this.nuevoInscripcion();
                         this.obtenerDatos();
-                        this.alumno.msg = 'Alumno eliminado con exito';
+                        this.inscripcion.msg = 'Inscripcion eliminado con exito';
                     };
                     query.onerror = e=>{
-                        this.alumno.msg = `Error al eliminar el alumno ${e.target.error}`;
+                        this.inscripcion.msg = `Error al eliminar el inscripcion ${e.target.error}`;
                     };
                 }
-                this.nuevoAlumno();
+                this.nuevoInscripcion();
             },
-            modificarAlumno(datos){
-                this.alumno = JSON.parse(JSON.stringify(datos));
-                this.alumno.accion = 'modificar';
+            modificarInscripcion(datos){
+                this.inscripcion = JSON.parse(JSON.stringify(datos));
+                this.inscripcion.accion = 'modificar';
             },
-            guardarAlumno(){
+            guardarInscripcion(){
                 let metodo = 'PUT',
-                    url = `/alumno/${this.alumno.id}`;
-                if(this.alumno.accion=="nuevo"){
-                    this.alumno.idAlumno = generarIdUnicoFecha();
+                    url = `/inscripcion/${this.inscripcion.id}`;
+                if(this.inscripcion.accion=="nuevo"){
+                    this.inscripcion.idInscripcion = generarIdUnicoFecha();
                     metodo = 'POST';
-                    url = '/alumno';
+                    url = '/inscripcion';
                 }
-                let alumno = JSON.parse(JSON.stringify(this.alumno));
-                this.sincronizarDatosServidor(alumno, metodo, url);
-                this.insertarLocal(alumno);
+                let inscripcion = JSON.parse(JSON.stringify(this.inscripcion));
+                this.sincronizarDatosServidor(inscripcion, metodo, url);
+                this.insertarLocal(inscripcion);
             },
             obtenerDatos(valor=''){
                 let store = this.abrirStore('inscripcion', 'readonly'),
@@ -209,12 +224,12 @@
                             {credentials: 'same-origin'})
                             .then(res=>res.json())
                             .then(data=>{
-                                this.alumnos = data;
-                                data.map(alumno=>{
+                                this.inscripcions = data;
+                                data.map(inscripcion=>{
                                     let store = this.abrirStore('inscripcion', 'readwrite'),
-                                        query = store.put(alumno);
+                                        query = store.put(inscripcion);
                                     query.onsuccess = e=>{
-                                        console.log(`Inscripcion ${alumno.nombre} guardado`);
+                                        console.log(`Inscripcion ${inscripcion.nombre} guardado`);
                                     };
                                     query.onerror = e=>{
                                         console.log(`Error al guardar la inscripcion ${e.target.error}`);
@@ -222,29 +237,28 @@
                                 });
                             })
                             .catch(err=>{
-                                this.alumno.msg = `Error al guardar el alumno ${err}`;
+                                this.inscripcion.msg = `Error al guardar el inscripcion ${err}`;
                             });
                     }
-                    this.alumnos = data.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.inscripcions = data.result.filter(inscripcion=>inscripcion.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
-                    this.alumno.msg = `Error al obtener los alumnos ${e.target.error}`;
+                    this.inscripcion.msg = `Error al obtener los inscripcions ${e.target.error}`;
                 };
             },
-            nuevoAlumno(){
-                this.alumno.accion = 'nuevo';
-                this.alumno.msg = '';
-                this.alumno.idAlumno = '';
-                this.alumno.codigo = '';
-                this.alumno.nombre = '';
-                this.alumno.direccion = '';
-                this.alumno.telefono = '';
-                this.alumno.dui = '';
-                this.alumno.carrera = '';
+            nuevoInscripcion(){
+            this.materia.accion = 'nuevo';
+            this.materia.idIncripcion = '';
+            this.materia.materia1 = 'ninguna';
+            this.materia.materia2 = 'ninguna';
+            this.materia.materia3 = 'ninguna';
+            this.materia.materia4 ='ninguna';
+            this.materia.materia5 ='ninguna';
             },
+
             abrirStore(store, modo){
-                return db.transaction(store, modo).objectStore(store);
-            }
+                return this.db.transaction(store, modo).objectStore(store);
+            },
         },
         created(){
             //this.obtenerDatos();

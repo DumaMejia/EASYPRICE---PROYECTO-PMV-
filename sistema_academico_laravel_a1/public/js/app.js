@@ -2349,32 +2349,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form'],
   data: function data() {
     return {
-      buscar: '',
+      incripcions: [],
       alumnos: [],
-      alumno: {
+      buscar1: '',
+      inscripcion: {
         accion: 'nuevo',
-        mostrar_msg: false,
-        msg: '',
-        id: 0,
-        idAlumno: '',
-        codigo: '',
+        idIncripcion: '',
         nombre: '',
-        direccion: '',
-        telefono: '',
-        dui: '',
-        carrera: ''
+        codigo1: '',
+        nombre1: '',
+        materia1: '',
+        materia2: '',
+        materia3: '',
+        materia4: '',
+        materia5: ''
       }
     };
   },
   methods: {
     cerrarForm: function cerrarForm() {
-      this.form['alumno'].mostrar = false;
+      this.form['inscripcion'].mostrar = false;
     },
-    sincronizarDatosServidor: function sincronizarDatosServidor(alumno, metodo, url) {
+    sincronizarDatosServidor: function sincronizarDatosServidor(inscripcion, metodo, url) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2386,18 +2401,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios({
                   method: metodo,
                   url: url,
-                  data: alumno
+                  data: inscripcion
                 }).then(function (resp) {
-                  if (alumno.accion == 'nuevo') {
-                    alumno.id = resp.data.id;
+                  if (inscripcion.accion == 'nuevo') {
+                    inscripcion.id = resp.data.id;
 
-                    _this.insertarLocal(alumno); //actualizar el id del alumno que se genero en el servidor con laravel y mysql
+                    _this.insertarLocal(inscripcion); //actualizar el id del inscripcion que se genero en el servidor con laravel y mysql
 
                   }
 
-                  _this.alumno.msg = "Alumno procesado ".concat(data.msg);
+                  _this.inscripcion.msg = "Inscripcion procesado ".concat(data.msg);
                 })["catch"](function (err) {
-                  _this.alumno.msg = "Error al procesar el alumno ".concat(err);
+                  _this.inscripcion.msg = "Error al procesar el inscripcion ".concat(err);
                 });
 
               case 2:
@@ -2408,70 +2423,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    insertarLocal: function insertarLocal(alumno) {
+    insertarLocal: function insertarLocal(inscripcion) {
       var _this2 = this;
 
-      var store = this.abrirStore('alumno', 'readwrite'),
-          query = store.put(alumno);
+      var store = this.abrirStore('inscripcion', 'readwrite'),
+          query = store.put(inscripcion);
 
       query.onsuccess = function (e) {
-        _this2.nuevoAlumno();
+        _this2.nuevoInscripcion();
 
         _this2.obtenerDatos();
 
-        _this2.alumno.msg = 'Alumno procesado con exito';
+        _this2.inscripcion.msg = 'Inscripcion procesado con exito';
       };
 
       query.onerror = function (e) {
-        _this2.alumno.msg = "Error al procesar el alumno ".concat(e.target.error);
+        _this2.inscripcion.msg = "Error al procesar el inscripcion ".concat(e.target.error);
       };
     },
-    buscandoAlumno: function buscandoAlumno() {
+    buscandoInscripcion: function buscandoInscripcion() {
       this.obtenerDatos(this.buscar);
     },
-    eliminarAlumno: function eliminarAlumno(alumno) {
+    eliminarInscripcion: function eliminarInscripcion(inscripcion) {
       var _this3 = this;
 
-      if (confirm("Esta seguro de eliminar el alumno ".concat(alumno.nombre, "?"))) {
-        alumno.accion = 'eliminar';
-        var store = this.abrirStore('alumno', 'readwrite'),
-            query = store["delete"](alumno.idAlumno),
+      if (confirm("Esta seguro de eliminar el inscripcion ".concat(alumno.nombre, "?"))) {
+        inscripcion.accion = 'eliminar';
+        var store = this.abrirStore('inscripcion', 'readwrite'),
+            query = store["delete"](inscripcion.idInscripcion),
             metodo = 'DELETE',
-            url = "/alumno/".concat(alumno.id);
-        this.sincronizarDatosServidor(alumno, metodo, url);
+            url = "/inscripcion/".concat(inscripcion.id);
+        this.sincronizarDatosServidor(inscripcion, metodo, url);
 
         query.onsuccess = function (e) {
-          _this3.nuevoAlumno();
+          _this3.nuevoInscripcion();
 
           _this3.obtenerDatos();
 
-          _this3.alumno.msg = 'Alumno eliminado con exito';
+          _this3.inscripcion.msg = 'Inscripcion eliminado con exito';
         };
 
         query.onerror = function (e) {
-          _this3.alumno.msg = "Error al eliminar el alumno ".concat(e.target.error);
+          _this3.inscripcion.msg = "Error al eliminar el inscripcion ".concat(e.target.error);
         };
       }
 
-      this.nuevoAlumno();
+      this.nuevoInscripcion();
     },
-    modificarAlumno: function modificarAlumno(datos) {
-      this.alumno = JSON.parse(JSON.stringify(datos));
-      this.alumno.accion = 'modificar';
+    modificarInscripcion: function modificarInscripcion(datos) {
+      this.inscripcion = JSON.parse(JSON.stringify(datos));
+      this.inscripcion.accion = 'modificar';
     },
-    guardarAlumno: function guardarAlumno() {
+    guardarInscripcion: function guardarInscripcion() {
       var metodo = 'PUT',
-          url = "/alumno/".concat(this.alumno.id);
+          url = "/inscripcion/".concat(this.inscripcion.id);
 
-      if (this.alumno.accion == "nuevo") {
-        this.alumno.idAlumno = generarIdUnicoFecha();
+      if (this.inscripcion.accion == "nuevo") {
+        this.inscripcion.idInscripcion = generarIdUnicoFecha();
         metodo = 'POST';
-        url = '/alumno';
+        url = '/inscripcion';
       }
 
-      var alumno = JSON.parse(JSON.stringify(this.alumno));
-      this.sincronizarDatosServidor(alumno, metodo, url);
-      this.insertarLocal(alumno);
+      var inscripcion = JSON.parse(JSON.stringify(this.inscripcion));
+      this.sincronizarDatosServidor(inscripcion, metodo, url);
+      this.insertarLocal(inscripcion);
     },
     obtenerDatos: function obtenerDatos() {
       var _this4 = this;
@@ -2487,13 +2502,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this4.alumnos = data;
-            data.map(function (alumno) {
+            _this4.inscripcions = data;
+            data.map(function (inscripcion) {
               var store = _this4.abrirStore('inscripcion', 'readwrite'),
-                  query = store.put(alumno);
+                  query = store.put(inscripcion);
 
               query.onsuccess = function (e) {
-                console.log("Inscripcion ".concat(alumno.nombre, " guardado"));
+                console.log("Inscripcion ".concat(inscripcion.nombre, " guardado"));
               };
 
               query.onerror = function (e) {
@@ -2501,29 +2516,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.alumno.msg = "Error al guardar el alumno ".concat(err);
+            _this4.inscripcion.msg = "Error al guardar el inscripcion ".concat(err);
           });
         }
 
-        _this4.alumnos = data.result.filter(function (alumno) {
-          return alumno.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+        _this4.inscripcions = data.result.filter(function (inscripcion) {
+          return inscripcion.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
-        _this4.alumno.msg = "Error al obtener los alumnos ".concat(e.target.error);
+        _this4.inscripcion.msg = "Error al obtener los inscripcions ".concat(e.target.error);
       };
     },
-    nuevoAlumno: function nuevoAlumno() {
-      this.alumno.accion = 'nuevo';
-      this.alumno.msg = '';
-      this.alumno.idAlumno = '';
-      this.alumno.codigo = '';
-      this.alumno.nombre = '';
-      this.alumno.direccion = '';
-      this.alumno.telefono = '';
-      this.alumno.dui = '';
-      this.alumno.carrera = '';
+    nuevoInscripcion: function nuevoInscripcion() {
+      this.materia.accion = 'nuevo';
+      this.materia.idIncripcion = '';
+      this.materia.materia1 = 'ninguna';
+      this.materia.materia2 = 'ninguna';
+      this.materia.materia3 = 'ninguna';
+      this.materia.materia4 = 'ninguna';
+      this.materia.materia5 = 'ninguna';
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -39347,205 +39360,34 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "appInscripcion" } }, [
-    _c(
-      "div",
-      { staticClass: "card text-white", attrs: { id: "carInscripcion" } },
-      [
-        _c("div", { staticClass: "card-header bg-primary" }, [
-          _vm._v("\n            Registro de Materias\n            "),
-          _c("button", {
-            staticClass: "btn-close text-end",
-            attrs: { type: "button" },
-            on: { click: _vm.cerrarForm },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body text-dark" }, [
-          _c(
-            "form",
-            {
-              attrs: { method: "post" },
-              on: {
-                submit: function ($event) {
-                  $event.preventDefault()
-                  return _vm.guardarAlumno.apply(null, arguments)
-                },
-                reset: _vm.nuevoAlumno,
-              },
+  return _c("div", { attrs: { id: "appAlumno" } }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c(
+        "form",
+        {
+          attrs: { method: "post", id: "frmMaterias" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.guardarInscripcion.apply(null, arguments)
             },
-            [
+            reset: function ($event) {
+              $event.preventDefault()
+              return _vm.nuevoInscripcion.apply(null, arguments)
+            },
+          },
+        },
+        [
+          _c("div", { staticClass: "card text-white bg-dark mb-3" }, [
+            _c("div", { staticClass: "card-header text-white bg-dark" }, [
+              _vm._v(
+                "\n                    Administracion de Materias\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-2" }, [_vm._v("Codigo:")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col col-md-2" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.alumno.codigo,
-                        expression: "alumno.codigo",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Ingrese el codigo",
-                      pattern: "[0-9]{3,10}",
-                      required: "",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.alumno.codigo },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.alumno, "codigo", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-2" }, [_vm._v("Nombre:")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col col-md-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.alumno.nombre,
-                        expression: "alumno.nombre",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Ingrese el nombre",
-                      pattern: "[A-Za-zñÑáéíóúü ]{3,75}",
-                      required: "",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.alumno.nombre },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.alumno, "nombre", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-2" }, [
-                  _vm._v("Direccion:"),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col col-md-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.alumno.direccion,
-                        expression: "alumno.direccion",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Ingrese la direccion",
-                      pattern: "[A-Za-zñÑáéíóúü ]{3,100}",
-                      required: "",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.alumno.direccion },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.alumno, "direccion", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-2" }, [
-                  _vm._v("Telefono:"),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col col-md-2" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.alumno.telefono,
-                        expression: "alumno.telefono",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Ingrese el tel",
-                      pattern: "[0-9]{4}-[0-9]{4}",
-                      required: "",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.alumno.telefono },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.alumno, "telefono", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-2" }, [_vm._v("DUI:")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col col-md-2" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.alumno.dui,
-                        expression: "alumno.dui",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Ingrese el DUI",
-                      pattern: "[0-9]{8}-[0-9]{1}",
-                      required: "",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.alumno.dui },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.alumno, "dui", $event.target.value)
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-2" }, [_vm._v("Carrera")]),
+                _c("div", { staticClass: "col col-md-1" }, [_vm._v("Nombre")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col col-md-2" }, [
                   _c(
@@ -39555,8 +39397,8 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.alumno.carrera,
-                          expression: "alumno.carrera",
+                          value: _vm.inscripcion.nombre,
+                          expression: "inscripcion.nombre",
                         },
                       ],
                       staticClass: "form-select form-select-sm",
@@ -39572,8 +39414,8 @@ var render = function () {
                               return val
                             })
                           _vm.$set(
-                            _vm.alumno,
-                            "carrera",
+                            _vm.inscripcion,
+                            "nombre",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -39583,26 +39425,67 @@ var render = function () {
                     },
                     [
                       _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Seleccionar Carrera"),
+                        _vm._v(" Ninguna"),
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0" } }),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row p-1" }, [
+                _c("div", { staticClass: "col col-md-1" }, [
+                  _vm._v("Materia 1"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-md-2" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.inscripcion.materia1,
+                          expression: "inscripcion.materia1",
+                        },
+                      ],
+                      staticClass: "form-select form-select-sm",
+                      attrs: { "aria-label": ".form-select-sm example" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.inscripcion,
+                            "materia1",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }, [
+                        _vm._v(" Ninguna"),
                       ]),
                       _vm._v(" "),
                       _c(
                         "option",
-                        {
-                          attrs: {
-                            value:
-                              "Ingenieria En Sistemas y Redes Informaticas",
-                          },
-                        },
-                        [_vm._v("Ingenieria En Sistemas")]
+                        { attrs: { value: "Metodologia de la investigacion" } },
+                        [_vm._v("Metodologia de la investigacion")]
                       ),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "Medicina" } }, [
-                        _vm._v("Medicina"),
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Artes Plasticas" } }, [
-                        _vm._v("Artes Plasticas"),
+                      _c("option", { attrs: { value: "Sociologia" } }, [
+                        _vm._v("Sociologia"),
                       ]),
                     ]
                   ),
@@ -39610,131 +39493,341 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row p-1" }, [
-                _c("div", { staticClass: "col col-md-5 text-center" }, [
-                  _vm.alumno.mostrar_msg
-                    ? _c(
-                        "div",
+                _c("div", { staticClass: "col col-md-1" }, [
+                  _vm._v("Materia 2"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-md-2" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
                         {
-                          staticClass:
-                            "alert alert-primary alert-dismissible fade show",
-                          attrs: { role: "alert" },
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.inscripcion.materia2,
+                          expression: "inscripcion.materia2",
                         },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(_vm.alumno.msg) +
-                              "\n                            "
-                          ),
-                          _c("button", {
-                            staticClass: "btn-close",
-                            attrs: {
-                              type: "button",
-                              "data-bs-dismiss": "alert",
-                              "aria-label": "Close",
-                            },
-                          }),
-                        ]
-                      )
-                    : _vm._e(),
+                      ],
+                      staticClass: "form-select form-select-sm",
+                      attrs: { "aria-label": ".form-select-sm example" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.inscripcion,
+                            "materia2",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }, [
+                        _vm._v("Ninguna"),
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Ingles Basico" } }, [
+                        _vm._v("Ingles Basico"),
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Ingles Tecnico" } }, [
+                        _vm._v("Ingles Tecnico"),
+                      ]),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row p-1" }, [
+                _c("div", { staticClass: "col col-md-1" }, [
+                  _vm._v("Materia 3"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-md-2" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.inscripcion.materia3,
+                          expression: "inscripcion.materia3",
+                        },
+                      ],
+                      staticClass: "form-select form-select-sm",
+                      attrs: { "aria-label": ".form-select-sm example" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.inscripcion,
+                            "materia3",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }, [
+                        _vm._v("Ninguna"),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { attrs: { value: "Curso Superior de Gramatica" } },
+                        [_vm._v("Curso Superior de Gramatica")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Matematica I" } }, [
+                        _vm._v("Matematica I"),
+                      ]),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row p-1" }, [
+                _c("div", { staticClass: "col col-md-1" }, [
+                  _vm._v("Materia 4"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-md-2" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.inscripcion.materia4,
+                          expression: "inscripcion.materia4",
+                        },
+                      ],
+                      staticClass: "form-select form-select-sm",
+                      attrs: { "aria-label": ".form-select-sm example" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.inscripcion,
+                            "materia4",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }, [
+                        _vm._v("Ninguna"),
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Matematica II" } }, [
+                        _vm._v("Matematica II"),
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Fisica I" } }, [
+                        _vm._v("Fisica I"),
+                      ]),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row p-1" }, [
+                _c("div", { staticClass: "col col-md-1" }, [
+                  _vm._v("Materia 5"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-md-2" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.inscripcion.materia5,
+                          expression: "inscripcion.materia5",
+                        },
+                      ],
+                      staticClass: "form-select form-select-sm",
+                      attrs: { "aria-label": ".form-select-sm example" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.inscripcion,
+                            "materia5",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }, [
+                        _vm._v("Ninguna"),
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Filosofia" } }, [
+                        _vm._v("Filosofia"),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { attrs: { value: "Sociedad e Historia" } },
+                        [_vm._v("Sociedad e Historia")]
+                      ),
+                    ]
+                  ),
                 ]),
               ]),
               _vm._v(" "),
               _vm._m(0),
-            ]
-          ),
-        ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card text-white", attrs: { id: "carBuscarAlumno" } },
-      [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-dark table-hover" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", { attrs: { colspan: "6" } }, [
-                  _vm._v("\n                            Buscar: "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.buscar,
-                        expression: "buscar",
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card text-white bg-dark mb-3",
+          attrs: { id: "cardBuscarCliente" },
+        },
+        [
+          _c("div", { staticClass: "card-header text-white bg-dark" }, [
+            _vm._v("\n        Busqueda de Inscripcion de Materias\n    "),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-dark table-striped" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("td", { attrs: { colspan: "6" } }, [
+                    _vm._v("\n                        Buscar: "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.buscar1,
+                          expression: "buscar1",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        title: "Introduzca el texto a buscar",
+                        type: "text",
                       },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { placeholder: "buscar aqui", type: "text" },
-                    domProps: { value: _vm.buscar },
-                    on: {
-                      keyup: _vm.buscandoAlumno,
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.buscar = $event.target.value
+                      domProps: { value: _vm.buscar1 },
+                      on: {
+                        keyup: _vm.buscandoInscripcion,
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.buscar1 = $event.target.value
+                        },
                       },
-                    },
-                  }),
+                    }),
+                  ]),
                 ]),
+                _vm._v(" "),
+                _vm._m(1),
               ]),
               _vm._v(" "),
-              _vm._m(2),
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.alumnos, function (item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.idAlumno,
-                    on: {
-                      click: function ($event) {
-                        return _vm.modificarAlumno(item)
-                      },
-                    },
-                  },
-                  [
-                    _c("td", [_vm._v(_vm._s(item.codigo))]),
+              _c(
+                "tbody",
+                _vm._l(_vm.materias, function (item) {
+                  return _c("tr", { key: item.idincripcion }, [
+                    _c("td", [_vm._v(_vm._s(item.alumno.label))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.nombre))]),
+                    _c("td", [_vm._v(_vm._s(item.materia1))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.direccion))]),
+                    _c("td", [_vm._v(_vm._s(item.materia2))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.telefono))]),
+                    _c("td", [_vm._v(_vm._s(item.materia3))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.dui))]),
+                    _c("td", [_vm._v(_vm._s(item.materia4))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.carrera))]),
+                    _c("td", [_vm._v(_vm._s(item.materia5))]),
                     _vm._v(" "),
                     _c("td", [
                       _c(
                         "button",
                         {
                           staticClass: "btn btn-danger",
+                          attrs: { type: "button" },
                           on: {
                             click: function ($event) {
-                              return _vm.eliminarAlumno(item)
+                              return _vm.eliminarIncripcion(item)
                             },
                           },
                         },
                         [_vm._v("Eliminar")]
                       ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.modificarIncripcion(item)
+                            },
+                          },
+                        },
+                        [_vm._v("Modificar")]
+                      ),
                     ]),
-                  ]
-                )
-              }),
-              0
-            ),
+                  ])
+                }),
+                0
+              ),
+            ]),
           ]),
-        ]),
-      ]
-    ),
+        ]
+      ),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -39742,17 +39835,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row m-2" }, [
-      _c("div", { staticClass: "col col-md-5 text-center" }, [
-        _c("input", {
-          staticClass: "btn btn-success",
-          attrs: { type: "submit", value: "Guardar" },
-        }),
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col col-md-3 text-center" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Guardar")]
+        ),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "btn btn-warning",
-          attrs: { type: "reset", value: "Nuevo" },
-        }),
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", attrs: { type: "reset" } },
+          [_vm._v("Nuevo")]
+        ),
       ]),
     ])
   },
@@ -39760,37 +39855,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-primary" }, [
-      _vm._v("\n            Busqueda de Alumnos\n            "),
-      _c("button", {
-        staticClass: "btn-close",
-        attrs: {
-          type: "button",
-          "data-bs-dismiss": "alert",
-          "data-bs-target": "#carBuscarAlumno",
-          "aria-label": "Close",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("CODIGO")]),
+      _c("th", [_vm._v("Nombre")]),
       _vm._v(" "),
-      _c("th", [_vm._v("NOMBRE")]),
+      _c("th", [_vm._v("Materia 1")]),
       _vm._v(" "),
-      _c("th", [_vm._v("DIRECCION")]),
+      _c("th", [_vm._v("Materia 2")]),
       _vm._v(" "),
-      _c("th", [_vm._v("TEL")]),
+      _c("th", [_vm._v("Materia 3")]),
       _vm._v(" "),
-      _c("th", [_vm._v("DUI")]),
+      _c("th", [_vm._v("Materia 4")]),
       _vm._v(" "),
-      _c("th", [_vm._v("CARRERA")]),
-      _vm._v(" "),
-      _c("th"),
+      _c("th", [_vm._v("Materia 5")]),
     ])
   },
 ]
@@ -52084,6 +52160,12 @@ var app = new Vue({
         });
         tblinscripcion = db.createObjectStore('inscripcion', {
           keyPath: 'idInscripcion'
+        });
+        tblalumno.createIndex('idAlumno', 'idAlumno', {
+          unique: true
+        });
+        tblalumno.createIndex('codigo', 'codigo', {
+          unique: false
         });
         tblinscripcion.createIndex('idInscripcion', 'idInscripcion', {
           unique: true

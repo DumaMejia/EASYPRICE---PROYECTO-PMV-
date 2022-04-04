@@ -26,6 +26,7 @@ window.generarIdUnicoFecha = ()=>{
 Vue.component('alumno-component', require('./components/AlumnoComponent.vue').default);
 Vue.component('inscripcion-component', require('./components/InscripcionComponent.vue').default);
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -57,6 +58,9 @@ const app = new Vue({
                 let db = e.target.result;
                 tblalumno = db.createObjectStore('alumno', {keyPath:'idAlumno'});
                 tblinscripcion = db.createObjectStore('inscripcion', {keyPath:'idInscripcion'});
+
+                tblalumno.createIndex('idAlumno', 'idAlumno', {unique:true});
+                tblalumno.createIndex('codigo', 'codigo', {unique:false});
 
 
                 tblinscripcion.createIndex('idInscripcion', 'idInscripcion', {unique:true});

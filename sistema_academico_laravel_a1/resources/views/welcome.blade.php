@@ -33,19 +33,7 @@
                             <a @click="abrirForm('alumno')" class="nav-link" href="#">Alumnos</a>
                         </li>
                         <li class="nav-item">
-                            <a @click="abrirForm('docente')" class="nav-link" href="#">Docentes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a @click="abrirForm('materia')" class="nav-link" href="#">Materias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a @click="abrirForm('matricula')" class="nav-link" href="#">Matricula</a>
-                        </li>
-                        <li class="nav-item">
                             <a @click="abrirForm('inscripcion')" class="nav-link" href="#">Inscripcion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a @click="abrirForm('nota')" class="nav-link" href="#">Notas</a>
                         </li>
                     </ul>
                 </div>
