@@ -64,7 +64,6 @@ const app = new Vue({
 
 
                 tblinscripcion.createIndex('idInscripcion', 'idInscripcion', {unique:true});
-                tblinscripcion.createIndex('idAlumno', 'idAlumno', {unique:false});
             };
             indexDb.onsuccess = e=>{
                 db = e.target.result;

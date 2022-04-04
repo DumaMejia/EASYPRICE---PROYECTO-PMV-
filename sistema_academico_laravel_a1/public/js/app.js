@@ -2426,7 +2426,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     insertarLocal: function insertarLocal(inscripcion) {
       var _this2 = this;
 
-      var store = this.abrirStore('inscripcion', 'readwrite'),
+      var store = this.abrirStore('alumno', 'readwrite'),
           query = store.put(inscripcion);
 
       query.onsuccess = function (e) {
@@ -2449,7 +2449,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (confirm("Esta seguro de eliminar el inscripcion ".concat(alumno.nombre, "?"))) {
         inscripcion.accion = 'eliminar';
-        var store = this.abrirStore('inscripcion', 'readwrite'),
+        var store = this.abrirStore('alumno', 'readwrite'),
             query = store["delete"](inscripcion.idInscripcion),
             metodo = 'DELETE',
             url = "/inscripcion/".concat(inscripcion.id);
@@ -2492,7 +2492,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var store = this.abrirStore('inscripcion', 'readonly'),
+      var store = this.abrirStore('alumno', 'readonly'),
           data = store.getAll();
 
       data.onsuccess = function (e) {
@@ -2504,7 +2504,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (data) {
             _this4.inscripcions = data;
             data.map(function (inscripcion) {
-              var store = _this4.abrirStore('inscripcion', 'readwrite'),
+              var store = _this4.abrirStore('alumno', 'readwrite'),
                   query = store.put(inscripcion);
 
               query.onsuccess = function (e) {
@@ -2530,16 +2530,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
     },
     nuevoInscripcion: function nuevoInscripcion() {
-      this.materia.accion = 'nuevo';
-      this.materia.idIncripcion = '';
-      this.materia.materia1 = 'ninguna';
-      this.materia.materia2 = 'ninguna';
-      this.materia.materia3 = 'ninguna';
-      this.materia.materia4 = 'ninguna';
-      this.materia.materia5 = 'ninguna';
+      this.inscripcion.accion = 'nuevo';
+      this.inscripcion.idIncripcion = '';
+      this.inscripcion.materia1 = 'ninguna';
+      this.inscripcion.materia2 = 'ninguna';
+      this.inscripcion.materia3 = 'ninguna';
+      this.inscripcion.materia4 = 'ninguna';
+      this.inscripcion.materia5 = 'ninguna';
     },
     abrirStore: function abrirStore(store, modo) {
-      return db.transaction(store, modo).objectStore(store);
+      return this.db.transaction(store, modo).objectStore(store);
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -39776,7 +39776,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.materias, function (item) {
+                _vm._l(_vm.Inscripcions, function (item) {
                   return _c("tr", { key: item.idincripcion }, [
                     _c("td", [_vm._v(_vm._s(item.alumno.label))]),
                     _vm._v(" "),
@@ -52169,9 +52169,6 @@ var app = new Vue({
         });
         tblinscripcion.createIndex('idInscripcion', 'idInscripcion', {
           unique: true
-        });
-        tblinscripcion.createIndex('idAlumno', 'idAlumno', {
-          unique: false
         });
       };
 

@@ -101,7 +101,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in materias" :key="item.idincripcion">
+                    <tr v-for="item in Inscripcions" :key="item.idincripcion">
                         <td>{{item.alumno.label}}</td>
                         <td>{{item.materia1}}</td>
                         <td>{{item.materia2}}</td>
@@ -166,7 +166,7 @@
                 })
             },
             insertarLocal(inscripcion){
-                let store = this.abrirStore('inscripcion', 'readwrite'),
+                let store = this.abrirStore('alumno', 'readwrite'),
                     query = store.put(inscripcion);
                 query.onsuccess = e=>{
                     this.nuevoInscripcion();
@@ -183,7 +183,7 @@
             eliminarInscripcion(inscripcion){
                 if( confirm(`Esta seguro de eliminar el inscripcion ${alumno.nombre}?`) ){
                     inscripcion.accion = 'eliminar';
-                    let store = this.abrirStore('inscripcion', 'readwrite'),
+                    let store = this.abrirStore('alumno', 'readwrite'),
                         query = store.delete(inscripcion.idInscripcion),
                         metodo = 'DELETE',
                         url = `/inscripcion/${inscripcion.id}`;
@@ -216,7 +216,7 @@
                 this.insertarLocal(inscripcion);
             },
             obtenerDatos(valor=''){
-                let store = this.abrirStore('inscripcion', 'readonly'),
+                let store = this.abrirStore('alumno', 'readonly'),
                     data = store.getAll();
                 data.onsuccess = e=>{
                     if( data.result.length<=0 ){
@@ -226,7 +226,7 @@
                             .then(data=>{
                                 this.inscripcions = data;
                                 data.map(inscripcion=>{
-                                    let store = this.abrirStore('inscripcion', 'readwrite'),
+                                    let store = this.abrirStore('alumno', 'readwrite'),
                                         query = store.put(inscripcion);
                                     query.onsuccess = e=>{
                                         console.log(`Inscripcion ${inscripcion.nombre} guardado`);
@@ -247,13 +247,13 @@
                 };
             },
             nuevoInscripcion(){
-            this.materia.accion = 'nuevo';
-            this.materia.idIncripcion = '';
-            this.materia.materia1 = 'ninguna';
-            this.materia.materia2 = 'ninguna';
-            this.materia.materia3 = 'ninguna';
-            this.materia.materia4 ='ninguna';
-            this.materia.materia5 ='ninguna';
+            this.inscripcion.accion = 'nuevo';
+            this.inscripcion.idIncripcion = '';
+            this.inscripcion.materia1 = 'ninguna';
+            this.inscripcion.materia2 = 'ninguna';
+            this.inscripcion.materia3 = 'ninguna';
+            this.inscripcion.materia4 ='ninguna';
+            this.inscripcion.materia5 ='ninguna';
             },
 
             abrirStore(store, modo){
