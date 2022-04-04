@@ -1,11 +1,11 @@
 <template>
     <div id="appAlumno">
         <div class="card text-white" id="carAlumno">
-            <div class="card-header bg-primary">
+            <div class="card-header text-white bg-dark">
                 Registro de Alumnos
                 <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
             </div>
-            <div class="card-body text-dark">
+            <div class="card-header text-white bg-dark">
                 <form method="post" @submit.prevent="guardarAlumno" @reset="nuevoAlumno">
                     <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
@@ -65,8 +65,8 @@
                 </form>
             </div>
         </div>
-        <div class="card text-white" id="carBuscarAlumno">
-            <div class="card-header bg-primary">
+        <div class="card text-white bg-dark mb-3" id="carBuscarAlumno">
+            <div class="card-header text-white bg-dark">
                 Busqueda de Alumnos
                 <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarAlumno" aria-label="Close"></button>
             </div>
@@ -98,6 +98,7 @@
                             <td>{{item.carrera}}</td>
                             <td>
                                 <button class="btn btn-danger" @click="eliminarAlumno(item)">Eliminar</button>
+                                <button type="button" class="btn btn-success" @click="modificarAlumno(item)">Modificar</button>
                             </td>
                         </tr>
                     </tbody>

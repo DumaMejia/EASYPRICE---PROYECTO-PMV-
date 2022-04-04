@@ -2037,6 +2037,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form'],
   data: function data() {
@@ -2566,8 +2567,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
 
+        var valor1 = '';
         _this4.alumnos = data1.result.filter(function (alumno) {
-          return alumno.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+          return alumno.nombre.toLowerCase().indexOf(valor1.toLowerCase()) > -1;
         });
       };
 
@@ -38947,7 +38949,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "appAlumno" } }, [
     _c("div", { staticClass: "card text-white", attrs: { id: "carAlumno" } }, [
-      _c("div", { staticClass: "card-header bg-primary" }, [
+      _c("div", { staticClass: "card-header text-white bg-dark" }, [
         _vm._v("\n            Registro de Alumnos\n            "),
         _c("button", {
           staticClass: "btn-close text-end",
@@ -38956,7 +38958,7 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body text-dark" }, [
+      _c("div", { staticClass: "card-header text-white bg-dark" }, [
         _c(
           "form",
           {
@@ -39239,7 +39241,10 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "card text-white", attrs: { id: "carBuscarAlumno" } },
+      {
+        staticClass: "card text-white bg-dark mb-3",
+        attrs: { id: "carBuscarAlumno" },
+      },
       [
         _vm._m(1),
         _vm._v(" "),
@@ -39316,6 +39321,20 @@ var render = function () {
                         },
                         [_vm._v("Eliminar")]
                       ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.modificarAlumno(item)
+                            },
+                          },
+                        },
+                        [_vm._v("Modificar")]
+                      ),
                     ]),
                   ]
                 )
@@ -39351,7 +39370,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-primary" }, [
+    return _c("div", { staticClass: "card-header text-white bg-dark" }, [
       _vm._v("\n            Busqueda de Alumnos\n            "),
       _c("button", {
         staticClass: "btn-close",
@@ -39906,7 +39925,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col col-md-3 text-center" }, [
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          { staticClass: "btn btn-success", attrs: { type: "submit" } },
           [_vm._v("Guardar")]
         ),
         _vm._v(" "),

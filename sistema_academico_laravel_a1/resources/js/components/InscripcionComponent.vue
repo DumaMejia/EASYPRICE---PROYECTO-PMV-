@@ -71,7 +71,7 @@
                         </div>
                         <div class="row">
                             <div class="col col-md-3 text-center">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit" class="btn btn-success">Guardar</button>
                                 <button type="reset" class="btn btn-warning">Nuevo</button>
                             </div>
                         </div>
@@ -279,7 +279,8 @@
                                 this.inscripcion.msg = `Error al guardar el inscripcion ${err}`;
                             });
                     }
-                    this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    let valor1 = '';
+                    this.alumnos = data1.result.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor1.toLowerCase())>-1);
                 };
                 data1.onerror = e=>{
                     this.inscripcion.msg = `Error al obtener los inscripcions ${e.target.error}`;
