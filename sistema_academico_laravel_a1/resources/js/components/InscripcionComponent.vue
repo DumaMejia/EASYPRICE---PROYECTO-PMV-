@@ -2,7 +2,7 @@
     <div id="appInscripcion">
         <div class="card text-white" id="carInscripcion">
             <div class="card-header bg-primary">
-                Registro de Alumnos
+                Registro de Materias
                 <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
             </div>
             <div class="card-body text-dark">
@@ -201,23 +201,23 @@
                 this.insertarLocal(alumno);
             },
             obtenerDatos(valor=''){
-                let store = this.abrirStore('alumno', 'readonly'),
+                let store = this.abrirStore('inscripcion', 'readonly'),
                     data = store.getAll();
                 data.onsuccess = e=>{
                     if( data.result.length<=0 ){
-                        fetch(`alumno`, 
+                        fetch(`inscripcion`, 
                             {credentials: 'same-origin'})
                             .then(res=>res.json())
                             .then(data=>{
                                 this.alumnos = data;
                                 data.map(alumno=>{
-                                    let store = this.abrirStore('alumno', 'readwrite'),
+                                    let store = this.abrirStore('inscripcion', 'readwrite'),
                                         query = store.put(alumno);
                                     query.onsuccess = e=>{
-                                        console.log(`Alumno ${alumno.nombre} guardado`);
+                                        console.log(`Inscripcion ${alumno.nombre} guardado`);
                                     };
                                     query.onerror = e=>{
-                                        console.log(`Error al guardar el alumno ${e.target.error}`);
+                                        console.log(`Error al guardar la inscripcion ${e.target.error}`);
                                     };
                                 });
                             })

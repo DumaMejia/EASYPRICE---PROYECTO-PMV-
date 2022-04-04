@@ -37,10 +37,6 @@ const app = new Vue({
     data:{
         forms:{
             alumno:{mostrar:false},
-            materia:{mostrar:false},
-            docente:{mostrar:false},
-            nota:{mostrar:false},
-            matricula:{mostrar:false},
             inscripcion:{mostrar:false},
         }
     },
@@ -60,19 +56,11 @@ const app = new Vue({
             indexDb.onupgradeneeded = e=>{
                 let db = e.target.result;
                 tblalumno = db.createObjectStore('alumno', {keyPath:'idAlumno'});
-                tblmateria = db.createObjectStore('materia', {keyPath:'idMateria'});
-                tbldocente = db.createObjectStore('docente', {keyPath:'idDocente'});
-                tblmatricula = db.createObjectStore('matricula', {keyPath:'idMatricula'});
                 tblinscripcion = db.createObjectStore('inscripcion', {keyPath:'idInscripcion'});
 
-                tblalumno.createIndex('idAlumno', 'idAlumno', {unique:true});
-                tblalumno.createIndex('codigo', 'codigo', {unique:false});
 
-                tblmateria.createIndex('idMateria', 'idMateria', {unique:true});
-                tblmateria.createIndex('codigo', 'codigo', {unique:false});
-
-                tblmatricula.createIndex('idIsnscripcion', 'idInscripcion', {unique:true});
-                tblmatricula.createIndex('idAlumno', 'idAlumno', {unique:false});
+                tblinscripcion.createIndex('idInscripcion', 'idInscripcion', {unique:true});
+                tblinscripcion.createIndex('idAlumno', 'idAlumno', {unique:false});
             };
             indexDb.onsuccess = e=>{
                 db = e.target.result;
