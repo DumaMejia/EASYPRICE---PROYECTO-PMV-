@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,16 @@ Route::get('/gps', function () {
 
 Route::get('/condiciones', function () {
     return view('layouts/condiciones');
+});
+
+Route::get('/login-google', function () {
+    return Socialite::driver('github')->redirect();
+});
+ 
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('github')->user();
+ 
+    // $user->token
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
