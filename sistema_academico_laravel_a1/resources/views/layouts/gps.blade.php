@@ -14,10 +14,10 @@
                         </div>
                     @endif
 
-                    {{ __('CONDICIONES') }}
+                    {{ __('GPS') }}
                 </div>
-                <div href="{{ url('/gps') }}" class="col-md-6 offset-md-4">
-                                <a href="{{ url('/gps') }}" type="submit"  >
+                <div class="col-md-6 offset-md-4">
+                                <a href="{{ url('/') }}" type="submit"  >
                                 <input type="button" value="registrar"> 
                                 </a>
                 </div>

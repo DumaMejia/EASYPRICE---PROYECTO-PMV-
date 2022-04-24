@@ -24,11 +24,14 @@ Route::apiResources([
 
 Route::get('/', function () {
     return view('home');
+})->middleware(['auth', 'verified']);
+
+Route::get('/gps', function () {
+    return view('layouts/gps');
 });
 
 Route::get('/condiciones', function () {
-    return view('condiciones');
+    return view('layouts/condiciones');
 });
-
 
 Route::get('/home', 'HomeController@index')->name('home');
