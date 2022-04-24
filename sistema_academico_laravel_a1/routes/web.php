@@ -23,9 +23,12 @@ Route::apiResources([
 ]);
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Auth::routes();
+Route::get('/condiciones', function () {
+    return view('condiciones');
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
