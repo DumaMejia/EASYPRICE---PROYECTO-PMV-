@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
+                 <p align="center"><img  src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="250" height="250"></p>
                 <div class="card-body">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
