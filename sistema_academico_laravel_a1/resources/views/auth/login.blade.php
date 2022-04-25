@@ -57,6 +57,14 @@
                                     {{ __('Iniciar sesion') }}
                                 </button>
 
+                              
+                                    <a href="{{ route('login.google') }}">
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="fa fa-google mr-2"></i>Google
+                                        </button>
+                                    </a>
+                        
+
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
