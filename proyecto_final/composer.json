@@ -13,7 +13,8 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "larswiegers/laravel-maps": "^0.12.0"
+        "larswiegers/laravel-maps": "^0.12.0",
+        "twbs/bootstrap": "5.1.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
