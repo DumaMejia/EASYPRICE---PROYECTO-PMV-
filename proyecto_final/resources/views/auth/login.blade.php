@@ -4,9 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-                <p align="center"><img  src="imagenes/imagen4.png" width="150" height="150"></p>
+            <div class="card ">
+                <div class="card-header  text-white  bg-primary ">{{ __('Login') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -53,13 +52,17 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                <button type="submit" class="btn btn-warning text-white">
+                                    {{ __('Iniciar Sesion') }}
                                 </button>
+
+                                {{ __('O') }}
 
                                 <a href="{{ route('login.google') }}">
                                         <button type="button" class="btn btn-primary">
-                                            <i class="fa fa-google mr-2"></i>Google
+                                            <i class="fa fa-google mr-2"></i>
+                                            <img  src="image/google1.png" width="20" height="20">
+                                            {{ __('Iniciar sesion con google') }}
                                         </button>
                                     </a>
 
