@@ -17,23 +17,18 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">EASYPRICE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <img  src="image/easypricelogo.png" width="100" height="30">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a @click="abrirForm('alumno')" class="nav-link" href="#">Alumnos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a @click="abrirForm('inscripcion')" class="nav-link" href="#">Inscripcion</a>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Menu</a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url('/') }}">Inicio</a></li>
+                            <li><a @click="abrirForm('alumno')" class="dropdown-item" href="{{ url('/welcome') }}">Pruebas1</a></li>
+                            <li><a @click="abrirForm('inscripcion')" class="dropdown-item" href="#">Pruebas2</a></li>
+                            </ul>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -70,6 +65,14 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Opciones</a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Usuario</a></li>
+                            <li><a class="dropdown-item" href="#">Permisos</a></li>
+                            <li><a class="dropdown-item" href="#">Notificaciónes</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
