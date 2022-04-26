@@ -17,8 +17,13 @@
 
                 <p align="center"><img  src="image/GPS.png" width="70   " height="100"></p>
 
-                <p>Permitir acceso a mi ubicacion</p>
-                    
+                <p></p>
+                <div class="form-check" >
+                        <input  class="form-check-input" type="checkbox" value="" id="flexCheckDefault" id="check">
+                        <label class="form-check-label" for="flexCheckDefault">
+                        Permitir acceso a mi ubicacion
+                        </label>
+                        </div>
                 </div>
                 <div class="col-md-6 offset-md-4">
                     <a href="{{ url('/') }}">
