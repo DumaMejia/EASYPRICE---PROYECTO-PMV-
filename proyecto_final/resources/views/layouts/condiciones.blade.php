@@ -14,59 +14,69 @@
                         </div>
                     @endif
 
-                    <p class="card-text">El presente documento contiene reglas aplicables al uso del sitio web de EasyPrice. Cualquier persona natural 
-                        , que desee comparar precios dentro de EasyPrice podra hacerlo con previa inscripcion o no como usuario en el sistema.
-                        Tenga en Cuenta:
-                        EasyPrice no es una tienda directa sino una plataforma de comparacion de precios. Por lo tanto, no es posible realizar pedidos de
-                        productos.
+                    <h1 align="center">Terminos y condiciones </h1>
+                    <body>
+                    <p>El presente documento contiene reglas aplicables al uso del sitio web de EasyPrice. Cualquier persona natural, que desee comparar precios dentro de EasyPrice podra hacerlo con previa inscripcion o no como usuario en el sistema.</p>
+                        <p><strong>Tenga En Cuenta:</strong></p>
 
-                        Registro de la tienda 
-                        Si desea registrar su tienda como socio a nuestra plataforma de comparacion de precios, puede contactarse con nosotrosa traves del
-                        siguiente correo: easyprice@outlook.com
+                        <p> No es una tienda directa sino una plataforma de comparacion de precios. Por lo tanto, no es posible realizar pedidos de
+                        productos.</p>
 
-                        Terminos Generales y Condiciones 
+                        <p><strong>Registro De La Tienda </strong></p>
 
-                        Toda informacion proporcionada debera ser verdadera, exacta y completa 
-                        Ele usuario es el unico y exclusivo responsabe de la informacion que brinda mediante el uso del sitio web
+                        <p>Si desea registrar su tienda como socio a nuestra plataforma de comparacion de precios, puede contactarse con nosotrosa traves del
+                        siguiente correo: easyprice@outlook.com</p>
 
-                        Al aceptar nuestros termnos y condiciones tambien esta sujeto a lo siguiente:
+                        <p><strong>Terminos Generales y Condiciones  </strong></p>
 
-                        Estoy de acuerdo con EasyPrice pueda acceder con fines relativos a la cuenta de usuario, los datos que se detallan a cntiuacion:
+                        <p>Toda informacion proporcionada debera ser verdadera, exacta y completa 
+                        Ele usuario es el unico y exclusivo responsabe de la informacion que brinda mediante el uso del sitio web.</p>
 
-                        elaboracion de perfiles de usuario y tratamiento de datos de mi cuneta de usuario.
+                        <p><strong>Al aceptar nuestros termnos y condiciones tambien esta sujeto a lo siguiente:</strong></p>
 
-                        almacenamiento y recopilacion de informacion.
+                        <div class="form-check" >
+                        <input href="{{ url('/gps') }}" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" id="check" 
+                        onchange="event.preventDefault();
+                                                     document.getElementById('').disabled= false; this.disabled= 'true';">
+                        <label class="form-check-label" for="flexCheckDefault">
+                        Estoy de acuerdo con EasyPrice pueda acceder con fines relativos a la cuenta de usuario, los datos que se detallan a continuacion:
+                        </label>
+                        </div>
+                        <p></p>
+                        <UL>
+                        <li>Elaboracion de perfiles de usuario y tratamiento de datos de mi cuenta de usuario.
 
-                        notificaciones de ofertas en la ciudad seleccionada.
+                        <li>Almacenamiento y recopilacion de informacion.
 
-                        notificaciones de productos especificos.
+                       <li> Notificaciones de ofertas en la ciudad seleccionada.
 
-                    </p>
+                        <li>Notificaciones de productos especificos.
+
+                         </UL>
+
+                         
+                    </body>
+                  
                 </div>
+
+                                <div class="d-grid gap-2 col-2 mx-auto">
+                                    <a href="{{ route('home') }}" class="btn btn-primary">
+                                        {{ __('Volver') }}
+                                    </a>
+
+                                    
+                                    
+                                    <a href="{{ url('/gps') }}" class="btn btn-primary" disabled="true" id="bts" disabled>
+                                        {{ __('Siguiente') }}
+                                    </a>
+                                </div>
+
+                                <p></p>
                 
-                <div class="col-md-6 offset-md-4">
-                    <a href="{{ url('/gps') }}">
-                     <button type="button" class="btn btn-primary">
-                     <i class="fa fa-google mr-2"></i>
-                     {{ __('Siguiente') }}
-                     </button>
-                    </a>
-                </div>
-
-              
-
-                <div class="col-md-6 offset-md-4">
-                    <a href="{{ url('/login') }}">
-                     <button type="button" class="btn btn-primary">
-                     <i class="fa fa-google mr-2"></i>
-                     {{ __('Atras') }}
-                     </button>
-                    </a>
-                </div>
-
-               
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+
