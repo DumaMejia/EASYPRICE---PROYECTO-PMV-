@@ -31,6 +31,11 @@ Route::get('/condiciones', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::apiResources([
+    'comerio'=>Comercios::class,
+    'producto'=>Productos::class,
+]);
+
 
 
 // Google login

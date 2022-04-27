@@ -26,8 +26,8 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Menu</a>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ url('/') }}">Inicio</a></li>
-                            <li><a @click="abrirForm('alumno')" class="dropdown-item" href="{{ url('/welcome') }}">Pruebas1</a></li>
-                            <li><a @click="abrirForm('inscripcion')" class="dropdown-item" href="#">Pruebas2</a></li>
+                            <li><a @click="abrirForm('comercio')" class="dropdown-item" href="#">Comercio</a></li>
+                            <li><a @click="abrirForm('producto')" class="dropdown-item" href="#">Productos</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -77,8 +77,8 @@
                 </div>
             </div>
         </nav>
-        <alumno-component v-bind:form="forms" ref="alumno" v-show="forms['alumno'].mostrar" ></alumno-component>
-        <inscripcion-component v-bind:form="forms" ref="inscripcion" v-show="forms['inscripcion'].mostrar" ><inscripcion-component>
+        <comercio-component v-bind:form="forms" ref="comercio" v-show="forms['comercio'].mostrar" ></comercio-component>
+        <producto-component v-bind:form="forms" ref="producto" v-show="forms['producto'].mostrar" ></producto-component>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

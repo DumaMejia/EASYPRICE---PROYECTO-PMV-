@@ -90,26 +90,26 @@
     
     <form align="center">
     <div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-    SELECCIONA UN DEPARTAMENTO
+  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+    Selecciona un departamento
   </button>
   <ul class="dropdown-menu dropdown-menu-lg-end">
     <li><button class="dropdown-item" type="button">Ahuachapan</button></li>
-    <li><button class="dropdown-item" type="button">Another action</button></li>
-    <li><button class="dropdown-item" type="button">Something else here</button></li>
+    <li><button class="dropdown-item" type="button">Cabañas</button></li>
+    <li><button class="dropdown-item" type="button">Usulutan</button></li>
   </ul>
 </div>
 
 {{ __('                                         ') }}
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-    SELECCIONA UN MUNICIPIO
+  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+    Selecciona un municipio
   </button>
   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-    <li><button class="dropdown-item" type="button">Action</button></li>
-    <li><button class="dropdown-item" type="button">Another action</button></li>
-    <li><button class="dropdown-item" type="button">Something else here</button></li>
+    <li><button class="dropdown-item" type="button">Usulutan</button></li>
+    <li><button class="dropdown-item" type="button">Santa Maria</button></li>
+    <li><button class="dropdown-item" type="button">Ozatlan</button></li>
   </ul>
 </div>
     </form>
@@ -153,9 +153,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://cdn-pro.elsalvador.com/wp-content/uploads/2019/10/Imagen-shutterstock_152186840.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -163,9 +163,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://copades.com/monec/wp-content/uploads/2021/07/ca-1-720x340.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -173,9 +173,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://s3.amazonaws.com/prod-wp-hrn/wp-content/uploads/2021/02/canasta-basica-subio.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -192,9 +192,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://cdn-pro.elsalvador.com/wp-content/uploads/2019/10/Imagen-shutterstock_152186840.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -202,9 +202,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://copades.com/monec/wp-content/uploads/2021/07/ca-1-720x340.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -212,9 +212,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://s3.amazonaws.com/prod-wp-hrn/wp-content/uploads/2021/02/canasta-basica-subio.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -230,9 +230,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://cdn-pro.elsalvador.com/wp-content/uploads/2019/10/Imagen-shutterstock_152186840.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -240,9 +240,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://copades.com/monec/wp-content/uploads/2021/07/ca-1-720x340.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">Ver aqui</a>
                     </div>
                 </div>
             </div>
@@ -250,9 +250,9 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://s3.amazonaws.com/prod-wp-hrn/wp-content/uploads/2021/02/canasta-basica-subio.png" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Canasta basica</h5>
+                        <p class="card-text">Productos en oferta</p>
+                        <a href="#" class="btn btn-primary">ver aqui</a>
                     </div>
                 </div>
             </div>

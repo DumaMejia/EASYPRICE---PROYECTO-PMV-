@@ -24,8 +24,8 @@ window.generarIdUnicoFecha = ()=>{
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('alumno-component', require('./components/AlumnoComponent.vue').default);
-Vue.component('inscripcion-component', require('./components/InscripcionComponent.vue').default);
+Vue.component('comercio-component', require('./components/ComercioComponent.vue').default);
+Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,8 +37,8 @@ const app = new Vue({
     el: '#app',
     data:{
         forms:{
-            alumno:{mostrar:false},
-            inscripcion:{mostrar:false},
+            comercio:{mostrar:false},
+            producto:{mostrar:false},
         }
     },
     methods:{
@@ -56,14 +56,15 @@ const app = new Vue({
             let indexDb = indexedDB.open('db_sistema', 1);
             indexDb.onupgradeneeded = e=>{
                 let db = e.target.result;
-                tblalumno = db.createObjectStore('alumno', {keyPath:'idAlumno'});
-                tblinscripcion = db.createObjectStore('inscripcion', {keyPath:'idInscripcion'});
+                tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
+                tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
 
-                tblalumno.createIndex('idAlumno', 'idAlumno', {unique:true});
-                tblalumno.createIndex('codigo', 'codigo', {unique:false});
+                tblcomercio.createIndex('idComercio', 'idComercio', {unique:true});
+                tblcomercio.createIndex('codigo', 'codigo', {unique:false});
 
 
-                tblinscripcion.createIndex('idInscripcion', 'idInscripcion', {unique:true});
+                tblproducto.createIndex('idProducto', 'idProducto', {unique:true});
+                tblproducto.createIndex('codigo', 'codigo', {unique:false});
             };
             indexDb.onsuccess = e=>{
                 db = e.target.result;
