@@ -5710,8 +5710,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         idProducto: '',
         codigo: '',
         nombre: '',
+        idComercio: '',
+        nombrecomercio: '',
         comercio: {
-          idComercio: '',
+          id: '',
           label: ''
         },
         precio: '',
@@ -5818,6 +5820,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         url = '/producto';
       }
 
+      this.producto.idComercio = this.producto.comercio.idC;
+      this.producto.label = this.producto.comercio.labe;
       var producto = JSON.parse(JSON.stringify(this.producto));
       this.sincronizarDatosServidor(producto, metodo, url);
       this.insertarLocal(producto);
@@ -5894,7 +5898,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this4.comercios = dataComercio.result.map(function (comercio) {
           return {
-            idComercio: comercio.id,
+            id: comercio.id,
             label: comercio.nombre
           };
         });
@@ -5914,8 +5918,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.producto.precio = '';
       this.producto.categoria = '';
       this.producto.comercio = {
-        idComercio: '',
-        label: ''
+        idC: '',
+        labe: ''
       };
     },
     abrirStore: function abrirStore(store, modo) {

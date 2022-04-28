@@ -109,8 +109,10 @@
             idProducto:'',
             codigo:'',
             nombre:'',
+            idComercio:'',
+            nombrecomercio: '',
             comercio:{
-                idComercio:'',
+                id:'',
                 label:'',
                 },
             precio:'',
@@ -185,6 +187,8 @@
                     metodo = 'POST';
                     url = '/producto';
                 }
+                this.producto.idComercio = this.producto.comercio.idC;
+                this.producto.label = this.producto.comercio.labe;
                 let producto = JSON.parse(JSON.stringify(this.producto));
                 this.sincronizarDatosServidor(producto, metodo, url);
                 this.insertarLocal(producto);
@@ -247,8 +251,8 @@
                     }
                     this.comercios = dataComercio.result.map(comercio=>{
                         return {
-                            idComercio : comercio.id,
-                            label : comercio.nombre
+                            id : comercio.id,
+                            label : comercio.nombre,
                         }
                     });
                     console.log(this.comercios);
@@ -269,8 +273,8 @@
             this.producto.precio = '';
             this.producto.categoria ='';
             this.producto.comercio = {
-                    idComercio:'',
-                    label:'',
+                    idC:'',
+                    labe:'',
                 };
             },
 
