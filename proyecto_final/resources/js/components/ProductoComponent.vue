@@ -26,7 +26,7 @@
                         <div class="row p-1">
                                 <div class="col col-md-2">Comercio:</div>
                                 <div class="col col-md-3">
-                                    <v-select-alumno title="Seleccione el alumno" v-model="producto.comercio" :options="comercios" required class="form-control"/>
+                                    <v-select-alumno title="Seleccione el comercio" v-model="producto.comercio" :options="comercios" required class="form-control"/>
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@
                     <tr  v-for="item in productos" @click='modificarProducto( item )' :key="item.idProducto">
                         <td>{{item.codigo}}</td>
                         <td>{{item.nombre}}</td>
-                        <td>{{item.comercio}}</td>
+                        <td>{{item.comercio.label}}</td>
                         <td>{{item.precio}}</td>
                         <td>{{item.categoria}}</td>
                         <td>
@@ -110,7 +110,7 @@
             codigo:'',
             nombre:'',
             comercio:{
-                id:'',
+                idComercio:'',
                 label:'',
                 },
             precio:'',
@@ -247,7 +247,7 @@
                     }
                     this.comercios = dataComercio.result.map(comercio=>{
                         return {
-                            id : comercio.id,
+                            idComercio : comercio.id,
                             label : comercio.nombre
                         }
                     });
@@ -262,12 +262,16 @@
 
             nuevoProducto(){
             this.producto.accion = 'nuevo';
-            this.producto.idIncripcion = '';
-            this.producto.nombre = 'ninguna';
-            this.producto.idcomercio = 'ninguna';
-            this.producto.precio = 'ninguna';
-            this.producto.categoria ='ninguna';
-            this.producto.materia5 ='ninguna';
+            this.producto.idProducto = '';
+            this.producto.codigo = '';
+            this.producto.nombre = '';
+            this.producto.idP = '';
+            this.producto.precio = '';
+            this.producto.categoria ='';
+            this.producto.comercio = {
+                    idComercio:'',
+                    label:'',
+                };
             },
 
             abrirStore(store, modo){

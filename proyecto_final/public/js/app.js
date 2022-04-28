@@ -5711,7 +5711,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         codigo: '',
         nombre: '',
         comercio: {
-          id: '',
+          idComercio: '',
           label: ''
         },
         precio: '',
@@ -5894,7 +5894,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this4.comercios = dataComercio.result.map(function (comercio) {
           return {
-            id: comercio.id,
+            idComercio: comercio.id,
             label: comercio.nombre
           };
         });
@@ -5907,12 +5907,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     nuevoProducto: function nuevoProducto() {
       this.producto.accion = 'nuevo';
-      this.producto.idIncripcion = '';
-      this.producto.nombre = 'ninguna';
-      this.producto.idcomercio = 'ninguna';
-      this.producto.precio = 'ninguna';
-      this.producto.categoria = 'ninguna';
-      this.producto.materia5 = 'ninguna';
+      this.producto.idProducto = '';
+      this.producto.codigo = '';
+      this.producto.nombre = '';
+      this.producto.idP = '';
+      this.producto.precio = '';
+      this.producto.categoria = '';
+      this.producto.comercio = {
+        idComercio: '',
+        label: ''
+      };
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -30438,7 +30442,7 @@ var render = function () {
                     _c("v-select-alumno", {
                       staticClass: "form-control",
                       attrs: {
-                        title: "Seleccione el alumno",
+                        title: "Seleccione el comercio",
                         options: _vm.comercios,
                         required: "",
                       },
@@ -30593,7 +30597,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.nombre))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.comercio))]),
+                      _c("td", [_vm._v(_vm._s(item.comercio.label))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.precio))]),
                       _vm._v(" "),
