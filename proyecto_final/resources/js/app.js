@@ -12,6 +12,8 @@ window.generarIdUnicoFecha = ()=>{
     let fecha = new Date();
     return Math.floor(fecha.getTime()/1000).toString(16);
 }
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 
 /**
  * The following block of code may be used to automatically register your
@@ -26,6 +28,7 @@ window.generarIdUnicoFecha = ()=>{
 
 Vue.component('comercio-component', require('./components/ComercioComponent.vue').default);
 Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
+Vue.component('v-select-alumno', vSelect);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

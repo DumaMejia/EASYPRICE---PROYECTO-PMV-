@@ -34,7 +34,7 @@
                     <div class="row p-1">
                         <div class="col col-md-2">CORREO:</div>
                         <div class="col col-md-2">
-                            <input title="Ingrese el CORREO" v-model="comercio.correo" pattern=".+@\.com" required type="text" class="form-control">
+                            <input title="Ingrese el CORREO" v-model="comercio.correo"  required type="email"  class="form-control">
                         </div>
                     </div>
                     <div class="row p-1">
@@ -42,9 +42,9 @@
                             <div class="col col-md-2">
                                 <select v-model="comercio.tipo" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                     <option  selected>Seleccionar Tipo</option>
-                                    <option value="Ingenieria En Sistemas y Redes Informaticas">Ingenieria En Sistemas</option>
-                                    <option value="Medicina">Medicina</option>
-                                    <option value="Artes Plasticas">Artes Plasticas</option>
+                                    <option value="Ingenieria En Sistemas y Redes Informaticas">pequeña empresa</option>
+                                    <option value="Medicina">Mediana empresa</option>
+                                    <option value="Artes Plasticas">Gran Empresa</option>
                                   </select>
                             </div> 
                         </div>
