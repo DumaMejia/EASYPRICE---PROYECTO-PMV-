@@ -1,11 +1,18 @@
 <template>
     <div id="appComercio">
-        <div class="card text-white" id="carComercio">
-            <div class="card-header text-white bg-dark">
+        
+        <div class="card">
+  
+        </div>
+        
+            
+            <div class="card text-dark bg-light mb-3" >
+                <div class="card-header text-white bg-warning">
                 Registro de Comercios
                 <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
-            </div>
-            <div class="card-header text-white bg-dark">
+                </div>
+                 
+                
                 <form method="post" @submit.prevent="guardarComercio" @reset="nuevoComercio">
                     <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
@@ -58,23 +65,23 @@
                     </div>
                     <div class="row m-2">
                         <div class="col col-md-5 text-center">
-                            <input class="btn btn-success" type="submit" value="Guardar">
+                            <input class="btn btn-primary" type="submit" value="Guardar">
                             <input class="btn btn-warning" type="reset" value="Nuevo">
                         </div>
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="card text-white bg-dark mb-3" id="carBuscarComercio">
-            <div class="card-header text-white bg-dark">
+    
+        <div class="card text-dark bg-light mb-3" id="carBuscarComercio">
+            <div class="card-header text-white bg-warning">
                 Busqueda de Comercios
-                <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarComercio" aria-label="Close"></button>
+                
             </div>
             <div class="card-body">
-                <table class="table table-dark table-hover">
+                <table class="table table-light table-hover">
                     <thead>
                         <tr>
-                            <th colspan="6">
+                            <th colspan="8">
                                 Buscar: <input @keyup="buscandoComercio" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
                             </th>
                         </tr>

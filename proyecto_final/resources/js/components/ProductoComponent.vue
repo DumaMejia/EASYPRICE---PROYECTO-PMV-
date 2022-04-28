@@ -1,13 +1,21 @@
 <template>
    
     <div id="appProducto">
-        <div class="container-fluid">
-        <form @submit.prevent="guardarProducto" @reset.prevent="nuevoProducto" method="post" id="frmMaterias">
-                <div class="card text-white bg-dark mb-3">
-                    <div class="card-header text-white bg-dark">
-                        Administracion de Materias
-                    </div>
-                    <div class="card-header text-white bg-dark">
+        <div class="card">
+        
+        </div>
+        
+
+        
+            <div class="card text-dark bg-light mb-3">
+                <div class="card-header text-white bg-warning">
+                        Administracion de Productos
+                        <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
+                 </div>
+                <form @submit.prevent="guardarProducto" @reset.prevent="nuevoProducto" method="post" id="frmMaterias">
+                
+                   
+                    
 
                         <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
@@ -26,7 +34,7 @@
                         <div class="row p-1">
                                 <div class="col col-md-2">Comercio:</div>
                                 <div class="col col-md-3">
-                                    <v-select-alumno title="Seleccione el comercio" v-model="producto.comercio" :options="comercios" required class="form-control"/>
+                                    <v-select-comercios title="Seleccione el comercio" v-model="producto.comercio" :options="comercios" required class="form-control"/>
                                 </div>
                             </div>
 
@@ -44,25 +52,27 @@
                         </div>
                     </div>
 
-                        <div class="row">
-                            <div class="col col-md-3 text-center">
-                                <button type="submit" class="btn btn-success">Guardar</button>
+                        <div class="row m-2">
+                            <div class="col col-md-5 text-center">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                                 <button type="reset" class="btn btn-warning">Nuevo</button>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    
+                
             </form>
+        </div>
     
-    <div class="card text-white bg-dark mb-3" id="cardBuscarCliente">
-        <div class="card-header text-white bg-dark">
-            Busqueda de Producto de Materias
+    <div class="card text-dark bg-light mb-3" id="cardBuscarCliente">
+        <div class="card-header text-white bg-warning">
+            Busqueda de Producto 
+            
         </div>
         <div class="card-body">
-            <table class="table table-dark table-striped">
+            <table class="table table-light table-striped">
                 <thead>
                     <tr>
-                        <td colspan="6">
+                        <td colspan="8">
                             Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoProducto" v-model="buscar" class="form-control" type="text">
                         </td>
                     </tr>
@@ -89,9 +99,8 @@
                 </tbody>
             </table>
         </div>
-    </div>
-        </div>
-    </div>
+    </div>        
+</div>
        
 </template>
 

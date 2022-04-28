@@ -28,7 +28,7 @@ import 'vue-select/dist/vue-select.css';
 
 Vue.component('comercio-component', require('./components/ComercioComponent.vue').default);
 Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
-Vue.component('v-select-alumno', vSelect);
+Vue.component('v-select-comercios', vSelect);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
