@@ -187,8 +187,8 @@
                     metodo = 'POST';
                     url = '/producto';
                 }
-                this.producto.idComercio = this.producto.comercio.idC;
-                this.producto.label = this.producto.comercio.labe;
+                this.producto.idComercio = this.producto.comercio.id;
+                this.producto.label = this.producto.comercio.label;
                 let producto = JSON.parse(JSON.stringify(this.producto));
                 this.sincronizarDatosServidor(producto, metodo, url);
                 this.insertarLocal(producto);
