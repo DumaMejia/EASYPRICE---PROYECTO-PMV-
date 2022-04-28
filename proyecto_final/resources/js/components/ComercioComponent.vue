@@ -42,9 +42,9 @@
                             <div class="col col-md-2">
                                 <select v-model="comercio.tipo" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                     <option  selected>Seleccionar Tipo</option>
-                                    <option value="Ingenieria En Sistemas y Redes Informaticas">pequeña empresa</option>
-                                    <option value="Medicina">Mediana empresa</option>
-                                    <option value="Artes Plasticas">Gran Empresa</option>
+                                    <option value="Pequeña empresa">Pequeña empresa</option>
+                                    <option value="Mediana empresa">Mediana empresa</option>
+                                    <option value="Gran Empresa">Gran Empresa</option>
                                   </select>
                             </div> 
                         </div>
@@ -226,7 +226,8 @@
                                 this.comercio.msg = `Error al guardar el comercio ${err}`;
                             });
                     }
-                    this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    
                 };
                 data.onerror = e=>{
                     this.comercio.msg = `Error al obtener los comercios ${e.target.error}`;

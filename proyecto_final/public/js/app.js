@@ -5552,7 +5552,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         _this4.comercios = data.result.filter(function (comercio) {
-          return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+          return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
@@ -5821,7 +5821,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       this.producto.idComercio = this.producto.comercio.id;
-      this.producto.label = this.producto.comercio.label;
+      this.producto.nombrecomercio = this.producto.comercio.label;
       var producto = JSON.parse(JSON.stringify(this.producto));
       this.sincronizarDatosServidor(producto, metodo, url);
       this.insertarLocal(producto);
@@ -5859,7 +5859,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         _this4.productos = data.result.filter(function (producto) {
-          return producto.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+          return producto.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
@@ -30096,22 +30096,15 @@ var render = function () {
                         _vm._v("Seleccionar Tipo"),
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "option",
-                        {
-                          attrs: {
-                            value:
-                              "Ingenieria En Sistemas y Redes Informaticas",
-                          },
-                        },
-                        [_vm._v("pequeña empresa")]
-                      ),
+                      _c("option", { attrs: { value: "Pequeña empresa" } }, [
+                        _vm._v("Pequeña empresa"),
+                      ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "Medicina" } }, [
+                      _c("option", { attrs: { value: "Mediana empresa" } }, [
                         _vm._v("Mediana empresa"),
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "Artes Plasticas" } }, [
+                      _c("option", { attrs: { value: "Gran Empresa" } }, [
                         _vm._v("Gran Empresa"),
                       ]),
                     ]

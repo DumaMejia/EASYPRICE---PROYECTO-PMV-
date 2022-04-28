@@ -188,7 +188,7 @@
                     url = '/producto';
                 }
                 this.producto.idComercio = this.producto.comercio.id;
-                this.producto.label = this.producto.comercio.label;
+                this.producto.nombrecomercio = this.producto.comercio.label;
                 let producto = JSON.parse(JSON.stringify(this.producto));
                 this.sincronizarDatosServidor(producto, metodo, url);
                 this.insertarLocal(producto);
@@ -218,7 +218,7 @@
                                 this.producto.msg = `Error al guardar el producto ${err}`;
                             });
                     }
-                    this.productos = data.result.filter(producto=>producto.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.productos = data.result.filter(producto=>producto.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
                     this.producto.msg = `Error al obtener los productos ${e.target.error}`;
