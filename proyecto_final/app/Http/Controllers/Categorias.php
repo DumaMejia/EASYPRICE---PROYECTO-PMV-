@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class Categorias extends Controller
+class Comercios extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class Categorias extends Controller
      */
     public function index()
     {
-        return Categoria::get();//select * from categoria
+        return Categoria::get();//select * from alumno
     }
 
     /**
@@ -35,7 +35,7 @@ class Categorias extends Controller
      */
     public function store(Request $request)
     {
-        $id = Categoria::create($request->all())->id;//insert into categoria...
+        $id = Categoria::create($request->all())->id;//insert into comercio...
         return response()->json(['id'=>$id], 200);
     }
 
