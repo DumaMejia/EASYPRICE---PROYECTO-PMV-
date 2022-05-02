@@ -6300,13 +6300,13 @@ var app = new Vue({
 
       indexDb.onupgradeneeded = function (e) {
         var db = e.target.result;
-        tblcomercio = db.createObjectStore('comercio', {
+        var tblcomercio = db.createObjectStore('comercio', {
           keyPath: 'idComercio'
         });
-        tblproducto = db.createObjectStore('producto', {
+        var tblproducto = db.createObjectStore('producto', {
           keyPath: 'idProducto'
         });
-        tblcategoria = db.createObjectStore('categoria', {
+        var tblcategoria = db.createObjectStore('categoria', {
           keyPath: 'idCategoria'
         });
         tblcomercio.createIndex('idComercio', 'idComercio', {

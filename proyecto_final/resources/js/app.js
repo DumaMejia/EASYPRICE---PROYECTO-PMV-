@@ -62,9 +62,9 @@ const app = new Vue({
             indexDb.onupgradeneeded = e=>{
                 let db = e.target.result;
                 
-                tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
-                tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
-                tblcategoria = db.createObjectStore('categoria', {keyPath:'idCategoria'});
+               let tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
+               let tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
+                let tblcategoria = db.createObjectStore('categoria', {keyPath:'idCategoria'});
 
                 tblcomercio.createIndex('idComercio', 'idComercio', {unique:true});
                 tblcomercio.createIndex('codigo', 'codigo', {unique:false});
