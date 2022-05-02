@@ -45,12 +45,12 @@
                         </div>
                         </div>
 
-                       <div class="row p-1">
-                        <div class="col col-md-2">Categoria:</div>
-                        <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="producto.categoria"  required type="text" class="form-control">
-                        </div>
-                    </div>
+                        <div class="row p-1">
+                                <div class="col col-md-2">Categoria:</div>
+                                <div class="col col-md-3">
+                                    <v-select-tipos title="Seleccione la categoria" v-model="producto.tipo" :options="tipos" required class="form-control"/>
+                                </div>
+                            </div>
 
                         <div class="row m-2">
                             <div class="col col-md-5 text-center">
@@ -90,7 +90,7 @@
                         <td>{{item.nombre}}</td>
                         <td>{{item.comercio.label}}</td>
                         <td>{{item.precio}}</td>
-                        <td>{{item.categoria}}</td>
+                        <td>{{item.tipo.label}}</td>
                         <td>
                             <button type="button" class="btn btn-danger" @click="eliminarProducto(item)">Eliminar</button>
                             <button type="button" class="btn btn-success" @click="modificarProducto(item)">Modificar</button>
@@ -111,6 +111,7 @@
             return{
         productos: [],
         comercios: [],
+        tipos: [],
         buscar: '',
          producto: {
             accion: 'nuevo',
@@ -124,8 +125,13 @@
                 id:'',
                 label:'',
                 },
+            tipo:{
+                id:'',
+                label:'',
+                },
             precio:'',
-            categoria:''
+            idCategoria:'',
+            ncategoria:'',
             }
         }
         },
@@ -198,6 +204,8 @@
                 }
                 this.producto.idComercio = this.producto.comercio.id;
                 this.producto.nombrecomercio = this.producto.comercio.label;
+                this.producto.idCategoria = this.producto.tipo.id;
+                this.producto.ncategoria = this.producto.tipo.label;
                 let producto = JSON.parse(JSON.stringify(this.producto));
                 this.sincronizarDatosServidor(producto, metodo, url);
                 this.insertarLocal(producto);
@@ -270,6 +278,43 @@
                     this.comercio.msg = `Error al obtener los comercios ${e.target.error}`;
                 };
 
+                //obtener Tipos
+                let storeTipo = this.abrirStore('tipo', 'readonly'),
+                    dataTipo = storeTipo.getAll();
+                dataTipo.onsuccess = e=>{
+                    if( dataTipo.result.length<=0 ){
+                        fetch(`tipo`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(dataTipo=>{
+                                this.tipos = dataTipo;
+                                dataTipo.map(tipo=>{
+                                    let store = this.abrirStore('tipo', 'readwrite'),
+                                        query = store.put(tipo);
+                                    query.onsuccess = e=>{
+                                        console.log(`Matricula ${tipo.nombre} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar el tipo ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                this.tipo.msg = `Error al guardar el tipo ${err}`;
+                            });
+                    }
+                    this.tipos = dataTipo.result.map(tipo=>{
+                        return {
+                            id : tipo.id,
+                            label : tipo.nombre,
+                        }
+                    });
+                    console.log(this.tipos);
+                };
+                dataTipo.onerror = e=>{
+                    this.tipo.msg = `Error al obtener los tipos ${e.target.error}`;
+                };
+
             },
     
 
@@ -282,8 +327,12 @@
             this.producto.precio = '';
             this.producto.categoria ='';
             this.producto.comercio = {
-                    idC:'',
-                    labe:'',
+                    id:'',
+                    label:'',
+                };
+            this.producto.tipo = {
+                    id1:'',
+                    label1:'',
                 };
             },
 

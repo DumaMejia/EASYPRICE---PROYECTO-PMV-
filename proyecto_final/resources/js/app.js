@@ -28,8 +28,9 @@ import 'vue-select/dist/vue-select.css';
 
 Vue.component('comercio-component', require('./components/ComercioComponent.vue').default);
 Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
-Vue.component('categoria-component', require('./components/CategoriaComponent.vue').default);
+Vue.component('tipo-component', require('./components/TipoComponent.vue').default);
 Vue.component('v-select-comercios', vSelect);
+Vue.component('v-select-tipos', vSelect);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -43,7 +44,7 @@ const app = new Vue({
         forms:{
             comercio:{mostrar:false},
             producto:{mostrar:false},
-            categoria:{mostrar:false},
+            tipo:{mostrar:false},
         }
     },
     methods:{

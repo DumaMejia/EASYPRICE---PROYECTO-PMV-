@@ -5266,279 +5266,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CategoriaComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CategoriaComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['form'],
-  data: function data() {
-    return {
-      tipos: [],
-      buscar: '',
-      tipo: {
-        accion: 'nuevo',
-        id: 0,
-        idTipo: '',
-        codigo: '',
-        nombre: ''
-      }
-    };
-  },
-  methods: {
-    cerrarForm: function cerrarForm() {
-      this.form['tipo'].mostrar = false;
-    },
-    sincronizarDatosServidor: function sincronizarDatosServidor(tipo, metodo, url) {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios({
-                  method: metodo,
-                  url: url,
-                  data: tipo
-                }).then(function (resp) {
-                  if (tipo.accion == 'nuevo') {
-                    tipo.id = resp.data.id;
-
-                    _this.insertarLocal(tipo); //actualizar el id del tipo que se genero en el servidor con laravel y mysql
-
-                  }
-
-                  _this.tipo.msg = "Tipo procesado ".concat(data.msg);
-                })["catch"](function (err) {
-                  _this.tipo.msg = "Error al procesar el tipo ".concat(err);
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    insertarLocal: function insertarLocal(tipo) {
-      var _this2 = this;
-
-      var store = this.abrirStore('tipo', 'readwrite'),
-          query = store.put(tipo);
-
-      query.onsuccess = function (e) {
-        _this2.nuevoTipo();
-
-        _this2.obtenerDatos();
-
-        _this2.tipo.msg = 'Tipo procesado con exito';
-      };
-
-      query.onerror = function (e) {
-        _this2.tipo.msg = "Error al procesar el tipo ".concat(e.target.error);
-      };
-    },
-    buscandoTipo: function buscandoTipo() {
-      this.obtenerDatos(this.buscar);
-    },
-    eliminarTipo: function eliminarTipo(tipo) {
-      var _this3 = this;
-
-      if (confirm("Esta seguro de eliminar el tipo ".concat(tipo.codigo, "?"))) {
-        tipo.accion = 'eliminar';
-        var store = this.abrirStore('tipo', 'readwrite'),
-            query = store["delete"](tipo.idTipo),
-            metodo = 'DELETE',
-            url = "/tipo/".concat(tipo.id);
-        this.sincronizarDatosServidor(tipo, metodo, url);
-
-        query.onsuccess = function (e) {
-          _this3.nuevoTipo();
-
-          _this3.obtenerDatos();
-
-          _this3.tipo.msg = 'Tipo eliminado con exito';
-        };
-
-        query.onerror = function (e) {
-          _this3.tipo.msg = "Error al eliminar el tipo ".concat(e.target.error);
-        };
-      }
-
-      this.nuevoTipo();
-    },
-    modificarTipo: function modificarTipo(datos) {
-      this.tipo = JSON.parse(JSON.stringify(datos));
-      this.tipo.accion = 'modificar';
-    },
-    guardarTipo: function guardarTipo() {
-      var metodo = 'PUT',
-          url = "/tipo/".concat(this.tipo.id);
-
-      if (this.tipo.accion == "nuevo") {
-        this.tipo.idTipo = generarIdUnicoFecha();
-        metodo = 'POST';
-        url = '/tipo';
-      }
-
-      var tipo = JSON.parse(JSON.stringify(this.tipo));
-      this.sincronizarDatosServidor(tipo, metodo, url);
-      this.insertarLocal(tipo);
-    },
-    obtenerDatos: function obtenerDatos() {
-      var _this4 = this;
-
-      var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var store = this.abrirStore('tipo', 'readonly'),
-          data = store.getAll();
-
-      data.onsuccess = function (e) {
-        if (data.result.length <= 0) {
-          fetch("tipo", {
-            credentials: 'same-origin'
-          }).then(function (res) {
-            return res.json();
-          }).then(function (data) {
-            _this4.tipos = data;
-            data.map(function (tipo) {
-              var store = _this4.abrirStore('tipo', 'readwrite'),
-                  query = store.put(tipo);
-
-              query.onsuccess = function (e) {
-                console.log("Tipo ".concat(tipo.codigo, " guardado"));
-              };
-
-              query.onerror = function (e) {
-                console.log("Error al guardar la tipo ".concat(e.target.error));
-              };
-            });
-          })["catch"](function (err) {
-            _this4.tipo.msg = "Error al guardar el tipo ".concat(err);
-          });
-        }
-
-        _this4.tipos = data.result.filter(function (tipo) {
-          return tipo.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
-        });
-      };
-
-      data.onerror = function (e) {
-        _this4.tipo.msg = "Error al obtener los tipos ".concat(e.target.error);
-      };
-    },
-    nuevoTipo: function nuevoTipo() {
-      this.tipo.accion = 'nuevo';
-      this.tipo.idTipo = '';
-      this.tipo.codigo = '';
-      this.tipo.nombre = '';
-    },
-    abrirStore: function abrirStore(store, modo) {
-      return db.transaction(store, modo).objectStore(store);
-    }
-  },
-  created: function created() {//this.obtenerDatosComercio();
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ComercioComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ComercioComponent.vue?vue&type=script&lang=js& ***!
@@ -5992,6 +5719,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       productos: [],
       comercios: [],
+      tipos: [],
       buscar: '',
       producto: {
         accion: 'nuevo',
@@ -6005,8 +5733,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           id: '',
           label: ''
         },
+        tipo: {
+          id: '',
+          label: ''
+        },
         precio: '',
-        categoria: ''
+        idCategoria: '',
+        ncategoria: ''
       }
     };
   },
@@ -6111,6 +5844,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.producto.idComercio = this.producto.comercio.id;
       this.producto.nombrecomercio = this.producto.comercio.label;
+      this.producto.idCategoria = this.producto.tipo.id;
+      this.producto.ncategoria = this.producto.tipo.label;
       var producto = JSON.parse(JSON.stringify(this.producto));
       this.sincronizarDatosServidor(producto, metodo, url);
       this.insertarLocal(producto);
@@ -6196,6 +5931,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       dataComercio.onerror = function (e) {
         _this4.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+      }; //obtener Tipos
+
+
+      var storeTipo = this.abrirStore('tipo', 'readonly'),
+          dataTipo = storeTipo.getAll();
+
+      dataTipo.onsuccess = function (e) {
+        if (dataTipo.result.length <= 0) {
+          fetch("tipo", {
+            credentials: 'same-origin'
+          }).then(function (res) {
+            return res.json();
+          }).then(function (dataTipo) {
+            _this4.tipos = dataTipo;
+            dataTipo.map(function (tipo) {
+              var store = _this4.abrirStore('tipo', 'readwrite'),
+                  query = store.put(tipo);
+
+              query.onsuccess = function (e) {
+                console.log("Matricula ".concat(tipo.nombre, " guardado"));
+              };
+
+              query.onerror = function (e) {
+                console.log("Error al guardar el tipo ".concat(e.target.error));
+              };
+            });
+          })["catch"](function (err) {
+            _this4.tipo.msg = "Error al guardar el tipo ".concat(err);
+          });
+        }
+
+        _this4.tipos = dataTipo.result.map(function (tipo) {
+          return {
+            id: tipo.id,
+            label: tipo.nombre
+          };
+        });
+        console.log(_this4.tipos);
+      };
+
+      dataTipo.onerror = function (e) {
+        _this4.tipo.msg = "Error al obtener los tipos ".concat(e.target.error);
       };
     },
     nuevoProducto: function nuevoProducto() {
@@ -6207,9 +5984,286 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.producto.precio = '';
       this.producto.categoria = '';
       this.producto.comercio = {
-        idC: '',
-        labe: ''
+        id: '',
+        label: ''
       };
+      this.producto.tipo = {
+        id1: '',
+        label1: ''
+      };
+    },
+    abrirStore: function abrirStore(store, modo) {
+      return db.transaction(store, modo).objectStore(store);
+    }
+  },
+  created: function created() {//this.obtenerDatosComercio();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TipoComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TipoComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['form'],
+  data: function data() {
+    return {
+      tipos: [],
+      buscar: '',
+      tipo: {
+        accion: 'nuevo',
+        id: 0,
+        idTipo: '',
+        codigo: '',
+        nombre: ''
+      }
+    };
+  },
+  methods: {
+    cerrarForm: function cerrarForm() {
+      this.form['tipo'].mostrar = false;
+    },
+    sincronizarDatosServidor: function sincronizarDatosServidor(tipo, metodo, url) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios({
+                  method: metodo,
+                  url: url,
+                  data: tipo
+                }).then(function (resp) {
+                  if (tipo.accion == 'nuevo') {
+                    tipo.id = resp.data.id;
+
+                    _this.insertarLocal(tipo); //actualizar el id del tipo que se genero en el servidor con laravel y mysql
+
+                  }
+
+                  _this.tipo.msg = "Tipo procesado ".concat(data.msg);
+                })["catch"](function (err) {
+                  _this.tipo.msg = "Error al procesar el tipo ".concat(err);
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    insertarLocal: function insertarLocal(tipo) {
+      var _this2 = this;
+
+      var store = this.abrirStore('tipo', 'readwrite'),
+          query = store.put(tipo);
+
+      query.onsuccess = function (e) {
+        _this2.nuevoTipo();
+
+        _this2.obtenerDatos();
+
+        _this2.tipo.msg = 'Tipo procesado con exito';
+      };
+
+      query.onerror = function (e) {
+        _this2.tipo.msg = "Error al procesar el tipo ".concat(e.target.error);
+      };
+    },
+    buscandoTipo: function buscandoTipo() {
+      this.obtenerDatos(this.buscar);
+    },
+    eliminarTipo: function eliminarTipo(tipo) {
+      var _this3 = this;
+
+      if (confirm("Esta seguro de eliminar el tipo ".concat(tipo.codigo, "?"))) {
+        tipo.accion = 'eliminar';
+        var store = this.abrirStore('tipo', 'readwrite'),
+            query = store["delete"](tipo.idTipo),
+            metodo = 'DELETE',
+            url = "/tipo/".concat(tipo.id);
+        this.sincronizarDatosServidor(tipo, metodo, url);
+
+        query.onsuccess = function (e) {
+          _this3.nuevoTipo();
+
+          _this3.obtenerDatos();
+
+          _this3.tipo.msg = 'Tipo eliminado con exito';
+        };
+
+        query.onerror = function (e) {
+          _this3.tipo.msg = "Error al eliminar el tipo ".concat(e.target.error);
+        };
+      }
+
+      this.nuevoTipo();
+    },
+    modificarTipo: function modificarTipo(datos) {
+      this.tipo = JSON.parse(JSON.stringify(datos));
+      this.tipo.accion = 'modificar';
+    },
+    guardarTipo: function guardarTipo() {
+      var metodo = 'PUT',
+          url = "/tipo/".concat(this.tipo.id);
+
+      if (this.tipo.accion == "nuevo") {
+        this.tipo.idTipo = generarIdUnicoFecha();
+        metodo = 'POST';
+        url = '/tipo';
+      }
+
+      var tipo = JSON.parse(JSON.stringify(this.tipo));
+      this.sincronizarDatosServidor(tipo, metodo, url);
+      this.insertarLocal(tipo);
+    },
+    obtenerDatos: function obtenerDatos() {
+      var _this4 = this;
+
+      var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var store = this.abrirStore('tipo', 'readonly'),
+          data = store.getAll();
+
+      data.onsuccess = function (e) {
+        if (data.result.length <= 0) {
+          fetch("tipo", {
+            credentials: 'same-origin'
+          }).then(function (res) {
+            return res.json();
+          }).then(function (data) {
+            _this4.tipos = data;
+            data.map(function (tipo) {
+              var store = _this4.abrirStore('tipo', 'readwrite'),
+                  query = store.put(tipo);
+
+              query.onsuccess = function (e) {
+                console.log("Tipo ".concat(tipo.codigo, " guardado"));
+              };
+
+              query.onerror = function (e) {
+                console.log("Error al guardar la tipo ".concat(e.target.error));
+              };
+            });
+          })["catch"](function (err) {
+            _this4.tipo.msg = "Error al guardar el tipo ".concat(err);
+          });
+        }
+
+        _this4.tipos = data.result.filter(function (tipo) {
+          return tipo.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+        });
+      };
+
+      data.onerror = function (e) {
+        _this4.tipo.msg = "Error al obtener los tipos ".concat(e.target.error);
+      };
+    },
+    nuevoTipo: function nuevoTipo() {
+      this.tipo.accion = 'nuevo';
+      this.tipo.idTipo = '';
+      this.tipo.codigo = '';
+      this.tipo.nombre = '';
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -6261,8 +6315,9 @@ window.generarIdUnicoFecha = function () {
 
 Vue.component('comercio-component', (__webpack_require__(/*! ./components/ComercioComponent.vue */ "./resources/js/components/ComercioComponent.vue")["default"]));
 Vue.component('producto-component', (__webpack_require__(/*! ./components/ProductoComponent.vue */ "./resources/js/components/ProductoComponent.vue")["default"]));
-Vue.component('categoria-component', (__webpack_require__(/*! ./components/CategoriaComponent.vue */ "./resources/js/components/CategoriaComponent.vue")["default"]));
+Vue.component('tipo-component', (__webpack_require__(/*! ./components/TipoComponent.vue */ "./resources/js/components/TipoComponent.vue")["default"]));
 Vue.component('v-select-comercios', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
+Vue.component('v-select-tipos', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -6279,7 +6334,7 @@ var app = new Vue({
       producto: {
         mostrar: false
       },
-      categoria: {
+      tipo: {
         mostrar: false
       }
     }
@@ -30000,45 +30055,6 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./resources/js/components/CategoriaComponent.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/CategoriaComponent.vue ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _CategoriaComponent_vue_vue_type_template_id_05fd4c96___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CategoriaComponent.vue?vue&type=template&id=05fd4c96& */ "./resources/js/components/CategoriaComponent.vue?vue&type=template&id=05fd4c96&");
-/* harmony import */ var _CategoriaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CategoriaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CategoriaComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CategoriaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CategoriaComponent_vue_vue_type_template_id_05fd4c96___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CategoriaComponent_vue_vue_type_template_id_05fd4c96___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/CategoriaComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/ComercioComponent.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/ComercioComponent.vue ***!
@@ -30117,10 +30133,10 @@ component.options.__file = "resources/js/components/ProductoComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/CategoriaComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/CategoriaComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/TipoComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/TipoComponent.vue ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -30128,8 +30144,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoriaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CategoriaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CategoriaComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoriaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _TipoComponent_vue_vue_type_template_id_5215b964___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TipoComponent.vue?vue&type=template&id=5215b964& */ "./resources/js/components/TipoComponent.vue?vue&type=template&id=5215b964&");
+/* harmony import */ var _TipoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TipoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TipoComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TipoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TipoComponent_vue_vue_type_template_id_5215b964___WEBPACK_IMPORTED_MODULE_0__.render,
+  _TipoComponent_vue_vue_type_template_id_5215b964___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TipoComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
@@ -30165,20 +30204,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/CategoriaComponent.vue?vue&type=template&id=05fd4c96&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/CategoriaComponent.vue?vue&type=template&id=05fd4c96& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/TipoComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/TipoComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoriaComponent_vue_vue_type_template_id_05fd4c96___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoriaComponent_vue_vue_type_template_id_05fd4c96___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoriaComponent_vue_vue_type_template_id_05fd4c96___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CategoriaComponent.vue?vue&type=template&id=05fd4c96& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CategoriaComponent.vue?vue&type=template&id=05fd4c96&");
-
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TipoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TipoComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -30216,263 +30254,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CategoriaComponent.vue?vue&type=template&id=05fd4c96&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CategoriaComponent.vue?vue&type=template&id=05fd4c96& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./resources/js/components/TipoComponent.vue?vue&type=template&id=5215b964&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/TipoComponent.vue?vue&type=template&id=5215b964& ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComponent_vue_vue_type_template_id_5215b964___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComponent_vue_vue_type_template_id_5215b964___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "appTipo" } }, [
-    _c("div", { staticClass: "card" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
-      _c("div", { staticClass: "card-header text-white bg-warning" }, [
-        _vm._v(
-          "\n                        Administracion de Tipos\n                        "
-        ),
-        _c("button", {
-          staticClass: "btn-close text-end",
-          attrs: { type: "button" },
-          on: { click: _vm.cerrarForm },
-        }),
-      ]),
-      _vm._v(" "),
-      _c(
-        "form",
-        {
-          attrs: { method: "post", id: "frmMaterias" },
-          on: {
-            submit: function ($event) {
-              $event.preventDefault()
-              return _vm.guardarTipo.apply(null, arguments)
-            },
-            reset: function ($event) {
-              $event.preventDefault()
-              return _vm.nuevoTipo.apply(null, arguments)
-            },
-          },
-        },
-        [
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Codigo:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.tipo.codigo,
-                    expression: "tipo.codigo",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese el nombre",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.tipo.codigo },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.tipo, "codigo", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Nombre:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.tipo.nombre,
-                    expression: "tipo.nombre",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese el nombre",
-                  pattern: "[A-Za-zñÑáéíóúü ]{3,75}",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.tipo.nombre },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.tipo, "nombre", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-        ]
-      ),
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "card text-dark bg-light mb-3",
-        attrs: { id: "cardBuscarCliente" },
-      },
-      [
-        _c("div", { staticClass: "card-header text-white bg-warning" }, [
-          _vm._v("\n            Busqueda de Tipo \n            \n        "),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-light table-striped" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("td", { attrs: { colspan: "8" } }, [
-                  _vm._v("\n                            Buscar: "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.buscar,
-                        expression: "buscar",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Introduzca el texto a buscar",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.buscar },
-                    on: {
-                      keyup: _vm.buscandoTipo,
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.buscar = $event.target.value
-                      },
-                    },
-                  }),
-                ]),
-              ]),
-              _vm._v(" "),
-              _vm._m(1),
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.tipos, function (item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.idTipo,
-                    on: {
-                      click: function ($event) {
-                        return _vm.modificarTipo(item)
-                      },
-                    },
-                  },
-                  [
-                    _c("td", [_vm._v(_vm._s(item.codigo))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.nombre))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.eliminarTipo(item)
-                            },
-                          },
-                        },
-                        [_vm._v("Eliminar")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.modificarTipo(item)
-                            },
-                          },
-                        },
-                        [_vm._v("Modificar")]
-                      ),
-                    ]),
-                  ]
-                )
-              }),
-              0
-            ),
-          ]),
-        ]),
-      ]
-    ),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row m-2" }, [
-      _c("div", { staticClass: "col col-md-5 text-center" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Guardar")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-warning", attrs: { type: "reset" } },
-          [_vm._v("Nuevo")]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Codigo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Nombre")]),
-    ])
-  },
-]
-render._withStripped = true
-
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComponent_vue_vue_type_template_id_5215b964___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TipoComponent.vue?vue&type=template&id=5215b964& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TipoComponent.vue?vue&type=template&id=5215b964&");
 
 
 /***/ }),
@@ -31106,33 +30900,28 @@ var render = function () {
           _c("div", { staticClass: "row p-1" }, [
             _c("div", { staticClass: "col col-md-2" }, [_vm._v("Categoria:")]),
             _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.producto.categoria,
-                    expression: "producto.categoria",
+            _c(
+              "div",
+              { staticClass: "col col-md-3" },
+              [
+                _c("v-select-tipos", {
+                  staticClass: "form-control",
+                  attrs: {
+                    title: "Seleccione la categoria",
+                    options: _vm.tipos,
+                    required: "",
                   },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese el nombre",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.producto.categoria },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.producto, "categoria", $event.target.value)
+                  model: {
+                    value: _vm.producto.tipo,
+                    callback: function ($$v) {
+                      _vm.$set(_vm.producto, "tipo", $$v)
+                    },
+                    expression: "producto.tipo",
                   },
-                },
-              }),
-            ]),
+                }),
+              ],
+              1
+            ),
           ]),
           _vm._v(" "),
           _vm._m(0),
@@ -31210,7 +30999,7 @@ var render = function () {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.precio))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.categoria))]),
+                    _c("td", [_vm._v(_vm._s(item.tipo.label))]),
                     _vm._v(" "),
                     _c("td", [
                       _c(
@@ -31287,6 +31076,267 @@ var staticRenderFns = [
       _c("th", [_vm._v("Precio")]),
       _vm._v(" "),
       _c("th", [_vm._v("Categoria")]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TipoComponent.vue?vue&type=template&id=5215b964&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TipoComponent.vue?vue&type=template&id=5215b964& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "appTipo" } }, [
+    _c("div", { staticClass: "card" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
+      _c("div", { staticClass: "card-header text-white bg-warning" }, [
+        _vm._v(
+          "\n                        Administracion de Tipos\n                        "
+        ),
+        _c("button", {
+          staticClass: "btn-close text-end",
+          attrs: { type: "button" },
+          on: { click: _vm.cerrarForm },
+        }),
+      ]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          attrs: { method: "post", id: "frmMaterias" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.guardarTipo.apply(null, arguments)
+            },
+            reset: function ($event) {
+              $event.preventDefault()
+              return _vm.nuevoTipo.apply(null, arguments)
+            },
+          },
+        },
+        [
+          _c("div", { staticClass: "row p-1" }, [
+            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Codigo:")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col col-md-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo.codigo,
+                    expression: "tipo.codigo",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  title: "Ingrese el nombre",
+                  required: "",
+                  type: "text",
+                },
+                domProps: { value: _vm.tipo.codigo },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.tipo, "codigo", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row p-1" }, [
+            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Nombre:")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col col-md-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo.nombre,
+                    expression: "tipo.nombre",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  title: "Ingrese el nombre",
+                  pattern: "[A-Za-zñÑáéíóúü ]{3,75}",
+                  required: "",
+                  type: "text",
+                },
+                domProps: { value: _vm.tipo.nombre },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.tipo, "nombre", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+        ]
+      ),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "card text-dark bg-light mb-3",
+        attrs: { id: "cardBuscarCliente" },
+      },
+      [
+        _c("div", { staticClass: "card-header text-white bg-warning" }, [
+          _vm._v("\n            Busqueda de Tipo \n            \n        "),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("table", { staticClass: "table table-light table-striped" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("td", { attrs: { colspan: "8" } }, [
+                  _vm._v("\n                            Buscar: "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.buscar,
+                        expression: "buscar",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      title: "Introduzca el texto a buscar",
+                      type: "text",
+                    },
+                    domProps: { value: _vm.buscar },
+                    on: {
+                      keyup: _vm.buscandoTipo,
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.buscar = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.tipos, function (item) {
+                return _c(
+                  "tr",
+                  {
+                    key: item.idTipo,
+                    on: {
+                      click: function ($event) {
+                        return _vm.modificarTipo(item)
+                      },
+                    },
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(item.codigo))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.nombre))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.eliminarTipo(item)
+                            },
+                          },
+                        },
+                        [_vm._v("Eliminar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.modificarTipo(item)
+                            },
+                          },
+                        },
+                        [_vm._v("Modificar")]
+                      ),
+                    ]),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row m-2" }, [
+      _c("div", { staticClass: "col col-md-5 text-center" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Guardar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", attrs: { type: "reset" } },
+          [_vm._v("Nuevo")]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Codigo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre")]),
     ])
   },
 ]
