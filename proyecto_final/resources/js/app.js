@@ -58,9 +58,10 @@ const app = new Vue({
              * 2. localStorage
              * 3. IndexedDB
              */
-            let indexDb = indexedDB.open('db_sistema', 1);
+            let indexDb = indexedDB.open('db_Easyprice', 1);
             indexDb.onupgradeneeded = e=>{
                 let db = e.target.result;
+                
                 tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
                 tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
                 tblcategoria = db.createObjectStore('categoria', {keyPath:'idCategoria'});
