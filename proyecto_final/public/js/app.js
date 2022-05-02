@@ -6296,7 +6296,7 @@ var app = new Vue({
        * 2. localStorage
        * 3. IndexedDB
        */
-      var indexDb = indexedDB.open('db_Easyprice', 2);
+      var indexDb = indexedDB.open('db_sistema', 1);
 
       indexDb.onupgradeneeded = function (e) {
         var db = e.target.result;
