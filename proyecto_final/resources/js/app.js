@@ -28,6 +28,7 @@ import 'vue-select/dist/vue-select.css';
 
 Vue.component('comercio-component', require('./components/ComercioComponent.vue').default);
 Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
+Vue.component('categoria-component', require('./components/CategoriaComponent.vue').default);
 Vue.component('v-select-comercios', vSelect);
 
 /**
@@ -42,6 +43,7 @@ const app = new Vue({
         forms:{
             comercio:{mostrar:false},
             producto:{mostrar:false},
+            categoria:{mostrar:false},
         }
     },
     methods:{
@@ -61,6 +63,7 @@ const app = new Vue({
                 let db = e.target.result;
                 tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
                 tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
+                tblcategoria = db.createObjectStore('categoria', {keyPath:'idCategoria'});
 
                 tblcomercio.createIndex('idComercio', 'idComercio', {unique:true});
                 tblcomercio.createIndex('codigo', 'codigo', {unique:false});
@@ -68,6 +71,9 @@ const app = new Vue({
 
                 tblproducto.createIndex('idProducto', 'idProducto', {unique:true});
                 tblproducto.createIndex('codigo', 'codigo', {unique:false});
+
+                tblcategoria.createIndex('idCategoria', 'idCategoria', {unique:true});
+                tblcategoria.createIndex('codigo', 'codigo', {unique:false});
             };
             indexDb.onsuccess = e=>{
                 db = e.target.result;

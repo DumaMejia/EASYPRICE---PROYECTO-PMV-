@@ -28,6 +28,7 @@
                             <li><a class="dropdown-item" href="{{ url('/') }}">Inicio</a></li>
                             <li><a @click="abrirForm('comercio')" class="dropdown-item" href="#">Comercio</a></li>
                             <li><a @click="abrirForm('producto')" class="dropdown-item" href="#">Productos</a></li>
+                            <li><a @click="abrirForm('categoria')" class="dropdown-item" href="#">Categoria</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -79,6 +80,7 @@
         </nav>
         <comercio-component v-bind:form="forms" ref="comercio" v-show="forms['comercio'].mostrar" ></comercio-component>
         <producto-component v-bind:form="forms" ref="producto" v-show="forms['producto'].mostrar" ></producto-component>
+        <categoria-component v-bind:form="forms" ref="categoria" v-show="forms['categoria'].mostrar" ></categoria-component>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
