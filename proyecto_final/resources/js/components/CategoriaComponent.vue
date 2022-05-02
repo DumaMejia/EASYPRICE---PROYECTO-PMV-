@@ -1,6 +1,6 @@
 <template>
    
-    <div id="appCategoria">
+    <div id="appTipo">
         <div class="card">
         
         </div>
@@ -9,10 +9,10 @@
         
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header text-white bg-warning">
-                        Administracion de Categorias
+                        Administracion de Tipos
                         <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
                  </div>
-                <form @submit.prevent="guardarCategoria" @reset.prevent="nuevoCategoria" method="post" id="frmMaterias">
+                <form @submit.prevent="guardarTipo" @reset.prevent="nuevoTipo" method="post" id="frmMaterias">
                 
                    
                     
@@ -20,14 +20,14 @@
                         <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="categoria.codigo"  required type="text" class="form-control">
+                            <input title="Ingrese el nombre" v-model="tipo.codigo"  required type="text" class="form-control">
                         </div>
                         </div>
 
                         <div class="row p-1">
                         <div class="col col-md-2">Nombre:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="categoria.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                            <input title="Ingrese el nombre" v-model="tipo.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
                         </div>
                         </div>
 
@@ -44,7 +44,7 @@
     
     <div class="card text-dark bg-light mb-3" id="cardBuscarCliente">
         <div class="card-header text-white bg-warning">
-            Busqueda de Categoria 
+            Busqueda de Tipo 
             
         </div>
         <div class="card-body">
@@ -52,7 +52,7 @@
                 <thead>
                     <tr>
                         <td colspan="8">
-                            Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoCategoria" v-model="buscar" class="form-control" type="text">
+                            Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoTipo" v-model="buscar" class="form-control" type="text">
                         </td>
                     </tr>
                     <tr>
@@ -61,12 +61,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  v-for="item in categorias" @click='modificarCategoria( item )' :key="item.idCategoria">
+                    <tr  v-for="item in tipos" @click='modificarTipo( item )' :key="item.idTipo">
                         <td>{{item.codigo}}</td>
                         <td>{{item.nombre}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger" @click="eliminarCategoria(item)">Eliminar</button>
-                            <button type="button" class="btn btn-success" @click="modificarCategoria(item)">Modificar</button>
+                            <button type="button" class="btn btn-danger" @click="eliminarTipo(item)">Eliminar</button>
+                            <button type="button" class="btn btn-success" @click="modificarTipo(item)">Modificar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -82,12 +82,12 @@
         props : ['form'],
          data:()=>{
             return{
-        categorias: [],
+        tipos: [],
         buscar: '',
-         categoria: {
+         tipo: {
             accion: 'nuevo',
             id: 0,
-            idCategoria:'',
+            idTipo:'',
             codigo:'',
             nombre:'',
             }
@@ -95,114 +95,114 @@
         },
         methods:{
             cerrarForm(){
-                this.form['categoria'].mostrar = false;
+                this.form['tipo'].mostrar = false;
             },
-            async sincronizarDatosServidor(categoria, metodo, url){
+            async sincronizarDatosServidor(tipo, metodo, url){
                 await axios({
                     method : metodo,
                     url,
-                    data : categoria
+                    data : tipo
                 })
                 .then(resp=>{
-                    if(categoria.accion=='nuevo'){
-                        categoria.id = resp.data.id;
-                        this.insertarLocal(categoria);//actualizar el id del categoria que se genero en el servidor con laravel y mysql
+                    if(tipo.accion=='nuevo'){
+                        tipo.id = resp.data.id;
+                        this.insertarLocal(tipo);//actualizar el id del tipo que se genero en el servidor con laravel y mysql
                     }
-                    this.categoria.msg = `Categoria procesado ${data.msg}`;
+                    this.tipo.msg = `Tipo procesado ${data.msg}`;
                 })
                 .catch(err=>{
-                    this.categoria.msg = `Error al procesar el categoria ${err}`;
+                    this.tipo.msg = `Error al procesar el tipo ${err}`;
                 })
             },
-            insertarLocal(categoria){
-                let store = this.abrirStore('categoria', 'readwrite'),
-                    query = store.put(categoria);
+            insertarLocal(tipo){
+                let store = this.abrirStore('tipo', 'readwrite'),
+                    query = store.put(tipo);
                 query.onsuccess = e=>{
-                    this.nuevoCategoria();
+                    this.nuevoTipo();
                     this.obtenerDatos();
-                    this.categoria.msg = 'Categoria procesado con exito';
+                    this.tipo.msg = 'Tipo procesado con exito';
                 };
                 query.onerror = e=>{
-                    this.categoria.msg = `Error al procesar el categoria ${e.target.error}`;
+                    this.tipo.msg = `Error al procesar el tipo ${e.target.error}`;
                 };
             },
-            buscandoCategoria(){
+            buscandoTipo(){
                 this.obtenerDatos(this.buscar);
             },
-            eliminarCategoria(categoria){
-                if( confirm(`Esta seguro de eliminar el categoria ${categoria.codigo}?`) ){
-                    categoria.accion = 'eliminar';
-                    let store = this.abrirStore('categoria', 'readwrite'),
-                        query = store.delete(categoria.idCategoria),
+            eliminarTipo(tipo){
+                if( confirm(`Esta seguro de eliminar el tipo ${tipo.codigo}?`) ){
+                    tipo.accion = 'eliminar';
+                    let store = this.abrirStore('tipo', 'readwrite'),
+                        query = store.delete(tipo.idTipo),
                         metodo = 'DELETE',
-                        url = `/categoria/${categoria.id}`;
-                    this.sincronizarDatosServidor(categoria, metodo, url);
+                        url = `/tipo/${tipo.id}`;
+                    this.sincronizarDatosServidor(tipo, metodo, url);
                     query.onsuccess = e=>{
-                        this.nuevoCategoria();
+                        this.nuevoTipo();
                         this.obtenerDatos();
-                        this.categoria.msg = 'Categoria eliminado con exito';
+                        this.tipo.msg = 'Tipo eliminado con exito';
                     };
                     query.onerror = e=>{
-                        this.categoria.msg = `Error al eliminar el categoria ${e.target.error}`;
+                        this.tipo.msg = `Error al eliminar el tipo ${e.target.error}`;
                     };
                 }
-                this.nuevoCategoria();
+                this.nuevoTipo();
             },
-            modificarCategoria(datos){
-                this.categoria = JSON.parse(JSON.stringify(datos));
-                this.categoria.accion = 'modificar';
+            modificarTipo(datos){
+                this.tipo = JSON.parse(JSON.stringify(datos));
+                this.tipo.accion = 'modificar';
             },
-            guardarCategoria(){
+            guardarTipo(){
                 let metodo = 'PUT',
-                    url = `/categoria/${this.categoria.id}`;
-                if(this.categoria.accion=="nuevo"){
-                    this.categoria.idCategoria = generarIdUnicoFecha();
+                    url = `/tipo/${this.tipo.id}`;
+                if(this.tipo.accion=="nuevo"){
+                    this.tipo.idTipo = generarIdUnicoFecha();
                     metodo = 'POST';
-                    url = '/categoria';
+                    url = '/tipo';
                 }
-                let categoria = JSON.parse(JSON.stringify(this.categoria));
-                this.sincronizarDatosServidor(categoria, metodo, url);
-                this.insertarLocal(categoria);
+                let tipo = JSON.parse(JSON.stringify(this.tipo));
+                this.sincronizarDatosServidor(tipo, metodo, url);
+                this.insertarLocal(tipo);
             },
             obtenerDatos(valor=''){
-                let store = this.abrirStore('categoria', 'readonly'),
+                let store = this.abrirStore('tipo', 'readonly'),
                     data = store.getAll();
                 data.onsuccess = e=>{
                     if( data.result.length<=0 ){
-                        fetch(`categoria`, 
+                        fetch(`tipo`, 
                             {credentials: 'same-origin'})
                             .then(res=>res.json())
                             .then(data=>{
-                                this.categorias = data;
-                                data.map(categoria=>{
-                                    let store = this.abrirStore('categoria', 'readwrite'),
-                                        query = store.put(categoria);
+                                this.tipos = data;
+                                data.map(tipo=>{
+                                    let store = this.abrirStore('tipo', 'readwrite'),
+                                        query = store.put(tipo);
                                     query.onsuccess = e=>{
-                                        console.log(`Categoria ${categoria.codigo} guardado`);
+                                        console.log(`Tipo ${tipo.codigo} guardado`);
                                     };
                                     query.onerror = e=>{
-                                        console.log(`Error al guardar la categoria ${e.target.error}`);
+                                        console.log(`Error al guardar la tipo ${e.target.error}`);
                                     };
                                 });
                             })
                             .catch(err=>{
-                                this.categoria.msg = `Error al guardar el categoria ${err}`;
+                                this.tipo.msg = `Error al guardar el tipo ${err}`;
                             });
                     }
-                    this.categorias = data.result.filter(categoria=>categoria.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || categoria.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.tipos = data.result.filter(tipo=>tipo.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
-                    this.categoria.msg = `Error al obtener los categorias ${e.target.error}`;
+                    this.tipo.msg = `Error al obtener los tipos ${e.target.error}`;
                 }; 
 
             },
     
 
-            nuevoCategoria(){
-            this.categoria.accion = 'nuevo';
-            this.categoria.idCategoria = '';
-            this.categoria.codigo = '';
-            this.categoria.nombre = '';
+            nuevoTipo(){
+            this.tipo.accion = 'nuevo';
+            this.tipo.idTipo = '';
+            this.tipo.codigo = '';
+            this.tipo.nombre = '';
             },
 
             abrirStore(store, modo){

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+use App\Models\Tipo;
 use Illuminate\Http\Request;
 
-class Comercios extends Controller
+class Tipos extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class Comercios extends Controller
      */
     public function index()
     {
-        return Categoria::get();//select * from alumno
+        return Tipo::get();//select * from alumno
     }
 
     /**
@@ -35,28 +35,28 @@ class Comercios extends Controller
      */
     public function store(Request $request)
     {
-        $id = Categoria::create($request->all())->id;//insert into comercio...
+        $id = Tipo::create($request->all())->id;//insert into comercio...
         return response()->json(['id'=>$id], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show(Tipo $tipo)
     {
-        return $categoria;
+        return $tipo;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit(Tipo $tipo)
     {
         //
     }
@@ -65,24 +65,24 @@ class Comercios extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, Tipo $tipo)
     {
-        $categoria->update($request->all());//update comercio set... where id = $id
+        $tipo->update($request->all());//update comercio set... where id = $id
         return response()->json(['id'=>$request->id], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Tipo $tipo)
     {
-        $categoria->delete();//delete from comercio where id = $id
-        return response()->json(['id'=>$categoria->id], 200);
+        $tipo->delete();//delete from comercio where id = $id
+        return response()->json(['id'=>$tipo->id], 200);
     }
 }

@@ -64,7 +64,7 @@ const app = new Vue({
                 
                let tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
                let tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
-                let tblcategoria = db.createObjectStore('categoria', {keyPath:'idCategoria'});
+                let tbltipo = db.createObjectStore('tipo', {keyPath:'idTipo'});
 
                 tblcomercio.createIndex('idComercio', 'idComercio', {unique:true});
                 tblcomercio.createIndex('codigo', 'codigo', {unique:false});
@@ -73,8 +73,8 @@ const app = new Vue({
                 tblproducto.createIndex('idProducto', 'idProducto', {unique:true});
                 tblproducto.createIndex('codigo', 'codigo', {unique:false});
 
-                tblcategoria.createIndex('idCategoria', 'idCategoria', {unique:true});
-                tblcategoria.createIndex('codigo', 'codigo', {unique:false});
+                tbltipo.createIndex('idTipo', 'idTipo', {unique:true});
+                tbltipo.createIndex('codigo', 'codigo', {unique:false});
             };
             indexDb.onsuccess = e=>{
                 db = e.target.result;

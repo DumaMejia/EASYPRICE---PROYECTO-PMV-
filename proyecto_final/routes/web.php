@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Comercios;
 use App\Http\Controllers\Productos;
-use App\Http\Controllers\Categorias;
+use App\Http\Controllers\Tipos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +37,7 @@ Auth::routes(['verify' => true]);
 Route::apiResources([
     'comercio'=>Comercios::class,
     'producto'=>Productos::class,
-    'categoria'=>Categorias::class,
+    'tipo'=>Tipos::class,
 ]);
 
 

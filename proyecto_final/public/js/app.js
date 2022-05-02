@@ -5368,12 +5368,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['form'],
   data: function data() {
     return {
-      categorias: [],
+      tipos: [],
       buscar: '',
-      categoria: {
+      tipo: {
         accion: 'nuevo',
         id: 0,
-        idCategoria: '',
+        idTipo: '',
         codigo: '',
         nombre: ''
       }
@@ -5381,9 +5381,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     cerrarForm: function cerrarForm() {
-      this.form['categoria'].mostrar = false;
+      this.form['tipo'].mostrar = false;
     },
-    sincronizarDatosServidor: function sincronizarDatosServidor(categoria, metodo, url) {
+    sincronizarDatosServidor: function sincronizarDatosServidor(tipo, metodo, url) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -5395,18 +5395,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios({
                   method: metodo,
                   url: url,
-                  data: categoria
+                  data: tipo
                 }).then(function (resp) {
-                  if (categoria.accion == 'nuevo') {
-                    categoria.id = resp.data.id;
+                  if (tipo.accion == 'nuevo') {
+                    tipo.id = resp.data.id;
 
-                    _this.insertarLocal(categoria); //actualizar el id del categoria que se genero en el servidor con laravel y mysql
+                    _this.insertarLocal(tipo); //actualizar el id del tipo que se genero en el servidor con laravel y mysql
 
                   }
 
-                  _this.categoria.msg = "Categoria procesado ".concat(data.msg);
+                  _this.tipo.msg = "Tipo procesado ".concat(data.msg);
                 })["catch"](function (err) {
-                  _this.categoria.msg = "Error al procesar el categoria ".concat(err);
+                  _this.tipo.msg = "Error al procesar el tipo ".concat(err);
                 });
 
               case 2:
@@ -5417,117 +5417,117 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    insertarLocal: function insertarLocal(categoria) {
+    insertarLocal: function insertarLocal(tipo) {
       var _this2 = this;
 
-      var store = this.abrirStore('categoria', 'readwrite'),
-          query = store.put(categoria);
+      var store = this.abrirStore('tipo', 'readwrite'),
+          query = store.put(tipo);
 
       query.onsuccess = function (e) {
-        _this2.nuevoCategoria();
+        _this2.nuevoTipo();
 
         _this2.obtenerDatos();
 
-        _this2.categoria.msg = 'Categoria procesado con exito';
+        _this2.tipo.msg = 'Tipo procesado con exito';
       };
 
       query.onerror = function (e) {
-        _this2.categoria.msg = "Error al procesar el categoria ".concat(e.target.error);
+        _this2.tipo.msg = "Error al procesar el tipo ".concat(e.target.error);
       };
     },
-    buscandoCategoria: function buscandoCategoria() {
+    buscandoTipo: function buscandoTipo() {
       this.obtenerDatos(this.buscar);
     },
-    eliminarCategoria: function eliminarCategoria(categoria) {
+    eliminarTipo: function eliminarTipo(tipo) {
       var _this3 = this;
 
-      if (confirm("Esta seguro de eliminar el categoria ".concat(categoria.codigo, "?"))) {
-        categoria.accion = 'eliminar';
-        var store = this.abrirStore('categoria', 'readwrite'),
-            query = store["delete"](categoria.idCategoria),
+      if (confirm("Esta seguro de eliminar el tipo ".concat(tipo.codigo, "?"))) {
+        tipo.accion = 'eliminar';
+        var store = this.abrirStore('tipo', 'readwrite'),
+            query = store["delete"](tipo.idTipo),
             metodo = 'DELETE',
-            url = "/categoria/".concat(categoria.id);
-        this.sincronizarDatosServidor(categoria, metodo, url);
+            url = "/tipo/".concat(tipo.id);
+        this.sincronizarDatosServidor(tipo, metodo, url);
 
         query.onsuccess = function (e) {
-          _this3.nuevoCategoria();
+          _this3.nuevoTipo();
 
           _this3.obtenerDatos();
 
-          _this3.categoria.msg = 'Categoria eliminado con exito';
+          _this3.tipo.msg = 'Tipo eliminado con exito';
         };
 
         query.onerror = function (e) {
-          _this3.categoria.msg = "Error al eliminar el categoria ".concat(e.target.error);
+          _this3.tipo.msg = "Error al eliminar el tipo ".concat(e.target.error);
         };
       }
 
-      this.nuevoCategoria();
+      this.nuevoTipo();
     },
-    modificarCategoria: function modificarCategoria(datos) {
-      this.categoria = JSON.parse(JSON.stringify(datos));
-      this.categoria.accion = 'modificar';
+    modificarTipo: function modificarTipo(datos) {
+      this.tipo = JSON.parse(JSON.stringify(datos));
+      this.tipo.accion = 'modificar';
     },
-    guardarCategoria: function guardarCategoria() {
+    guardarTipo: function guardarTipo() {
       var metodo = 'PUT',
-          url = "/categoria/".concat(this.categoria.id);
+          url = "/tipo/".concat(this.tipo.id);
 
-      if (this.categoria.accion == "nuevo") {
-        this.categoria.idCategoria = generarIdUnicoFecha();
+      if (this.tipo.accion == "nuevo") {
+        this.tipo.idTipo = generarIdUnicoFecha();
         metodo = 'POST';
-        url = '/categoria';
+        url = '/tipo';
       }
 
-      var categoria = JSON.parse(JSON.stringify(this.categoria));
-      this.sincronizarDatosServidor(categoria, metodo, url);
-      this.insertarLocal(categoria);
+      var tipo = JSON.parse(JSON.stringify(this.tipo));
+      this.sincronizarDatosServidor(tipo, metodo, url);
+      this.insertarLocal(tipo);
     },
     obtenerDatos: function obtenerDatos() {
       var _this4 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var store = this.abrirStore('categoria', 'readonly'),
+      var store = this.abrirStore('tipo', 'readonly'),
           data = store.getAll();
 
       data.onsuccess = function (e) {
         if (data.result.length <= 0) {
-          fetch("categoria", {
+          fetch("tipo", {
             credentials: 'same-origin'
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this4.categorias = data;
-            data.map(function (categoria) {
-              var store = _this4.abrirStore('categoria', 'readwrite'),
-                  query = store.put(categoria);
+            _this4.tipos = data;
+            data.map(function (tipo) {
+              var store = _this4.abrirStore('tipo', 'readwrite'),
+                  query = store.put(tipo);
 
               query.onsuccess = function (e) {
-                console.log("Categoria ".concat(categoria.codigo, " guardado"));
+                console.log("Tipo ".concat(tipo.codigo, " guardado"));
               };
 
               query.onerror = function (e) {
-                console.log("Error al guardar la categoria ".concat(e.target.error));
+                console.log("Error al guardar la tipo ".concat(e.target.error));
               };
             });
           })["catch"](function (err) {
-            _this4.categoria.msg = "Error al guardar el categoria ".concat(err);
+            _this4.tipo.msg = "Error al guardar el tipo ".concat(err);
           });
         }
 
-        _this4.categorias = data.result.filter(function (categoria) {
-          return categoria.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || categoria.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+        _this4.tipos = data.result.filter(function (tipo) {
+          return tipo.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
-        _this4.categoria.msg = "Error al obtener los categorias ".concat(e.target.error);
+        _this4.tipo.msg = "Error al obtener los tipos ".concat(e.target.error);
       };
     },
-    nuevoCategoria: function nuevoCategoria() {
-      this.categoria.accion = 'nuevo';
-      this.categoria.idCategoria = '';
-      this.categoria.codigo = '';
-      this.categoria.nombre = '';
+    nuevoTipo: function nuevoTipo() {
+      this.tipo.accion = 'nuevo';
+      this.tipo.idTipo = '';
+      this.tipo.codigo = '';
+      this.tipo.nombre = '';
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -6306,8 +6306,8 @@ var app = new Vue({
         var tblproducto = db.createObjectStore('producto', {
           keyPath: 'idProducto'
         });
-        var tblcategoria = db.createObjectStore('categoria', {
-          keyPath: 'idCategoria'
+        var tbltipo = db.createObjectStore('tipo', {
+          keyPath: 'idTipo'
         });
         tblcomercio.createIndex('idComercio', 'idComercio', {
           unique: true
@@ -6321,10 +6321,10 @@ var app = new Vue({
         tblproducto.createIndex('codigo', 'codigo', {
           unique: false
         });
-        tblcategoria.createIndex('idCategoria', 'idCategoria', {
+        tbltipo.createIndex('idTipo', 'idTipo', {
           unique: true
         });
-        tblcategoria.createIndex('codigo', 'codigo', {
+        tbltipo.createIndex('codigo', 'codigo', {
           unique: false
         });
       };
@@ -30232,13 +30232,13 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "appCategoria" } }, [
+  return _c("div", { attrs: { id: "appTipo" } }, [
     _c("div", { staticClass: "card" }),
     _vm._v(" "),
     _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
       _c("div", { staticClass: "card-header text-white bg-warning" }, [
         _vm._v(
-          "\n                        Administracion de Categorias\n                        "
+          "\n                        Administracion de Tipos\n                        "
         ),
         _c("button", {
           staticClass: "btn-close text-end",
@@ -30254,11 +30254,11 @@ var render = function () {
           on: {
             submit: function ($event) {
               $event.preventDefault()
-              return _vm.guardarCategoria.apply(null, arguments)
+              return _vm.guardarTipo.apply(null, arguments)
             },
             reset: function ($event) {
               $event.preventDefault()
-              return _vm.nuevoCategoria.apply(null, arguments)
+              return _vm.nuevoTipo.apply(null, arguments)
             },
           },
         },
@@ -30272,8 +30272,8 @@ var render = function () {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.categoria.codigo,
-                    expression: "categoria.codigo",
+                    value: _vm.tipo.codigo,
+                    expression: "tipo.codigo",
                   },
                 ],
                 staticClass: "form-control",
@@ -30282,13 +30282,13 @@ var render = function () {
                   required: "",
                   type: "text",
                 },
-                domProps: { value: _vm.categoria.codigo },
+                domProps: { value: _vm.tipo.codigo },
                 on: {
                   input: function ($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.categoria, "codigo", $event.target.value)
+                    _vm.$set(_vm.tipo, "codigo", $event.target.value)
                   },
                 },
               }),
@@ -30304,8 +30304,8 @@ var render = function () {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.categoria.nombre,
-                    expression: "categoria.nombre",
+                    value: _vm.tipo.nombre,
+                    expression: "tipo.nombre",
                   },
                 ],
                 staticClass: "form-control",
@@ -30315,13 +30315,13 @@ var render = function () {
                   required: "",
                   type: "text",
                 },
-                domProps: { value: _vm.categoria.nombre },
+                domProps: { value: _vm.tipo.nombre },
                 on: {
                   input: function ($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.categoria, "nombre", $event.target.value)
+                    _vm.$set(_vm.tipo, "nombre", $event.target.value)
                   },
                 },
               }),
@@ -30341,9 +30341,7 @@ var render = function () {
       },
       [
         _c("div", { staticClass: "card-header text-white bg-warning" }, [
-          _vm._v(
-            "\n            Busqueda de Categoria \n            \n        "
-          ),
+          _vm._v("\n            Busqueda de Tipo \n            \n        "),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
@@ -30368,7 +30366,7 @@ var render = function () {
                     },
                     domProps: { value: _vm.buscar },
                     on: {
-                      keyup: _vm.buscandoCategoria,
+                      keyup: _vm.buscandoTipo,
                       input: function ($event) {
                         if ($event.target.composing) {
                           return
@@ -30385,14 +30383,14 @@ var render = function () {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.categorias, function (item) {
+              _vm._l(_vm.tipos, function (item) {
                 return _c(
                   "tr",
                   {
-                    key: item.idCategoria,
+                    key: item.idTipo,
                     on: {
                       click: function ($event) {
-                        return _vm.modificarCategoria(item)
+                        return _vm.modificarTipo(item)
                       },
                     },
                   },
@@ -30409,7 +30407,7 @@ var render = function () {
                           attrs: { type: "button" },
                           on: {
                             click: function ($event) {
-                              return _vm.eliminarCategoria(item)
+                              return _vm.eliminarTipo(item)
                             },
                           },
                         },
@@ -30423,7 +30421,7 @@ var render = function () {
                           attrs: { type: "button" },
                           on: {
                             click: function ($event) {
-                              return _vm.modificarCategoria(item)
+                              return _vm.modificarTipo(item)
                             },
                           },
                         },
