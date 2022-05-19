@@ -22,7 +22,17 @@ server.get('/cliente/list', function(req, resp){
 });
 
 server.get('/cliente/nuevo', function(req, resp){
-    resp.sendfile(__dirname + '/index.html');
+    resp.sendFile(__dirname + '/index.html');
+});
+server.post('/cliente/save', function(req, resp){
+    mongodb.connect(url, function(err, client){
+        if(err) resp.send(err);
+        const db = client.db('facturacion');
+        db.collection('cliente').insertOne(req.body, function(err, result){
+            if(err) resp.send(err);
+            resp.send(result);
+        });
+    });
 });
 
 server.listen(port, function(event){
