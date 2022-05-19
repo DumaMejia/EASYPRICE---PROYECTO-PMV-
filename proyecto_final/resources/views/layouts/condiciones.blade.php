@@ -14,6 +14,7 @@
                         </div>
                     @endif
 
+                    <form  class="form-">
                     <h1 align="center">Terminos y condiciones </h1>
                     <body>
                     <p>El presente documento contiene reglas aplicables al uso del sitio web de EasyPrice. Cualquier persona natural, que desee comparar precios dentro de EasyPrice podra hacerlo con previa inscripcion o no como usuario en el sistema.</p>
@@ -34,14 +35,17 @@
 
                         <p><strong>Al aceptar nuestros termnos y condiciones tambien esta sujeto a lo siguiente:</strong></p>
 
-                        <div class="form-check" >
-                        <input href="{{ url('/gps') }}" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" id="check" 
-                        onchange="event.preventDefault();
-                                                     document.getElementById('').disabled= false; this.disabled= 'true';">
+                        <div class="form-check" required>
+                        <input  required class="form-check-input" type="checkbox" value="" id="flexCheckDefault" id="check" 
+                        if(checked=true) onchange="event.preventDefault();
+                                                document.getElementById('bts').href='http://127.0.0.1:8000/gps'
+                                                 ">
+
+                        
                         <label class="form-check-label" for="flexCheckDefault">
                         Estoy de acuerdo con EasyPrice pueda acceder con fines relativos a la cuenta de usuario, los datos que se detallan a continuacion:
                         </label>
-                        </div>
+                        </input>
                         <p></p>
                         <UL>
                         <li>Elaboracion de perfiles de usuario y tratamiento de datos de mi cuenta de usuario.
@@ -56,20 +60,27 @@
 
                          
                     </body>
-                  
-                </div>
 
-                                <div class="d-grid gap-2 col-2 mx-auto">
+                    <div class="d-grid gap-2 col-2 mx-auto">
                                     <a href="{{ route('home') }}" class="btn btn-primary">
                                         {{ __('Volver') }}
                                     </a>
 
                                     
                                     
-                                    <a href="{{ url('/gps') }}" class="btn btn-primary" disabled="true" id="bts" disabled>
+                                    <a   class="btn btn-primary" disabled="true" id="bts" disabled>
                                         {{ __('Siguiente') }}
                                     </a>
+
                                 </div>
+
+                    </form>
+
+                    
+                  
+                </div>
+
+                                
 
                                 <p></p>
                 
