@@ -1,26 +1,22 @@
 <template>
-    <div id="appMapa">
+    <div id="appComercio">
         
         
-   
-    
 
-            <div class="container m-3 ">
-                
-                <div class="card" style="width: 1200px; height: 400px;">
-                <x-maps-leaflet 
-                    :centerPoint="['lat' == 13.341835133794397, 'long' == -88.4186510089188]"
-                    :markers="[['lat' == 13.341835133794397, 'long' == -88.4186510089188]]">
-                    
-                </x-maps-leaflet>
-                </div>
+                <div class="map">
+              
+            <GmapMap
+                :center="{lat:10, lng:10}"
+                :zoom="7"
+                style="width: 100%, height: 320%;"
+            ></GmapMap>
                 
             </div>
-
     </div>
-
 </template>
 
 <script>
+
+
     
 </script>
