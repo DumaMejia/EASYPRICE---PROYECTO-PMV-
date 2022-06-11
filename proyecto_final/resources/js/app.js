@@ -12,8 +12,18 @@ window.generarIdUnicoFecha = ()=>{
     let fecha = new Date();
     return Math.floor(fecha.getTime()/1000).toString(16);
 }
+import Vue from 'vue';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+import * as VueGoogleMaps from 'vue2-google-maps';
+
+Vue.use(VueGoogleMaps, {
+
+    load: {
+        key: ''
+    }
+
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,6 +39,7 @@ import 'vue-select/dist/vue-select.css';
 Vue.component('comercio-component', require('./components/ComercioComponent.vue').default);
 Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
 Vue.component('tipo-component', require('./components/TipoComponent.vue').default);
+Vue.component('mapa-component', require('./components/MapaComponent.vue').default);
 Vue.component('v-select-comercios', vSelect);
 Vue.component('v-select-tipos', vSelect);
 
@@ -45,12 +56,16 @@ const app = new Vue({
             comercio:{mostrar:false},
             producto:{mostrar:false},
             tipo:{mostrar:false},
+            mapa:{mostrar:false},
         }
     },
     methods:{
         abrirForm(form){
             this.forms[form].mostrar = !this.forms[form].mostrar;
             this.$refs[form].obtenerDatos();
+        },
+        abrir(form){
+            this.forms[form].mostrar = !this.forms[form].mostrar;
         },
         abrirBd(){
             /**
