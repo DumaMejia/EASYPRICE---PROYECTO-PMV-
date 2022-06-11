@@ -21,8 +21,7 @@ Vue.use(VueGoogleMaps, {
 
     load: {
         key: ''
-    }
-
+    },
 });
 
 /**

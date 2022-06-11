@@ -128,11 +128,11 @@
 
             <div class="map">
               
-            <gmap-map
+            <GmapMap
                 :center="{lat:10, lng:10}"
                 :zoom="7"
                 :style="width: 100%, height: 320%;"
-            ></gmap-map>
+            ></GmapMap>
                 
             </div>
 
