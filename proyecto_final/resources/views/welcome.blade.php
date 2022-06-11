@@ -29,6 +29,7 @@
                             <li><a @click="abrirForm('comercio')" class="dropdown-item" href="#">Comercio</a></li>
                             <li><a @click="abrirForm('producto')" class="dropdown-item" href="#">Productos</a></li>
                             <li><a @click="abrirForm('tipo')" class="dropdown-item" href="#">Tipo de Producto</a></li>
+                            <li><a @click="abrir('mapa')" class="dropdown-item" href="#">prueba</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -81,6 +82,7 @@
         <comercio-component v-bind:form="forms" ref="comercio" v-show="forms['comercio'].mostrar" ></comercio-component>
         <producto-component v-bind:form="forms" ref="producto" v-show="forms['producto'].mostrar" ></producto-component>
         <tipo-component v-bind:form="forms" ref="tipo" v-show="forms['tipo'].mostrar" ></tipo-component>
+        <mapa-component v-bind:form="forms" ref="mapa" v-show="forms['mapa'].mostrar" ></mapa-component>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
