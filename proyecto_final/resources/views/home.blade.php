@@ -126,13 +126,13 @@
             
 
 
-            <div class="map">
+            <div class="conatiner 3">
               
-            <GmapMap
+            <gmap-map
                 :center="{lat:10, lng:10}"
                 :zoom="7"
-                :style="width: 100%, height: 320%;"
-            ></GmapMap>
+                style="width: 100%; height: 500px"
+            ></gmap-map>
                 
             </div>
 
