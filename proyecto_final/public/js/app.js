@@ -5605,13 +5605,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 
@@ -6310,11 +6303,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6333,12 +6326,6 @@ window.generarIdUnicoFecha = function () {
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__, {
-  load: {
-    key: ''
-  }
-});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -6349,19 +6336,25 @@ vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue2_google_maps__WEBPACK_IMPORT
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('comercio-component', (__webpack_require__(/*! ./components/ComercioComponent.vue */ "./resources/js/components/ComercioComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('producto-component', (__webpack_require__(/*! ./components/ProductoComponent.vue */ "./resources/js/components/ProductoComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('tipo-component', (__webpack_require__(/*! ./components/TipoComponent.vue */ "./resources/js/components/TipoComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('mapa-component', (__webpack_require__(/*! ./components/MapaComponent.vue */ "./resources/js/components/MapaComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('v-select-comercios', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('v-select-tipos', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('comercio-component', (__webpack_require__(/*! ./components/ComercioComponent.vue */ "./resources/js/components/ComercioComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('producto-component', (__webpack_require__(/*! ./components/ProductoComponent.vue */ "./resources/js/components/ProductoComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('tipo-component', (__webpack_require__(/*! ./components/TipoComponent.vue */ "./resources/js/components/TipoComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('mapa-component', (__webpack_require__(/*! ./components/MapaComponent.vue */ "./resources/js/components/MapaComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('v-select-comercios', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('v-select-tipos', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
+
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__, {
+  load: {
+    key: ''
+  }
+});
+var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   el: '#app',
   data: {
     forms: {
@@ -31627,21 +31620,16 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "appComercio" } }, [
-    _c(
-      "div",
-      { staticClass: "map" },
-      [
-        _c("GmapMap", {
-          staticStyle: { width: "100%, height: 320%" },
-          attrs: { center: { lat: 10, lng: 10 }, zoom: 7 },
-        }),
-      ],
-      1
-    ),
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "appComercio" } }, [_c("button")])
+  },
+]
 render._withStripped = true
 
 

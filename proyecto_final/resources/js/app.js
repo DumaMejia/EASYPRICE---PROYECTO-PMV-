@@ -15,14 +15,7 @@ window.generarIdUnicoFecha = ()=>{
 import Vue from 'vue';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
-import * as VueGoogleMaps from 'vue2-google-maps';
 
-Vue.use(VueGoogleMaps, {
-
-    load: {
-        key: ''
-    }
-});
 
 /**
  * The following block of code may be used to automatically register your
@@ -47,6 +40,15 @@ Vue.component('v-select-tipos', vSelect);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+ import * as VueGoogleMaps from 'vue2-google-maps';
+
+ Vue.use(VueGoogleMaps, {
+ 
+     load: {
+         key: ''
+     }
+ });
 
 const app = new Vue({
     el: '#app',
@@ -102,4 +104,6 @@ const app = new Vue({
     created(){
         this.abrirBd();
     }
+
+
 });
