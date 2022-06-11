@@ -41,15 +41,6 @@ Vue.component('v-select-tipos', vSelect);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- import * as VueGoogleMaps from 'vue2-google-maps';
-
- Vue.use(VueGoogleMaps, {
- 
-     load: {
-         key: ''
-     }
- });
-
 const app = new Vue({
     el: '#app',
     data:{
@@ -104,6 +95,4 @@ const app = new Vue({
     created(){
         this.abrirBd();
     }
-
-
 });

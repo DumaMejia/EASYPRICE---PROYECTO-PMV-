@@ -123,14 +123,18 @@
 
         <div>
 
-        
-                        
-            
+        <div class="container m-3 ">
+                
+                <div class="card" style="width: 1200px; height: 400px;">
+                <x-maps-leaflet 
+                    :centerPoint="['lat' => 13.341835133794397, 'long' => -88.4186510089188]"
+                    :markers="[['lat' => 13.341835133794397, 'long' => -88.4186510089188]]">
+                    
+                </x-maps-leaflet>
+                </div>
+                
+            </div>
 
-
-        <div id="map">
-
-        </div>
 
             
 
@@ -277,10 +281,11 @@
                 
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/java.js') }}"></script>        
+        <script src="{{ mix('js/app.js') }}"></script>        
         <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
+
     </body>
 </html>
 
