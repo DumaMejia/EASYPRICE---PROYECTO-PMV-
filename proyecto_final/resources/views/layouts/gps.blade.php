@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,6 +15,8 @@
                     Para poder  mostrarte las promociones y comercios cercanos a ti es indispensable 
                     que nos proporciones tu ubicacion
                 </p>
+
+                <p>{{coordinates.lat}}, {{coordinates.lng}}</p>
 
                 <p align="center"><img  src="image/GPS.png" width="70   " height="100"></p>
 
@@ -37,4 +40,25 @@
         </div>
     </div>
 </div>
+<script>
+    export default {
+        data() {
+            return {
+                coordinates: {
+                    lat: 0,
+                    lng: 0
+                }  
+            }
+        },
+        created() {
+            this.$getlocation({})
+            .then(coordinates => {
+                this.coordinates = coordinates;
+            })
+        }
+    }
+
+</script>
+</body>
+
 @endsection

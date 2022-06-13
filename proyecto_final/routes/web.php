@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Comercios;
 use App\Http\Controllers\Productos;
+use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Tipos;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,5 +55,7 @@ Route::post('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordControll
 Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
 Route::post('reset-password', 'App\Http\Controllers\Auth\ResetPasswordController@updatePassword');
 
+Route::get('/NewPassword',  [UserSettingsController::class,'NewPassword'])->name('NewPassword')->middleware('auth');
+Route::post('/change/password',  [UserSettingsController::class,'changePassword'])->name('changePassword');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -74,7 +74,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Opciones</a>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Usuario</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('NewPassword') }}">Usuario</a></li>
                             <li><a class="dropdown-item" href="#">Permisos</a></li>
                             <li><a class="dropdown-item" href="#">Notificaciónes</a></li>
                             </ul>
@@ -126,11 +126,11 @@
         <div class="container m-3 ">
                 
                 <div class="card" style="width: 1200px; height: 400px;">
-                <x-maps-leaflet 
+                <x-maps-google id="map"
                     :centerPoint="['lat' => 13.341835133794397, 'long' => -88.4186510089188]"
-                    :markers="[['lat' => 13.341835133794397, 'long' => -88.4186510089188]]">
+                    :markers="[['lat' => 13.341835133794397, 'long' => -88.4186510089188, 'title' => 'Your title']]">
                     
-                </x-maps-leaflet>
+                </x-maps-google>
                 </div>
                 
             </div>
@@ -280,11 +280,22 @@
             
                 
         </div>
-        <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ mix('js/app.js') }}"></script>        
+        <script src="{{ asset('js/app.js') }}"></script>      
         <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
+    <script>
+        
+        ubic: {
+            lat= -12.043333
+            long= -77.028333
+        };
+
+        let ubi = "['lat' => 56.341835133794397, 'long' => -81.4186510089188]";
+        document.getElementById('map').setAttribute(":centerPoint", "['lat' => 23.341835133794397, 'long' => -81.4186510089188]");
+
+        
+    </script>
 
     </body>
 </html>
