@@ -27,11 +27,11 @@ Route::get('/welcome', function () {
 })->middleware(['auth', 'verified']);
 
 Route::get('/gps', function () {
-    return view('layouts/gps');
+    return view('gps');
 });
 
 Route::get('/condiciones', function () {
-    return view('layouts/condiciones');
+    return view('condiciones');
 });
 
 Auth::routes(['verify' => true]);

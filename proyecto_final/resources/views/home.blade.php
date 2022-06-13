@@ -92,27 +92,22 @@
     
     <form align="center">
     <div class="btn-group">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-    Selecciona un departamento
-  </button>
-  <ul class="dropdown-menu dropdown-menu-lg-end">
-    <li><button class="dropdown-item" type="button">Ahuachapan</button></li>
-    <li><button class="dropdown-item" type="button">Cabañas</button></li>
-    <li><button class="dropdown-item" type="button">Usulutan</button></li>
-  </ul>
+  <select class="form-select form-select-sm btn-warning" aria-label="Default select example">
+        <option class="btn btn-light" selected>Open this select menu</option>
+        <option class="btn btn-light" value="1">One</option>
+        <option class="btn btn-light" value="2">Two</option>
+        <option class="btn btn-light" value="3">Three</option>
+        </select>
 </div>
 
-{{ __('                                         ') }}
-
 <div class="btn-group">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-    Selecciona un municipio
-  </button>
-  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-    <li><button class="dropdown-item" type="button">Usulutan</button></li>
-    <li><button class="dropdown-item" type="button">Santa Maria</button></li>
-    <li><button class="dropdown-item" type="button">Ozatlan</button></li>
-  </ul>
+  
+  <select class="form-select form-select-sm  btn-warning" aria-label="Default select example">
+        <option class="btn btn-light" selected>Open this select menu</option>
+        <option class="btn btn-light" value="1">One</option>
+        <option class="btn btn-light" value="2">Two</option>
+        <option class="btn btn-light" value="3">Three</option>
+        </select>
 </div>
     </form>
 

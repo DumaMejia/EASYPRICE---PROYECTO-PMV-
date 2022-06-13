@@ -5813,24 +5813,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
     return {
       ubicacion: {
-        lat: '13.341835133794397',
-        lng: '-88.4186510089188'
+        lat: 13.343565797622999,
+        lng: -88.43976983311296
+      },
+      depmun: {
+        valor: ''
+      },
+      gps: {
+        lat: 10,
+        lng: 10
       }
     };
   },
   methods: {
     mapCenter: function mapCenter() {
-      return {
-        lat: 13.341835133794397,
-        lng: -88.4186510089188
-      };
+      if (this.depmun.valor == "ahuachapan") {
+        this.ubicacion.lat = 13.922733648736088;
+        this.ubicacion.lng = -89.84554859477569;
+      }
+
+      ;
+
+      if (this.depmun.valor == "san salvador") {
+        this.ubicacion.lat = 13.697813428718089;
+        this.ubicacion.lng = -89.21799925241162;
+      }
+
+      ;
+
+      if (this.depmun.valor == "usulutan") {
+        this.ubicacion.lat = 13.345611871500576;
+        this.ubicacion.lng = -88.43976983311296;
+      }
+
+      ;
     },
     cerrarForm: function cerrarForm() {
       this.form['comercio'].mostrar = false;
@@ -5990,7 +6011,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return db.transaction(store, modo).objectStore(store);
     }
   },
-  created: function created() {//this.obtenerDatos();
+  created: function created() {
+    var _this5 = this;
+
+    //this.obtenerDatos();
+    this.$getLocation({}).then(function (gps) {
+      _this5.gps = gps;
+    });
   }
 });
 
@@ -6698,6 +6725,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-browser-geolocation */ "./node_modules/vue-browser-geolocation/dist/vue-geolocation.js");
 /* harmony import */ var vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+var _this = undefined;
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6713,11 +6742,19 @@ window.generarIdUnicoFecha = function () {
   return Math.floor(fecha.getTime() / 1000).toString(16);
 };
 
+window.obtenergps = function () {
+  _this.$getLocation({}).then(function (gps) {
+    localStorage.lat = gps.lat;
+    localStorage.lng = gps.lng;
+  });
+};
 
 
 
 
 
+
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2___default()));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__, {
   load: {
     key: 'AIzaSyBWAatt8ZEDh5BAUW7qdZusQdWB4S_KVlM',
@@ -32033,7 +32070,138 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "container m-3" }, [
+      _c("form", { attrs: { align: "center" } }, [
+        _c("div", { staticClass: "btn-group" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.depmun.valor,
+                  expression: "depmun.valor",
+                },
+              ],
+              staticClass: "form-select form-select-sm btn-warning",
+              attrs: { "aria-label": "Default select example" },
+              on: {
+                click: _vm.mapCenter,
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.depmun,
+                    "valor",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+              },
+            },
+            [
+              _c(
+                "option",
+                { staticClass: "btn btn-light", attrs: { selected: "" } },
+                [_vm._v("Seleciona un departamento")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                {
+                  staticClass: "btn btn-light",
+                  attrs: { value: "ahuachapan" },
+                },
+                [_vm._v("ahuachapan")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                {
+                  staticClass: "btn btn-light",
+                  attrs: { value: "san salvador" },
+                },
+                [_vm._v("San Salvador")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                { staticClass: "btn btn-light", attrs: { value: "usulutan" } },
+                [_vm._v("Usulutan")]
+              ),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn-group" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.depmun.valor,
+                  expression: "depmun.valor",
+                },
+              ],
+              staticClass: "form-select form-select-sm btn-warning",
+              attrs: { "aria-label": "Default select example" },
+              on: {
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.depmun,
+                    "valor",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+              },
+            },
+            [
+              _c(
+                "option",
+                { staticClass: "btn btn-light", attrs: { selected: "" } },
+                [_vm._v("Selecciona un municipio")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                { staticClass: "btn btn-light", attrs: { value: "1" } },
+                [_vm._v("One")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                { staticClass: "btn btn-light", attrs: { value: "2" } },
+                [_vm._v("Two")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                { staticClass: "btn btn-light", attrs: { value: "3" } },
+                [_vm._v("Three")]
+              ),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.gps.lat) + ", " + _vm._s(_vm.gps.lng))]),
+      ]),
+    ]),
     _vm._v(" "),
     _c("div", [
       _c(
@@ -32067,110 +32235,11 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
     ]),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container m-3" }, [
-      _c("form", { attrs: { align: "center" } }, [
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-warning dropdown-toggle",
-              attrs: {
-                type: "button",
-                "data-bs-toggle": "dropdown",
-                "data-bs-display": "static",
-                "aria-expanded": "false",
-              },
-            },
-            [_vm._v("\n    Selecciona un departamento\n  ")]
-          ),
-          _vm._v(" "),
-          _c("ul", { staticClass: "dropdown-menu dropdown-menu-lg-end" }, [
-            _c("li", { attrs: { id: "ahuachapan" } }, [
-              _c(
-                "button",
-                { staticClass: "dropdown-item", attrs: { type: "button" } },
-                [_vm._v("Ahuachapan")]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "button",
-                { staticClass: "dropdown-item", attrs: { type: "button" } },
-                [_vm._v("Cabañas")]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "button",
-                { staticClass: "dropdown-item", attrs: { type: "button" } },
-                [_vm._v("Usulutan")]
-              ),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-warning dropdown-toggle",
-              attrs: {
-                type: "button",
-                "data-bs-toggle": "dropdown",
-                "data-bs-display": "static",
-                "aria-expanded": "false",
-              },
-            },
-            [_vm._v("\n    Selecciona un municipio\n  ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass:
-                "dropdown-menu dropdown-menu-end dropdown-menu-lg-start",
-            },
-            [
-              _c("li", [
-                _c(
-                  "button",
-                  { staticClass: "dropdown-item", attrs: { type: "button" } },
-                  [_vm._v("Usulutan")]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "button",
-                  { staticClass: "dropdown-item", attrs: { type: "button" } },
-                  [_vm._v("Santa Maria")]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "button",
-                  { staticClass: "dropdown-item", attrs: { type: "button" } },
-                  [_vm._v("Ozatlan")]
-                ),
-              ]),
-            ]
-          ),
-        ]),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

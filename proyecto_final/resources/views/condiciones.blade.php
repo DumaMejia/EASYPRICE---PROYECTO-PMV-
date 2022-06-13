@@ -37,7 +37,7 @@
 
                         <div class="form-check" required>
                         <input  required class="form-check-input" type="checkbox" value="" id="flexCheckDefault" id="check" 
-                        if(checked=true) onchange="event.preventDefault();
+                         onchange="event.preventDefault();
                                                 document.getElementById('bts').href='http://127.0.0.1:8000/gps'
                                                  ">
 

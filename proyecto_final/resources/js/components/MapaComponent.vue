@@ -9,29 +9,27 @@
         
     
     <form align="center">
-    <div class="btn-group">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-    Selecciona un departamento
-  </button>
-  <ul class="dropdown-menu dropdown-menu-lg-end">
-    <li id="ahuachapan"><button class="dropdown-item"  type="button">Ahuachapan</button></li>
-    <li><button class="dropdown-item" type="button">Cabañas</button></li>
-    <li><button class="dropdown-item" type="button">Usulutan</button></li>
-  </ul>
-</div>
 
+        <div class="btn-group">
+            <select @click="mapCenter" v-model="depmun.valor" class="form-select form-select-sm btn-warning" aria-label="Default select example">
+                    <option class="btn btn-light" selected>Seleciona un departamento</option>
+                    <option class="btn btn-light" value="ahuachapan">ahuachapan</option>
+                    <option class="btn btn-light" value="san salvador">San Salvador</option>
+                    <option class="btn btn-light" value="usulutan">Usulutan</option>
+            </select>
+         </div>
 
+       <div class="btn-group">
+            <select  v-model="depmun.valor" class="form-select form-select-sm btn-warning" aria-label="Default select example">
+                    <option class="btn btn-light" selected>Selecciona un municipio</option>
+                    <option class="btn btn-light" value="1">One</option>
+                    <option class="btn btn-light" value="2">Two</option>
+                    <option class="btn btn-light" value="3">Three</option>
+            </select>
+        </div>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-    Selecciona un municipio
-  </button>
-  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-    <li><button class="dropdown-item" type="button">Usulutan</button></li>
-    <li><button class="dropdown-item" type="button">Santa Maria</button></li>
-    <li><button class="dropdown-item" type="button">Ozatlan</button></li>
-  </ul>
-</div>
+        <p>{{gps.lat}}, {{gps.lng}}</p>
+
     </form>
 
     
@@ -211,20 +209,39 @@
          data:()=>{
             return {
                 ubicacion:{
-                    lat : '13.341835133794397',
-                    lng : '-88.4186510089188',
+                    lat : 13.343565797622999,
+                    lng : -88.43976983311296,
+                },
+                depmun:{
+                    valor :'',
+                },
+                gps:{
+                    lat : 10,
+                    lng : 10,
                 }
+
             }
         },
         methods:{
 
             mapCenter(){
+                if(this.depmun.valor=="ahuachapan"){
+                    this.ubicacion.lat = 13.922733648736088;
+                    this.ubicacion.lng = -89.84554859477569;
 
-                return{
+                };
+                if(this.depmun.valor=="san salvador"){
+                    this.ubicacion.lat = 13.697813428718089;
+                    this.ubicacion.lng = -89.21799925241162;
 
-                    lat: 13.341835133794397,
-                    lng: -88.4186510089188
-                }
+                };
+                if(this.depmun.valor=="usulutan"){
+                    this.ubicacion.lat = 13.345611871500576;
+                    this.ubicacion.lng = -88.43976983311296;
+
+                };
+
+                
             },
 
             cerrarForm(){
@@ -346,6 +363,10 @@
         },
         created(){
             //this.obtenerDatos();
+            this.$getLocation({})
+            .then(gps => {
+                this.gps = gps;
+            })
         },
     }
     

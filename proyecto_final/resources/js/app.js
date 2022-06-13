@@ -12,13 +12,15 @@ window.generarIdUnicoFecha = ()=>{
     let fecha = new Date();
     return Math.floor(fecha.getTime()/1000).toString(16);
 }
+
+
 import Vue from 'vue';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 import VueGeolocation from 'vue-browser-geolocation';
-
 import * as VueGoogleMaps from 'vue2-google-maps'
  
+Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyBWAatt8ZEDh5BAUW7qdZusQdWB4S_KVlM',
@@ -119,6 +121,13 @@ const app = new Vue({
             indexDb.onerror = e=>{
                 console.log(e.target.error);
             };
+        },
+        obtenergps(){
+            this.$getLocation({})
+            .then(gps => {
+                localStorage.lat = gps.lat;
+                localStorage.lng = gps.lng;
+            })
         },
     },
     created(){
