@@ -3,31 +3,41 @@
 
 
  <div>
-
-
-    <div class="container m-3">
+     
+    <div class="card text-dark bg-light mb-3">
+      <div class="card-body">
+        
+        <div class="container m-3">
         
     
     <form align="center">
-
+        
+    
+        <div class="input-group mb-3">
+        <input type="text" class="form-control" v-model="depmun.valor" aria-describedby="button-addon2">
+        <button class="btn btn-outline-primary" type="button" id="button-addon2" @click="mapCenter">Buscar</button>
+        </div>
         <div class="btn-group">
-            <select @click="mapCenter" v-model="depmun.valor" class="form-select form-select-sm btn-warning" aria-label="Default select example">
-                    <option class="btn btn-light" selected>Seleciona un departamento</option>
-                    <option class="btn btn-light" value="ahuachapan">ahuachapan</option>
+            <select @click="mapCenter" v-model="depmun.valor"  aria-label="Default select example" class="form-select btn-warning" >
+                    Departamentos
+                    <option selected>Seleciona un departamento</option>
+                    <option class="btn btn-light" value="ahuachapan">Ahuachapan</option>
                     <option class="btn btn-light" value="san salvador">San Salvador</option>
                     <option class="btn btn-light" value="usulutan">Usulutan</option>
             </select>
          </div>
 
          <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary" @click="mapCentergps">
+            <button type="button" class="btn btn-outline-info" @click="mapCentergps">
+               
                 <i class="fa fa-google mr-2"></i>
                  <img  src="image/gps2.png" width="20" height="20">
+                  
                 </button>
         </div>
 
        <div class="btn-group">
-            <select  v-model="depmun.valor" class="form-select form-select-sm btn-warning" aria-label="Default select example">
+            <select  v-model="depmun.valor" class="form-select  btn-warning" aria-label="Default select example">
                     <option class="btn btn-light" selected>Selecciona un municipio</option>
                     <option class="btn btn-light" value="1">One</option>
                     <option class="btn btn-light" value="2">Two</option>
@@ -197,6 +207,11 @@
                 
         </div>
 
+
+      </div>
+    </div>
+
+    
 
         
 

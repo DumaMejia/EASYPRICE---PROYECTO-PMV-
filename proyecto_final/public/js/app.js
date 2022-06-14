@@ -5953,6 +5953,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -32448,188 +32463,237 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container m-3" }, [
-      _c("form", { attrs: { align: "center" } }, [
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.depmun.valor,
-                  expression: "depmun.valor",
-                },
-              ],
-              staticClass: "form-select form-select-sm btn-warning",
-              attrs: { "aria-label": "Default select example" },
-              on: {
-                click: _vm.mapCenter,
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.depmun,
-                    "valor",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            [
-              _c(
-                "option",
-                { staticClass: "btn btn-light", attrs: { selected: "" } },
-                [_vm._v("Seleciona un departamento")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                {
-                  staticClass: "btn btn-light",
-                  attrs: { value: "ahuachapan" },
-                },
-                [_vm._v("ahuachapan")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                {
-                  staticClass: "btn btn-light",
-                  attrs: { value: "san salvador" },
-                },
-                [_vm._v("San Salvador")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "btn btn-light", attrs: { value: "usulutan" } },
-                [_vm._v("Usulutan")]
-              ),
-            ]
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.mapCentergps },
-            },
-            [
-              _c("i", { staticClass: "fa fa-google mr-2" }),
-              _vm._v(" "),
-              _c("img", {
-                attrs: { src: "image/gps2.png", width: "20", height: "20" },
-              }),
-            ]
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.depmun.valor,
-                  expression: "depmun.valor",
-                },
-              ],
-              staticClass: "form-select form-select-sm btn-warning",
-              attrs: { "aria-label": "Default select example" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.depmun,
-                    "valor",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            [
-              _c(
-                "option",
-                { staticClass: "btn btn-light", attrs: { selected: "" } },
-                [_vm._v("Selecciona un municipio")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "btn btn-light", attrs: { value: "1" } },
-                [_vm._v("One")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "btn btn-light", attrs: { value: "2" } },
-                [_vm._v("Two")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "btn btn-light", attrs: { value: "3" } },
-                [_vm._v("Three")]
-              ),
-            ]
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "div",
-        { staticClass: "container m-3 " },
-        [
-          _c(
-            "GmapMap",
-            {
-              staticStyle: {
-                width: "1200px",
-                height: "400px",
-                margin: "32px auto",
-              },
-              attrs: {
-                center: _vm.ubicacion,
-                zoom: 14,
-                "map-type-id": "roadmap",
-              },
-            },
-            [
-              _c("GmapMarker", {
-                attrs: {
-                  position: { lat: 13.341835133794397, lng: -88.4186510089188 },
+    _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "container m-3" }, [
+          _c("form", { attrs: { align: "center" } }, [
+            _c("div", { staticClass: "input-group mb-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.depmun.valor,
+                    expression: "depmun.valor",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", "aria-describedby": "button-addon2" },
+                domProps: { value: _vm.depmun.valor },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.depmun, "valor", $event.target.value)
+                  },
                 },
               }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button", id: "button-addon2" },
+                  on: { click: _vm.mapCenter },
+                },
+                [_vm._v("Buscar")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.depmun.valor,
+                      expression: "depmun.valor",
+                    },
+                  ],
+                  staticClass: "form-select btn-warning",
+                  attrs: { "aria-label": "Default select example" },
+                  on: {
+                    click: _vm.mapCenter,
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.depmun,
+                        "valor",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n                    Departamentos\n                    "
+                  ),
+                  _c("option", { attrs: { selected: "" } }, [
+                    _vm._v("Seleciona un departamento"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "ahuachapan" },
+                    },
+                    [_vm._v("Ahuachapan")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "san salvador" },
+                    },
+                    [_vm._v("San Salvador")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "usulutan" },
+                    },
+                    [_vm._v("Usulutan")]
+                  ),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-info",
+                  attrs: { type: "button" },
+                  on: { click: _vm.mapCentergps },
+                },
+                [
+                  _c("i", { staticClass: "fa fa-google mr-2" }),
+                  _vm._v(" "),
+                  _c("img", {
+                    attrs: { src: "image/gps2.png", width: "20", height: "20" },
+                  }),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.depmun.valor,
+                      expression: "depmun.valor",
+                    },
+                  ],
+                  staticClass: "form-select  btn-warning",
+                  attrs: { "aria-label": "Default select example" },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.depmun,
+                        "valor",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
+                [
+                  _c(
+                    "option",
+                    { staticClass: "btn btn-light", attrs: { selected: "" } },
+                    [_vm._v("Selecciona un municipio")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { staticClass: "btn btn-light", attrs: { value: "1" } },
+                    [_vm._v("One")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { staticClass: "btn btn-light", attrs: { value: "2" } },
+                    [_vm._v("Two")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { staticClass: "btn btn-light", attrs: { value: "3" } },
+                    [_vm._v("Three")]
+                  ),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "div",
+            { staticClass: "container m-3 " },
+            [
+              _c(
+                "GmapMap",
+                {
+                  staticStyle: {
+                    width: "1200px",
+                    height: "400px",
+                    margin: "32px auto",
+                  },
+                  attrs: {
+                    center: _vm.ubicacion,
+                    zoom: 14,
+                    "map-type-id": "roadmap",
+                  },
+                },
+                [
+                  _c("GmapMarker", {
+                    attrs: {
+                      position: {
+                        lat: 13.341835133794397,
+                        lng: -88.4186510089188,
+                      },
+                    },
+                  }),
+                ],
+                1
+              ),
             ],
             1
           ),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm._m(0),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
+      ]),
     ]),
   ])
 }
