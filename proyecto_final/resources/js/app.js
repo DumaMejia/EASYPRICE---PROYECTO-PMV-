@@ -19,6 +19,8 @@ import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 import VueGeolocation from 'vue-browser-geolocation';
 import * as VueGoogleMaps from 'vue2-google-maps'
+
+
  
 Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {
@@ -62,6 +64,7 @@ Vue.component('comercio-component', require('./components/ComercioComponent.vue'
 Vue.component('producto-component', require('./components/ProductoComponent.vue').default);
 Vue.component('tipo-component', require('./components/TipoComponent.vue').default);
 Vue.component('mapa-component', require('./components/MapaComponent.vue').default);
+Vue.component('chat-component', require('./components/ChatComponent.vue').default);
 Vue.component('v-select-comercios', vSelect);
 Vue.component('v-select-tipos', vSelect);
 Vue.use(VueGeolocation);
@@ -80,6 +83,7 @@ const app = new Vue({
             producto:{mostrar:false},
             tipo:{mostrar:false},
             mapa:{mostrar:false},
+            chat:{mostrar:false},
         }
     },
     methods:{

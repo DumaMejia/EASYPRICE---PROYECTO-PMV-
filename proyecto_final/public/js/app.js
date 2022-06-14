@@ -5266,6 +5266,119 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['form'],
+  data: function data() {
+    return {
+      imgchat: "img/chat.png",
+      imgenviar: "img/enviar.png",
+      chats: [],
+      chat: {
+        id: '',
+        from: document.querySelector("#navbarDropdown").innerText,
+        to: 'todos',
+        msg: '',
+        status: 'pendiente',
+        fecha: new Date().toLocaleString('es-ES', {
+          timeZone: 'America/El_Salvador'
+        })
+      }
+    };
+  },
+  methods: {
+    cerrarForm: function cerrarForm() {
+      this.form['chat'].mostrar = false;
+    },
+    limpiar: function limpiar() {
+      this.chat.msg = '';
+    },
+    mostrarDatos: function mostrarDatos(chat) {
+      this.chats.push(chat);
+    },
+    obtenerDatos: function obtenerDatos() {
+      var _this = this;
+
+      sockectio.emit('historial'); //enviar un evento
+
+      sockectio.on('historial', function (chats) {
+        //escuchar un evento. //historial
+        _this.chats = chats;
+      });
+    },
+    guardarChat: function guardarChat() {
+      this.chat.id = generarIdUnicoFecha();
+
+      if (this.chat.msg != '') {
+        sockectio.emit('chat', this.chat);
+        this.limpiar();
+      } else {
+        console.log('Mensaje vacio');
+      }
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    this.obtenerDatos();
+    sockectio.on('chat', function (chat) {
+      _this2.mostrarDatos(chat);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ComercioComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ComercioComponent.vue?vue&type=script&lang=js& ***!
@@ -5813,6 +5926,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -5853,11 +5975,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       ;
     },
+    mapCentergps: function mapCentergps() {
+      var _this = this;
+
+      var gps;
+      this.$getLocation({}).then(function (gps) {
+        _this.ubicacion = gps;
+      });
+    },
     cerrarForm: function cerrarForm() {
       this.form['comercio'].mostrar = false;
     },
     sincronizarDatosServidor: function sincronizarDatosServidor(comercio, metodo, url) {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -5873,13 +6003,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (comercio.accion == 'nuevo') {
                     comercio.id = resp.data.id;
 
-                    _this.insertarLocal(comercio); //actualizar el id del comercio que se genero en el servidor con laravel y mysql
+                    _this2.insertarLocal(comercio); //actualizar el id del comercio que se genero en el servidor con laravel y mysql
 
                   }
 
-                  _this.comercio.msg = "Comercio procesado ".concat(data.msg);
+                  _this2.comercio.msg = "Comercio procesado ".concat(data.msg);
                 })["catch"](function (err) {
-                  _this.comercio.msg = "Error al procesar el comercio ".concat(err);
+                  _this2.comercio.msg = "Error al procesar el comercio ".concat(err);
                 });
 
               case 2:
@@ -5891,28 +6021,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     insertarLocal: function insertarLocal(comercio) {
-      var _this2 = this;
+      var _this3 = this;
 
       var store = this.abrirStore('comercio', 'readwrite'),
           query = store.put(comercio);
 
       query.onsuccess = function (e) {
-        _this2.nuevoComercio();
+        _this3.nuevoComercio();
 
-        _this2.obtenerDatos();
+        _this3.obtenerDatos();
 
-        _this2.comercio.msg = 'Comercio procesado con exito';
+        _this3.comercio.msg = 'Comercio procesado con exito';
       };
 
       query.onerror = function (e) {
-        _this2.comercio.msg = "Error al procesar el comercio ".concat(e.target.error);
+        _this3.comercio.msg = "Error al procesar el comercio ".concat(e.target.error);
       };
     },
     buscandoComercio: function buscandoComercio() {
       this.obtenerDatos(this.buscar);
     },
     eliminarComercio: function eliminarComercio(comercio) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (confirm("Esta seguro de eliminar el comercio ".concat(comercio.nombre, "?"))) {
         comercio.accion = 'eliminar';
@@ -5923,15 +6053,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.sincronizarDatosServidor(comercio, metodo, url);
 
         query.onsuccess = function (e) {
-          _this3.nuevoComercio();
+          _this4.nuevoComercio();
 
-          _this3.obtenerDatos();
+          _this4.obtenerDatos();
 
-          _this3.comercio.msg = 'Comercio eliminado con exito';
+          _this4.comercio.msg = 'Comercio eliminado con exito';
         };
 
         query.onerror = function (e) {
-          _this3.comercio.msg = "Error al eliminar el comercio ".concat(e.target.error);
+          _this4.comercio.msg = "Error al eliminar el comercio ".concat(e.target.error);
         };
       }
 
@@ -5956,7 +6086,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.insertarLocal(comercio);
     },
     obtenerDatos: function obtenerDatos() {
-      var _this4 = this;
+      var _this5 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var store = this.abrirStore('comercio', 'readonly'),
@@ -5969,9 +6099,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this4.comercios = data;
+            _this5.comercios = data;
             data.map(function (comercio) {
-              var store = _this4.abrirStore('comercio', 'readwrite'),
+              var store = _this5.abrirStore('comercio', 'readwrite'),
                   query = store.put(comercio);
 
               query.onsuccess = function (e) {
@@ -5983,17 +6113,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.comercio.msg = "Error al guardar el comercio ".concat(err);
+            _this5.comercio.msg = "Error al guardar el comercio ".concat(err);
           });
         }
 
-        _this4.comercios = data.result.filter(function (comercio) {
+        _this5.comercios = data.result.filter(function (comercio) {
           return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
-        _this4.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+        _this5.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
       };
     },
     nuevoComercio: function nuevoComercio() {
@@ -6011,13 +6141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return db.transaction(store, modo).objectStore(store);
     }
   },
-  created: function created() {
-    var _this5 = this;
-
-    //this.obtenerDatos();
-    this.$getLocation({}).then(function (gps) {
-      _this5.gps = gps;
-    });
+  created: function created() {//this.obtenerDatos();
   }
 });
 
@@ -6725,8 +6849,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-browser-geolocation */ "./node_modules/vue-browser-geolocation/dist/vue-geolocation.js");
 /* harmony import */ var vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-var _this = undefined;
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6740,13 +6862,6 @@ window.db = '';
 window.generarIdUnicoFecha = function () {
   var fecha = new Date();
   return Math.floor(fecha.getTime() / 1000).toString(16);
-};
-
-window.obtenergps = function () {
-  _this.$getLocation({}).then(function (gps) {
-    localStorage.lat = gps.lat;
-    localStorage.lng = gps.lng;
-  });
 };
 
 
@@ -6791,6 +6906,7 @@ vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('comercio-component', (__w
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('producto-component', (__webpack_require__(/*! ./components/ProductoComponent.vue */ "./resources/js/components/ProductoComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('tipo-component', (__webpack_require__(/*! ./components/TipoComponent.vue */ "./resources/js/components/TipoComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('mapa-component', (__webpack_require__(/*! ./components/MapaComponent.vue */ "./resources/js/components/MapaComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('chat-component', (__webpack_require__(/*! ./components/ChatComponent.vue */ "./resources/js/components/ChatComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('v-select-comercios', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('v-select-tipos', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2___default()));
@@ -6814,6 +6930,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
         mostrar: false
       },
       mapa: {
+        mostrar: false
+      },
+      chat: {
         mostrar: false
       }
     }
@@ -6873,6 +6992,12 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
       indexDb.onerror = function (e) {
         console.log(e.target.error);
       };
+    },
+    obtenergps: function obtenergps() {
+      this.$getLocation({}).then(function (gps) {
+        localStorage.lat = gps.lat;
+        localStorage.lng = gps.lng;
+      });
     }
   },
   created: function created() {
@@ -30959,6 +31084,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ChatComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ChatComponent.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChatComponent.vue?vue&type=template&id=80d584ac& */ "./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac&");
+/* harmony import */ var _ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChatComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ChatComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ComercioComponent.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/ComercioComponent.vue ***!
@@ -31112,6 +31276,22 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 if (false) { var api; }
 component.options.__file = "resources/js/components/TipoComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ChatComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ChatComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -31354,6 +31534,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ChatComponent.vue?vue&type=template&id=80d584ac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ComercioComponent.vue?vue&type=template&id=51049172&":
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/ComercioComponent.vue?vue&type=template&id=51049172& ***!
@@ -31590,6 +31787,151 @@ var render = function () {
     ],
     2
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function ($event) {
+            $event.preventDefault()
+            return _vm.guardarChat.apply(null, arguments)
+          },
+        },
+      },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-1" }, [
+                _c("img", {
+                  attrs: {
+                    width: "20",
+                    height: "20",
+                    src: _vm.imgchat,
+                    alt: "Imagen de chat",
+                    title: "chat de usuarios",
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-10" }, [
+                _vm._v("Chat de usuarios"),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-1" }, [
+                _c("button", {
+                  staticClass: "btn-close",
+                  on: { click: _vm.cerrarForm },
+                }),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col" }, [
+                _c(
+                  "ul",
+                  { attrs: { id: "ltsMensajes" } },
+                  _vm._l(_vm.chats, function (msg) {
+                    return _c("li", { key: msg._id }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(msg.from) +
+                          " : " +
+                          _vm._s(msg.msg) +
+                          "\n                            "
+                      ),
+                    ])
+                  }),
+                  0
+                ),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-10" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.chat.msg,
+                      expression: "chat.msg",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    required: "",
+                    placeholder: "Escribe tu mensaje aqui...",
+                  },
+                  domProps: { value: _vm.chat.msg },
+                  on: {
+                    keyup: function ($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.guardarChat.apply(null, arguments)
+                    },
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.chat, "msg", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-2" }, [
+                _c("a", { on: { click: _vm.guardarChat } }, [
+                  _c("img", {
+                    attrs: {
+                      width: "30",
+                      height: "30",
+                      src: _vm.imgenviar,
+                      alt: "Imagen de envio",
+                      title: "Enviar mensaje",
+                    },
+                  }),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -32141,6 +32483,24 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "btn-group" }, [
           _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.mapCentergps },
+            },
+            [
+              _c("i", { staticClass: "fa fa-google mr-2" }),
+              _vm._v(" "),
+              _c("img", {
+                attrs: { src: "image/gps2.png", width: "20", height: "20" },
+              }),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn-group" }, [
+          _c(
             "select",
             {
               directives: [
@@ -32199,7 +32559,9 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.gps.lat) + ", " + _vm._s(_vm.gps.lng))]),
+        _c("p", [
+          _vm._v(_vm._s(_vm.ubicacion.lat) + ", " + _vm._s(_vm.ubicacion.lng)),
+        ]),
       ]),
     ]),
     _vm._v(" "),

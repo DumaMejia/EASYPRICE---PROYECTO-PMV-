@@ -12,9 +12,15 @@
         <!-- Styles -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-   crossorigin=""/>
+        
+         <!-- Alertify -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     </head>
             
     <body> 
@@ -109,6 +115,9 @@
         <option class="btn btn-light" value="3">Three</option>
         </select>
 </div>
+<div class="btn-group">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
     </form>
 
     
@@ -275,22 +284,11 @@
             
                 
         </div>
-        <script src="{{ asset('js/app.js') }}"></script>      
-        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-   crossorigin=""></script>
-    <script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.min.js"></script>
+        <script src="https://unpkg.com/vue-resizable@1"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script src="{{ asset('js/app.js') }}"></script> 
         
-        ubic: {
-            lat= -12.043333
-            long= -77.028333
-        };
-
-        let ubi = "['lat' => 56.341835133794397, 'long' => -81.4186510089188]";
-        document.getElementById('map').setAttribute(":centerPoint", "['lat' => 23.341835133794397, 'long' => -81.4186510089188]");
-
-        
-    </script>
 
     </body>
 </html>

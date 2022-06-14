@@ -13,6 +13,15 @@
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        
+     <!-- Alertify -->
+     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 </head>
 
 <body>
@@ -30,6 +39,7 @@
                             <li><a @click="abrirForm('producto')" class="dropdown-item" href="#">Productos</a></li>
                             <li><a @click="abrirForm('tipo')" class="dropdown-item" href="#">Tipo de Producto</a></li>
                             <li><a @click="abrir('mapa')" class="dropdown-item" href="#">prueba</a></li>
+                            <li><a @click="abrir('chat')" class="dropdown-item" href="#">prueba</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -83,7 +93,11 @@
         <producto-component v-bind:form="forms" ref="producto" v-show="forms['producto'].mostrar" ></producto-component>
         <tipo-component v-bind:form="forms" ref="tipo" v-show="forms['tipo'].mostrar" ></tipo-component>
         <mapa-component v-bind:form="forms" ref="mapa" v-show="forms['mapa'].mostrar" ></mapa-component>
+        <chat-component v-bind:form="forms" ref="chat" v-show="forms['chat'].mostrar" ></chat-component>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.min.js"></script>
+    <script src="https://unpkg.com/vue-resizable@1"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 

@@ -1,40 +1,76 @@
 const express = require('express'),
     server = express(),
     mongodb = require('mongodb').MongoClient,
-    url = 'mongodb://localhost:27017'
-    port = 3001;
-
+    url = 'mongodb://localhost:27017',
+    port = 3001,
+    http = require('http').Server(server)
+    io = require('socket.io')(http, {
+        allowEIO3: true,
+        cors:{
+            origin:['http://127.0.0.1:8000'],
+            credentials: true
+        }
+    });
 server.use(express.json());
+
+io.on('connect',function(socket){
+    console.log('Conectado via socket');
+
+    socket.on('historial', function(e){
+        mongodb.connect(url, function(err, client){
+            if(err) console.log(err);
+            const db = client.db('chatDB');
+            db.collection('chat').find().toArray(function(err, chats){
+                if(err) console.log(err);
+                socket.emit('historial', chats); //enviamos los datos a quien lo solicito
+            });
+        });
+    });
+    socket.on('chat', function(chat){
+        console.log(chat);
+        mongodb.connect(url, function(err, client){
+            if(err) console.log(err);
+            const db = client.db('chatDB');
+            db.collection('chat').insertOne(chat).then(result=>{
+                io.emit('chat', chat);//enviar a todo el mensaje recibido...
+            }).catch(err=>{
+                console.log(err);
+            });
+        });
+    });
+});
 
 server.get('/chat', function(req, resp){
     resp.send('Hola Mundo');
 });
 
-server.get('/cliente/list', function(req, resp){
+server.get('/usuarios/list', function(req, resp){
     mongodb.connect(url, function(err, client){
         if(err) resp.send(err);
-        const db = client.db('facturacion');
-        db.collection('cliente').find({}).toArray(function(err, data){
+        const db = client.db('prueba');
+        db.collection('usuarios').find({}).toArray(function(err,data){
             if(err) resp.send(err);
             resp.send(data);
         });
     });
 });
-
-server.get('/cliente/nuevo', function(req, resp){
+server.get('/usuarios/nuevo', function(req, resp){
     resp.sendFile(__dirname + '/index.html');
 });
-server.post('/cliente/save', function(req, resp){
+server.post('/usuarios/save', function(req, resp){
     mongodb.connect(url, function(err, client){
         if(err) resp.send(err);
-        const db = client.db('facturacion');
-        db.collection('cliente').insertOne(req.body, function(err, result){
+        const db = client.db('prueba');
+        db.collection('usuarios').insertOne(req.body,function(err, result){
             if(err) resp.send(err);
             resp.send(result);
         });
     });
 });
 
-server.listen(port, function(event){
+/*server.listen(port, function(event){
     console.log('Server running on port 3001');
+});*/
+http.listen(port, function(e){
+    console.log(`Server corriendo en puerto ${port}`);
 });

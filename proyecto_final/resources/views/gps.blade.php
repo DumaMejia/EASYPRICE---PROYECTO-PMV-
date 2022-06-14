@@ -106,7 +106,8 @@
 
    function sucess(geolocationPosition){
     let coords = geolocationPosition.coords;
-    document.getElementById("mymap").innerHTML =  "latitude" + coords.latitude + "<br>" + "longitude" + coords.longitude;
+    localStorage.setItem('lat', coords.latitude);
+    localStorage.setItem('lng', coords.longitude);
    }
 </script>
 <script src="{{ mix('js/app.js') }}"></script> 

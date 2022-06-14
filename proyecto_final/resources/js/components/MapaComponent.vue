@@ -19,6 +19,13 @@
             </select>
          </div>
 
+         <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary" @click="mapCentergps">
+                <i class="fa fa-google mr-2"></i>
+                 <img  src="image/gps2.png" width="20" height="20">
+                </button>
+        </div>
+
        <div class="btn-group">
             <select  v-model="depmun.valor" class="form-select form-select-sm btn-warning" aria-label="Default select example">
                     <option class="btn btn-light" selected>Selecciona un municipio</option>
@@ -28,7 +35,9 @@
             </select>
         </div>
 
-        <p>{{gps.lat}}, {{gps.lng}}</p>
+        
+
+        <p>{{ubicacion.lat}}, {{ubicacion.lng}}</p>
 
     </form>
 
@@ -202,8 +211,9 @@
         </div>
 
 </template>
-
+<script src="https://kit.fontawesome.com/1302715a40.js" crossorigin="anonymous"></script>
 <script>
+
   export default {
         props : ['form'],
          data:()=>{
@@ -242,6 +252,14 @@
                 };
 
                 
+            },
+
+            mapCentergps(){
+                let gps;
+                this.$getLocation({})
+                .then(gps => {
+                this.ubicacion = gps;
+                })
             },
 
             cerrarForm(){
@@ -363,11 +381,8 @@
         },
         created(){
             //this.obtenerDatos();
-            this.$getLocation({})
-            .then(gps => {
-                this.gps = gps;
-            })
+            
         },
     }
-    
+
 </script>
