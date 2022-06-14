@@ -36,6 +36,7 @@
                             <li><a class="dropdown-item" href="#">Inicio</a></li>
                             <li><a id="admi" class="dropdown-item" href="{{ url('/welcome') }}">Administracion</a></li>
                             <li><a class="dropdown-item" href="{{ url('/chat') }}">Chat de usuarios</a></li>
+                            <li><a @click="abrirForm('mapa')" class="dropdown-item" href="#">Chat de usuarios</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -5541,6 +5541,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -5554,6 +5570,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         codigo: '',
         nombre: '',
         direccion: '',
+        latitude: '',
+        longitude: '',
         telefono: '',
         correo: '',
         tipo: ''
@@ -5711,6 +5729,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.comercio.codigo = '';
       this.comercio.nombre = '';
       this.comercio.direccion = '';
+      this.comercio.latitude = '';
+      this.comercio.longitude = '';
       this.comercio.telefono = '';
       this.comercio.correo = '';
       this.comercio.tipo = '';
@@ -5736,14 +5756,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5972,6 +6001,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['form'],
   data: function data() {
     return {
+      comercios: [],
+      comercio: {
+        accion: 'nuevo',
+        id: 0,
+        idComercio: '',
+        codigo: '',
+        nombre: '',
+        direccion: '',
+        latitude: '',
+        longitude: '',
+        telefono: '',
+        correo: '',
+        tipo: ''
+      },
       ubicacion: {
         lat: 13.343565797622999,
         lng: -88.43976983311296
@@ -5982,10 +6025,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       gps: {
         lat: 10,
         lng: 10
-      }
+      },
+      infoWindowOptions: {
+        pixelOffset: {
+          width: 0,
+          height: -35
+        }
+      },
+      activeComercio: {
+        lat: 10,
+        lng: 10
+      },
+      infoWindowOpened: false
     };
   },
   methods: {
+    handleMarkclicked: function handleMarkclicked(item) {
+      this.activeComercio = item;
+      this.infoWindowOpened = true;
+    },
+    handleInfoWindowClose: function handleInfoWindowClose() {
+      this.activeComercio = {};
+      this.infoWindowOpened = false;
+    },
+    infoWindowPosition: function infoWindowPosition() {
+      return {
+        lat: parseFloat(this.activeComercio.latitude),
+        lng: parseFloat(this.activeComercio.longitude)
+      };
+    },
+    getMark: function getMark(item) {
+      return {
+        lat: parseFloat(item.latitude),
+        lng: parseFloat(item.longitude)
+      };
+    },
     mapCenter: function mapCenter() {
       if (this.depmun.valor == "ahuachapan") {
         this.ubicacion.lat = 13.922733648736088;
@@ -6016,110 +6090,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this.ubicacion = gps;
       });
     },
-    cerrarForm: function cerrarForm() {
-      this.form['comercio'].mostrar = false;
-    },
-    sincronizarDatosServidor: function sincronizarDatosServidor(comercio, metodo, url) {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios({
-                  method: metodo,
-                  url: url,
-                  data: comercio
-                }).then(function (resp) {
-                  if (comercio.accion == 'nuevo') {
-                    comercio.id = resp.data.id;
-
-                    _this2.insertarLocal(comercio); //actualizar el id del comercio que se genero en el servidor con laravel y mysql
-
-                  }
-
-                  _this2.comercio.msg = "Comercio procesado ".concat(data.msg);
-                })["catch"](function (err) {
-                  _this2.comercio.msg = "Error al procesar el comercio ".concat(err);
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    insertarLocal: function insertarLocal(comercio) {
-      var _this3 = this;
-
-      var store = this.abrirStore('comercio', 'readwrite'),
-          query = store.put(comercio);
-
-      query.onsuccess = function (e) {
-        _this3.nuevoComercio();
-
-        _this3.obtenerDatos();
-
-        _this3.comercio.msg = 'Comercio procesado con exito';
-      };
-
-      query.onerror = function (e) {
-        _this3.comercio.msg = "Error al procesar el comercio ".concat(e.target.error);
-      };
-    },
     buscandoComercio: function buscandoComercio() {
       this.obtenerDatos(this.buscar);
     },
-    eliminarComercio: function eliminarComercio(comercio) {
-      var _this4 = this;
-
-      if (confirm("Esta seguro de eliminar el comercio ".concat(comercio.nombre, "?"))) {
-        comercio.accion = 'eliminar';
-        var store = this.abrirStore('comercio', 'readwrite'),
-            query = store["delete"](comercio.idComercio),
-            metodo = 'DELETE',
-            url = "/comercio/".concat(comercio.id);
-        this.sincronizarDatosServidor(comercio, metodo, url);
-
-        query.onsuccess = function (e) {
-          _this4.nuevoComercio();
-
-          _this4.obtenerDatos();
-
-          _this4.comercio.msg = 'Comercio eliminado con exito';
-        };
-
-        query.onerror = function (e) {
-          _this4.comercio.msg = "Error al eliminar el comercio ".concat(e.target.error);
-        };
-      }
-
-      this.nuevoComercio();
-    },
-    modificarComercio: function modificarComercio(datos) {
-      this.comercio = JSON.parse(JSON.stringify(datos));
-      this.comercio.accion = 'modificar';
-    },
-    guardarComercio: function guardarComercio() {
-      var metodo = 'PUT',
-          url = "/comercio/".concat(this.comercio.id);
-
-      if (this.comercio.accion == "nuevo") {
-        this.comercio.idComercio = generarIdUnicoFecha();
-        metodo = 'POST';
-        url = '/comercio';
-      }
-
-      var comercio = JSON.parse(JSON.stringify(this.comercio));
-      this.sincronizarDatosServidor(comercio, metodo, url);
-      this.insertarLocal(comercio);
-    },
     obtenerDatos: function obtenerDatos() {
-      var _this5 = this;
+      var _this2 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var store = this.abrirStore('comercio', 'readonly'),
@@ -6132,9 +6107,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this5.comercios = data;
+            _this2.comercios = data;
             data.map(function (comercio) {
-              var store = _this5.abrirStore('comercio', 'readwrite'),
+              var store = _this2.abrirStore('comercio', 'readwrite'),
                   query = store.put(comercio);
 
               query.onsuccess = function (e) {
@@ -6146,17 +6121,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this5.comercio.msg = "Error al guardar el comercio ".concat(err);
+            _this2.comercio.msg = "Error al guardar el comercio ".concat(err);
           });
         }
 
-        _this5.comercios = data.result.filter(function (comercio) {
+        _this2.comercios = data.result.filter(function (comercio) {
           return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
-        _this5.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+        _this2.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
       };
     },
     nuevoComercio: function nuevoComercio() {
@@ -6172,14 +6147,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
-    },
-    abrirForm: function abrirForm() {
-      this.form['mapa'].mostrar = true;
     }
   },
-  created: function created() {
-    //this.obtenerDatos();
-    this.abrirForm();
+  created: function created() {//this.obtenerDatos();
   }
 });
 
@@ -32133,6 +32103,70 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row p-1" }, [
+            _c("div", { staticClass: "col col-md-2" }, [_vm._v("latitude:")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col col-md-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comercio.latitude,
+                    expression: "comercio.latitude",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  title: "Ingrese la direccion",
+                  required: "",
+                  type: "text",
+                },
+                domProps: { value: _vm.comercio.latitude },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.comercio, "latitude", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row p-1" }, [
+            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Longitude:")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col col-md-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comercio.longitude,
+                    expression: "comercio.longitude",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  title: "Ingrese la latitude",
+                  required: "",
+                  type: "text",
+                },
+                domProps: { value: _vm.comercio.longitude },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.comercio, "longitude", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row p-1" }, [
             _c("div", { staticClass: "col col-md-2" }, [_vm._v("Telefono:")]),
             _vm._v(" "),
             _c("div", { staticClass: "col col-md-2" }, [
@@ -32147,7 +32181,7 @@ var render = function () {
                 ],
                 staticClass: "form-control",
                 attrs: {
-                  title: "Ingrese el tel",
+                  title: "Ingrese la longitude",
                   pattern: "[0-9]{4}-[0-9]{4}",
                   required: "",
                   type: "text",
@@ -32166,7 +32200,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("CORREO:")]),
+            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Correo:")]),
             _vm._v(" "),
             _c("div", { staticClass: "col col-md-2" }, [
               _c("input", {
@@ -32198,7 +32232,9 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Tipo")]),
+            _c("div", { staticClass: "col col-md-2" }, [
+              _vm._v("Tipo de comercio:"),
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "col col-md-2" }, [
               _c(
@@ -32355,6 +32391,10 @@ var render = function () {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.direccion))]),
                     _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.latitude))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.longitude))]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.telefono))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.correo))]),
@@ -32430,11 +32470,15 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("DIRECCION")]),
       _vm._v(" "),
+      _c("th", [_vm._v("LATITUDE")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("LONGITUDE")]),
+      _vm._v(" "),
       _c("th", [_vm._v("TEL")]),
       _vm._v(" "),
       _c("th", [_vm._v("CORREO")]),
       _vm._v(" "),
-      _c("th", [_vm._v("TIPO")]),
+      _c("th", [_vm._v("TIPO DE COMERCIO")]),
       _vm._v(" "),
       _c("th"),
     ])
@@ -32676,16 +32720,56 @@ var render = function () {
                   },
                 },
                 [
-                  _c("GmapMarker", {
-                    attrs: {
-                      position: {
-                        lat: 13.341835133794397,
-                        lng: -88.4186510089188,
+                  _c(
+                    "Gmap-info-window",
+                    {
+                      attrs: {
+                        option: _vm.infoWindowOptions,
+                        position: _vm.infoWindowPosition(),
+                        opened: _vm.infoWindowOpened,
                       },
+                      on: { closeclick: _vm.handleInfoWindowClose },
                     },
+                    [
+                      _c("div", { staticClass: "info-window" }, [
+                        _c("h2", {
+                          domProps: {
+                            textContent: _vm._s(_vm.activeComercio.nombre),
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("h5", {
+                          domProps: {
+                            textContent: _vm._s(_vm.activeComercio.direccion),
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", {
+                          domProps: {
+                            textContent: _vm._s(_vm.activeComercio.tipo),
+                          },
+                        }),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.comercios, function (item) {
+                    return _c("GmapMarker", {
+                      key: item.id,
+                      attrs: {
+                        position: _vm.getMark(item),
+                        clickable: true,
+                        draggable: false,
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.handleMarkclicked(item)
+                        },
+                      },
+                    })
                   }),
                 ],
-                1
+                2
               ),
             ],
             1

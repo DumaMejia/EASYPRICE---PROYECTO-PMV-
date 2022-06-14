@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comercio extends Model
 {
-    protected $fillable = ['idComercio', 'codigo', 'nombre', 'direccion', 'telefono','correo','tipo'];
+    protected $fillable = ['idComercio', 'codigo', 'nombre', 'direccion', 'latitude', 'longitude', 'telefono','correo','tipo'];
 }

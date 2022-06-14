@@ -33,19 +33,31 @@
                         </div>
                     </div>
                     <div class="row p-1">
-                        <div class="col col-md-2">Telefono:</div>
-                        <div class="col col-md-2">
-                            <input title="Ingrese el tel" v-model="comercio.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
+                        <div class="col col-md-2">latitude:</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese la direccion" v-model="comercio.latitude"  required type="text" class="form-control">
                         </div>
                     </div>
                     <div class="row p-1">
-                        <div class="col col-md-2">CORREO:</div>
+                        <div class="col col-md-2">Longitude:</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese la latitude" v-model="comercio.longitude"  required type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col col-md-2">Telefono:</div>
+                        <div class="col col-md-2">
+                            <input title="Ingrese la longitude" v-model="comercio.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col col-md-2">Correo:</div>
                         <div class="col col-md-2">
                             <input title="Ingrese el CORREO" v-model="comercio.correo"  required type="email"  class="form-control">
                         </div>
                     </div>
                     <div class="row p-1">
-                            <div class="col col-md-2">Tipo</div>
+                            <div class="col col-md-2">Tipo de comercio:</div>
                             <div class="col col-md-2">
                                 <select v-model="comercio.tipo" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                     <option  selected>Seleccionar Tipo</option>
@@ -89,9 +101,11 @@
                             <th>CODIGO</th>
                             <th>NOMBRE</th>
                             <th>DIRECCION</th>
+                            <th>LATITUDE</th>
+                            <th>LONGITUDE</th>
                             <th>TEL</th>
                             <th>CORREO</th>
-                            <th>TIPO</th>
+                            <th>TIPO DE COMERCIO</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -100,6 +114,8 @@
                             <td>{{item.codigo}}</td>
                             <td>{{item.nombre}}</td>
                             <td>{{item.direccion}}</td>
+                            <td>{{item.latitude}}</td>
+                            <td>{{item.longitude}}</td>
                             <td>{{item.telefono}}</td>
                             <td>{{item.correo}}</td>
                             <td>{{item.tipo}}</td>
@@ -130,6 +146,8 @@
                     codigo: '',
                     nombre: '',
                     direccion: '',
+                    latitude: '',
+                    longitude: '',
                     telefono: '',
                     correo: '',
                     tipo: ''
@@ -248,6 +266,8 @@
                 this.comercio.codigo = '';
                 this.comercio.nombre = '';
                 this.comercio.direccion = '';
+                this.comercio.latitude = '';
+                this.comercio.longitude = '';
                 this.comercio.telefono = '';
                 this.comercio.correo = '';
                 this.comercio.tipo = '';

@@ -62,8 +62,25 @@
                     map-type-id="roadmap"
                     style="width: 1200px; height: 400px; margin: 32px auto"
                     >
+                    <Gmap-info-window 
+                    :option="infoWindowOptions" 
+                    :position="infoWindowPosition()"
+                    :opened="infoWindowOpened"
+                    @closeclick="handleInfoWindowClose">
+                    <div class="info-window">
+                        <h2 v-text="activeComercio.nombre"> </h2>
+                        <h5 v-text="activeComercio.direccion"></h5>
+                        <p v-text="activeComercio.tipo"></p>
+                    </div>
+                    
+                    </Gmap-info-window>
                     <GmapMarker
-                       :position="{lat:13.341835133794397, lng:-88.4186510089188}"
+                        v-for="item in comercios"
+                        :key="item.id"
+                       :position="getMark(item)"
+                       :clickable="true"
+                       :draggable="false"
+                       @click="handleMarkclicked(item)"
                     />
                     </GmapMap>
                 
@@ -228,6 +245,22 @@
         props : ['form'],
          data:()=>{
             return {
+                
+                comercios:[],
+                comercio:{
+                    accion : 'nuevo',
+                    id : 0,
+                    idComercio : '',
+                    codigo: '',
+                    nombre: '',
+                    direccion: '',
+                    latitude: '',
+                    longitude: '',
+                    telefono: '',
+                    correo: '',
+                    tipo: ''
+                },
+
                 ubicacion:{
                     lat : 13.343565797622999,
                     lng : -88.43976983311296,
@@ -238,11 +271,42 @@
                 gps:{
                     lat : 10,
                     lng : 10,
-                }
+                },
+                infoWindowOptions:{
+                    pixelOffset :{
+                        width: 0,
+                        height: -35
+                    }
+                },
+                activeComercio:{
+                    lat : 10,
+                    lng : 10,
+                },
+                infoWindowOpened:false,
 
             }
         },
         methods:{
+            handleMarkclicked(item){
+                this.activeComercio = item;
+                this.infoWindowOpened = true;
+            }, 
+            handleInfoWindowClose(){
+                this.activeComercio = {};
+                this.infoWindowOpened = false;
+            },
+            infoWindowPosition(){
+                return{
+                    lat : parseFloat(this.activeComercio.latitude),
+                    lng : parseFloat(this.activeComercio.longitude),
+                }
+            },
+            getMark(item){
+                return{
+                    lat : parseFloat(item.latitude),
+                    lng : parseFloat(item.longitude),
+                }
+            },
 
             mapCenter(){
                 if(this.depmun.valor=="ahuachapan"){
@@ -272,76 +336,13 @@
                 })
             },
 
-            cerrarForm(){
-                this.form['comercio'].mostrar = false;
-            },
-            async sincronizarDatosServidor(comercio, metodo, url){
-                await axios({
-                    method : metodo,
-                    url,
-                    data : comercio
-                })
-                .then(resp=>{
-                    if(comercio.accion=='nuevo'){
-                        comercio.id = resp.data.id;
-                        this.insertarLocal(comercio);//actualizar el id del comercio que se genero en el servidor con laravel y mysql
-                    }
-                    this.comercio.msg = `Comercio procesado ${data.msg}`;
-                })
-                .catch(err=>{
-                    this.comercio.msg = `Error al procesar el comercio ${err}`;
-                })
-            },
-            insertarLocal(comercio){
-                let store = this.abrirStore('comercio', 'readwrite'),
-                    query = store.put(comercio);
-                query.onsuccess = e=>{
-                    this.nuevoComercio();
-                    this.obtenerDatos();
-                    this.comercio.msg = 'Comercio procesado con exito';
-                };
-                query.onerror = e=>{
-                    this.comercio.msg = `Error al procesar el comercio ${e.target.error}`;
-                };
-            },
+            
+           
+          
             buscandoComercio(){
                 this.obtenerDatos(this.buscar);
             },
-            eliminarComercio(comercio){
-                if( confirm(`Esta seguro de eliminar el comercio ${comercio.nombre}?`) ){
-                    comercio.accion = 'eliminar';
-                    let store = this.abrirStore('comercio', 'readwrite'),
-                        query = store.delete(comercio.idComercio),
-                        metodo = 'DELETE',
-                        url = `/comercio/${comercio.id}`;
-                    this.sincronizarDatosServidor(comercio, metodo, url);
-                    query.onsuccess = e=>{
-                        this.nuevoComercio();
-                        this.obtenerDatos();
-                        this.comercio.msg = 'Comercio eliminado con exito';
-                    };
-                    query.onerror = e=>{
-                        this.comercio.msg = `Error al eliminar el comercio ${e.target.error}`;
-                    };
-                }
-                this.nuevoComercio();
-            },
-            modificarComercio(datos){
-                this.comercio = JSON.parse(JSON.stringify(datos));
-                this.comercio.accion = 'modificar';
-            },
-            guardarComercio(){
-                let metodo = 'PUT',
-                    url = `/comercio/${this.comercio.id}`;
-                if(this.comercio.accion=="nuevo"){
-                    this.comercio.idComercio = generarIdUnicoFecha();
-                    metodo = 'POST';
-                    url = '/comercio';
-                }
-                let comercio = JSON.parse(JSON.stringify(this.comercio));
-                this.sincronizarDatosServidor(comercio, metodo, url);
-                this.insertarLocal(comercio);
-            },
+            
             obtenerDatos(valor=''){
                 let store = this.abrirStore('comercio', 'readonly'),
                     data = store.getAll();
@@ -388,13 +389,11 @@
             abrirStore(store, modo){
                 return db.transaction(store, modo).objectStore(store);
             },
-            abrirForm(){
-                this.form['mapa'].mostrar = true;
-            },
+           
         },
         created(){
             //this.obtenerDatos();
-            this.abrirForm();
+           
             
             
         },
