@@ -125,8 +125,6 @@
                 comercios:[],
                 comercio:{
                     accion : 'nuevo',
-                    mostrar_msg : false,
-                    msg : '',
                     id : 0,
                     idComercio : '',
                     codigo: '',
@@ -152,11 +150,15 @@
                     if(comercio.accion=='nuevo'){
                         comercio.id = resp.data.id;
                         this.insertarLocal(comercio);//actualizar el id del comercio que se genero en el servidor con laravel y mysql
+                        alertify.success(`Comercio procesado con exito`);
                     }
-                    this.comercio.msg = `Comercio procesado ${data.msg}`;
+                    if(comercio.accion=='modificar'){
+                        alertify.success(`Comercio procesado con exito`);
+                    }
+                    
                 })
                 .catch(err=>{
-                    this.comercio.msg = `Error al procesar el comercio ${err}`;
+                   
                 })
             },
             insertarLocal(comercio){
@@ -165,10 +167,9 @@
                 query.onsuccess = e=>{
                     this.nuevoComercio();
                     this.obtenerDatos();
-                    this.comercio.msg = 'Comercio procesado con exito';
                 };
                 query.onerror = e=>{
-                    this.comercio.msg = `Error al procesar el comercio ${e.target.error}`;
+                    alertify.error(`Error al procesar el comercio ${e.target.error}`);
                 };
             },
             buscandoComercio(){
@@ -185,10 +186,10 @@
                     query.onsuccess = e=>{
                         this.nuevoComercio();
                         this.obtenerDatos();
-                        this.comercio.msg = 'Comercio eliminado con exito';
+                        alertify.success('Comercio eliminado con exito');
                     };
                     query.onerror = e=>{
-                        this.comercio.msg = `Error al eliminar el comercio ${e.target.error}`;
+                        alertify.error = `Error al eliminar el comercio ${e.target.error}`;
                     };
                 }
                 this.nuevoComercio();
@@ -231,19 +232,18 @@
                                 });
                             })
                             .catch(err=>{
-                                this.comercio.msg = `Error al guardar el comercio ${err}`;
+                                alertify.error = `Error al guardar el comercio ${err}`;
                             });
                     }
                     this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1);
                     
                 };
                 data.onerror = e=>{
-                    this.comercio.msg = `Error al obtener los comercios ${e.target.error}`;
+                    alertify.error = `Error al obtener los comercios ${e.target.error}`;
                 };
             },
             nuevoComercio(){
                 this.comercio.accion = 'nuevo';
-                this.comercio.msg = '';
                 this.comercio.idComercio = '';
                 this.comercio.codigo = '';
                 this.comercio.nombre = '';

@@ -1,6 +1,6 @@
 <template>
    
-    <div id="appTipo">
+    <div id="app">
         <div class="card">
         
         </div>
@@ -107,11 +107,15 @@
                     if(tipo.accion=='nuevo'){
                         tipo.id = resp.data.id;
                         this.insertarLocal(tipo);//actualizar el id del tipo que se genero en el servidor con laravel y mysql
+                        alertify.success(`Tipo procesado con exito`);
                     }
-                    this.tipo.msg = `Tipo procesado ${data.msg}`;
+                    if(tipo.accion=='modificar'){
+                        alertify.success(`Tipo procesado con exito`);
+                    }
+                    
                 })
                 .catch(err=>{
-                    this.tipo.msg = `Error al procesar el tipo ${err}`;
+                    
                 })
             },
             insertarLocal(tipo){
@@ -123,7 +127,7 @@
                     this.tipo.msg = 'Tipo procesado con exito';
                 };
                 query.onerror = e=>{
-                    this.tipo.msg = `Error al procesar el tipo ${e.target.error}`;
+                    alertify.error(`Error al procesar el tipo ${e.target.error}`);
                 };
             },
             buscandoTipo(){
@@ -140,10 +144,10 @@
                     query.onsuccess = e=>{
                         this.nuevoTipo();
                         this.obtenerDatos();
-                        this.tipo.msg = 'Tipo eliminado con exito';
+                        alertify.success('Tipo eliminado con exito');
                     };
                     query.onerror = e=>{
-                        this.tipo.msg = `Error al eliminar el tipo ${e.target.error}`;
+                        alertify.error(`Error al eliminar el tipo ${e.target.error}`);
                     };
                 }
                 this.nuevoTipo();
@@ -186,13 +190,13 @@
                                 });
                             })
                             .catch(err=>{
-                                this.tipo.msg = `Error al guardar el tipo ${err}`;
+                                alertify.error(`Error al guardar el tipo ${err}`);
                             });
                     }
                     this.tipos = data.result.filter(tipo=>tipo.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
-                    this.tipo.msg = `Error al obtener los tipos ${e.target.error}`;
+                    alertify.error(`Error al obtener los tipos ${e.target.error}`);
                 }; 
 
             },

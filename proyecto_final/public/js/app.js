@@ -5549,8 +5549,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       comercios: [],
       comercio: {
         accion: 'nuevo',
-        mostrar_msg: false,
-        msg: '',
         id: 0,
         idComercio: '',
         codigo: '',
@@ -5585,12 +5583,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this.insertarLocal(comercio); //actualizar el id del comercio que se genero en el servidor con laravel y mysql
 
+
+                    //actualizar el id del comercio que se genero en el servidor con laravel y mysql
+                    alertify.success("Comercio procesado con exito");
                   }
 
-                  _this.comercio.msg = "Comercio procesado ".concat(data.msg);
-                })["catch"](function (err) {
-                  _this.comercio.msg = "Error al procesar el comercio ".concat(err);
-                });
+                  if (comercio.accion == 'modificar') {
+                    alertify.success("Comercio procesado con exito");
+                  }
+                })["catch"](function (err) {});
 
               case 2:
               case "end":
@@ -5610,12 +5611,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.nuevoComercio();
 
         _this2.obtenerDatos();
-
-        _this2.comercio.msg = 'Comercio procesado con exito';
       };
 
       query.onerror = function (e) {
-        _this2.comercio.msg = "Error al procesar el comercio ".concat(e.target.error);
+        alertify.error("Error al procesar el comercio ".concat(e.target.error));
       };
     },
     buscandoComercio: function buscandoComercio() {
@@ -5637,11 +5636,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           _this3.obtenerDatos();
 
-          _this3.comercio.msg = 'Comercio eliminado con exito';
+          alertify.success('Comercio eliminado con exito');
         };
 
         query.onerror = function (e) {
-          _this3.comercio.msg = "Error al eliminar el comercio ".concat(e.target.error);
+          alertify.error = "Error al eliminar el comercio ".concat(e.target.error);
         };
       }
 
@@ -5693,7 +5692,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.comercio.msg = "Error al guardar el comercio ".concat(err);
+            alertify.error = "Error al guardar el comercio ".concat(err);
           });
         }
 
@@ -5703,12 +5702,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       data.onerror = function (e) {
-        _this4.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+        alertify.error = "Error al obtener los comercios ".concat(e.target.error);
       };
     },
     nuevoComercio: function nuevoComercio() {
       this.comercio.accion = 'nuevo';
-      this.comercio.msg = '';
       this.comercio.idComercio = '';
       this.comercio.codigo = '';
       this.comercio.nombre = '';
@@ -6350,12 +6348,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this.insertarLocal(producto); //actualizar el id del producto que se genero en el servidor con laravel y mysql
 
+
+                    //actualizar el id del producto que se genero en el servidor con laravel y mysql
+                    alertify.success("Producto procesado con exito");
                   }
 
-                  _this.producto.msg = "Producto procesado ".concat(data.msg);
-                })["catch"](function (err) {
-                  _this.producto.msg = "Error al procesar el producto ".concat(err);
-                });
+                  if (producto.accion == 'modificar') {
+                    alertify.success("Producto procesado con exito");
+                  }
+                })["catch"](function (err) {});
 
               case 2:
               case "end":
@@ -6375,12 +6376,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.nuevoProducto();
 
         _this2.obtenerDatos();
-
-        _this2.producto.msg = 'Producto procesado con exito';
       };
 
       query.onerror = function (e) {
-        _this2.producto.msg = "Error al procesar el producto ".concat(e.target.error);
+        alertify.error("Error al procesar el producto ".concat(e.target.error));
       };
     },
     buscandoProducto: function buscandoProducto() {
@@ -6402,11 +6401,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           _this3.obtenerDatos();
 
-          _this3.producto.msg = 'Producto eliminado con exito';
+          alertify.success('Producto eliminado con exito');
         };
 
         query.onerror = function (e) {
-          _this3.producto.msg = "Error al eliminar el producto ".concat(e.target.error);
+          alertify.error = "Error al eliminar el producto ".concat(e.target.error);
         };
       }
 
@@ -6462,7 +6461,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.producto.msg = "Error al guardar el producto ".concat(err);
+            alertify.error("Error al guardar el producto ".concat(err));
           });
         }
 
@@ -6472,7 +6471,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       data.onerror = function (e) {
-        _this4.producto.msg = "Error al obtener los productos ".concat(e.target.error);
+        alertify.error("Error al obtener los productos ".concat(e.target.error));
       }; //obtener comercios 
 
 
@@ -6500,7 +6499,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.comercio.msg = "Error al guardar el comercio ".concat(err);
+            alertify.error("Error al guardar el comercio ".concat(err));
           });
         }
 
@@ -6514,7 +6513,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       dataComercio.onerror = function (e) {
-        _this4.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+        alertify.error("Error al obtener los comercios ".concat(e.target.error));
       }; //obtener Tipos
 
 
@@ -6534,7 +6533,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   query = store.put(tipo);
 
               query.onsuccess = function (e) {
-                console.log("Matricula ".concat(tipo.nombre, " guardado"));
+                console.log("tipo ".concat(tipo.nombre, " guardado"));
               };
 
               query.onerror = function (e) {
@@ -6542,7 +6541,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.tipo.msg = "Error al guardar el tipo ".concat(err);
+            alertify.error("Error al guardar el tipo ".concat(err));
           });
         }
 
@@ -6556,7 +6555,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       dataTipo.onerror = function (e) {
-        _this4.tipo.msg = "Error al obtener los tipos ".concat(e.target.error);
+        alertify.error("Error al obtener los tipos ".concat(e.target.error));
       };
     },
     nuevoProducto: function nuevoProducto() {
@@ -6722,12 +6721,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this.insertarLocal(tipo); //actualizar el id del tipo que se genero en el servidor con laravel y mysql
 
+
+                    //actualizar el id del tipo que se genero en el servidor con laravel y mysql
+                    alertify.success("Tipo procesado con exito");
                   }
 
-                  _this.tipo.msg = "Tipo procesado ".concat(data.msg);
-                })["catch"](function (err) {
-                  _this.tipo.msg = "Error al procesar el tipo ".concat(err);
-                });
+                  if (tipo.accion == 'modificar') {
+                    alertify.success("Tipo procesado con exito");
+                  }
+                })["catch"](function (err) {});
 
               case 2:
               case "end":
@@ -6752,7 +6754,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       query.onerror = function (e) {
-        _this2.tipo.msg = "Error al procesar el tipo ".concat(e.target.error);
+        alertify.error("Error al procesar el tipo ".concat(e.target.error));
       };
     },
     buscandoTipo: function buscandoTipo() {
@@ -6774,11 +6776,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           _this3.obtenerDatos();
 
-          _this3.tipo.msg = 'Tipo eliminado con exito';
+          alertify.success('Tipo eliminado con exito');
         };
 
         query.onerror = function (e) {
-          _this3.tipo.msg = "Error al eliminar el tipo ".concat(e.target.error);
+          alertify.error("Error al eliminar el tipo ".concat(e.target.error));
         };
       }
 
@@ -6830,7 +6832,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
             });
           })["catch"](function (err) {
-            _this4.tipo.msg = "Error al guardar el tipo ".concat(err);
+            alertify.error("Error al guardar el tipo ".concat(err));
           });
         }
 
@@ -6840,7 +6842,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       data.onerror = function (e) {
-        _this4.tipo.msg = "Error al obtener los tipos ".concat(e.target.error);
+        alertify.error("Error al obtener los tipos ".concat(e.target.error));
       };
     },
     nuevoTipo: function nuevoTipo() {
@@ -33449,7 +33451,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "appTipo" } }, [
+  return _c("div", { attrs: { id: "app" } }, [
     _c("div", { staticClass: "card" }),
     _vm._v(" "),
     _c("div", { staticClass: "card text-dark bg-light mb-3" }, [

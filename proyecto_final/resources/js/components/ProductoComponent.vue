@@ -149,11 +149,15 @@
                     if(producto.accion=='nuevo'){
                         producto.id = resp.data.id;
                         this.insertarLocal(producto);//actualizar el id del producto que se genero en el servidor con laravel y mysql
+                        alertify.success(`Producto procesado con exito`);
                     }
-                    this.producto.msg = `Producto procesado ${data.msg}`;
+                    if(producto.accion=='modificar'){
+                        alertify.success(`Producto procesado con exito`);
+                    }
+                    
                 })
                 .catch(err=>{
-                    this.producto.msg = `Error al procesar el producto ${err}`;
+                    
                 })
             },
             insertarLocal(producto){
@@ -162,10 +166,9 @@
                 query.onsuccess = e=>{
                     this.nuevoProducto();
                     this.obtenerDatos();
-                    this.producto.msg = 'Producto procesado con exito';
                 };
                 query.onerror = e=>{
-                    this.producto.msg = `Error al procesar el producto ${e.target.error}`;
+                     alertify.error(`Error al procesar el producto ${e.target.error}`);
                 };
             },
             buscandoProducto(){
@@ -182,10 +185,10 @@
                     query.onsuccess = e=>{
                         this.nuevoProducto();
                         this.obtenerDatos();
-                        this.producto.msg = 'Producto eliminado con exito';
+                        alertify.success('Producto eliminado con exito');
                     };
                     query.onerror = e=>{
-                        this.producto.msg = `Error al eliminar el producto ${e.target.error}`;
+                        alertify.error = `Error al eliminar el producto ${e.target.error}`;
                     };
                 }
                 this.nuevoProducto();
@@ -232,13 +235,13 @@
                                 });
                             })
                             .catch(err=>{
-                                this.producto.msg = `Error al guardar el producto ${err}`;
+                                alertify.error(`Error al guardar el producto ${err}`);
                             });
                     }
                     this.productos = data.result.filter(producto=>producto.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
-                    this.producto.msg = `Error al obtener los productos ${e.target.error}`;
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
                 }; 
 
                 //obtener comercios 
@@ -263,7 +266,7 @@
                                 });
                             })
                             .catch(err=>{
-                                this.comercio.msg = `Error al guardar el comercio ${err}`;
+                                alertify.error(`Error al guardar el comercio ${err}`);
                             });
                     }
                     this.comercios = dataComercio.result.map(comercio=>{
@@ -275,7 +278,7 @@
                     console.log(this.comercios);
                 };
                 dataComercio.onerror = e=>{
-                    this.comercio.msg = `Error al obtener los comercios ${e.target.error}`;
+                    alertify.error(`Error al obtener los comercios ${e.target.error}`);
                 };
 
                 //obtener Tipos
@@ -292,7 +295,7 @@
                                     let store = this.abrirStore('tipo', 'readwrite'),
                                         query = store.put(tipo);
                                     query.onsuccess = e=>{
-                                        console.log(`Matricula ${tipo.nombre} guardado`);
+                                        console.log(`tipo ${tipo.nombre} guardado`);
                                     };
                                     query.onerror = e=>{
                                         console.log(`Error al guardar el tipo ${e.target.error}`);
@@ -300,7 +303,7 @@
                                 });
                             })
                             .catch(err=>{
-                                this.tipo.msg = `Error al guardar el tipo ${err}`;
+                                alertify.error(`Error al guardar el tipo ${err}`);
                             });
                     }
                     this.tipos = dataTipo.result.map(tipo=>{
@@ -312,7 +315,7 @@
                     console.log(this.tipos);
                 };
                 dataTipo.onerror = e=>{
-                    this.tipo.msg = `Error al obtener los tipos ${e.target.error}`;
+                    alertify.error(`Error al obtener los tipos ${e.target.error}`);
                 };
 
             },
