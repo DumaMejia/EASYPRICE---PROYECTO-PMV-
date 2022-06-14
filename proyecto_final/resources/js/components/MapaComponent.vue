@@ -34,11 +34,6 @@
                     <option class="btn btn-light" value="3">Three</option>
             </select>
         </div>
-
-        
-
-        <p>{{ubicacion.lat}}, {{ubicacion.lng}}</p>
-
     </form>
 
     
@@ -377,10 +372,15 @@
             },
             abrirStore(store, modo){
                 return db.transaction(store, modo).objectStore(store);
-            }
+            },
+            abrirForm(){
+                this.form['mapa'].mostrar = true;
+            },
         },
         created(){
             //this.obtenerDatos();
+            this.abrirForm();
+            
             
         },
     }

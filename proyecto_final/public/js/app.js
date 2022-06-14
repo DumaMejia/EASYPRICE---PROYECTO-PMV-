@@ -5321,8 +5321,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['form'],
   data: function data() {
     return {
-      imgchat: "img/chat.png",
-      imgenviar: "img/enviar.png",
+      imgchat: "image/chat.png",
+      imgenviar: "image/enviar.jpg",
       chats: [],
       chat: {
         id: '',
@@ -5362,18 +5362,43 @@ __webpack_require__.r(__webpack_exports__);
       if (this.chat.msg != '') {
         sockectio.emit('chat', this.chat);
         this.limpiar();
+
+        if (permitirNotificaciones == 'granted') {
+          var notificacion;
+          notificacion = new Notification('Chat de usuario', {
+            body: 'Acabas de mandar un mensaje'
+          });
+        }
       } else {
         console.log('Mensaje vacio');
       }
+    },
+    abrirForm: function abrirForm() {
+      this.form['chat'].mostrar = true;
     }
   },
   created: function created() {
     var _this2 = this;
 
+    this.abrirForm();
     this.obtenerDatos();
     sockectio.on('chat', function (chat) {
       _this2.mostrarDatos(chat);
     });
+
+    if (!Notification) {
+      alertify.error('El navegador no soporta notificaciones');
+    }
+
+    window.permitirNotificaciones = 'default';
+
+    if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        permitirNotificaciones = permission;
+      });
+    } else {
+      permitirNotificaciones = 'denied';
+    }
   }
 });
 
@@ -5930,11 +5955,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -6139,9 +6159,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
+    },
+    abrirForm: function abrirForm() {
+      this.form['mapa'].mostrar = true;
     }
   },
-  created: function created() {//this.obtenerDatos();
+  created: function created() {
+    //this.obtenerDatos();
+    this.abrirForm();
   }
 });
 
@@ -6864,6 +6889,10 @@ window.generarIdUnicoFecha = function () {
   return Math.floor(fecha.getTime() / 1000).toString(16);
 };
 
+window.sockectio = io('http://localhost:3001');
+sockectio.on('connect', function (e) {
+  console.log('Conectado');
+});
 
 
 
@@ -31812,6 +31841,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -31824,7 +31855,7 @@ var render = function () {
       },
       [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
+          _c("div", { staticClass: "card-header text-white bg-warning" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-1" }, [
                 _c("img", {
@@ -31840,13 +31871,6 @@ var render = function () {
               _vm._v(" "),
               _c("div", { staticClass: "col-10" }, [
                 _vm._v("Chat de usuarios"),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-1" }, [
-                _c("button", {
-                  staticClass: "btn-close",
-                  on: { click: _vm.cerrarForm },
-                }),
               ]),
             ]),
           ]),
@@ -31917,8 +31941,8 @@ var render = function () {
                 _c("a", { on: { click: _vm.guardarChat } }, [
                   _c("img", {
                     attrs: {
-                      width: "30",
-                      height: "30",
+                      width: "40",
+                      height: "40",
                       src: _vm.imgenviar,
                       alt: "Imagen de envio",
                       title: "Enviar mensaje",
@@ -31933,7 +31957,17 @@ var render = function () {
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "text-center" }, [
+      _vm._v("Chat de usuarios"),
+      _c("hr"),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -32557,10 +32591,6 @@ var render = function () {
               ),
             ]
           ),
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(_vm._s(_vm.ubicacion.lat) + ", " + _vm._s(_vm.ubicacion.lng)),
         ]),
       ]),
     ]),

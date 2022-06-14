@@ -1,14 +1,14 @@
 <template>
     <div class="container">
+        <h2 class="text-center">Chat de usuarios<hr></h2>
         <form v-on:submit.prevent="guardarChat">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-white bg-warning">
                     <div class="row">
                         <div class="col-1">
                             <img width="20" height="20" :src="imgchat" alt="Imagen de chat" title="chat de usuarios">
                         </div>
                         <div class="col-10">Chat de usuarios</div>
-                        <div class="col-1"><button class="btn-close" @click="cerrarForm"></button></div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-2">
                             <a @click="guardarChat">
-                                <img width="30" height="30" :src="imgenviar" alt="Imagen de envio" title="Enviar mensaje">
+                                <img width="40" height="40" :src="imgenviar" alt="Imagen de envio" title="Enviar mensaje">
                             </a>
                         </div>
                     </div>
@@ -43,8 +43,8 @@
         props: ['form'],
         data(){
             return {
-                imgchat: "img/chat.png",
-                imgenviar: "img/enviar.png",
+                imgchat: "image/chat.png",
+                imgenviar: "image/enviar.jpg",
                 chats: [],
                 chat:{
                     id:'',
@@ -67,9 +67,11 @@
                 this.chats.push(chat);
             },
             obtenerDatos(){
+                
                 sockectio.emit('historial');//enviar un evento
                 sockectio.on('historial',chats=>{ //escuchar un evento. //historial
                     this.chats = chats;
+                    
                 });
             },
             guardarChat(){
@@ -77,18 +79,41 @@
                 if( this.chat.msg!='' ){
                     sockectio.emit('chat', this.chat);
                     this.limpiar();
+                if( permitirNotificaciones=='granted' ){
+                    let notificacion;
+                     notificacion = new Notification('Chat de usuario', {
+                    body : 'Acabas de mandar un mensaje',
+                });
+            }
+                    
                 } else{
                     console.log('Mensaje vacio');
                 }
-            }
+            },
+            abrirForm(){
+                this.form['chat'].mostrar = true;
+            },
         },
         created(){
+            this.abrirForm();
             this.obtenerDatos();
 
             sockectio.on('chat', chat=>{
                 this.mostrarDatos(chat);
 
             });
+             if(!Notification){
+            alertify.error('El navegador no soporta notificaciones');
+            }
+            window.permitirNotificaciones = 'default';
+
+            if(Notification.permission !== 'denied'){
+                Notification.requestPermission(function(permission){
+                    permitirNotificaciones = permission;
+                });
+            } else {
+                permitirNotificaciones = 'denied';
+            }
         }
     }
 </script>

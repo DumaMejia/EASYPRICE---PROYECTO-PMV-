@@ -26,8 +26,8 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Menu</a>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ url('/home') }}">Inicio</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/welcome') }}">Administracion</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a id="admi" class="dropdown-item" href="{{ url('/welcome') }}">Administracion</a></li>
+                            <li><a class="dropdown-item" href="{{ url('/chat') }}">Chat de usuarios</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -81,7 +81,7 @@
         </nav>
 
 <!--- Mensajes -->
-<h2 class="text-center">Actualizar mi datos <hr></h2>
+<h2 class="text-center">Actualizar mis datos <hr></h2>
   <div class="row justify-content-center">
       <div class="col-md-8">
         <form action="{{route('changePassword')}}" method="POST" class="needs-validation" novalidate>
@@ -144,6 +144,11 @@
 </div>
 
 <script src="{{ asset('js/app.js') }}"></script> 
+<script>
+    if("{{ Auth::user()->name }}"!='admin'){
+                document.getElementById('admi').style.display = 'none';
+            }
+</script>
 
 </body>
 </html>

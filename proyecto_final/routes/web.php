@@ -30,6 +30,10 @@ Route::get('/gps', function () {
     return view('gps');
 });
 
+Route::get('/chat', function () {
+    return view('chat');
+});
+
 Route::get('/condiciones', function () {
     return view('condiciones');
 });

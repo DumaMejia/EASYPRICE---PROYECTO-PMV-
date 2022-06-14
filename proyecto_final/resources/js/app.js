@@ -12,6 +12,10 @@ window.generarIdUnicoFecha = ()=>{
     let fecha = new Date();
     return Math.floor(fecha.getTime()/1000).toString(16);
 }
+window.sockectio = io('http://localhost:3001');
+sockectio.on('connect',function(e){
+    console.log('Conectado');
+});
 
 
 import Vue from 'vue';
