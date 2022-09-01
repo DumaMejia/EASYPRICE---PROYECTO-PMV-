@@ -20,7 +20,7 @@
                         <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="tipo.codigo"  required type="text" class="form-control">
+                            <input disabled title="Ingrese el nombre" v-model="tipo.codigo"  required type="text" class="form-control">
                         </div>
                         </div>
 
@@ -193,7 +193,7 @@
                                 alertify.error(`Error al guardar el tipo ${err}`);
                             });
                     }
-                    this.tipos = data.result.filter(tipo=>tipo.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.tipos = data.result.filter(tipo=>tipo.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los tipos ${e.target.error}`);
@@ -207,6 +207,11 @@
             this.tipo.idTipo = '';
             this.tipo.codigo = '';
             this.tipo.nombre = '';
+
+            this.codeList();
+            },
+            codeList() {
+                this.tipo.codigo = this.tipos.length + 1;  
             },
 
             abrirStore(store, modo){
