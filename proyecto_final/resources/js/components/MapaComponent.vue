@@ -37,11 +37,11 @@
         </div>
 
        <div class="btn-group">
-            <select  v-model="depmun.valor" class="form-select  btn-warning" aria-label="Default select example">
+            <select @click="mapCenter" v-model="depmun.valor" class="form-select  btn-warning" aria-label="Default select example">
                     <option class="btn btn-light" selected>Selecciona un municipio</option>
-                    <option class="btn btn-light" value="1">One</option>
-                    <option class="btn btn-light" value="2">Two</option>
-                    <option class="btn btn-light" value="3">Three</option>
+                    <option class="btn btn-light" value="santa maria">Santa Maria</option>
+                    <option class="btn btn-light" value="santa elena">Santa Elena</option>
+                    <option class="btn btn-light" value="alegria">Alegria</option>
             </select>
         </div>
     </form>
@@ -322,6 +322,21 @@
                 if(this.depmun.valor=="usulutan"){
                     this.ubicacion.lat = 13.345611871500576;
                     this.ubicacion.lng = -88.43976983311296;
+
+                };
+                if(this.depmun.valor=="santa maria"){
+                    this.ubicacion.lat = 13.34619540428378;
+                    this.ubicacion.lng = -88.41608077882177;
+
+                };
+                if(this.depmun.valor=="santa elena"){
+                    this.ubicacion.lat = 13.380807927031531;
+                    this.ubicacion.lng = -88.41131026521978;
+
+                };
+                if(this.depmun.valor=="alegria"){
+                    this.ubicacion.lat = 13.509147734778331;
+                    this.ubicacion.lng = -88.48701958897692;
 
                 };
 

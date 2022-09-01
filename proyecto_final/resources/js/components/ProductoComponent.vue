@@ -20,7 +20,7 @@
                         <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="producto.codigo"  required type="text" class="form-control">
+                            <input disabled title="Ingrese el nombre" v-model="producto.codigo"  required type="text" class="form-control">
                         </div>
                         </div>
 
@@ -238,7 +238,7 @@
                                 alertify.error(`Error al guardar el producto ${err}`);
                             });
                     }
-                    this.productos = data.result.filter(producto=>producto.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.productos = data.result.filter(producto=>producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase())>-1);
                 };
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los productos ${e.target.error}`);
@@ -337,6 +337,10 @@
                     id1:'',
                     label1:'',
                 };
+            this.codeList();
+            },
+            codeList() {
+                this.producto.codigo = this.productos.length + 1;  
             },
 
             abrirStore(store, modo){

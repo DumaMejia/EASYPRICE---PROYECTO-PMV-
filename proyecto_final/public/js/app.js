@@ -5557,6 +5557,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -5715,7 +5747,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         _this4.comercios = data.result.filter(function (comercio) {
-          return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+          return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.direccion.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
@@ -5734,9 +5766,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.comercio.telefono = '';
       this.comercio.correo = '';
       this.comercio.tipo = '';
+      document.getElementById("map").style.display = 'none';
+      this.codeList();
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
+    },
+    handleMapClick: function handleMapClick(e) {
+      this.comercio.latitude = e.latLng.lat();
+      this.comercio.longitude = e.latLng.lng();
+    },
+    displaymap: function displaymap() {
+      if (document.getElementById("map").style.display == '') {
+        document.getElementById("map").style.display = 'none';
+      } else {
+        document.getElementById("map").style.display = '';
+      }
+
+      ;
+    },
+    codeList: function codeList() {
+      this.obtenerDatos();
+      this.comercio.codigo = this.comercios.length + 1;
+    },
+    resultTable: function resultTable() {
+      obtenerDatos();
+      document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -6078,6 +6133,27 @@ __webpack_require__.r(__webpack_exports__);
       if (this.depmun.valor == "usulutan") {
         this.ubicacion.lat = 13.345611871500576;
         this.ubicacion.lng = -88.43976983311296;
+      }
+
+      ;
+
+      if (this.depmun.valor == "santa maria") {
+        this.ubicacion.lat = 13.34619540428378;
+        this.ubicacion.lng = -88.41608077882177;
+      }
+
+      ;
+
+      if (this.depmun.valor == "santa elena") {
+        this.ubicacion.lat = 13.380807927031531;
+        this.ubicacion.lng = -88.41131026521978;
+      }
+
+      ;
+
+      if (this.depmun.valor == "alegria") {
+        this.ubicacion.lat = 13.509147734778331;
+        this.ubicacion.lng = -88.48701958897692;
       }
 
       ;
@@ -6451,7 +6527,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         _this4.productos = data.result.filter(function (producto) {
-          return producto.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+          return producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
@@ -6559,6 +6635,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id1: '',
         label1: ''
       };
+      this.codeList();
+    },
+    codeList: function codeList() {
+      this.producto.codigo = this.productos.length + 1;
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -6589,6 +6669,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6822,7 +6907,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         _this4.tipos = data.result.filter(function (tipo) {
-          return tipo.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+          return tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
@@ -6835,6 +6920,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.tipo.idTipo = '';
       this.tipo.codigo = '';
       this.tipo.nombre = '';
+      this.codeList();
+    },
+    codeList: function codeList() {
+      this.tipo.codigo = this.tipos.length + 1;
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -32004,324 +32093,430 @@ var render = function () {
         },
         [
           _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Codigo:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.codigo,
-                    expression: "comercio.codigo",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese el codigo",
-                  pattern: "[0-9]{3,10}",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.comercio.codigo },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "codigo", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Nombre:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.nombre,
-                    expression: "comercio.nombre",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese el nombre",
-                  pattern: "[A-Za-zñÑáéíóúü ]{3,75}",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.comercio.nombre },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "nombre", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Direccion:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.direccion,
-                    expression: "comercio.direccion",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese la direccion",
-                  pattern: "[A-Za-zñÑáéíóúü ]{3,100}",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.comercio.direccion },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "direccion", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("latitude:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.latitude,
-                    expression: "comercio.latitude",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese la direccion",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.comercio.latitude },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "latitude", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Longitude:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.longitude,
-                    expression: "comercio.longitude",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese la latitude",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.comercio.longitude },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "longitude", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Telefono:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.telefono,
-                    expression: "comercio.telefono",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese la longitude",
-                  pattern: "[0-9]{4}-[0-9]{4}",
-                  required: "",
-                  type: "text",
-                },
-                domProps: { value: _vm.comercio.telefono },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "telefono", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [_vm._v("Correo:")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comercio.correo,
-                    expression: "comercio.correo",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  title: "Ingrese el CORREO",
-                  required: "",
-                  type: "email",
-                },
-                domProps: { value: _vm.comercio.correo },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.comercio, "correo", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-2" }, [
-              _vm._v("Tipo de comercio:"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-md-2" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.comercio.tipo,
-                      expression: "comercio.tipo",
-                    },
-                  ],
-                  staticClass: "form-select form-select-sm",
-                  attrs: { "aria-label": ".form-select-sm example" },
-                  on: {
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.comercio,
-                        "tipo",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                  },
-                },
-                [
-                  _c("option", { attrs: { selected: "" } }, [
-                    _vm._v("Seleccionar Tipo"),
+            _c(
+              "div",
+              {
+                staticClass: "card",
+                staticStyle: { width: "650px", height: "500px" },
+              },
+              [
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Codigo:"),
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "Pequeña empresa" } }, [
-                    _vm._v("Pequeña empresa"),
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.codigo,
+                          expression: "comercio.codigo",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "150px" },
+                      attrs: {
+                        title: "Ingrese el codigo",
+                        disabled: "",
+                        pattern: "[0-9]{3,10}",
+                        required: "",
+                        type: "text",
+                      },
+                      domProps: { value: _vm.comercio.codigo },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.comercio, "codigo", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Nombre:"),
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "Mediana empresa" } }, [
-                    _vm._v("Mediana empresa"),
+                  _c("div", { staticClass: "col col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.nombre,
+                          expression: "comercio.nombre",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese el nombre",
+                        pattern: "[A-Za-zñÑáéíóúü ]{3,75}",
+                        required: "",
+                        type: "text",
+                      },
+                      domProps: { value: _vm.comercio.nombre },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.comercio, "nombre", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Direccion:"),
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "Gran Empresa" } }, [
-                    _vm._v("Gran Empresa"),
+                  _c("div", { staticClass: "col col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.direccion,
+                          expression: "comercio.direccion",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese la direccion",
+                        pattern: "[A-Za-zñÑáéíóúü ]{3,100}",
+                        required: "",
+                        type: "text",
+                      },
+                      domProps: { value: _vm.comercio.direccion },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.comercio,
+                            "direccion",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
                   ]),
-                ]
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row p-1" }, [
-            _c("div", { staticClass: "col col-md-5 text-center" }, [
-              _vm.comercio.mostrar_msg
-                ? _c(
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("latitude:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.latitude,
+                          expression: "comercio.latitude",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese la direccion",
+                        required: "",
+                        type: "text",
+                        disabled: "",
+                      },
+                      domProps: { value: _vm.comercio.latitude },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.comercio,
+                            "latitude",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Longitude:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.longitude,
+                          expression: "comercio.longitude",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese la latitude",
+                        required: "",
+                        type: "text",
+                        disabled: "",
+                      },
+                      domProps: { value: _vm.comercio.longitude },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.comercio,
+                            "longitude",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Telefono:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.telefono,
+                          expression: "comercio.telefono",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese la longitude",
+                        pattern: "[0-9]{4}-[0-9]{4}",
+                        required: "",
+                        type: "text",
+                      },
+                      domProps: { value: _vm.comercio.telefono },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.comercio,
+                            "telefono",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Correo:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comercio.correo,
+                          expression: "comercio.correo",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese el CORREO",
+                        required: "",
+                        type: "email",
+                      },
+                      domProps: { value: _vm.comercio.correo },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.comercio, "correo", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c(
                     "div",
                     {
-                      staticClass:
-                        "alert alert-primary alert-dismissible fade show",
-                      attrs: { role: "alert" },
+                      staticClass: "col col-md-2",
+                      attrs: { visibility: "hidden" },
                     },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.comercio.msg) +
-                          "\n                            "
-                      ),
-                      _c("button", {
-                        staticClass: "btn-close",
-                        attrs: {
-                          type: "button",
-                          "data-bs-dismiss": "alert",
-                          "aria-label": "Close",
+                    [_vm._v("Tipo de comercio:")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.comercio.tipo,
+                            expression: "comercio.tipo",
+                          },
+                        ],
+                        staticClass: "form-select form-select-sm",
+                        staticStyle: { width: "300px" },
+                        attrs: { "aria-label": ".form-select-sm example" },
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.comercio,
+                              "tipo",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
                         },
-                      }),
-                    ]
-                  )
-                : _vm._e(),
-            ]),
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Seleccionar Tipo"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Pequeña empresa" } }, [
+                          _vm._v("Pequeña empresa"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Mediana empresa" } }, [
+                          _vm._v("Mediana empresa"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Gran Empresa" } }, [
+                          _vm._v("Gran Empresa"),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-5 text-center" }, [
+                    _vm.comercio.mostrar_msg
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "alert alert-primary alert-dismissible fade show",
+                            attrs: { role: "alert" },
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.comercio.msg) +
+                                "\n                            "
+                            ),
+                            _c("button", {
+                              staticClass: "btn-close",
+                              attrs: {
+                                type: "button",
+                                "data-bs-dismiss": "alert",
+                                "aria-label": "Close",
+                              },
+                            }),
+                          ]
+                        )
+                      : _vm._e(),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _c("input", {
+                      staticClass: "btn btn-outline-primary",
+                      staticStyle: { width: "193px" },
+                      attrs: { type: "button", value: "Mapa" },
+                      on: { click: _vm.displaymap },
+                    }),
+                  ]),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "container m-3",
+                staticStyle: {
+                  width: "700px",
+                  height: "450px",
+                  left: "5px",
+                  top: "1px",
+                  display: "none",
+                },
+                attrs: { id: "map" },
+              },
+              [
+                _c("GmapMap", {
+                  staticStyle: {
+                    width: "730px",
+                    height: "450px",
+                    left: "1px",
+                    top: "1px",
+                    right: "1px",
+                  },
+                  attrs: {
+                    center: {
+                      lat: 13.343565797622999,
+                      lng: -88.43976983311296,
+                    },
+                    zoom: 14,
+                    "map-type-id": "roadmap",
+                  },
+                  on: { click: _vm.handleMapClick },
+                }),
+              ],
+              1
+            ),
           ]),
-          _vm._v(" "),
-          _vm._m(0),
         ]
       ),
     ]),
@@ -32368,7 +32563,13 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c(
+                "div",
+                { staticClass: "col col-md-12", attrs: { id: "res" } },
+                [_vm._v("Resultados: ")]
+              ),
+              _vm._v(" "),
+              _vm._m(2),
             ]),
             _vm._v(" "),
             _c(
@@ -32445,18 +32646,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row m-2" }, [
-      _c("div", { staticClass: "col col-md-5 text-center" }, [
-        _c("input", {
-          staticClass: "btn btn-primary",
-          attrs: { type: "submit", value: "Guardar" },
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "btn btn-warning",
-          attrs: { type: "reset", value: "Nuevo" },
-        }),
-      ]),
+    return _c("div", { staticClass: "col col-md-2" }, [
+      _c("input", {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit", value: "Guardar" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col col-md-2" }, [
+      _c("input", {
+        staticClass: "btn btn-warning",
+        attrs: { type: "reset", value: "Nuevo" },
+      }),
     ])
   },
   function () {
@@ -32651,6 +32856,7 @@ var render = function () {
                   staticClass: "form-select  btn-warning",
                   attrs: { "aria-label": "Default select example" },
                   on: {
+                    click: _vm.mapCenter,
                     change: function ($event) {
                       var $$selectedVal = Array.prototype.filter
                         .call($event.target.options, function (o) {
@@ -32679,20 +32885,29 @@ var render = function () {
                   _vm._v(" "),
                   _c(
                     "option",
-                    { staticClass: "btn btn-light", attrs: { value: "1" } },
-                    [_vm._v("One")]
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "santa maria" },
+                    },
+                    [_vm._v("Santa Maria")]
                   ),
                   _vm._v(" "),
                   _c(
                     "option",
-                    { staticClass: "btn btn-light", attrs: { value: "2" } },
-                    [_vm._v("Two")]
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "santa elena" },
+                    },
+                    [_vm._v("Santa Elena")]
                   ),
                   _vm._v(" "),
                   _c(
                     "option",
-                    { staticClass: "btn btn-light", attrs: { value: "3" } },
-                    [_vm._v("Three")]
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "alegria" },
+                    },
+                    [_vm._v("Alegria")]
                   ),
                 ]
               ),
@@ -33286,6 +33501,7 @@ var render = function () {
                 ],
                 staticClass: "form-control",
                 attrs: {
+                  disabled: "",
                   title: "Ingrese el nombre",
                   required: "",
                   type: "text",
@@ -33645,6 +33861,7 @@ var render = function () {
                 ],
                 staticClass: "form-control",
                 attrs: {
+                  disabled: "",
                   title: "Ingrese el nombre",
                   required: "",
                   type: "text",
@@ -33743,6 +33960,37 @@ var render = function () {
                     },
                   }),
                 ]),
+                _vm._v(" "),
+                _c("td", { attrs: { colspan: "8" } }, [
+                  _vm._v("\n                            Buscar: "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.buscar,
+                        expression: "buscar",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      title: "Introduzca el texto a buscar",
+                      type: "text",
+                    },
+                    domProps: { value: _vm.buscar },
+                    on: {
+                      keyup: _vm.buscandoTipo,
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.buscar = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-md-2" }, [_vm._v("Codigo:")]),
               ]),
               _vm._v(" "),
               _vm._m(1),

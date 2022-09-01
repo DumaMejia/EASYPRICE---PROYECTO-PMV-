@@ -14,52 +14,55 @@
                  
                 
                 <form method="post" @submit.prevent="guardarComercio" @reset="nuevoComercio">
-                    <div class="row p-1">
+                <div class="row p-1">
+                    <div class="card" style="width: 650px; height: 500px;">
+                        <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
                         <div class="col col-md-2">
-                            <input title="Ingrese el codigo" v-model="comercio.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control">
+                            <input title="Ingrese el codigo" disabled v-model="comercio.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control" style="width : 150px">
                         </div>
                     </div>
                     <div class="row p-1">
                         <div class="col col-md-2">Nombre:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="comercio.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                            <input title="Ingrese el nombre" v-model="comercio.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control" style="width : 300px">
                         </div>
                     </div>
                     <div class="row p-1">
                         <div class="col col-md-2">Direccion:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese la direccion" v-model="comercio.direccion" pattern="[A-Za-zñÑáéíóúü ]{3,100}" required type="text" class="form-control">
+                            <input title="Ingrese la direccion" v-model="comercio.direccion" pattern="[A-Za-zñÑáéíóúü ]{3,100}" required type="text" class="form-control" style="width : 300px">
                         </div>
                     </div>
                     <div class="row p-1">
                         <div class="col col-md-2">latitude:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese la direccion" v-model="comercio.latitude"  required type="text" class="form-control">
+                            <input title="Ingrese la direccion" v-model="comercio.latitude"  required type="text" disabled  class="form-control" style="width : 300px">
                         </div>
+                        
                     </div>
                     <div class="row p-1">
                         <div class="col col-md-2">Longitude:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese la latitude" v-model="comercio.longitude"  required type="text" class="form-control">
+                            <input title="Ingrese la latitude" v-model="comercio.longitude"  required type="text" disabled class="form-control" style="width : 300px">
                         </div>
                     </div>
                     <div class="row p-1">
                         <div class="col col-md-2">Telefono:</div>
                         <div class="col col-md-2">
-                            <input title="Ingrese la longitude" v-model="comercio.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
+                            <input title="Ingrese la longitude" v-model="comercio.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control" style="width : 300px">
                         </div>
                     </div>
                     <div class="row p-1">
                         <div class="col col-md-2">Correo:</div>
                         <div class="col col-md-2">
-                            <input title="Ingrese el CORREO" v-model="comercio.correo"  required type="email"  class="form-control">
+                            <input title="Ingrese el CORREO" v-model="comercio.correo"  required type="email"  class="form-control" style="width : 300px">
                         </div>
                     </div>
-                    <div class="row p-1">
-                            <div class="col col-md-2">Tipo de comercio:</div>
+                    <div class="row p-1" >
+                            <div   visibility="hidden" class="col col-md-2">Tipo de comercio:</div>
                             <div class="col col-md-2">
-                                <select v-model="comercio.tipo" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <select  v-model="comercio.tipo" class="form-select form-select-sm" aria-label=".form-select-sm example" style="width : 300px">
                                     <option  selected>Seleccionar Tipo</option>
                                     <option value="Pequeña empresa">Pequeña empresa</option>
                                     <option value="Mediana empresa">Mediana empresa</option>
@@ -67,7 +70,7 @@
                                   </select>
                             </div> 
                         </div>
-                    <div class="row p-1">
+                        <div class="row p-1">
                         <div class="col col-md-5 text-center">
                             <div v-if="comercio.mostrar_msg" class="alert alert-primary alert-dismissible fade show" role="alert">
                                 {{ comercio.msg }}
@@ -75,12 +78,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row m-2">
-                        <div class="col col-md-5 text-center">
+                    <div class="row p-1">
+                        <div class="col col-md-2" >
                             <input class="btn btn-primary" type="submit" value="Guardar">
+                        </div>
+                        <div class="col col-md-2" >
                             <input class="btn btn-warning" type="reset" value="Nuevo">
                         </div>
+                        <div class="col col-md-2">
+                            <input class="btn btn-outline-primary" type="button" @click="displaymap" value="Mapa" style="width: 193px">
+                        </div>
+                            
+                       
                     </div>
+                    </div>
+                    
+                    <div class="container m-3" id="map" style="width: 700px; height: 450px; left: 5px; top: 1px; display : none" >
+                        <GmapMap 
+                    :center="{lat:13.343565797622999,lng:-88.43976983311296}"
+                    :zoom="14"
+
+                    map-type-id="roadmap"
+                    style="width: 730px; height: 450px; left: 1px; top: 1px; right: 1px;"
+                    @click="handleMapClick"
+                    >
+                    
+                    </GmapMap>
+                    </div>
+                   
+                
+                     
+                    
+
+                </div>
+                    
                 </form>
             </div>
     
@@ -97,6 +128,7 @@
                                 Buscar: <input @keyup="buscandoComercio" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
                             </th>
                         </tr>
+                        <div class="col col-md-12"  id="res" >Resultados: </div>
                         <tr>
                             <th>CODIGO</th>
                             <th>NOMBRE</th>
@@ -253,12 +285,13 @@
                                 alertify.error = `Error al guardar el comercio ${err}`;
                             });
                     }
-                    this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.direccion.toLowerCase().indexOf(valor.toLowerCase())>-1);
                     
                 };
                 data.onerror = e=>{
                     alertify.error = `Error al obtener los comercios ${e.target.error}`;
                 };
+                
             },
             nuevoComercio(){
                 this.comercio.accion = 'nuevo';
@@ -271,13 +304,35 @@
                 this.comercio.telefono = '';
                 this.comercio.correo = '';
                 this.comercio.tipo = '';
+                document.getElementById("map").style.display = 'none';
+                this.codeList();
             },
             abrirStore(store, modo){
                 return db.transaction(store, modo).objectStore(store);
+            },
+            handleMapClick(e) {
+                this.comercio.latitude = e.latLng.lat();
+                this.comercio.longitude = e.latLng.lng();
+            },
+            displaymap() {
+                if(document.getElementById("map").style.display == ''){
+                    document.getElementById("map").style.display = 'none';
+                }else{
+                    document.getElementById("map").style.display = '';
+                };   
+            },
+            codeList() {
+                this.obtenerDatos();
+                this.comercio.codigo = this.comercios.length + 1;
+            },
+            resultTable(){
+                obtenerDatos();
+                document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;
             }
         },
         created(){
             //this.obtenerDatos();
+            
         },
     }
 </script>
