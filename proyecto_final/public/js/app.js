@@ -5606,7 +5606,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         longitude: '',
         telefono: '',
         correo: '',
-        tipo: ''
+        tipo: '',
+        resultados: ''
       }
     };
   },
@@ -5749,6 +5750,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.comercios = data.result.filter(function (comercio) {
           return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.direccion.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
+        _this4.comercio.resultados = _this4.comercio.length;
       };
 
       data.onerror = function (e) {
@@ -5768,6 +5770,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.comercio.tipo = '';
       document.getElementById("map").style.display = 'none';
       this.codeList();
+      this.resultTable();
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -5790,7 +5793,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.comercio.codigo = this.comercios.length + 1;
     },
     resultTable: function resultTable() {
-      obtenerDatos();
       document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;
     }
   },
@@ -6356,6 +6358,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -6618,6 +6621,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dataTipo.onerror = function (e) {
         alertify.error("Error al obtener los tipos ".concat(e.target.error));
       };
+
+      this.resultTable();
     },
     nuevoProducto: function nuevoProducto() {
       this.producto.accion = 'nuevo';
@@ -6638,7 +6643,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.codeList();
     },
     codeList: function codeList() {
+      this.obtenerDatos();
       this.producto.codigo = this.productos.length + 1;
+    },
+    resultTable: function resultTable() {
+      document.getElementById("res").innerHTML = "Resultados: " + this.productos.length;
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -6669,10 +6678,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -6914,6 +6919,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data.onerror = function (e) {
         alertify.error("Error al obtener los tipos ".concat(e.target.error));
       };
+
+      this.resultTable();
     },
     nuevoTipo: function nuevoTipo() {
       this.tipo.accion = 'nuevo';
@@ -6923,7 +6930,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.codeList();
     },
     codeList: function codeList() {
+      this.obtenerDatos();
       this.tipo.codigo = this.tipos.length + 1;
+    },
+    resultTable: function resultTable() {
+      document.getElementById("res").innerHTML = "Resultados: " + this.tipos.length;
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -7046,6 +7057,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
     abrirForm: function abrirForm(form) {
       this.forms[form].mostrar = !this.forms[form].mostrar;
       this.$refs[form].obtenerDatos();
+      this.$refs[form].resultTable();
     },
     abrir: function abrir(form) {
       this.forms[form].mostrar = !this.forms[form].mostrar;
@@ -32066,7 +32078,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "appComercio" } }, [
+  return _c("div", { attrs: { id: "appComercio", onload: "resultTable()" } }, [
     _c("div", { staticClass: "card" }),
     _vm._v(" "),
     _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
@@ -32533,109 +32545,132 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-light table-hover" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", { attrs: { colspan: "8" } }, [
-                  _vm._v("\n                            Buscar: "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.buscar,
-                        expression: "buscar",
+          _c(
+            "table",
+            {
+              staticClass: "table table-light table-hover",
+              attrs: { id: "tabla" },
+            },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { colspan: "8" } }, [
+                    _vm._v("\n                            Buscar: "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.buscar,
+                          expression: "buscar",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { placeholder: "buscar aqui", type: "text" },
+                      domProps: { value: _vm.buscar },
+                      on: {
+                        keyup: _vm.buscandoComercio,
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.buscar = $event.target.value
+                        },
                       },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { placeholder: "buscar aqui", type: "text" },
-                    domProps: { value: _vm.buscar },
-                    on: {
-                      keyup: _vm.buscandoComercio,
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.buscar = $event.target.value
-                      },
-                    },
-                  }),
+                    }),
+                  ]),
                 ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.resultados,
+                      expression: "resultados",
+                    },
+                  ],
+                  staticClass: "col col-md-12",
+                  attrs: { id: "res" },
+                  domProps: { value: _vm.resultados },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.resultados = $event.target.value
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _vm._m(2),
               ]),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "col col-md-12", attrs: { id: "res" } },
-                [_vm._v("Resultados: ")]
-              ),
-              _vm._v(" "),
-              _vm._m(2),
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.comercios, function (item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.idComercio,
-                    on: {
-                      click: function ($event) {
-                        return _vm.modificarComercio(item)
+                "tbody",
+                _vm._l(_vm.comercios, function (item) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.idComercio,
+                      on: {
+                        click: function ($event) {
+                          return _vm.modificarComercio(item)
+                        },
                       },
                     },
-                  },
-                  [
-                    _c("td", [_vm._v(_vm._s(item.codigo))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.nombre))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.direccion))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.latitude))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.longitude))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.telefono))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.correo))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.tipo))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: {
-                            click: function ($event) {
-                              return _vm.eliminarComercio(item)
-                            },
-                          },
-                        },
-                        [_vm._v("Eliminar")]
-                      ),
+                    [
+                      _c("td", [_vm._v(_vm._s(item.codigo))]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.modificarComercio(item)
+                      _c("td", [_vm._v(_vm._s(item.nombre))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.direccion))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.latitude))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.longitude))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.telefono))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.correo))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.tipo))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function ($event) {
+                                return _vm.eliminarComercio(item)
+                              },
                             },
                           },
-                        },
-                        [_vm._v("Modificar")]
-                      ),
-                    ]),
-                  ]
-                )
-              }),
-              0
-            ),
-          ]),
+                          [_vm._v("Eliminar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.modificarComercio(item)
+                              },
+                            },
+                          },
+                          [_vm._v("Modificar")]
+                        ),
+                      ]),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ]
+          ),
         ]),
       ]
     ),
@@ -33688,6 +33723,12 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col col-md-12", attrs: { id: "res" } },
+                [_vm._v("Resultados: ")]
+              ),
+              _vm._v(" "),
               _vm._m(1),
             ]),
             _vm._v(" "),
@@ -33960,38 +34001,13 @@ var render = function () {
                     },
                   }),
                 ]),
-                _vm._v(" "),
-                _c("td", { attrs: { colspan: "8" } }, [
-                  _vm._v("\n                            Buscar: "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.buscar,
-                        expression: "buscar",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Introduzca el texto a buscar",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.buscar },
-                    on: {
-                      keyup: _vm.buscandoTipo,
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.buscar = $event.target.value
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col col-md-2" }, [_vm._v("Codigo:")]),
               ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col col-md-12", attrs: { id: "res" } },
+                [_vm._v("Resultados: ")]
+              ),
               _vm._v(" "),
               _vm._m(1),
             ]),

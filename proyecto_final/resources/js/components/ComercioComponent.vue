@@ -1,19 +1,19 @@
 <template>
-    <div id="appComercio">
+    <div id="appComercio" onload="resultTable()">
         
         <div class="card">
   
         </div>
         
             
-            <div class="card text-dark bg-light mb-3" >
+            <div class="card text-dark bg-light mb-3">
                 <div class="card-header text-white bg-warning">
                 Registro de Comercios
                 <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
                 </div>
                  
                 
-                <form method="post" @submit.prevent="guardarComercio" @reset="nuevoComercio">
+                <form method="post" @submit.prevent="guardarComercio" @reset="nuevoComercio" >
                 <div class="row p-1">
                     <div class="card" style="width: 650px; height: 500px;">
                         <div class="row p-1">
@@ -121,14 +121,14 @@
                 
             </div>
             <div class="card-body">
-                <table class="table table-light table-hover">
+                <table class="table table-light table-hover" id="tabla" >
                     <thead>
                         <tr>
                             <th colspan="8">
                                 Buscar: <input @keyup="buscandoComercio" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
                             </th>
                         </tr>
-                        <div class="col col-md-12"  id="res" >Resultados: </div>
+                        <input class="col col-md-12"  id="res" v-model="resultados" >
                         <tr>
                             <th>CODIGO</th>
                             <th>NOMBRE</th>
@@ -182,7 +182,8 @@
                     longitude: '',
                     telefono: '',
                     correo: '',
-                    tipo: ''
+                    tipo: '',
+                    resultados:''
                 }
             }
         },
@@ -286,7 +287,7 @@
                             });
                     }
                     this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.direccion.toLowerCase().indexOf(valor.toLowerCase())>-1);
-                    
+                    this.comercio.resultados = this.comercio.length;
                 };
                 data.onerror = e=>{
                     alertify.error = `Error al obtener los comercios ${e.target.error}`;
@@ -306,6 +307,7 @@
                 this.comercio.tipo = '';
                 document.getElementById("map").style.display = 'none';
                 this.codeList();
+                this.resultTable();
             },
             abrirStore(store, modo){
                 return db.transaction(store, modo).objectStore(store);
@@ -326,12 +328,13 @@
                 this.comercio.codigo = this.comercios.length + 1;
             },
             resultTable(){
-                obtenerDatos();
-                document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;
-            }
+                document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;               
+            },
+            
         },
         created(){
             //this.obtenerDatos();
+            
             
         },
     }

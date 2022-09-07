@@ -76,6 +76,7 @@
                             Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoProducto" v-model="buscar" class="form-control" type="text">
                         </td>
                     </tr>
+                    <div class="col col-md-12"  id="res" >Resultados: </div>
                     <tr>
                         <th>Codigo</th>
                         <th>Nombre</th>
@@ -317,7 +318,7 @@
                 dataTipo.onerror = e=>{
                     alertify.error(`Error al obtener los tipos ${e.target.error}`);
                 };
-
+                this.resultTable();
             },
     
 
@@ -340,7 +341,13 @@
             this.codeList();
             },
             codeList() {
+                this.obtenerDatos();
                 this.producto.codigo = this.productos.length + 1;  
+            },
+            resultTable(){
+                
+                document.getElementById("res").innerHTML = "Resultados: " + this.productos.length;
+                
             },
 
             abrirStore(store, modo){
