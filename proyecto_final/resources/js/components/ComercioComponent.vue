@@ -8,7 +8,7 @@
             
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header text-white bg-warning">
-                Registro de Comercios
+                Administracion de Comercios
                 <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
                 </div>
                  
@@ -62,10 +62,10 @@
                     <div class="row p-1" >
                             <div   visibility="hidden" class="col col-md-2">Tipo de comercio:</div>
                             <div class="col col-md-2">
-                                <select  v-model="comercio.tipo" class="form-select form-select-sm" aria-label=".form-select-sm example" style="width : 300px">
-                                    <option  selected>Seleccionar Tipo</option>
-                                    <option value="Pequeña empresa">Pequeña empresa</option>
-                                    <option value="Mediana empresa">Mediana empresa</option>
+                                <select  v-model="comercio.tipo" class="form-select" aria-label=".form-select-sm example" style="width : 300px">
+                                    <option  selected>Selecciona Tipo De Empresa</option>
+                                    <option value="Pequeña Empresa">Pequeña Empresa</option>
+                                    <option value="Mediana Empresa">Mediana Empresa</option>
                                     <option value="Gran Empresa">Gran Empresa</option>
                                   </select>
                             </div> 
@@ -125,10 +125,11 @@
                     <thead>
                         <tr>
                             <th colspan="8">
-                                Buscar: <input @keyup="buscandoComercio" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
+                               <input @keyup="buscandoComercio" v-model="buscar" placeholder="Buscar" aria-label="Buscar" class="form-control" type="text" >
+                                <div class="col col-md-12"  id="res" >Resultados: </div>
                             </th>
                         </tr>
-                        <input class="col col-md-12"  id="res" v-model="resultados" >
+                        
                         <tr>
                             <th>CODIGO</th>
                             <th>NOMBRE</th>
@@ -182,8 +183,7 @@
                     longitude: '',
                     telefono: '',
                     correo: '',
-                    tipo: '',
-                    resultados:''
+                    tipo: ''
                 }
             }
         },
@@ -287,7 +287,7 @@
                             });
                     }
                     this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.direccion.toLowerCase().indexOf(valor.toLowerCase())>-1);
-                    this.comercio.resultados = this.comercio.length;
+                    document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;
                 };
                 data.onerror = e=>{
                     alertify.error = `Error al obtener los comercios ${e.target.error}`;
@@ -307,7 +307,7 @@
                 this.comercio.tipo = '';
                 document.getElementById("map").style.display = 'none';
                 this.codeList();
-                this.resultTable();
+                
             },
             abrirStore(store, modo){
                 return db.transaction(store, modo).objectStore(store);
@@ -327,9 +327,7 @@
                 this.obtenerDatos();
                 this.comercio.codigo = this.comercios.length + 1;
             },
-            resultTable(){
-                document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;               
-            },
+            
             
         },
         created(){

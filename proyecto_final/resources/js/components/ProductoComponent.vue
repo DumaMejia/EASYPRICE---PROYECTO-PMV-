@@ -52,11 +52,14 @@
                                 </div>
                             </div>
 
-                        <div class="row m-2">
-                            <div class="col col-md-5 text-center">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <button type="reset" class="btn btn-warning">Nuevo</button>
-                            </div>
+                        <div class="row p-1">
+                            <div class="col col-md-2" >
+                            
+                        </div>
+                        <div class="col col-md-2" >
+                            <input class="btn btn-warning" type="reset" value="Nuevo">
+                            <input class="btn btn-primary" type="submit" value="Guardar">
+                        </div>
                         </div>
                     
                 
@@ -69,14 +72,15 @@
             
         </div>
         <div class="card-body">
-            <table class="table table-light table-striped">
+            <table class="table table-light table-striped" id="tabla">
                 <thead>
                     <tr>
-                        <td colspan="8">
-                            Buscar: <input title="Introduzca el texto a buscar" @keyup="buscandoProducto" v-model="buscar" class="form-control" type="text">
-                        </td>
+                        <th colspan="8">
+                         <input title="Introduzca el texto a buscar" placeholder="Buscar" @keyup="buscandoProducto" v-model="buscar" class="form-control" type="text">
+                            <div class="col col-md-12"  id="res1" >Resultados: </div>
+                        </th>
                     </tr>
-                    <div class="col col-md-12"  id="res" >Resultados: </div>
+                    
                     <tr>
                         <th>Codigo</th>
                         <th>Nombre</th>
@@ -176,7 +180,7 @@
                 this.obtenerDatos(this.buscar);
             },
             eliminarProducto(producto){
-                if( confirm(`Esta seguro de eliminar el producto ${producto.codigo}?`) ){
+                if( confirm(`¿Esta seguro de eliminar producto ${producto.nombre}?`) ){
                     producto.accion = 'eliminar';
                     let store = this.abrirStore('producto', 'readwrite'),
                         query = store.delete(producto.idProducto),
@@ -240,6 +244,7 @@
                             });
                     }
                     this.productos = data.result.filter(producto=>producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    document.getElementById("res1").innerHTML = "Resultados: " + this.productos.length;
                 };
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los productos ${e.target.error}`);
@@ -318,7 +323,7 @@
                 dataTipo.onerror = e=>{
                     alertify.error(`Error al obtener los tipos ${e.target.error}`);
                 };
-                this.resultTable();
+                
             },
     
 
@@ -344,9 +349,11 @@
                 this.obtenerDatos();
                 this.producto.codigo = this.productos.length + 1;  
             },
-            resultTable(){
-                
-                document.getElementById("res").innerHTML = "Resultados: " + this.productos.length;
+            resultTable(){ 
+
+                let resultabla = document.getElementById("tabla");
+                let filas = resultabla.getElementsByTagName("tr");
+                document.getElementById("res").innerText = "Resultados: " + (filas.length + 1);     
                 
             },
 

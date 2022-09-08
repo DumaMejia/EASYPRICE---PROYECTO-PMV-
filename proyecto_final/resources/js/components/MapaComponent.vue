@@ -18,17 +18,16 @@
         <button class="btn btn-outline-primary" type="button" id="button-addon2" @click="mapCenter">Buscar</button>
         </div>
         <div class="btn-group">
-            <select @click="mapCenter" v-model="depmun.valor"  aria-label="Default select example" class="form-select btn-warning" >
-                    Departamentos
-                    <option selected>Seleciona un departamento</option>
+            <select @click="mapCenter" v-model="depmun.valor" class="form-select btn-warning" placeholder="Seleccione Un Departamento" aria-label="Default select example">
+                    <option class="btn btn-light"  selected>Seleccione un Departamento</option>
                     <option class="btn btn-light" value="ahuachapan">Ahuachapan</option>
                     <option class="btn btn-light" value="san salvador">San Salvador</option>
-                    <option class="btn btn-light" value="usulutan">Usulutan</option>
+                    <option class="btn btn-light" value="usulutan">Usulután</option>
             </select>
          </div>
 
          <div class="btn-group">
-            <button type="button" class="btn btn-outline-info" @click="mapCentergps">
+            <button type="button" class="btn btn-outline-info" @contextmenu="indigps"    @click="mapCentergps">
                
                 <i class="fa fa-google mr-2"></i>
                  <img  src="image/gps2.png" width="20" height="20">
@@ -37,8 +36,8 @@
         </div>
 
        <div class="btn-group">
-            <select @click="mapCenter" v-model="depmun.valor" class="form-select  btn-warning" aria-label="Default select example">
-                    <option class="btn btn-light" selected>Selecciona un municipio</option>
+            <select @click="mapCenter" v-model="depmun.valor" class="form-select  btn-warning" placeholder="Seleccione Municipio" aria-label="Default select example">
+                    <option class="btn btn-light"  selected>Seleccione Un Municipio</option>
                     <option class="btn btn-light" value="santa maria">Santa Maria</option>
                     <option class="btn btn-light" value="santa elena">Santa Elena</option>
                     <option class="btn btn-light" value="alegria">Alegria</option>
@@ -403,6 +402,10 @@
             },
             abrirStore(store, modo){
                 return db.transaction(store, modo).objectStore(store);
+            },
+            indigps(){
+                document.oncontextmenu = function(){return false;};
+                alertify.alert(`El filtro de ubicación accede a tu ubicación actual siempre y cuando hayas dado el permiso requerido.`)
             },
            
         },

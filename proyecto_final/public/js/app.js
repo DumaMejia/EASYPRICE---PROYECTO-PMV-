@@ -5589,6 +5589,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -5606,8 +5607,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         longitude: '',
         telefono: '',
         correo: '',
-        tipo: '',
-        resultados: ''
+        tipo: ''
       }
     };
   },
@@ -5750,7 +5750,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.comercios = data.result.filter(function (comercio) {
           return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.direccion.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
-        _this4.comercio.resultados = _this4.comercio.length;
+        document.getElementById("res").innerHTML = "Resultados: " + _this4.comercios.length;
       };
 
       data.onerror = function (e) {
@@ -5770,7 +5770,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.comercio.tipo = '';
       document.getElementById("map").style.display = 'none';
       this.codeList();
-      this.resultTable();
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -5791,9 +5790,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     codeList: function codeList() {
       this.obtenerDatos();
       this.comercio.codigo = this.comercios.length + 1;
-    },
-    resultTable: function resultTable() {
-      document.getElementById("res").innerHTML = "Resultados: " + this.comercios.length;
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -5813,7 +5809,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -6225,6 +6220,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
+    },
+    indigps: function indigps() {
+      document.oncontextmenu = function () {
+        return false;
+      };
+
+      alertify.alert("El filtro de ubicaci\xF3n accede a tu ubicaci\xF3n actual siempre y cuando hayas dado el permiso requerido.");
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -6252,6 +6254,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -6452,7 +6458,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     eliminarProducto: function eliminarProducto(producto) {
       var _this3 = this;
 
-      if (confirm("Esta seguro de eliminar el producto ".concat(producto.codigo, "?"))) {
+      if (confirm("\xBFEsta seguro de eliminar producto ".concat(producto.nombre, "?"))) {
         producto.accion = 'eliminar';
         var store = this.abrirStore('producto', 'readwrite'),
             query = store["delete"](producto.idProducto),
@@ -6532,6 +6538,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.productos = data.result.filter(function (producto) {
           return producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
+        document.getElementById("res1").innerHTML = "Resultados: " + _this4.productos.length;
       };
 
       data.onerror = function (e) {
@@ -6621,8 +6628,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dataTipo.onerror = function (e) {
         alertify.error("Error al obtener los tipos ".concat(e.target.error));
       };
-
-      this.resultTable();
     },
     nuevoProducto: function nuevoProducto() {
       this.producto.accion = 'nuevo';
@@ -6647,7 +6652,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.producto.codigo = this.productos.length + 1;
     },
     resultTable: function resultTable() {
-      document.getElementById("res").innerHTML = "Resultados: " + this.productos.length;
+      var resultabla = document.getElementById("tabla");
+      var filas = resultabla.getElementsByTagName("tr");
+      document.getElementById("res").innerText = "Resultados: " + (filas.length + 1);
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -6678,6 +6685,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -6798,11 +6809,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
                     //actualizar el id del tipo que se genero en el servidor con laravel y mysql
-                    alertify.success("Tipo procesado con exito");
+                    alertify.success("Categoria procesada con exito");
                   }
 
                   if (tipo.accion == 'modificar') {
-                    alertify.success("Tipo procesado con exito");
+                    alertify.success("Categoria procesada con exito");
                   }
                 })["catch"](function (err) {});
 
@@ -6825,11 +6836,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this2.obtenerDatos();
 
-        _this2.tipo.msg = 'Tipo procesado con exito';
+        _this2.tipo.msg = 'Categoria procesada con exito';
       };
 
       query.onerror = function (e) {
-        alertify.error("Error al procesar el tipo ".concat(e.target.error));
+        alertify.error("Error al procesar la categoria ".concat(e.target.error));
       };
     },
     buscandoTipo: function buscandoTipo() {
@@ -6838,7 +6849,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     eliminarTipo: function eliminarTipo(tipo) {
       var _this3 = this;
 
-      if (confirm("Esta seguro de eliminar el tipo ".concat(tipo.codigo, "?"))) {
+      if (confirm("\xBFEsta seguro de eliminar la categoria ".concat(tipo.nombre, "?"))) {
         tipo.accion = 'eliminar';
         var store = this.abrirStore('tipo', 'readwrite'),
             query = store["delete"](tipo.idTipo),
@@ -6851,11 +6862,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           _this3.obtenerDatos();
 
-          alertify.success('Tipo eliminado con exito');
+          alertify.success('Categoria eliminada con exito');
         };
 
         query.onerror = function (e) {
-          alertify.error("Error al eliminar el tipo ".concat(e.target.error));
+          alertify.error("Error al eliminar la categoria ".concat(e.target.error));
         };
       }
 
@@ -6903,24 +6914,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               };
 
               query.onerror = function (e) {
-                console.log("Error al guardar la tipo ".concat(e.target.error));
+                console.log("Error al guardar la categoria ".concat(e.target.error));
               };
             });
           })["catch"](function (err) {
-            alertify.error("Error al guardar el tipo ".concat(err));
+            alertify.error("Error al guardar el categoria ".concat(err));
           });
         }
 
         _this4.tipos = data.result.filter(function (tipo) {
           return tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
+        document.getElementById("res2").innerHTML = "Resultados: " + _this4.tipos.length;
       };
 
       data.onerror = function (e) {
-        alertify.error("Error al obtener los tipos ".concat(e.target.error));
+        alertify.error("Error al obtener los categoria ".concat(e.target.error));
       };
-
-      this.resultTable();
     },
     nuevoTipo: function nuevoTipo() {
       this.tipo.accion = 'nuevo';
@@ -6932,9 +6942,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     codeList: function codeList() {
       this.obtenerDatos();
       this.tipo.codigo = this.tipos.length + 1;
-    },
-    resultTable: function resultTable() {
-      document.getElementById("res").innerHTML = "Resultados: " + this.tipos.length;
     },
     abrirStore: function abrirStore(store, modo) {
       return db.transaction(store, modo).objectStore(store);
@@ -7057,7 +7064,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
     abrirForm: function abrirForm(form) {
       this.forms[form].mostrar = !this.forms[form].mostrar;
       this.$refs[form].obtenerDatos();
-      this.$refs[form].resultTable();
     },
     abrir: function abrir(form) {
       this.forms[form].mostrar = !this.forms[form].mostrar;
@@ -32083,7 +32089,7 @@ var render = function () {
     _vm._v(" "),
     _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
       _c("div", { staticClass: "card-header text-white bg-warning" }, [
-        _vm._v("\n            Registro de Comercios\n            "),
+        _vm._v("\n            Administracion de Comercios\n            "),
         _c("button", {
           staticClass: "btn-close text-end",
           attrs: { type: "button" },
@@ -32402,7 +32408,7 @@ var render = function () {
                             expression: "comercio.tipo",
                           },
                         ],
-                        staticClass: "form-select form-select-sm",
+                        staticClass: "form-select",
                         staticStyle: { width: "300px" },
                         attrs: { "aria-label": ".form-select-sm example" },
                         on: {
@@ -32427,15 +32433,15 @@ var render = function () {
                       },
                       [
                         _c("option", { attrs: { selected: "" } }, [
-                          _vm._v("Seleccionar Tipo"),
+                          _vm._v("Selecciona Tipo De Empresa"),
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "Pequeña empresa" } }, [
-                          _vm._v("Pequeña empresa"),
+                        _c("option", { attrs: { value: "Pequeña Empresa" } }, [
+                          _vm._v("Pequeña Empresa"),
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "Mediana empresa" } }, [
-                          _vm._v("Mediana empresa"),
+                        _c("option", { attrs: { value: "Mediana Empresa" } }, [
+                          _vm._v("Mediana Empresa"),
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "Gran Empresa" } }, [
@@ -32555,7 +32561,6 @@ var render = function () {
               _c("thead", [
                 _c("tr", [
                   _c("th", { attrs: { colspan: "8" } }, [
-                    _vm._v("\n                            Buscar: "),
                     _c("input", {
                       directives: [
                         {
@@ -32566,7 +32571,11 @@ var render = function () {
                         },
                       ],
                       staticClass: "form-control",
-                      attrs: { placeholder: "buscar aqui", type: "text" },
+                      attrs: {
+                        placeholder: "Buscar",
+                        "aria-label": "Buscar",
+                        type: "text",
+                      },
                       domProps: { value: _vm.buscar },
                       on: {
                         keyup: _vm.buscandoComercio,
@@ -32578,30 +32587,14 @@ var render = function () {
                         },
                       },
                     }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col col-md-12", attrs: { id: "res" } },
+                      [_vm._v("Resultados: ")]
+                    ),
                   ]),
                 ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.resultados,
-                      expression: "resultados",
-                    },
-                  ],
-                  staticClass: "col col-md-12",
-                  attrs: { id: "res" },
-                  domProps: { value: _vm.resultados },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.resultados = $event.target.value
-                    },
-                  },
-                }),
                 _vm._v(" "),
                 _vm._m(2),
               ]),
@@ -32798,98 +32791,10 @@ var render = function () {
                     },
                   ],
                   staticClass: "form-select btn-warning",
-                  attrs: { "aria-label": "Default select example" },
-                  on: {
-                    click: _vm.mapCenter,
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.depmun,
-                        "valor",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
+                  attrs: {
+                    placeholder: "Seleccione Un Departamento",
+                    "aria-label": "Default select example",
                   },
-                },
-                [
-                  _vm._v(
-                    "\n                    Departamentos\n                    "
-                  ),
-                  _c("option", { attrs: { selected: "" } }, [
-                    _vm._v("Seleciona un departamento"),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "ahuachapan" },
-                    },
-                    [_vm._v("Ahuachapan")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "san salvador" },
-                    },
-                    [_vm._v("San Salvador")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "usulutan" },
-                    },
-                    [_vm._v("Usulutan")]
-                  ),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn-group" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-info",
-                  attrs: { type: "button" },
-                  on: { click: _vm.mapCentergps },
-                },
-                [
-                  _c("i", { staticClass: "fa fa-google mr-2" }),
-                  _vm._v(" "),
-                  _c("img", {
-                    attrs: { src: "image/gps2.png", width: "20", height: "20" },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn-group" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.depmun.valor,
-                      expression: "depmun.valor",
-                    },
-                  ],
-                  staticClass: "form-select  btn-warning",
-                  attrs: { "aria-label": "Default select example" },
                   on: {
                     click: _vm.mapCenter,
                     change: function ($event) {
@@ -32915,7 +32820,100 @@ var render = function () {
                   _c(
                     "option",
                     { staticClass: "btn btn-light", attrs: { selected: "" } },
-                    [_vm._v("Selecciona un municipio")]
+                    [_vm._v("Seleccione un Departamento")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "ahuachapan" },
+                    },
+                    [_vm._v("Ahuachapan")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "san salvador" },
+                    },
+                    [_vm._v("San Salvador")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { value: "usulutan" },
+                    },
+                    [_vm._v("Usulután")]
+                  ),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-info",
+                  attrs: { type: "button" },
+                  on: { contextmenu: _vm.indigps, click: _vm.mapCentergps },
+                },
+                [
+                  _c("i", { staticClass: "fa fa-google mr-2" }),
+                  _vm._v(" "),
+                  _c("img", {
+                    attrs: { src: "image/gps2.png", width: "20", height: "20" },
+                  }),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.depmun.valor,
+                      expression: "depmun.valor",
+                    },
+                  ],
+                  staticClass: "form-select  btn-warning",
+                  attrs: {
+                    placeholder: "Seleccione Municipio",
+                    "aria-label": "Default select example",
+                  },
+                  on: {
+                    click: _vm.mapCenter,
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.depmun,
+                        "valor",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
+                [
+                  _c(
+                    "option",
+                    { staticClass: "btn btn-light", attrs: { selected: "" } },
+                    [_vm._v("Seleccione Un Municipio")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -33690,107 +33688,114 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-light table-striped" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("td", { attrs: { colspan: "8" } }, [
-                  _vm._v("\n                            Buscar: "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.buscar,
-                        expression: "buscar",
+          _c(
+            "table",
+            {
+              staticClass: "table table-light table-striped",
+              attrs: { id: "tabla" },
+            },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { colspan: "8" } }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.buscar,
+                          expression: "buscar",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        title: "Introduzca el texto a buscar",
+                        placeholder: "Buscar",
+                        type: "text",
                       },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Introduzca el texto a buscar",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.buscar },
-                    on: {
-                      keyup: _vm.buscandoProducto,
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.buscar = $event.target.value
+                      domProps: { value: _vm.buscar },
+                      on: {
+                        keyup: _vm.buscandoProducto,
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.buscar = $event.target.value
+                        },
                       },
-                    },
-                  }),
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col col-md-12", attrs: { id: "res1" } },
+                      [_vm._v("Resultados: ")]
+                    ),
+                  ]),
                 ]),
+                _vm._v(" "),
+                _vm._m(1),
               ]),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "col col-md-12", attrs: { id: "res" } },
-                [_vm._v("Resultados: ")]
-              ),
-              _vm._v(" "),
-              _vm._m(1),
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.productos, function (item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.idProducto,
-                    on: {
-                      click: function ($event) {
-                        return _vm.modificarProducto(item)
+                "tbody",
+                _vm._l(_vm.productos, function (item) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.idProducto,
+                      on: {
+                        click: function ($event) {
+                          return _vm.modificarProducto(item)
+                        },
                       },
                     },
-                  },
-                  [
-                    _c("td", [_vm._v(_vm._s(item.codigo))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.nombre))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.comercio.label))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.precio))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.tipo.label))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.eliminarProducto(item)
-                            },
-                          },
-                        },
-                        [_vm._v("Eliminar")]
-                      ),
+                    [
+                      _c("td", [_vm._v(_vm._s(item.codigo))]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.modificarProducto(item)
+                      _c("td", [_vm._v(_vm._s(item.nombre))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.comercio.label))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.precio))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.tipo.label))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.eliminarProducto(item)
+                              },
                             },
                           },
-                        },
-                        [_vm._v("Modificar")]
-                      ),
-                    ]),
-                  ]
-                )
-              }),
-              0
-            ),
-          ]),
+                          [_vm._v("Eliminar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.modificarProducto(item)
+                              },
+                            },
+                          },
+                          [_vm._v("Modificar")]
+                        ),
+                      ]),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ]
+          ),
         ]),
       ]
     ),
@@ -33801,19 +33806,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row m-2" }, [
-      _c("div", { staticClass: "col col-md-5 text-center" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Guardar")]
-        ),
+    return _c("div", { staticClass: "row p-1" }, [
+      _c("div", { staticClass: "col col-md-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col col-md-2" }, [
+        _c("input", {
+          staticClass: "btn btn-warning",
+          attrs: { type: "reset", value: "Nuevo" },
+        }),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-warning", attrs: { type: "reset" } },
-          [_vm._v("Nuevo")]
-        ),
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Guardar" },
+        }),
       ]),
     ])
   },
@@ -33862,7 +33867,7 @@ var render = function () {
     _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
       _c("div", { staticClass: "card-header text-white bg-warning" }, [
         _vm._v(
-          "\n                        Administracion de Tipos\n                        "
+          "\n                        Administracion de Categorias\n                        "
         ),
         _c("button", {
           staticClass: "btn-close text-end",
@@ -33936,6 +33941,7 @@ var render = function () {
                 staticClass: "form-control",
                 attrs: {
                   title: "Ingrese el nombre",
+                  placeholder: "Ejemplo: Bebidas",
                   pattern: "[A-Za-zñÑáéíóúü ]{3,75}",
                   required: "",
                   type: "text",
@@ -33966,105 +33972,114 @@ var render = function () {
       },
       [
         _c("div", { staticClass: "card-header text-white bg-warning" }, [
-          _vm._v("\n            Busqueda de Tipo \n            \n        "),
+          _vm._v(
+            "\n            Busqueda de Categorias \n            \n        "
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-light table-striped" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("td", { attrs: { colspan: "8" } }, [
-                  _vm._v("\n                            Buscar: "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.buscar,
-                        expression: "buscar",
+          _c(
+            "table",
+            {
+              staticClass: "table table-light table-striped",
+              attrs: { id: "tabla" },
+            },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { colspan: "8" } }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.buscar,
+                          expression: "buscar",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        title: "Introduzca el texto a buscar",
+                        placeholder: "Buscar",
+                        type: "text",
                       },
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      title: "Introduzca el texto a buscar",
-                      type: "text",
-                    },
-                    domProps: { value: _vm.buscar },
-                    on: {
-                      keyup: _vm.buscandoTipo,
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.buscar = $event.target.value
+                      domProps: { value: _vm.buscar },
+                      on: {
+                        keyup: _vm.buscandoTipo,
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.buscar = $event.target.value
+                        },
                       },
-                    },
-                  }),
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col col-md-12", attrs: { id: "res2" } },
+                      [_vm._v("Resultados: ")]
+                    ),
+                  ]),
                 ]),
+                _vm._v(" "),
+                _vm._m(1),
               ]),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "col col-md-12", attrs: { id: "res" } },
-                [_vm._v("Resultados: ")]
-              ),
-              _vm._v(" "),
-              _vm._m(1),
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.tipos, function (item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.idTipo,
-                    on: {
-                      click: function ($event) {
-                        return _vm.modificarTipo(item)
+                "tbody",
+                _vm._l(_vm.tipos, function (item) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.idTipo,
+                      on: {
+                        click: function ($event) {
+                          return _vm.modificarTipo(item)
+                        },
                       },
                     },
-                  },
-                  [
-                    _c("td", [_vm._v(_vm._s(item.codigo))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.nombre))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.eliminarTipo(item)
-                            },
-                          },
-                        },
-                        [_vm._v("Eliminar")]
-                      ),
+                    [
+                      _c("td", [_vm._v(_vm._s(item.codigo))]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.modificarTipo(item)
+                      _c("td", [_vm._v(_vm._s(item.nombre))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.eliminarTipo(item)
+                              },
                             },
                           },
-                        },
-                        [_vm._v("Modificar")]
-                      ),
-                    ]),
-                  ]
-                )
-              }),
-              0
-            ),
-          ]),
+                          [_vm._v("Eliminar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.modificarTipo(item)
+                              },
+                            },
+                          },
+                          [_vm._v("Modificar")]
+                        ),
+                      ]),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ]
+          ),
         ]),
       ]
     ),
@@ -34075,8 +34090,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row m-2" }, [
-      _c("div", { staticClass: "col col-md-5 text-center" }, [
+    return _c("div", { staticClass: "row p-1" }, [
+      _c("div", { staticClass: "col col-md-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col col-md-2" }, [
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },

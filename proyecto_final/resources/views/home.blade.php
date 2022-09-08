@@ -98,6 +98,9 @@
             if("{{ Auth::user()->name }}"!='admin'){
                         document.getElementById('admi').style.display = 'none';
                     }
+            window.onload = function cargarcomentarios(){
+                alertify.alert('Bienvenido a EASYPRICE. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones');
+            };
         </script>
 
     </body>

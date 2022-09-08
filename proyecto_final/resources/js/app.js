@@ -94,7 +94,7 @@ const app = new Vue({
         abrirForm(form){
             this.forms[form].mostrar = !this.forms[form].mostrar;
             this.$refs[form].obtenerDatos();
-            this.$refs[form].resultTable();
+            
         },
         abrir(form){
             this.forms[form].mostrar = !this.forms[form].mostrar;
