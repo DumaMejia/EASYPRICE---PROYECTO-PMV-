@@ -88,6 +88,7 @@
          data:()=>{
             return{
         tipos: [],
+        productos: [],
         buscar: '',
          tipo: {
             accion: 'nuevo',
@@ -139,7 +140,16 @@
                 this.obtenerDatos(this.buscar);
             },
             eliminarTipo(tipo){
-                if( confirm(`¿Esta seguro de eliminar la categoria ${tipo.nombre}?`) ){
+                let var1 = 0;
+                this.productos.forEach(productos =>{
+                   if(tipo.id == productos.idCategoria){
+
+                    var1 = var1 +1;
+                   } 
+                });
+                if(var1 == 0){
+                    if( confirm(`¿Esta seguro de eliminar la categoria ${tipo.nombre}?`) ){
+                    
                     tipo.accion = 'eliminar';
                     let store = this.abrirStore('tipo', 'readwrite'),
                         query = store.delete(tipo.idTipo),
@@ -155,6 +165,10 @@
                         alertify.error(`Error al eliminar la categoria ${e.target.error}`);
                     };
                 }
+                }else{
+                    alertify.error(`No se puede eliminar la categoría ${tipo.nombre} ya que existen ` + var1 + ` Productos relacionados`)
+                }
+                
                 this.nuevoTipo();
             },
             modificarTipo(datos){
@@ -162,6 +176,9 @@
                 this.tipo.accion = 'modificar';
             },
             guardarTipo(){
+
+                
+
                 let metodo = 'PUT',
                     url = `/tipo/${this.tipo.id}`;
                 if(this.tipo.accion=="nuevo"){
@@ -203,6 +220,41 @@
                 };
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los categoria ${e.target.error}`);
+                }; 
+
+                //Productos
+
+                let storeProductos = this.abrirStore('producto', 'readonly'),
+                    datap = storeProductos.getAll();
+                datap.onsuccess = e=>{
+                    if( datap.result.length<=0 ){
+                        fetch(`producto`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(datap=>{
+                                this.productos = datap;
+                                datap.map(producto=>{
+                                    let storeProductos = this.abrirStore('producto', 'readwrite'),
+                                        query = storeProductos.put(producto);
+                                    query.onsuccess = e=>{
+                                        console.log(`Producto ${producto.codigo} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar la producto ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                alertify.error(`Error al guardar el producto ${err}`);
+                            });
+                    }
+                    let valor1 = "";
+                    this.productos = datap.result.filter(producto=>producto.ncategoria.toLowerCase().indexOf(valor1.toLowerCase())>-1);
+                    
+                    
+                };
+                data.onerror = e=>{
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
                 }; 
                 
             },

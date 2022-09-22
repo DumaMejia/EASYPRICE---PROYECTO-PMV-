@@ -69,6 +69,7 @@ Vue.component('producto-component', require('./components/ProductoComponent.vue'
 Vue.component('tipo-component', require('./components/TipoComponent.vue').default);
 Vue.component('mapa-component', require('./components/MapaComponent.vue').default);
 Vue.component('chat-component', require('./components/ChatComponent.vue').default);
+Vue.component('basico-component', require('./components/BasicoComponent.vue').default);
 Vue.component('v-select-comercios', vSelect);
 Vue.component('v-select-tipos', vSelect);
 Vue.use(VueGeolocation);
@@ -88,6 +89,7 @@ const app = new Vue({
             tipo:{mostrar:false},
             mapa:{mostrar:false},
             chat:{mostrar:false},
+            basico:{mostrar:false},
         }
     },
     methods:{
@@ -113,6 +115,7 @@ const app = new Vue({
                let tblcomercio = db.createObjectStore('comercio', {keyPath:'idComercio'});
                let tblproducto = db.createObjectStore('producto', {keyPath:'idProducto'});
                 let tbltipo = db.createObjectStore('tipo', {keyPath:'idTipo'});
+                let tblbasico = db.createObjectStore('basico', {keyPath:'idBase'});
 
                 tblcomercio.createIndex('idComercio', 'idComercio', {unique:true});
                 tblcomercio.createIndex('codigo', 'codigo', {unique:false});
@@ -123,6 +126,9 @@ const app = new Vue({
 
                 tbltipo.createIndex('idTipo', 'idTipo', {unique:true});
                 tbltipo.createIndex('codigo', 'codigo', {unique:false});
+
+                tblbasico.createIndex('idBase', 'idBase', {unique:true});
+                tblbasico.createIndex('codigo', 'codigo', {unique:false});
             };
             indexDb.onsuccess = e=>{
                 db = e.target.result;

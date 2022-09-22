@@ -4,6 +4,7 @@ use App\Http\Controllers\Comercios;
 use App\Http\Controllers\Productos;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Tipos;
+use App\Http\Controllers\Basicos;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,6 +45,7 @@ Route::apiResources([
     'comercio'=>Comercios::class,
     'producto'=>Productos::class,
     'tipo'=>Tipos::class,
+    'basico'=>Basicos::class,
 ]);
 
 

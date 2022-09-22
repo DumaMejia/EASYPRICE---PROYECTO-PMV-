@@ -85,15 +85,12 @@
                         <div class="col col-md-2" >
                             <input class="btn btn-warning" type="reset" value="Nuevo">
                         </div>
-                        <div class="col col-md-2">
-                            <input class="btn btn-outline-primary" type="button" @click="displaymap" value="Mapa" style="width: 193px">
-                        </div>
                             
                        
                     </div>
                     </div>
                     
-                    <div class="container m-3" id="map" style="width: 700px; height: 450px; left: 5px; top: 1px; display : none" >
+                    <div class="container m-3" id="map" style="width: 700px; height: 450px; left: 5px; top: 1px;" >
                         <GmapMap 
                     :center="{lat:13.343565797622999,lng:-88.43976983311296}"
                     :zoom="14"
@@ -172,6 +169,7 @@
             return {
                 buscar:'',
                 comercios:[],
+                productos: [],
                 comercio:{
                     accion : 'nuevo',
                     id : 0,
@@ -227,7 +225,16 @@
                 this.obtenerDatos(this.buscar);
             },
             eliminarComercio(comercio){
-                if( confirm(`Esta seguro de eliminar el comercio ${comercio.nombre}?`) ){
+                let var1 = 0;
+                this.productos.forEach(productos =>{
+                   if(comercio.id == productos.idComercio){
+
+                    var1 = var1 +1;
+                   } 
+                });
+                if(var1 == 0){
+
+                    if( confirm(`Esta seguro de eliminar el comercio ${comercio.nombre}?`) ){
                     comercio.accion = 'eliminar';
                     let store = this.abrirStore('comercio', 'readwrite'),
                         query = store.delete(comercio.idComercio),
@@ -243,6 +250,11 @@
                         alertify.error = `Error al eliminar el comercio ${e.target.error}`;
                     };
                 }
+
+                }else{
+                    alertify.error(`No se puede eliminar el comercio ${comercio.nombre} ya que existen ` + var1 + ` Productos relacionados`)
+                }
+                
                 this.nuevoComercio();
             },
             modificarComercio(datos){
@@ -292,6 +304,41 @@
                 data.onerror = e=>{
                     alertify.error = `Error al obtener los comercios ${e.target.error}`;
                 };
+
+                //Productos
+
+                let storeProductos = this.abrirStore('producto', 'readonly'),
+                    datap = storeProductos.getAll();
+                datap.onsuccess = e=>{
+                    if( datap.result.length<=0 ){
+                        fetch(`producto`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(datap=>{
+                                this.productos = datap;
+                                datap.map(producto=>{
+                                    let storeProductos = this.abrirStore('producto', 'readwrite'),
+                                        query = storeProductos.put(producto);
+                                    query.onsuccess = e=>{
+                                        console.log(`Producto ${producto.codigo} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar la producto ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                alertify.error(`Error al guardar el producto ${err}`);
+                            });
+                    }
+                    let valor1 = "";
+                    this.productos = datap.result.filter(producto=>producto.ncategoria.toLowerCase().indexOf(valor1.toLowerCase())>-1);
+                    
+                    
+                };
+                data.onerror = e=>{
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
+                };
                 
             },
             nuevoComercio(){
@@ -305,7 +352,6 @@
                 this.comercio.telefono = '';
                 this.comercio.correo = '';
                 this.comercio.tipo = '';
-                document.getElementById("map").style.display = 'none';
                 this.codeList();
                 
             },
@@ -316,13 +362,7 @@
                 this.comercio.latitude = e.latLng.lat();
                 this.comercio.longitude = e.latLng.lng();
             },
-            displaymap() {
-                if(document.getElementById("map").style.display == ''){
-                    document.getElementById("map").style.display = 'none';
-                }else{
-                    document.getElementById("map").style.display = '';
-                };   
-            },
+            
             codeList() {
                 this.obtenerDatos();
                 this.comercio.codigo = this.comercios.length + 1;

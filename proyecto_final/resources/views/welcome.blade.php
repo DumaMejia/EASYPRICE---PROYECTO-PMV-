@@ -37,6 +37,7 @@
                             <li><a class="dropdown-item" href="{{ url('/') }}">Inicio</a></li>
                             <li><a @click="abrirForm('comercio')" class="dropdown-item" href="#">Comercio</a></li>
                             <li><a @click="abrirForm('producto')" class="dropdown-item" href="#">Productos</a></li>
+                            <li><a @click="abrirForm('basico')" class="dropdown-item" href="#">Productos Base</a></li>
                             <li><a @click="abrirForm('tipo')" class="dropdown-item" href="#">Categorias de Producto</a></li>
                             
                             </ul>
@@ -91,6 +92,7 @@
         <comercio-component v-bind:form="forms" ref="comercio" v-show="forms['comercio'].mostrar" ></comercio-component>
         <producto-component v-bind:form="forms" ref="producto" v-show="forms['producto'].mostrar" ></producto-component>
         <tipo-component v-bind:form="forms" ref="tipo" v-show="forms['tipo'].mostrar" ></tipo-component>
+        <basico-component v-bind:form="forms" ref="basico" v-show="forms['basico'].mostrar" ></basico-component>
         
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.min.js"></script>

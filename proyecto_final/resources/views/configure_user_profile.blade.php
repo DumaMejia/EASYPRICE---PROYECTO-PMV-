@@ -70,7 +70,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Opciones</a>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"  href="{{ route('NewPassword') }}">Usuario</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('NewPassword') }}">Mi Cuenta</a></li>
                             <li><a class="dropdown-item" href="#">Permisos</a></li>
                             <li><a class="dropdown-item" href="#">Notificaciónes</a></li>
                             </ul>
@@ -81,10 +81,12 @@
         </nav>
 
 <!--- Mensajes -->
+
 <h2 class="text-center">Actualizar mis datos <hr></h2>
   <div class="row justify-content-center">
       <div class="col-md-8">
-        <form action="{{route('changePassword')}}" method="POST" class="needs-validation" novalidate>
+      
+                <form action="{{route('changePassword')}}" method="POST"  class="needs-validation" novalidate>
             @csrf 
 
             <div class="row mb-3">
@@ -100,7 +102,7 @@
               </div>    
             <div class="row mb-3">
               <div class="form-group mt-3">
-                  <label for="password_actual">Clave Actual</label>
+                  <label for="password_actual">Contraseña Actual</label>
                   <input type="password" name="password_actual" class="form-control @error('password_actual') is-invalid @enderror" required>
                     @error('password_actual')
                         <span class="invalid-feedback" role="alert">
@@ -111,7 +113,7 @@
             </div>
             <div class="row mb-3">
                 <div class="form-group mt-3">
-                    <label for="new_password ">Nueva Clave</label>
+                    <label for="new_password ">Nueva Contraseña</label>
                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -122,7 +124,7 @@
             </div>
             <div class="row mb-3">
                 <div class="form-group mt-3">
-                    <label for="confirm_password">Confirmar nueva Clave</label>
+                    <label for="confirm_password">Confirmar Nueva Contraseña</label>
                     <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror"required>
                     @error('confirm_password')
                         <span class="invalid-feedback" role="alert">
@@ -134,11 +136,21 @@
 
             <div class="row text-center mb-4 mt-5">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" id="formSubmit">Guardar Cambios</button>
-                    <a href="/home" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-outline-primary" id="formSubmit">
+
+                    <i class="fa fa-google mr-2"></i>
+                 <img  src="image/save.png" width="20" height="20">
+                  
+                </button>
+
+                    <a href="/home" class="btn btn-outline-danger" ><img  src="image/cancel3.png" width="20" height="20"></a>
                 </div>
             </div>
         </form>
+
+                
+        
+        
     </div>
   </div>
 </div>

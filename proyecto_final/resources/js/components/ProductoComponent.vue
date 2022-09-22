@@ -12,57 +12,125 @@
                         Administracion de Productos
                         <button type="button" class="btn-close text-end" @click="cerrarForm"></button>
                  </div>
-                <form @submit.prevent="guardarProducto" @reset.prevent="nuevoProducto" method="post" id="frmMaterias">
-                
-                   
+                <form @submit.prevent="guardarProducto" @reset.prevent="nuevoProducto" method="post" id="frmMaterias" >
+                    <div class="row p-1">
+                        <div class="card" style="width: 850px; height: 600px;">
                     
 
                         <div class="row p-1">
                         <div class="col col-md-2">Codigo:</div>
                         <div class="col col-md-3">
-                            <input disabled title="Ingrese el nombre" v-model="producto.codigo"  required type="text" class="form-control">
+                            <input disabled title="Ingrese el nombre" v-model="producto.codigo"  required type="text" class="form-control" style="width : 300px">
                         </div>
                         </div>
 
                         <div class="row p-1">
                         <div class="col col-md-2">Nombre:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="producto.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                            <input title="Ingrese el nombre" v-model="producto.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control" style="width : 300px" disabled>
                         </div>
                         </div>
                         
                         <div class="row p-1">
                                 <div class="col col-md-2">Comercio:</div>
                                 <div class="col col-md-3">
-                                    <v-select-comercios title="Seleccione el comercio" v-model="producto.comercio" :options="comercios" required class="form-control"/>
+                                    <v-select-comercios title="Seleccione el comercio" v-model="producto.comercio" :options="comercios" required class="form-control" style="width : 300px"/>
                                 </div>
                             </div>
 
                         <div class="row p-1">
-                        <div class="col col-md-2">Precio:</div>
+                        <div class="col col-md-2">Precio Base:</div>
                         <div class="col col-md-3">
-                            <input title="Ingrese el nombre" v-model="producto.precio" required type="text" class="form-control">
+                            <input title="Ingrese el nombre" v-model="producto.precio" required type="number" step="0.01" class="form-control" style="width : 300px">
                         </div>
                         </div>
 
                         <div class="row p-1">
-                                <div class="col col-md-2">Categoria:</div>
-                                <div class="col col-md-3">
-                                    <v-select-tipos title="Seleccione la categoria" v-model="producto.tipo" :options="tipos" required class="form-control"/>
-                                </div>
-                            </div>
+                        <div class="col col-md-2">Precio Especial:</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese el nombre" v-model="producto.precioe" placeholder="Menor a precio base" type="number" step="0.01" class="form-control" style="width : 300px">
+                        </div>
+                        </div>
+
+                        <div class="row p-1">
+                        <div class="col col-md-2">Fecha Inicio (Precio Especial):</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese el nombre" v-model="producto.fechai" placeholder="AA-MM-DD" type="date"  class="form-control" style="width : 300px">
+                        </div>
+                        </div>
+
+                        <div class="row p-1">
+                        <div class="col col-md-2">Fecha Final (Precio Especial):</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese el nombre" v-model="producto.fechaf" placeholder="AA-MM-DD" type="date" class="form-control" style="width : 300px">
+                        </div>
+                        </div>
+
+                        
+                        <div class="row p-1">
+                        <div class="col col-md-2">Categoria:</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese la categoria" v-model="producto.ncategoria"  required type="text" class="form-control" style="width : 300px" disabled>
+                        </div>
+                        </div>
 
                         <div class="row p-1">
                             <div class="col col-md-2" >
-                            
+                            <input class="btn btn-warning" type="reset" value="Nuevo">
                         </div>
                         <div class="col col-md-2" >
-                            <input class="btn btn-warning" type="reset" value="Nuevo">
+                            
                             <input class="btn btn-primary" type="submit" value="Guardar">
                         </div>
                         </div>
+                    </div>
+
+                        <div class="container m-3" id="map" style="width: 500px; height: 350px; left: 5px;" >
+                        
+
+
+
+                            <div class="card-body">
+                        <table class="table table-light table-striped" id="tabla">
+                            <thead>
+                                <tr>
+                                    <th colspan="8">
+                                    <input title="Introduzca el texto a buscar" placeholder="Buscar" @keyup="buscandoProductoBase" v-model="buscar1" class="form-control" type="text">
+                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                    </th>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Categoria</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  v-for="item in basicos" :key="item.idBase">
+                                    <td>{{item.codigo}}</td>
+                                    <td>{{item.nombre}}</td>
+                                    <td>{{item.precio}}</td>
+                                    <td>{{item.tipo.label}}</td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-success" @click="obtenerProductobase(item)">Insertar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                     </div>
+
+
+                        
+                        
+                        </div>
+
+                        
                     
-                
+                    </div>
             </form>
         </div>
     
@@ -86,7 +154,11 @@
                         <th>Nombre</th>
                         <th>Comercio</th>
                         <th>Precio</th>
+                        <th>Precio Especial</th>
+                        <th>Fecha Inicio (Precio Especial)</th>
+                        <th>Fecha Final (Precio Especial)</th> 
                         <th>Categoria</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -95,7 +167,10 @@
                         <td>{{item.nombre}}</td>
                         <td>{{item.comercio.label}}</td>
                         <td>{{item.precio}}</td>
-                        <td>{{item.tipo.label}}</td>
+                        <td>{{item.precioe}}</td>
+                        <td>{{item.fechai}}</td>
+                        <td>{{item.fechaf}}</td>
+                        <td>{{item.ncategoria}}</td>
                         <td>
                             <button type="button" class="btn btn-danger" @click="eliminarProducto(item)">Eliminar</button>
                             <button type="button" class="btn btn-success" @click="modificarProducto(item)">Modificar</button>
@@ -116,13 +191,15 @@
             return{
         productos: [],
         comercios: [],
-        tipos: [],
+        basicos: [],
         buscar: '',
+        buscar1: '',
          producto: {
             accion: 'nuevo',
             id: 0,
             idProducto:'',
             codigo:'',
+            idBase:'',
             nombre:'',
             idComercio:'',
             nombrecomercio: '',
@@ -130,11 +207,11 @@
                 id:'',
                 label:'',
                 },
-            tipo:{
-                id:'',
-                label:'',
-                },
+            preciosu:'',
             precio:'',
+            precioe:'',
+            fechai:'',
+            fechaf: '',
             idCategoria:'',
             ncategoria:'',
             }
@@ -179,6 +256,9 @@
             buscandoProducto(){
                 this.obtenerDatos(this.buscar);
             },
+            buscandoProductoBase(){
+                this.buscarBase(this.buscar1);
+            },
             eliminarProducto(producto){
                 if( confirm(`¿Esta seguro de eliminar producto ${producto.nombre}?`) ){
                     producto.accion = 'eliminar';
@@ -202,21 +282,61 @@
                 this.producto = JSON.parse(JSON.stringify(datos));
                 this.producto.accion = 'modificar';
             },
+            obtenerProductobase(datos){
+
+                this.nuevoProducto();
+
+                this.producto.idBase = datos.idBase;
+                this.producto.ncategoria = datos.tipo.label;
+                this.producto.idCategoria = datos.tipo.id;
+                this.producto.nombre = datos.nombre;
+               // this.producto = JSON.parse(JSON.stringify(datos));
+                
+            },
             guardarProducto(){
-                let metodo = 'PUT',
-                    url = `/producto/${this.producto.id}`;
-                if(this.producto.accion=="nuevo"){
-                    this.producto.idProducto = generarIdUnicoFecha();
-                    metodo = 'POST';
-                    url = '/producto';
+                let fecha = new Date();
+                fecha = fecha.toISOString();
+                fecha = fecha.slice(0, 10)
+                if(this.producto.precio>this.producto.precioe){
+                    if( this.producto.fechai<this.producto.fechaf || this.producto.fechai=="" & this.producto.fechaf == ""){
+                        if(this.producto.fechai>=fecha){
+
+
+                            let metodo = 'PUT',
+                            url = `/producto/${this.producto.id}`;
+                        if(this.producto.accion=="nuevo"){
+                            this.producto.idProducto = generarIdUnicoFecha();
+                            metodo = 'POST';
+                            url = '/producto';
+                        }
+                        this.producto.idComercio = this.producto.comercio.id;
+                        this.producto.nombrecomercio = this.producto.comercio.label;
+                        let producto = JSON.parse(JSON.stringify(this.producto));
+                        this.sincronizarDatosServidor(producto, metodo, url);
+                        this.insertarLocal(producto);
+
+                            
+                        }else{
+                            alertify.error(`La Fecha inicio debe ser fecha actual o superior`)
+
+                        }
+                        
+
+                        
+
+                    }else{
+                        alertify.error(`La Fecha inicio debe ser menor a la fecha final`)
+                    }
+                    
+                }else{
+                    alertify.error(`El precio especial debe ser menor al precio base`)
                 }
-                this.producto.idComercio = this.producto.comercio.id;
-                this.producto.nombrecomercio = this.producto.comercio.label;
-                this.producto.idCategoria = this.producto.tipo.id;
-                this.producto.ncategoria = this.producto.tipo.label;
-                let producto = JSON.parse(JSON.stringify(this.producto));
-                this.sincronizarDatosServidor(producto, metodo, url);
-                this.insertarLocal(producto);
+                
+            },
+            fecha(fecha){
+                let fechas = new Date(fecha).toISOString();
+
+                return fechas;
             },
             obtenerDatos(valor=''){
                 let store = this.abrirStore('producto', 'readonly'),
@@ -250,6 +370,7 @@
                     alertify.error(`Error al obtener los productos ${e.target.error}`);
                 }; 
 
+                
                 //obtener comercios 
                 let storeComercio = this.abrirStore('comercio', 'readonly'),
                     dataComercio = storeComercio.getAll();
@@ -264,7 +385,7 @@
                                     let store = this.abrirStore('comercio', 'readwrite'),
                                         query = store.put(comercio);
                                     query.onsuccess = e=>{
-                                        console.log(`Matricula ${comercio.nombre} guardado`);
+                                        console.log(`Comercio ${comercio.nombre} guardado`);
                                     };
                                     query.onerror = e=>{
                                         console.log(`Error al guardar el comercio ${e.target.error}`);
@@ -287,43 +408,80 @@
                     alertify.error(`Error al obtener los comercios ${e.target.error}`);
                 };
 
-                //obtener Tipos
-                let storeTipo = this.abrirStore('tipo', 'readonly'),
-                    dataTipo = storeTipo.getAll();
-                dataTipo.onsuccess = e=>{
-                    if( dataTipo.result.length<=0 ){
-                        fetch(`tipo`, 
+                //obtener productos base
+
+                let storeba = this.abrirStore('basico', 'readonly'),
+                    databa = storeba.getAll();
+                databa.onsuccess = e=>{
+                    if( databa.result.length<=0 ){
+                        fetch(`basico`, 
                             {credentials: 'same-origin'})
                             .then(res=>res.json())
-                            .then(dataTipo=>{
-                                this.tipos = dataTipo;
-                                dataTipo.map(tipo=>{
-                                    let store = this.abrirStore('tipo', 'readwrite'),
-                                        query = store.put(tipo);
+                            .then(databa=>{
+                                this.basicos = databa;
+                                databa.map(basico=>{
+                                    let storeba = this.abrirStore('basico', 'readwrite'),
+                                        query = storeba.put(basico);
                                     query.onsuccess = e=>{
-                                        console.log(`tipo ${tipo.nombre} guardado`);
+                                        console.log(`Producto ${basico.codigo} guardado`);
                                     };
                                     query.onerror = e=>{
-                                        console.log(`Error al guardar el tipo ${e.target.error}`);
+                                        console.log(`Error al guardar el producto ${e.target.error}`);
                                     };
                                 });
                             })
                             .catch(err=>{
-                                alertify.error(`Error al guardar el tipo ${err}`);
+                                alertify.error(`Error al guardar el producto ${err}`);
                             });
                     }
-                    this.tipos = dataTipo.result.map(tipo=>{
-                        return {
-                            id : tipo.id,
-                            label : tipo.nombre,
-                        }
-                    });
-                    console.log(this.tipos);
+                    let valor1 = "";
+                    this.basicos = databa.result.filter(basico=>basico.ncategoria.toLowerCase().indexOf(valor1.toLowerCase())>-1 || basico.nombre.toLowerCase().indexOf(valor1.toLowerCase())>-1);
+                    document.getElementById("res2").innerHTML = "Resultados: " + this.basicos.length;
                 };
-                dataTipo.onerror = e=>{
-                    alertify.error(`Error al obtener los tipos ${e.target.error}`);
-                };
+                data.onerror = e=>{
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
+                }; 
+
+
+            
                 
+            },
+
+            buscarBase(valor){
+
+                let storeba = this.abrirStore('basico', 'readonly'),
+                    databa = storeba.getAll();
+                databa.onsuccess = e=>{
+                    if( databa.result.length<=0 ){
+                        fetch(`basico`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(databa=>{
+                                this.basicos = databa;
+                                databa.map(basico=>{
+                                    let storeba = this.abrirStore('basico', 'readwrite'),
+                                        query = storeba.put(basico);
+                                    query.onsuccess = e=>{
+                                        console.log(`Producto ${basico.codigo} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar el producto ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                alertify.error(`Error al guardar el producto ${err}`);
+                            });
+                    }
+                    
+                    this.basicos = databa.result.filter(basico=>basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase())>-1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    document.getElementById("res2").innerHTML = "Resultados: " + this.basicos.length;
+                };
+                data.onerror = e=>{
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
+                }; 
+
+
             },
     
 
@@ -334,14 +492,14 @@
             this.producto.nombre = '';
             this.producto.idP = '';
             this.producto.precio = '';
-            this.producto.categoria ='';
+            this.producto.precioe = '';
+            this.producto.fechai = '';
+            this.producto.fechaf = '';
+            this.producto.idCategoria ='';
+            this.producto.ncategoria ='';
             this.producto.comercio = {
                     id:'',
                     label:'',
-                };
-            this.producto.tipo = {
-                    id1:'',
-                    label1:'',
                 };
             this.codeList();
             },
