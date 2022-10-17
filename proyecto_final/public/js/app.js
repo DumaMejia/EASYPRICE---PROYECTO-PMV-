@@ -6457,11 +6457,198 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
     return {
       comercios: [],
+      basicos: [],
+      buscar1: '',
       comercio: {
         accion: 'nuevo',
         id: 0,
@@ -6574,6 +6761,9 @@ __webpack_require__.r(__webpack_exports__);
     buscandoComercio: function buscandoComercio() {
       this.obtenerDatos(this.buscar);
     },
+    buscandoProductoBase: function buscandoProductoBase() {
+      this.buscarBase(this.buscar1);
+    },
     obtenerDatos: function obtenerDatos() {
       var _this2 = this;
 
@@ -6613,6 +6803,87 @@ __webpack_require__.r(__webpack_exports__);
 
       data.onerror = function (e) {
         _this2.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+      }; //otener productos base 
+
+
+      var storeba = this.abrirStore('basico', 'readonly'),
+          databa = storeba.getAll();
+
+      databa.onsuccess = function (e) {
+        if (databa.result.length <= 0) {
+          fetch("basico", {
+            credentials: 'same-origin'
+          }).then(function (res) {
+            return res.json();
+          }).then(function (databa) {
+            _this2.basicos = databa;
+            databa.map(function (basico) {
+              var storeba = _this2.abrirStore('basico', 'readwrite'),
+                  query = storeba.put(basico);
+
+              query.onsuccess = function (e) {
+                console.log("Producto ".concat(basico.codigo, " guardado"));
+              };
+
+              query.onerror = function (e) {
+                console.log("Error al guardar el producto ".concat(e.target.error));
+              };
+            });
+          })["catch"](function (err) {
+            alertify.error("Error al guardar el producto ".concat(err));
+          });
+        }
+
+        var valor1 = "";
+        _this2.basicos = databa.result.filter(function (basico) {
+          return basico.ncategoria.toLowerCase().indexOf(valor1.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor1.toLowerCase()) > -1;
+        });
+        document.getElementById("res2").innerHTML = "Resultados: " + _this2.basicos.length;
+      };
+
+      data.onerror = function (e) {
+        alertify.error("Error al obtener los productos ".concat(e.target.error));
+      };
+    },
+    buscarBase: function buscarBase(valor) {
+      var _this3 = this;
+
+      var storeba = this.abrirStore('basico', 'readonly'),
+          databa = storeba.getAll();
+
+      databa.onsuccess = function (e) {
+        if (databa.result.length <= 0) {
+          fetch("basico", {
+            credentials: 'same-origin'
+          }).then(function (res) {
+            return res.json();
+          }).then(function (databa) {
+            _this3.basicos = databa;
+            databa.map(function (basico) {
+              var storeba = _this3.abrirStore('basico', 'readwrite'),
+                  query = storeba.put(basico);
+
+              query.onsuccess = function (e) {
+                console.log("Producto ".concat(basico.codigo, " guardado"));
+              };
+
+              query.onerror = function (e) {
+                console.log("Error al guardar el producto ".concat(e.target.error));
+              };
+            });
+          })["catch"](function (err) {
+            alertify.error("Error al guardar el producto ".concat(err));
+          });
+        }
+
+        _this3.basicos = databa.result.filter(function (basico) {
+          return basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+        });
+        document.getElementById("res2").innerHTML = "Resultados: " + _this3.basicos.length;
+      };
+
+      data.onerror = function (e) {
+        alertify.error("Error al obtener los productos ".concat(e.target.error));
       };
     },
     nuevoComercio: function nuevoComercio() {
@@ -33965,6 +34236,178 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-header text-white bg-warning text-center" },
+          [_vm._v("\n                Filtros de busqueda\n                ")]
+        ),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "row p-1" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col border border-dark" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row p-1" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col col-md-4",
+                        attrs: { visibility: "hidden" },
+                      },
+                      [_vm._v("Tipo de comercio:")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-4" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comercio.tipo,
+                              expression: "comercio.tipo",
+                            },
+                          ],
+                          staticClass: "form-select",
+                          staticStyle: { width: "250px" },
+                          attrs: { "aria-label": ".form-select-sm example" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.comercio,
+                                "tipo",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c("option", { attrs: { selected: "" } }, [
+                            _vm._v("Selecciona Tipo De Empresa"),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            { attrs: { value: "Pequeña Empresa" } },
+                            [_vm._v("Pequeña Empresa")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            { attrs: { value: "Mediana Empresa" } },
+                            [_vm._v("Mediana Empresa")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Gran Empresa" } }, [
+                            _vm._v("Gran Empresa"),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row p-1" }, [
+                    _c("div", { staticClass: "col col-md-7" }, [
+                      _vm._v(
+                        "\n                            Buscar productos\n                            "
+                      ),
+                      _c(
+                        "table",
+                        {
+                          staticClass: "table table-light table-striped",
+                          attrs: { id: "tabla" },
+                        },
+                        [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", { attrs: { colspan: "8" } }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.buscar1,
+                                      expression: "buscar1",
+                                    },
+                                  ],
+                                  staticClass: "form-control",
+                                  staticStyle: { width: "355px" },
+                                  attrs: {
+                                    title: "Introduzca el texto a buscar",
+                                    placeholder: "Buscar Producto",
+                                    type: "text",
+                                  },
+                                  domProps: { value: _vm.buscar1 },
+                                  on: {
+                                    keyup: _vm.buscandoProductoBase,
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.buscar1 = $event.target.value
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "col col-md-12",
+                                    attrs: { id: "res2" },
+                                  },
+                                  [_vm._v("Resultados: ")]
+                                ),
+                                _vm._v(" "),
+                                _c("div", {
+                                  staticClass: "col col-md-12",
+                                  attrs: { id: "" },
+                                }),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.basicos, function (item) {
+                              return _c("tr", { key: item.idBase }, [
+                                _c("td", [_vm._v(_vm._s(item.nombre))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(item.precio))]),
+                                _vm._v(" "),
+                                _vm._m(2, true),
+                              ])
+                            }),
+                            0
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+              ]),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
         _c("div", [
           _c(
             "div",
@@ -34040,13 +34483,227 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _vm._m(5),
         ]),
       ]),
     ]),
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row p-1" }, [
+      _c("div", { staticClass: "col col-md-4" }, [_vm._v("Salario:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col col-md-4" }, [
+        _c("input", {
+          staticClass: "form-control",
+          staticStyle: { width: "250px" },
+          attrs: {
+            title: "SALARIO",
+            required: "",
+            type: "number",
+            step: "0.01",
+            pattern: "[0-9]{3,10}",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Precio Sugerido")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "button" } },
+        [_vm._v("Agregar")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col border border-dark" }, [
+      _vm._v(
+        "\n                            Lista de productos\n                            "
+      ),
+      _c(
+        "table",
+        {
+          staticClass: "table table-light table-striped",
+          staticStyle: { width: "150px" },
+          attrs: { id: "tabla" },
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { colspan: "8" } }, [
+                _c(
+                  "div",
+                  { staticClass: "col col-md-12", attrs: { id: "res2" } },
+                  [_vm._v("Resultados: ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col col-md-12", attrs: { id: "total" } },
+                  [_vm._v("Total: ")]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", [_vm._v("Nombre")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Precio Sugerido")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Cantidad")]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  { staticClass: "btn btn-danger", attrs: { type: "button" } },
+                  [_vm._v("Eliminar")]
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col border border-dark" }, [
+      _vm._v(
+        "\n                            Comercios Disponibles\n                        "
+      ),
+      _c(
+        "table",
+        {
+          staticClass: "table table-light table-striped",
+          staticStyle: { width: "500px" },
+          attrs: { id: "tabla" },
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { colspan: "8" } }, [
+                _c(
+                  "div",
+                  { staticClass: "col col-md-12", attrs: { id: "res2" } },
+                  [_vm._v("Resultados: ")]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", [_vm._v("Nombre")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Direccion")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Tipo de comercio")]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                  [_vm._v("Ver Productos")]
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(
+        "\n                       \n                       \n                            Productos Disponibles\n                        "
+      ),
+      _c(
+        "table",
+        {
+          staticClass: "table table-light table-striped",
+          staticStyle: { width: "500px" },
+          attrs: { id: "tabla" },
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { colspan: "8" } }, [
+                _c(
+                  "div",
+                  { staticClass: "col col-md-12", attrs: { id: "res2" } },
+                  [_vm._v("Resultados: ")]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", [_vm._v("Nombre")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Direccion")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Tipo de comercio")]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("{{}}")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                  [_vm._v("Ver Productos")]
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

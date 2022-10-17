@@ -48,6 +48,191 @@
     
 
     </div>
+
+    
+                <div class="card-header text-white bg-warning text-center">
+                Filtros de busqueda
+                </div>
+                 
+                
+                
+                <form  >
+                <div class="row p-1">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col border border-dark">
+                            <div class="row p-1">
+                        <div class="col col-md-4">Salario:</div>
+                        <div class="col col-md-4">
+                            <input title="SALARIO" required type="number" step="0.01" pattern="[0-9]{3,10}"  class="form-control" style="width : 250px">
+                        </div>
+                    </div>
+                    <div class="row p-1" >
+                            <div   visibility="hidden" class="col col-md-4">Tipo de comercio:</div>
+                            <div class="col col-md-4">
+                                <select  v-model="comercio.tipo" class="form-select" aria-label=".form-select-sm example" style="width : 250px">
+                                    <option  selected>Selecciona Tipo De Empresa</option>
+                                    <option value="Pequeña Empresa">Pequeña Empresa</option>
+                                    <option value="Mediana Empresa">Mediana Empresa</option>
+                                    <option value="Gran Empresa">Gran Empresa</option>
+                                  </select>
+                            </div> 
+                    </div>
+
+                    <div class="row p-1">
+
+
+                        <div class="col col-md-7" >
+                            Buscar productos
+                            <table class="table table-light table-striped" id="tabla">
+                            <thead>
+                                <tr>
+                                    <th colspan="8">
+            
+                                    <input title="Introduzca el texto a buscar" placeholder="Buscar Producto"  @keyup="buscandoProductoBase" v-model="buscar1" class="form-control" type="text" style="width : 355px" >
+                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                        <div class="col col-md-12"  id="" ></div>
+                                    </th>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Precio Sugerido</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  v-for="item in basicos" :key="item.idBase">
+                                    <td>{{item.nombre}}</td>
+                                    <td>{{item.precio}}</td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-success" >Agregar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        
+                        
+
+                        
+
+                        
+
+                    </div> 
+
+                        </div>
+                        <div class="col border border-dark">
+                            Lista de productos
+                            <table class="table table-light table-striped" id="tabla" style="width: 150px">
+                            <thead>
+                                <tr>
+                                    <th colspan="8">
+                                    
+                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                        <div class="col col-md-12"  id="total" >Total: </div>
+                                        
+                                    </th>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Precio Sugerido</th>
+                                    <th>Cantidad</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    <td>{{}}</td>
+                                    <td>{{}}</td>
+                                    <td>{{}}</td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-danger" >Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        </div>
+                        <div class="col border border-dark">
+                            Comercios Disponibles
+                        <table class="table table-light table-striped" id="tabla" style="width: 500px" >
+                            <thead>
+                                <tr>
+                                    <th colspan="8">
+                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                    </th>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Direccion</th>
+                                    <th>Tipo de comercio</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    <td>{{}}</td>
+                                    <td>{{}}</td>
+                                    <td>{{}}</td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-primary" >Ver Productos</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                       
+                       
+                            Productos Disponibles
+                        <table class="table table-light table-striped" id="tabla" style="width: 500px">
+                            <thead>
+                                <tr>
+                                    <th colspan="8">
+                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                    </th>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Direccion</th>
+                                    <th>Tipo de comercio</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    <td>{{}}</td>
+                                    <td>{{}}</td>
+                                    <td>{{}}</td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-primary" >Ver Productos</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                       
+                        </div>
+                    </div>
+                    </div>
+                    
+                  
+
+                
+                
+                    
+
+                    
+
+                </div>
+                    
+                </form>
+            
         
 
         <div>
@@ -246,6 +431,8 @@
             return {
                 
                 comercios:[],
+                basicos: [],
+                buscar1: '',
                 comercio:{
                     accion : 'nuevo',
                     id : 0,
@@ -356,6 +543,11 @@
             buscandoComercio(){
                 this.obtenerDatos(this.buscar);
             },
+
+            buscandoProductoBase(){
+                this.buscarBase(this.buscar1);
+            },
+
             
             obtenerDatos(valor=''){
                 let store = this.abrirStore('comercio', 'readonly'),
@@ -388,7 +580,86 @@
                 data.onerror = e=>{
                     this.comercio.msg = `Error al obtener los comercios ${e.target.error}`;
                 };
+
+                //otener productos base 
+
+                let storeba = this.abrirStore('basico', 'readonly'),
+                    databa = storeba.getAll();
+                databa.onsuccess = e=>{
+                    if( databa.result.length<=0 ){
+                        fetch(`basico`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(databa=>{
+                                this.basicos = databa;
+                                databa.map(basico=>{
+                                    let storeba = this.abrirStore('basico', 'readwrite'),
+                                        query = storeba.put(basico);
+                                    query.onsuccess = e=>{
+                                        console.log(`Producto ${basico.codigo} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar el producto ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                alertify.error(`Error al guardar el producto ${err}`);
+                            });
+                    }
+                   let valor1 = "";
+                    this.basicos = databa.result.filter(basico=>basico.ncategoria.toLowerCase().indexOf(valor1.toLowerCase())>-1 || basico.nombre.toLowerCase().indexOf(valor1.toLowerCase())>-1);
+                    document.getElementById("res2").innerHTML = "Resultados: " + this.basicos.length;
+                };
+                data.onerror = e=>{
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
+                };
+
+
+
+
+
             },
+
+
+            buscarBase(valor){
+
+            let storeba = this.abrirStore('basico', 'readonly'),
+                databa = storeba.getAll();
+            databa.onsuccess = e=>{
+                if( databa.result.length<=0 ){
+                    fetch(`basico`, 
+                        {credentials: 'same-origin'})
+                        .then(res=>res.json())
+                        .then(databa=>{
+                            this.basicos = databa;
+                            databa.map(basico=>{
+                                let storeba = this.abrirStore('basico', 'readwrite'),
+                                    query = storeba.put(basico);
+                                query.onsuccess = e=>{
+                                    console.log(`Producto ${basico.codigo} guardado`);
+                                };
+                                query.onerror = e=>{
+                                    console.log(`Error al guardar el producto ${e.target.error}`);
+                                };
+                            });
+                        })
+                        .catch(err=>{
+                            alertify.error(`Error al guardar el producto ${err}`);
+                        });
+                }
+                
+                this.basicos = databa.result.filter(basico=>basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase())>-1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                document.getElementById("res2").innerHTML = "Resultados: " + this.basicos.length;
+            };
+            data.onerror = e=>{
+                alertify.error(`Error al obtener los productos ${e.target.error}`);
+            }; 
+
+
+            },
+
+
             nuevoComercio(){
                 this.comercio.accion = 'nuevo';
                 this.comercio.msg = '';
