@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <div class="container">
                 
-                <img  src="image/easypricelogo.png" width="100" height="30">
+                <img alt=""  src="image/easypricelogo.png" width="100" height="30">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -73,7 +73,7 @@
                 </div>
 
 
-                <p align="center"><img  src="image/GPS.png" width="70   " height="100"></p>
+                <p align="center"><img alt="" src="image/GPS.png" width="70   " height="100"></p>
 
                 <p></p>
                 <div class="form-check" >
@@ -88,7 +88,7 @@
                 <div class="col-md-6 offset-md-4">
                     <a href="{{ url('/') }}">
                      <button type="button" class="btn btn-primary">
-                     <i class="fa fa-google mr-2"></i>
+                     <em class="fa fa-google mr-2"></em>
                      {{ __('Siguiente') }}
                      </button>
                     </a>

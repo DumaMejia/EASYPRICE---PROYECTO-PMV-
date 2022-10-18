@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary  text-white">
             <div class="container-fluid">
-            <img  src="image/easypricelogo.png" width="100" height="30">
+            <img alt="" src="image/easypricelogo.png" width="100" height="30">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item dropdown">

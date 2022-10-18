@@ -19,7 +19,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary  text-white">
             <div class="container-fluid">
-            <img  src="image/easypricelogo.png" width="100" height="30">
+            <img alt="" src="image/easypricelogo.png" width="100" height="30">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item dropdown">
@@ -138,12 +138,12 @@
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-outline-primary" id="formSubmit">
 
-                    <i class="fa fa-google mr-2"></i>
-                 <img  src="image/save.png" width="20" height="20">
+                    <em class="fa fa-google mr-2"></em>
+                 <img alt="" src="image/save.png" width="20" height="20">
                   
                 </button>
 
-                    <a href="/home" class="btn btn-outline-danger" ><img  src="image/cancel3.png" width="20" height="20"></a>
+                    <a href="/home" class="btn btn-outline-danger" ><img alt="" src="image/cancel3.png" width="20" height="20"></a>
                 </div>
             </div>
         </form>
