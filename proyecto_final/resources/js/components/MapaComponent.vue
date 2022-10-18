@@ -98,6 +98,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Precio Sugerido</th>
+                                    <th>Cantidad</th>
                                 
                                 </tr>
                             </thead>
@@ -106,8 +107,11 @@
                                     <td>{{item.nombre}}</td>
                                     <td>{{item.precio}}</td>
                                     <td>
+                                        <input  required type="number" step="1.00" pattern="[0-9]{3,10}"  class="form-control" v-model="cantidad">
+                                    </td>
+                                    <td>
                                         
-                                        <button type="button" class="btn btn-success" >Agregar</button>
+                                        <button type="button" class="btn btn-success" @click="obtenerProductobase(item)" >Agregar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -125,13 +129,13 @@
                         </div>
                         <div class="col border border-dark">
                             Lista de productos
-                            <table class="table table-light table-striped" id="tabla" style="width: 150px">
+                            <table class="table table-light table-striped" id="tablalista" >
                             <thead>
                                 <tr>
                                     <th colspan="8">
                                     
-                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
-                                        <div class="col col-md-12"  id="total" >Total: </div>
+                                        <div class="col col-md-12"  id="res3"  >Resultados: </div>
+                                        <div class="col col-md-12"  id="total" value="0">Total: </div>
                                         
                                     </th>
                                 </tr>
@@ -144,18 +148,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr >
-                                    <td>{{}}</td>
-                                    <td>{{}}</td>
-                                    <td>{{}}</td>
+                                <tr v-for="item in lista" :key="item.idBase">
+                                    <td>{{item.nombre}}</td>
+                                    <td>{{item.precio}}</td>
+                                    <td>{{item.cantidad}}</td>
                                     <td>
                                         
-                                        <button type="button" class="btn btn-danger" >Eliminar</button>
-                                    </td>
+                                        <button type="button" class="btn btn-danger" @click="eliminarProductobase(item)" >Eliminar</button>
+                                    </td>   
                                 </tr>
                             </tbody>
                         </table>
+                        
 
+                        <button type="button" class="btn btn-warning"  @click="filtrarComercio()">Filtrar</button>
                         </div>
                         <div class="col border border-dark">
                             Comercios Disponibles
@@ -163,7 +169,7 @@
                             <thead>
                                 <tr>
                                     <th colspan="8">
-                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                        <div class="col col-md-12"  id="rescom" >Resultados: </div>
                                     </th>
                                 </tr>
                                 
@@ -175,13 +181,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr >
-                                    <td>{{}}</td>
-                                    <td>{{}}</td>
-                                    <td>{{}}</td>
+                                <tr  v-for="item in comerciosfil" :key="item.idComercio">
+                                    <td>{{item.nombre}}</td>
+                                    <td>{{item.direccion}}</td>
+                                    <td>{{item.tipo}}</td>
                                     <td>
                                         
-                                        <button type="button" class="btn btn-primary" >Ver Productos</button>
+                                        <button type="button" class="btn btn-primary" @click="verProducto(item)" >Ver Productos</button>
+                                    </td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-primary" @click="verUbicacion(item)" >Ver Ubicacion</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -193,26 +203,24 @@
                             <thead>
                                 <tr>
                                     <th colspan="8">
-                                        <div class="col col-md-12"  id="res2" >Resultados: </div>
+                                        <div class="col col-md-12"  id="respo" >Resultados: </div>
                                     </th>
                                 </tr>
                                 
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Direccion</th>
-                                    <th>Tipo de comercio</th>
+                                    <th>Precio Base</th>
+                                    <th>Precio Especial</th>
+                                    <th>Fecha Final (precio especial)</th>
                                 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr >
-                                    <td>{{}}</td>
-                                    <td>{{}}</td>
-                                    <td>{{}}</td>
-                                    <td>
-                                        
-                                        <button type="button" class="btn btn-primary" >Ver Productos</button>
-                                    </td>
+                                <tr v-for="item in productosfil" :key="item.idProducto">
+                                    <td>{{item.nombre}}</td>
+                                    <td>{{item.precio}}</td>
+                                    <td>{{item.precioe}}</td>
+                                    <td>{{item.fechaf}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -431,8 +439,13 @@
             return {
                 
                 comercios:[],
+                comerciosfil:[],
+                productos: [],
+                productosfil: [],
                 basicos: [],
+                lista: [],
                 buscar1: '',
+                cantidad: '',
                 comercio:{
                     accion : 'nuevo',
                     id : 0,
@@ -445,6 +458,12 @@
                     telefono: '',
                     correo: '',
                     tipo: ''
+                },
+
+                base:{
+                    idBase : '',
+                    nombre : '',
+                    precio: ''
                 },
 
                 ubicacion:{
@@ -476,6 +495,19 @@
             handleMarkclicked(item){
                 this.activeComercio = item;
                 this.infoWindowOpened = true;
+
+                this.productosfil.splice(0, this.productosfil.length);
+
+
+
+                this.productos.forEach(productos =>{
+                   if(item.id == productos.idComercio){
+
+                    this.productosfil.push({idProducto : productos.idProducto, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+
+                   }    
+                });
+                
             }, 
             handleInfoWindowClose(){
                 this.activeComercio = {};
@@ -492,6 +524,216 @@
                     lat : parseFloat(item.latitude),
                     lng : parseFloat(item.longitude),
                 }
+            },
+
+            obtenerProductobase(item){
+
+                let repe = 0;
+                this.lista.forEach(productos =>{
+                   if(item.idBase == productos.idBase){
+
+                        repe = repe + 1;
+                   }    
+                });
+
+                if(repe == 0){
+                    this.lista.push({idBase : item.idBase, nombre : item.nombre, precio : item.precio, cantidad : this.cantidad});
+                }else{
+                    alertify.error(`Ya tienes este producto agregado`)
+                };
+
+                document.getElementById("res3").innerHTML = "Resultados: " + this.lista.length;
+
+                let total = 0;
+                let precio = 0;
+                let cantidad = 0;
+                
+
+                this.lista.forEach(productos =>{
+                 precio =  productos.precio;
+                 cantidad = productos.cantidad;
+
+                 total = total + precio * cantidad;
+                });
+
+                document.getElementById("total").innerHTML = "Total: " + total;
+
+                
+            },
+
+            eliminarProductobase(item){
+
+              
+                let var1 = 0;
+                let var2 = 0;
+                this.lista.forEach(productos =>{
+                   if(item.idBase == productos.idBase){
+
+                    var2 = var1;
+                 
+
+                   } 
+                
+                   var1 = var1 +1;
+                   
+                });
+
+
+                    this.lista.splice(var2, var2);
+                    if(var2==0){
+                        this.lista.splice(0, 1);
+                    }
+
+                    document.getElementById("res3").innerHTML = "Resultados: " + this.lista.length;
+
+                    let total = 0;
+                    let precio = 0;
+                    let cantidad = 0;
+                
+
+                    this.lista.forEach(productos =>{
+                    precio =  productos.precio;
+                    cantidad = productos.cantidad;
+
+                    total = total + precio * cantidad;
+                });
+
+                document.getElementById("total").innerHTML = "Total: " + total;
+                
+
+            },
+
+            filtrarComercio(valor=''){
+
+                //productos
+
+                let store = this.abrirStore('producto', 'readonly'),
+                    data = store.getAll();
+                data.onsuccess = e=>{
+                    if( data.result.length<=0 ){
+                        fetch(`producto`, 
+                            {credentials: 'same-origin'})
+                            .then(res=>res.json())
+                            .then(data=>{
+                                this.productos = data;
+                                data.map(producto=>{
+                                    let store = this.abrirStore('producto', 'readwrite'),
+                                        query = store.put(producto);
+                                    query.onsuccess = e=>{
+                                        console.log(`Producto ${producto.codigo} guardado`);
+                                    };
+                                    query.onerror = e=>{
+                                        console.log(`Error al guardar la producto ${e.target.error}`);
+                                    };
+                                });
+                            })
+                            .catch(err=>{
+                                alertify.error(`Error al guardar el producto ${err}`);
+                            });
+                    }
+                    this.productos = data.result.filter(producto=>producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase())>-1);
+                    
+                };
+                data.onerror = e=>{
+                    alertify.error(`Error al obtener los productos ${e.target.error}`);
+                };
+                
+                
+                
+
+
+
+                //comercios 
+                
+
+                this.comerciosfil.splice(0, this.comerciosfil.length);
+                if(this.lista.length>0){
+                    this.obtenerDatos();
+                    let numcom = 0;
+                    this.lista.forEach(basicos =>{
+                        this.productos.forEach(productos =>{
+
+                         if(basicos.idBase == productos.idBase){
+                            numcom = numcom + 1;
+                            if(numcom>0){
+
+                                this.comercios.forEach(comercios =>{
+
+                                    if(comercios.id == productos.idComercio){
+
+                                        this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
+                                    };
+
+                                    
+
+                                });
+
+                                
+
+                            };
+
+                        };
+                        
+                        
+                   
+                        });
+
+                        
+                    });
+                    this.comercios.splice(0, this.comercios.length);
+                    this.comercios = this.comerciosfil;
+                };
+                    
+
+                    
+
+                    if(this.lista.length == 0){
+                            this.comercios.forEach(comercios =>{
+                            this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
+                        });
+                        this.obtenerDatos();
+                    };
+
+                    
+
+
+                   
+                    document.getElementById("rescom").innerHTML = "Resultados: " + this.comerciosfil.length;
+               
+
+
+                
+
+            },
+
+            verProducto(item){
+
+                this.productosfil.splice(0, this.productosfil.length);
+
+
+                this.productos.forEach(productos =>{
+                   if(item.id == productos.idComercio){
+
+                    this.productosfil.push({idProducto : productos.idProducto, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+
+                   }    
+                });
+
+
+            },
+            verUbicacion(item){
+
+                
+
+                this.ubicacion.lat = parseFloat(item.latitude);
+                this.ubicacion.lng = parseFloat(item.longitude);
+                this.activeComercio = item;
+                this.infoWindowOpened = true;
+
+                window.scroll(0, 800);
+
+
+
             },
 
             mapCenter(){
@@ -550,6 +792,7 @@
 
             
             obtenerDatos(valor=''){
+
                 let store = this.abrirStore('comercio', 'readonly'),
                     data = store.getAll();
                 data.onsuccess = e=>{

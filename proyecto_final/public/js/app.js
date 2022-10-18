@@ -6642,13 +6642,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
     return {
       comercios: [],
+      comerciosfil: [],
+      productos: [],
+      productosfil: [],
       basicos: [],
+      lista: [],
       buscar1: '',
+      cantidad: '',
       comercio: {
         accion: 'nuevo',
         id: 0,
@@ -6661,6 +6674,11 @@ __webpack_require__.r(__webpack_exports__);
         telefono: '',
         correo: '',
         tipo: ''
+      },
+      base: {
+        idBase: '',
+        nombre: '',
+        precio: ''
       },
       ubicacion: {
         lat: 13.343565797622999,
@@ -6688,8 +6706,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleMarkclicked: function handleMarkclicked(item) {
+      var _this = this;
+
       this.activeComercio = item;
       this.infoWindowOpened = true;
+      this.productosfil.splice(0, this.productosfil.length);
+      this.productos.forEach(function (productos) {
+        if (item.id == productos.idComercio) {
+          _this.productosfil.push({
+            idProducto: productos.idProducto,
+            IdComercio: productos.idComercio,
+            nombre: productos.nombre,
+            precio: productos.precio,
+            precioe: productos.precioe,
+            fechaf: productos.fechaf
+          });
+        }
+      });
     },
     handleInfoWindowClose: function handleInfoWindowClose() {
       this.activeComercio = {};
@@ -6706,6 +6739,187 @@ __webpack_require__.r(__webpack_exports__);
         lat: parseFloat(item.latitude),
         lng: parseFloat(item.longitude)
       };
+    },
+    obtenerProductobase: function obtenerProductobase(item) {
+      var repe = 0;
+      this.lista.forEach(function (productos) {
+        if (item.idBase == productos.idBase) {
+          repe = repe + 1;
+        }
+      });
+
+      if (repe == 0) {
+        this.lista.push({
+          idBase: item.idBase,
+          nombre: item.nombre,
+          precio: item.precio,
+          cantidad: this.cantidad
+        });
+      } else {
+        alertify.error("Ya tienes este producto agregado");
+      }
+
+      ;
+      document.getElementById("res3").innerHTML = "Resultados: " + this.lista.length;
+      var total = 0;
+      var precio = 0;
+      var cantidad = 0;
+      this.lista.forEach(function (productos) {
+        precio = productos.precio;
+        cantidad = productos.cantidad;
+        total = total + precio * cantidad;
+      });
+      document.getElementById("total").innerHTML = "Total: " + total;
+    },
+    eliminarProductobase: function eliminarProductobase(item) {
+      var var1 = 0;
+      var var2 = 0;
+      this.lista.forEach(function (productos) {
+        if (item.idBase == productos.idBase) {
+          var2 = var1;
+        }
+
+        var1 = var1 + 1;
+      });
+      this.lista.splice(var2, var2);
+
+      if (var2 == 0) {
+        this.lista.splice(0, 1);
+      }
+
+      document.getElementById("res3").innerHTML = "Resultados: " + this.lista.length;
+      var total = 0;
+      var precio = 0;
+      var cantidad = 0;
+      this.lista.forEach(function (productos) {
+        precio = productos.precio;
+        cantidad = productos.cantidad;
+        total = total + precio * cantidad;
+      });
+      document.getElementById("total").innerHTML = "Total: " + total;
+    },
+    filtrarComercio: function filtrarComercio() {
+      var _this2 = this;
+
+      var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      //productos
+      var store = this.abrirStore('producto', 'readonly'),
+          data = store.getAll();
+
+      data.onsuccess = function (e) {
+        if (data.result.length <= 0) {
+          fetch("producto", {
+            credentials: 'same-origin'
+          }).then(function (res) {
+            return res.json();
+          }).then(function (data) {
+            _this2.productos = data;
+            data.map(function (producto) {
+              var store = _this2.abrirStore('producto', 'readwrite'),
+                  query = store.put(producto);
+
+              query.onsuccess = function (e) {
+                console.log("Producto ".concat(producto.codigo, " guardado"));
+              };
+
+              query.onerror = function (e) {
+                console.log("Error al guardar la producto ".concat(e.target.error));
+              };
+            });
+          })["catch"](function (err) {
+            alertify.error("Error al guardar el producto ".concat(err));
+          });
+        }
+
+        _this2.productos = data.result.filter(function (producto) {
+          return producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase()) > -1;
+        });
+      };
+
+      data.onerror = function (e) {
+        alertify.error("Error al obtener los productos ".concat(e.target.error));
+      }; //comercios 
+
+
+      this.comerciosfil.splice(0, this.comerciosfil.length);
+
+      if (this.lista.length > 0) {
+        this.obtenerDatos();
+        var numcom = 0;
+        this.lista.forEach(function (basicos) {
+          _this2.productos.forEach(function (productos) {
+            if (basicos.idBase == productos.idBase) {
+              numcom = numcom + 1;
+
+              if (numcom > 0) {
+                _this2.comercios.forEach(function (comercios) {
+                  if (comercios.id == productos.idComercio) {
+                    _this2.comerciosfil.push({
+                      idComercio: comercios.id,
+                      direccion: comercios.direccion,
+                      nombre: comercios.nombre,
+                      latitude: comercios.latitude,
+                      longitude: comercios.longitude,
+                      tipo: comercios.tipo
+                    });
+                  }
+
+                  ;
+                });
+              }
+
+              ;
+            }
+
+            ;
+          });
+        });
+        this.comercios.splice(0, this.comercios.length);
+        this.comercios = this.comerciosfil;
+      }
+
+      ;
+
+      if (this.lista.length == 0) {
+        this.comercios.forEach(function (comercios) {
+          _this2.comerciosfil.push({
+            idComercio: comercios.id,
+            direccion: comercios.direccion,
+            nombre: comercios.nombre,
+            latitude: comercios.latitude,
+            longitude: comercios.longitude,
+            tipo: comercios.tipo
+          });
+        });
+        this.obtenerDatos();
+      }
+
+      ;
+      document.getElementById("rescom").innerHTML = "Resultados: " + this.comerciosfil.length;
+    },
+    verProducto: function verProducto(item) {
+      var _this3 = this;
+
+      this.productosfil.splice(0, this.productosfil.length);
+      this.productos.forEach(function (productos) {
+        if (item.id == productos.idComercio) {
+          _this3.productosfil.push({
+            idProducto: productos.idProducto,
+            IdComercio: productos.idComercio,
+            nombre: productos.nombre,
+            precio: productos.precio,
+            precioe: productos.precioe,
+            fechaf: productos.fechaf
+          });
+        }
+      });
+    },
+    verUbicacion: function verUbicacion(item) {
+      this.ubicacion.lat = parseFloat(item.latitude);
+      this.ubicacion.lng = parseFloat(item.longitude);
+      this.activeComercio = item;
+      this.infoWindowOpened = true;
+      window.scroll(0, 800);
     },
     mapCenter: function mapCenter() {
       if (this.depmun.valor == "ahuachapan") {
@@ -6751,11 +6965,11 @@ __webpack_require__.r(__webpack_exports__);
       ;
     },
     mapCentergps: function mapCentergps() {
-      var _this = this;
+      var _this4 = this;
 
       var gps;
       this.$getLocation({}).then(function (gps) {
-        _this.ubicacion = gps;
+        _this4.ubicacion = gps;
       });
     },
     buscandoComercio: function buscandoComercio() {
@@ -6765,7 +6979,7 @@ __webpack_require__.r(__webpack_exports__);
       this.buscarBase(this.buscar1);
     },
     obtenerDatos: function obtenerDatos() {
-      var _this2 = this;
+      var _this5 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var store = this.abrirStore('comercio', 'readonly'),
@@ -6778,9 +6992,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this2.comercios = data;
+            _this5.comercios = data;
             data.map(function (comercio) {
-              var store = _this2.abrirStore('comercio', 'readwrite'),
+              var store = _this5.abrirStore('comercio', 'readwrite'),
                   query = store.put(comercio);
 
               query.onsuccess = function (e) {
@@ -6792,17 +7006,17 @@ __webpack_require__.r(__webpack_exports__);
               };
             });
           })["catch"](function (err) {
-            _this2.comercio.msg = "Error al guardar el comercio ".concat(err);
+            _this5.comercio.msg = "Error al guardar el comercio ".concat(err);
           });
         }
 
-        _this2.comercios = data.result.filter(function (comercio) {
+        _this5.comercios = data.result.filter(function (comercio) {
           return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
-        _this2.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+        _this5.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
       }; //otener productos base 
 
 
@@ -6816,9 +7030,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (databa) {
-            _this2.basicos = databa;
+            _this5.basicos = databa;
             databa.map(function (basico) {
-              var storeba = _this2.abrirStore('basico', 'readwrite'),
+              var storeba = _this5.abrirStore('basico', 'readwrite'),
                   query = storeba.put(basico);
 
               query.onsuccess = function (e) {
@@ -6835,10 +7049,10 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         var valor1 = "";
-        _this2.basicos = databa.result.filter(function (basico) {
+        _this5.basicos = databa.result.filter(function (basico) {
           return basico.ncategoria.toLowerCase().indexOf(valor1.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor1.toLowerCase()) > -1;
         });
-        document.getElementById("res2").innerHTML = "Resultados: " + _this2.basicos.length;
+        document.getElementById("res2").innerHTML = "Resultados: " + _this5.basicos.length;
       };
 
       data.onerror = function (e) {
@@ -6846,7 +7060,7 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     buscarBase: function buscarBase(valor) {
-      var _this3 = this;
+      var _this6 = this;
 
       var storeba = this.abrirStore('basico', 'readonly'),
           databa = storeba.getAll();
@@ -6858,9 +7072,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (databa) {
-            _this3.basicos = databa;
+            _this6.basicos = databa;
             databa.map(function (basico) {
-              var storeba = _this3.abrirStore('basico', 'readwrite'),
+              var storeba = _this6.abrirStore('basico', 'readwrite'),
                   query = storeba.put(basico);
 
               query.onsuccess = function (e) {
@@ -6876,10 +7090,10 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
 
-        _this3.basicos = databa.result.filter(function (basico) {
+        _this6.basicos = databa.result.filter(function (basico) {
           return basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
-        document.getElementById("res2").innerHTML = "Resultados: " + _this3.basicos.length;
+        document.getElementById("res2").innerHTML = "Resultados: " + _this6.basicos.length;
       };
 
       data.onerror = function (e) {
@@ -34389,7 +34603,50 @@ var render = function () {
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(item.precio))]),
                                 _vm._v(" "),
-                                _vm._m(2, true),
+                                _c("td", [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.cantidad,
+                                        expression: "cantidad",
+                                      },
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      required: "",
+                                      type: "number",
+                                      step: "1.00",
+                                      pattern: "[0-9]{3,10}",
+                                    },
+                                    domProps: { value: _vm.cantidad },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.cantidad = $event.target.value
+                                      },
+                                    },
+                                  }),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.obtenerProductobase(item)
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Agregar")]
+                                  ),
+                                ]),
                               ])
                             }),
                             0
@@ -34400,9 +34657,158 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "col border border-dark" }, [
+                  _vm._v(
+                    "\n                            Lista de productos\n                            "
+                  ),
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-light table-striped",
+                      attrs: { id: "tablalista" },
+                    },
+                    [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.lista, function (item) {
+                          return _c("tr", { key: item.idBase }, [
+                            _c("td", [_vm._v(_vm._s(item.nombre))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.precio))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.cantidad))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.eliminarProductobase(item)
+                                    },
+                                  },
+                                },
+                                [_vm._v("Eliminar")]
+                              ),
+                            ]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.filtrarComercio()
+                        },
+                      },
+                    },
+                    [_vm._v("Filtrar")]
+                  ),
+                ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _c("div", { staticClass: "col border border-dark" }, [
+                  _vm._v(
+                    "\n                            Comercios Disponibles\n                        "
+                  ),
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-light table-striped",
+                      staticStyle: { width: "500px" },
+                      attrs: { id: "tabla" },
+                    },
+                    [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.comerciosfil, function (item) {
+                          return _c("tr", { key: item.idComercio }, [
+                            _c("td", [_vm._v(_vm._s(item.nombre))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.direccion))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.tipo))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.verProducto(item)
+                                    },
+                                  },
+                                },
+                                [_vm._v("Ver Productos")]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.verUbicacion(item)
+                                    },
+                                  },
+                                },
+                                [_vm._v("Ver Ubicacion")]
+                              ),
+                            ]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                  _vm._v(
+                    "\n                       \n                       \n                            Productos Disponibles\n                        "
+                  ),
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-light table-striped",
+                      staticStyle: { width: "500px" },
+                      attrs: { id: "tabla" },
+                    },
+                    [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.productosfil, function (item) {
+                          return _c("tr", { key: item.idProducto }, [
+                            _c("td", [_vm._v(_vm._s(item.nombre))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.precio))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.precioe))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.fechaf))]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                ]),
               ]),
             ]),
           ]),
@@ -34520,188 +34926,85 @@ var staticRenderFns = [
       _c("th", [_vm._v("Nombre")]),
       _vm._v(" "),
       _c("th", [_vm._v("Precio Sugerido")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cantidad")]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "button" } },
-        [_vm._v("Agregar")]
-      ),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { colspan: "8" } }, [
+          _c("div", { staticClass: "col col-md-12", attrs: { id: "res3" } }, [
+            _vm._v("Resultados: "),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col col-md-12",
+              attrs: { id: "total", value: "0" },
+            },
+            [_vm._v("Total: ")]
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio Sugerido")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")]),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col border border-dark" }, [
-      _vm._v(
-        "\n                            Lista de productos\n                            "
-      ),
-      _c(
-        "table",
-        {
-          staticClass: "table table-light table-striped",
-          staticStyle: { width: "150px" },
-          attrs: { id: "tabla" },
-        },
-        [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { attrs: { colspan: "8" } }, [
-                _c(
-                  "div",
-                  { staticClass: "col col-md-12", attrs: { id: "res2" } },
-                  [_vm._v("Resultados: ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col col-md-12", attrs: { id: "total" } },
-                  [_vm._v("Total: ")]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Precio Sugerido")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Cantidad")]),
-            ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { colspan: "8" } }, [
+          _c("div", { staticClass: "col col-md-12", attrs: { id: "rescom" } }, [
+            _vm._v("Resultados: "),
           ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-danger", attrs: { type: "button" } },
-                  [_vm._v("Eliminar")]
-                ),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Direccion")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tipo de comercio")]),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col border border-dark" }, [
-      _vm._v(
-        "\n                            Comercios Disponibles\n                        "
-      ),
-      _c(
-        "table",
-        {
-          staticClass: "table table-light table-striped",
-          staticStyle: { width: "500px" },
-          attrs: { id: "tabla" },
-        },
-        [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { attrs: { colspan: "8" } }, [
-                _c(
-                  "div",
-                  { staticClass: "col col-md-12", attrs: { id: "res2" } },
-                  [_vm._v("Resultados: ")]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Direccion")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Tipo de comercio")]),
-            ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { colspan: "8" } }, [
+          _c("div", { staticClass: "col col-md-12", attrs: { id: "respo" } }, [
+            _vm._v("Resultados: "),
           ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("Ver Productos")]
-                ),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
-      _vm._v(
-        "\n                       \n                       \n                            Productos Disponibles\n                        "
-      ),
-      _c(
-        "table",
-        {
-          staticClass: "table table-light table-striped",
-          staticStyle: { width: "500px" },
-          attrs: { id: "tabla" },
-        },
-        [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { attrs: { colspan: "8" } }, [
-                _c(
-                  "div",
-                  { staticClass: "col col-md-12", attrs: { id: "res2" } },
-                  [_vm._v("Resultados: ")]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Direccion")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Tipo de comercio")]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("{{}}")]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("Ver Productos")]
-                ),
-              ]),
-            ]),
-          ]),
-        ]
-      ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio Base")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio Especial")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Fecha Final (precio especial)")]),
+      ]),
     ])
   },
   function () {
