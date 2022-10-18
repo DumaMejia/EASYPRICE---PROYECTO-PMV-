@@ -6650,6 +6650,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['form'],
   data: function data() {
@@ -6662,6 +6665,8 @@ __webpack_require__.r(__webpack_exports__);
       lista: [],
       buscar1: '',
       cantidad: '',
+      salario: '',
+      tipo: '',
       comercio: {
         accion: 'nuevo',
         id: 0,
@@ -6712,15 +6717,34 @@ __webpack_require__.r(__webpack_exports__);
       this.infoWindowOpened = true;
       this.productosfil.splice(0, this.productosfil.length);
       this.productos.forEach(function (productos) {
-        if (item.id == productos.idComercio) {
-          _this.productosfil.push({
-            idProducto: productos.idProducto,
-            IdComercio: productos.idComercio,
-            nombre: productos.nombre,
-            precio: productos.precio,
-            precioe: productos.precioe,
-            fechaf: productos.fechaf
+        if (item.idComercio == productos.idComercio) {
+          _this.lista.forEach(function (basicos) {
+            if (basicos.idBase == productos.idBase) {
+              _this.productosfil.push({
+                idProducto: productos.idProducto,
+                IdComercio: productos.idComercio,
+                nombre: productos.nombre,
+                precio: productos.precio,
+                precioe: productos.precioe,
+                fechaf: productos.fechaf
+              });
+            }
+
+            ;
           });
+
+          if (_this.lista.length == 0) {
+            _this.productosfil.push({
+              idProducto: productos.idProducto,
+              IdComercio: productos.idComercio,
+              nombre: productos.nombre,
+              precio: productos.precio,
+              precioe: productos.precioe,
+              fechaf: productos.fechaf
+            });
+          }
+
+          ;
         }
       });
     },
@@ -6741,6 +6765,8 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     obtenerProductobase: function obtenerProductobase(item) {
+      var _this2 = this;
+
       var repe = 0;
       this.lista.forEach(function (productos) {
         if (item.idBase == productos.idBase) {
@@ -6749,12 +6775,18 @@ __webpack_require__.r(__webpack_exports__);
       });
 
       if (repe == 0) {
-        this.lista.push({
-          idBase: item.idBase,
-          nombre: item.nombre,
-          precio: item.precio,
-          cantidad: this.cantidad
-        });
+        if (this.cantidad != "" && this.cantidad >= 1) {
+          this.lista.push({
+            idBase: item.idBase,
+            nombre: item.nombre,
+            precio: item.precio,
+            cantidad: this.cantidad
+          });
+        } else {
+          alertify.error("Por favor agrega una cantidad valida");
+        }
+
+        ;
       } else {
         alertify.error("Ya tienes este producto agregado");
       }
@@ -6768,8 +6800,17 @@ __webpack_require__.r(__webpack_exports__);
         precio = productos.precio;
         cantidad = productos.cantidad;
         total = total + precio * cantidad;
+
+        if (_this2.salario == "" || _this2.salario > total) {} else {
+          alertify.error("Te has pasado del salario establecido");
+          total = total - precio * cantidad;
+
+          _this2.lista.splice(_this2.lista.length - 1, _this2.lista.length);
+        }
+
+        ;
       });
-      document.getElementById("total").innerHTML = "Total: " + total;
+      document.getElementById("total").innerHTML = "Total: " + total.toFixed(2);
     },
     eliminarProductobase: function eliminarProductobase(item) {
       var var1 = 0;
@@ -6798,8 +6839,8 @@ __webpack_require__.r(__webpack_exports__);
       });
       document.getElementById("total").innerHTML = "Total: " + total;
     },
-    filtrarComercio: function filtrarComercio() {
-      var _this2 = this;
+    obtenerProducto: function obtenerProducto() {
+      var _this3 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       //productos
@@ -6813,9 +6854,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this2.productos = data;
+            _this3.productos = data;
             data.map(function (producto) {
-              var store = _this2.abrirStore('producto', 'readwrite'),
+              var store = _this3.abrirStore('producto', 'readwrite'),
                   query = store.put(producto);
 
               query.onsuccess = function (e) {
@@ -6831,37 +6872,88 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
 
-        _this2.productos = data.result.filter(function (producto) {
+        _this3.productos = data.result.filter(function (producto) {
           return producto.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || producto.nombrecomercio.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
         alertify.error("Error al obtener los productos ".concat(e.target.error));
-      }; //comercios 
+      };
+    },
+    filtrarComercio: function filtrarComercio() {
+      var _this4 = this;
 
+      this.productosfil.splice(0, this.productosfil.length);
+      document.getElementById("respo").innerHTML = "Resultados: " + this.productosfil.length;
+      this.obtenerProducto();
 
-      this.comerciosfil.splice(0, this.comerciosfil.length);
+      if (this.lista.length == 0) {
+        this.comerciosfil.splice(0, this.comerciosfil.length);
+        this.comercios.forEach(function (comercios) {
+          if (comercios.tipo == _this4.tipo || _this4.tipo == "" || _this4.tipo == "Todas" || _this4.tipo == "Selecciona Tipo De Empresa") {
+            _this4.comerciosfil.push({
+              idComercio: comercios.id,
+              direccion: comercios.direccion,
+              nombre: comercios.nombre,
+              latitude: comercios.latitude,
+              longitude: comercios.longitude,
+              tipo: comercios.tipo
+            });
+          }
+
+          ;
+        });
+      }
+
+      ;
+      var numcom = 0;
 
       if (this.lista.length > 0) {
-        this.obtenerDatos();
-        var numcom = 0;
+        this.comerciosfil.splice(0, this.comerciosfil.length);
         this.lista.forEach(function (basicos) {
-          _this2.productos.forEach(function (productos) {
+          _this4.productos.forEach(function (productos) {
             if (basicos.idBase == productos.idBase) {
               numcom = numcom + 1;
 
               if (numcom > 0) {
-                _this2.comercios.forEach(function (comercios) {
+                _this4.comercios.forEach(function (comercios) {
                   if (comercios.id == productos.idComercio) {
-                    _this2.comerciosfil.push({
-                      idComercio: comercios.id,
-                      direccion: comercios.direccion,
-                      nombre: comercios.nombre,
-                      latitude: comercios.latitude,
-                      longitude: comercios.longitude,
-                      tipo: comercios.tipo
-                    });
+                    if (_this4.comerciosfil.length > 0) {
+                      _this4.comerciosfil.forEach(function (comerciosfil) {
+                        if (comerciosfil.idComercio != productos.idComercio) {
+                          if (comercios.tipo == _this4.tipo || _this4.tipo == "" || _this4.tipo == "Todas" || _this4.tipo == "Selecciona Tipo De Empresa") {
+                            _this4.comerciosfil.push({
+                              idComercio: comercios.id,
+                              direccion: comercios.direccion,
+                              nombre: comercios.nombre,
+                              latitude: comercios.latitude,
+                              longitude: comercios.longitude,
+                              tipo: comercios.tipo
+                            });
+                          }
+
+                          ;
+                        } else {}
+
+                        ;
+                      });
+                    } else {
+                      if (comercios.tipo == _this4.tipo || _this4.tipo == "" || _this4.tipo == "Todas" || _this4.tipo == "Selecciona Tipo De Empresa") {
+                        _this4.comerciosfil.push({
+                          idComercio: comercios.id,
+                          direccion: comercios.direccion,
+                          nombre: comercios.nombre,
+                          latitude: comercios.latitude,
+                          longitude: comercios.longitude,
+                          tipo: comercios.tipo
+                        });
+                      }
+
+                      ;
+                    }
+
+                    ;
                   }
 
                   ;
@@ -6874,45 +6966,77 @@ __webpack_require__.r(__webpack_exports__);
             ;
           });
         });
-        this.comercios.splice(0, this.comercios.length);
-        this.comercios = this.comerciosfil;
-      }
-
-      ;
-
-      if (this.lista.length == 0) {
-        this.comercios.forEach(function (comercios) {
-          _this2.comerciosfil.push({
-            idComercio: comercios.id,
-            direccion: comercios.direccion,
-            nombre: comercios.nombre,
-            latitude: comercios.latitude,
-            longitude: comercios.longitude,
-            tipo: comercios.tipo
-          });
-        });
-        this.obtenerDatos();
       }
 
       ;
       document.getElementById("rescom").innerHTML = "Resultados: " + this.comerciosfil.length;
     },
     verProducto: function verProducto(item) {
-      var _this3 = this;
+      var _this5 = this;
 
       this.productosfil.splice(0, this.productosfil.length);
       this.productos.forEach(function (productos) {
-        if (item.id == productos.idComercio) {
-          _this3.productosfil.push({
-            idProducto: productos.idProducto,
-            IdComercio: productos.idComercio,
-            nombre: productos.nombre,
-            precio: productos.precio,
-            precioe: productos.precioe,
-            fechaf: productos.fechaf
+        if (item.idComercio == productos.idComercio) {
+          _this5.lista.forEach(function (basicos) {
+            if (basicos.idBase == productos.idBase) {
+              _this5.productosfil.push({
+                idProducto: productos.idProducto,
+                idBase: productos.idBase,
+                IdComercio: productos.idComercio,
+                nombre: productos.nombre,
+                precio: productos.precio,
+                precioe: productos.precioe,
+                fechaf: productos.fechaf
+              });
+            }
+
+            ;
           });
+
+          if (_this5.lista.length == 0) {
+            _this5.productosfil.push({
+              idProducto: productos.idProducto,
+              idBase: productos.idBase,
+              IdComercio: productos.idComercio,
+              nombre: productos.nombre,
+              precio: productos.precio,
+              precioe: productos.precioe,
+              fechaf: productos.fechaf
+            });
+          }
+
+          ;
         }
       });
+      document.getElementById("respo").innerHTML = "Resultados: " + this.productosfil.length;
+      var precio = 0;
+      var cantidad = 0;
+      var total = 0;
+      var fecha = new Date();
+      fecha = fecha.toISOString();
+      fecha = fecha.slice(0, 10);
+      this.productosfil.forEach(function (productos) {
+        _this5.lista.forEach(function (lista) {
+          if (lista.idBase == productos.idBase) {
+            if (productos.fechaf < fecha) {
+              precio = productos.precio;
+            }
+
+            ;
+
+            if (productos.fechaf >= fecha) {
+              precio = productos.precioe;
+            }
+
+            ;
+            cantidad = lista.cantidad;
+            total = total + precio * cantidad;
+          }
+
+          ;
+        });
+      });
+      document.getElementById("totalpo").innerHTML = "Total: " + total;
     },
     verUbicacion: function verUbicacion(item) {
       this.ubicacion.lat = parseFloat(item.latitude);
@@ -6965,11 +7089,11 @@ __webpack_require__.r(__webpack_exports__);
       ;
     },
     mapCentergps: function mapCentergps() {
-      var _this4 = this;
+      var _this6 = this;
 
       var gps;
       this.$getLocation({}).then(function (gps) {
-        _this4.ubicacion = gps;
+        _this6.ubicacion = gps;
       });
     },
     buscandoComercio: function buscandoComercio() {
@@ -6979,7 +7103,7 @@ __webpack_require__.r(__webpack_exports__);
       this.buscarBase(this.buscar1);
     },
     obtenerDatos: function obtenerDatos() {
-      var _this5 = this;
+      var _this7 = this;
 
       var valor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var store = this.abrirStore('comercio', 'readonly'),
@@ -6992,9 +7116,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (data) {
-            _this5.comercios = data;
+            _this7.comercios = data;
             data.map(function (comercio) {
-              var store = _this5.abrirStore('comercio', 'readwrite'),
+              var store = _this7.abrirStore('comercio', 'readwrite'),
                   query = store.put(comercio);
 
               query.onsuccess = function (e) {
@@ -7006,17 +7130,17 @@ __webpack_require__.r(__webpack_exports__);
               };
             });
           })["catch"](function (err) {
-            _this5.comercio.msg = "Error al guardar el comercio ".concat(err);
+            _this7.comercio.msg = "Error al guardar el comercio ".concat(err);
           });
         }
 
-        _this5.comercios = data.result.filter(function (comercio) {
+        _this7.comercios = data.result.filter(function (comercio) {
           return comercio.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase()) > -1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
       };
 
       data.onerror = function (e) {
-        _this5.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
+        _this7.comercio.msg = "Error al obtener los comercios ".concat(e.target.error);
       }; //otener productos base 
 
 
@@ -7030,9 +7154,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (databa) {
-            _this5.basicos = databa;
+            _this7.basicos = databa;
             databa.map(function (basico) {
-              var storeba = _this5.abrirStore('basico', 'readwrite'),
+              var storeba = _this7.abrirStore('basico', 'readwrite'),
                   query = storeba.put(basico);
 
               query.onsuccess = function (e) {
@@ -7049,10 +7173,10 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         var valor1 = "";
-        _this5.basicos = databa.result.filter(function (basico) {
+        _this7.basicos = databa.result.filter(function (basico) {
           return basico.ncategoria.toLowerCase().indexOf(valor1.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor1.toLowerCase()) > -1;
         });
-        document.getElementById("res2").innerHTML = "Resultados: " + _this5.basicos.length;
+        document.getElementById("res2").innerHTML = "Resultados: " + _this7.basicos.length;
       };
 
       data.onerror = function (e) {
@@ -7060,7 +7184,7 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     buscarBase: function buscarBase(valor) {
-      var _this6 = this;
+      var _this8 = this;
 
       var storeba = this.abrirStore('basico', 'readonly'),
           databa = storeba.getAll();
@@ -7072,9 +7196,9 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (res) {
             return res.json();
           }).then(function (databa) {
-            _this6.basicos = databa;
+            _this8.basicos = databa;
             databa.map(function (basico) {
-              var storeba = _this6.abrirStore('basico', 'readwrite'),
+              var storeba = _this8.abrirStore('basico', 'readwrite'),
                   query = storeba.put(basico);
 
               query.onsuccess = function (e) {
@@ -7090,10 +7214,10 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
 
-        _this6.basicos = databa.result.filter(function (basico) {
+        _this8.basicos = databa.result.filter(function (basico) {
           return basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
-        document.getElementById("res2").innerHTML = "Resultados: " + _this6.basicos.length;
+        document.getElementById("res2").innerHTML = "Resultados: " + _this8.basicos.length;
       };
 
       data.onerror = function (e) {
@@ -7119,7 +7243,21 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       };
 
-      alertify.alert("El filtro de ubicaci\xF3n accede a tu ubicaci\xF3n actual siempre y cuando hayas dado el permiso requerido.");
+      alertify.alert("El filtro de ubicaci\xF3n accede a tu ubicaci\xF3n actual siempre y cuando hayas dado el permiso requerido.").setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    indifiltros: function indifiltros() {
+      document.oncontextmenu = function () {
+        return false;
+      };
+
+      alertify.alert("Con el uso de los filtros puedes especificar el salario y tipo de comercio que deseas buscar. adem\xE1s de crear la lista de productos que necesites. tambi\xE9n puedes solamente ver los comercios disponibles que se encuentran en la aplicaci\xF3n y usar los filtros de navegaci\xF3n para guiarte. Empiezas la b\xFAsqueda al oprimir el bot\xF3n \u2018Filtrar\u2019").setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    indiCom: function indiCom() {
+      document.oncontextmenu = function () {
+        return false;
+      };
+
+      alertify.alert("En este apartado veras los comercios que coinciden con tus criterios de b\xFAsqueda. Al hacer clic en \"Ver Productos\" en un comercio de la tabla veras el listado de productos y el precio orientado a tus valores de b\xFAsqueda").setHeader('<img  src="image/logo2.png" width="100" height="30">');
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -34452,7 +34590,10 @@ var render = function () {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card-header text-white bg-warning text-center" },
+          {
+            staticClass: "card-header text-white bg-warning text-center",
+            on: { contextmenu: _vm.indifiltros },
+          },
           [_vm._v("\n                Filtros de busqueda\n                ")]
         ),
         _vm._v(" "),
@@ -34461,7 +34602,42 @@ var render = function () {
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col border border-dark" }, [
-                  _vm._m(0),
+                  _c("div", { staticClass: "row p-1" }, [
+                    _c("div", { staticClass: "col col-md-4" }, [
+                      _vm._v("Salario:"),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.salario,
+                            expression: "salario",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        staticStyle: { width: "250px" },
+                        attrs: {
+                          title: "SALARIO",
+                          required: "",
+                          type: "number",
+                          step: "0.01",
+                          pattern: "[0-9]{3,10}",
+                        },
+                        domProps: { value: _vm.salario },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.salario = $event.target.value
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row p-1" }, [
                     _c(
@@ -34481,8 +34657,8 @@ var render = function () {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.comercio.tipo,
-                              expression: "comercio.tipo",
+                              value: _vm.tipo,
+                              expression: "tipo",
                             },
                           ],
                           staticClass: "form-select",
@@ -34498,19 +34674,19 @@ var render = function () {
                                   var val = "_value" in o ? o._value : o.value
                                   return val
                                 })
-                              _vm.$set(
-                                _vm.comercio,
-                                "tipo",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
+                              _vm.tipo = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
                             },
                           },
                         },
                         [
                           _c("option", { attrs: { selected: "" } }, [
                             _vm._v("Selecciona Tipo De Empresa"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Todas" } }, [
+                            _vm._v("Todas"),
                           ]),
                           _vm._v(" "),
                           _c(
@@ -34541,7 +34717,7 @@ var render = function () {
                       _c(
                         "table",
                         {
-                          staticClass: "table table-light table-striped",
+                          staticClass: "table table-light table-striped scroll",
                           attrs: { id: "tabla" },
                         },
                         [
@@ -34592,7 +34768,7 @@ var render = function () {
                               ]),
                             ]),
                             _vm._v(" "),
-                            _vm._m(1),
+                            _vm._m(0),
                           ]),
                           _vm._v(" "),
                           _c(
@@ -34664,14 +34840,16 @@ var render = function () {
                   _c(
                     "table",
                     {
-                      staticClass: "table table-light table-striped",
+                      staticClass: "table table-light table-striped scroll",
+                      staticStyle: { width: "400px" },
                       attrs: { id: "tablalista" },
                     },
                     [
-                      _vm._m(2),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c(
                         "tbody",
+                        { staticStyle: { height: "466px" } },
                         _vm._l(_vm.lista, function (item) {
                           return _c("tr", { key: item.idBase }, [
                             _c("td", [_vm._v(_vm._s(item.nombre))]),
@@ -34705,7 +34883,7 @@ var render = function () {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-warning",
+                      staticClass: "btn btn-warning text-white",
                       attrs: { type: "button" },
                       on: {
                         click: function ($event) {
@@ -34724,15 +34902,17 @@ var render = function () {
                   _c(
                     "table",
                     {
-                      staticClass: "table table-light table-striped",
+                      staticClass: "table table-light table-striped scroll",
                       staticStyle: { width: "500px" },
                       attrs: { id: "tabla" },
+                      on: { contextmenu: _vm.indiCom },
                     },
                     [
-                      _vm._m(3),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "tbody",
+                        { staticStyle: { height: "190px" } },
                         _vm._l(_vm.comerciosfil, function (item) {
                           return _c("tr", { key: item.idComercio }, [
                             _c("td", [_vm._v(_vm._s(item.nombre))]),
@@ -34784,24 +34964,33 @@ var render = function () {
                   _c(
                     "table",
                     {
-                      staticClass: "table table-light table-striped",
+                      staticClass: "table table-light table-striped scroll",
                       staticStyle: { width: "500px" },
                       attrs: { id: "tabla" },
                     },
                     [
-                      _vm._m(4),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c(
                         "tbody",
+                        { staticStyle: { height: "150px" } },
                         _vm._l(_vm.productosfil, function (item) {
                           return _c("tr", { key: item.idProducto }, [
-                            _c("td", [_vm._v(_vm._s(item.nombre))]),
+                            _c("td", { staticStyle: { width: "150px" } }, [
+                              _vm._v(_vm._s(item.nombre)),
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.precio))]),
+                            _c("td", { staticStyle: { width: "150px" } }, [
+                              _vm._v(_vm._s(item.precio)),
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.precioe))]),
+                            _c("td", { staticStyle: { width: "150px" } }, [
+                              _vm._v(_vm._s(item.precioe)),
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.fechaf))]),
+                            _c("td", { staticStyle: { width: "150px" } }, [
+                              _vm._v(_vm._s(item.fechaf)),
+                            ]),
                           ])
                         }),
                         0
@@ -34823,9 +35012,9 @@ var render = function () {
                 "GmapMap",
                 {
                   staticStyle: {
-                    width: "1200px",
-                    height: "400px",
-                    margin: "32px auto",
+                    width: "1300px",
+                    height: "600px",
+                    "margin-left": "1px",
                   },
                   attrs: {
                     center: _vm.ubicacion,
@@ -34867,7 +35056,7 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._l(_vm.comercios, function (item) {
+                  _vm._l(_vm.comerciosfil, function (item) {
                     return _c("GmapMarker", {
                       key: item.id,
                       attrs: {
@@ -34889,35 +35078,13 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _vm._m(5),
+          _vm._m(4),
         ]),
       ]),
     ]),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row p-1" }, [
-      _c("div", { staticClass: "col col-md-4" }, [_vm._v("Salario:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col col-md-4" }, [
-        _c("input", {
-          staticClass: "form-control",
-          staticStyle: { width: "250px" },
-          attrs: {
-            title: "SALARIO",
-            required: "",
-            type: "number",
-            step: "0.01",
-            pattern: "[0-9]{3,10}",
-          },
-        }),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -34936,10 +35103,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { colspan: "8" } }, [
-          _c("div", { staticClass: "col col-md-12", attrs: { id: "res3" } }, [
-            _vm._v("Resultados: "),
-          ]),
+        _c("th", { attrs: { colspan: "10" } }, [
+          _c(
+            "div",
+            {
+              staticClass: "col col-md-12",
+              staticStyle: { width: "400px" },
+              attrs: { id: "res3" },
+            },
+            [_vm._v("Resultados: ")]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -34968,9 +35141,15 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { colspan: "8" } }, [
-          _c("div", { staticClass: "col col-md-12", attrs: { id: "rescom" } }, [
-            _vm._v("Resultados: "),
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "col col-md-12",
+              staticStyle: { width: "400px" },
+              attrs: { id: "rescom" },
+            },
+            [_vm._v("Resultados: ")]
+          ),
         ]),
       ]),
       _vm._v(" "),
@@ -34990,20 +35169,39 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { colspan: "8" } }, [
-          _c("div", { staticClass: "col col-md-12", attrs: { id: "respo" } }, [
-            _vm._v("Resultados: "),
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "col col-md-12",
+              staticStyle: { width: "400px" },
+              attrs: { id: "respo" },
+            },
+            [_vm._v("Resultados: ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col col-md-12",
+              attrs: { id: "totalpo", value: "0" },
+            },
+            [_vm._v("Total: ")]
+          ),
         ]),
       ]),
       _vm._v(" "),
       _c("tr", [
-        _c("th", [_vm._v("Nombre")]),
+        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Precio Base")]),
+        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Precio Base")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Precio Especial")]),
+        _c("th", { staticStyle: { width: "150px" } }, [
+          _vm._v("Precio Especial"),
+        ]),
         _vm._v(" "),
-        _c("th", [_vm._v("Fecha Final (precio especial)")]),
+        _c("th", { staticStyle: { width: "150px" } }, [
+          _vm._v("Fecha Final (precio especial)"),
+        ]),
       ]),
     ])
   },

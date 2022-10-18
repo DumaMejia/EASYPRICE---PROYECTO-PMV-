@@ -50,7 +50,7 @@
     </div>
 
     
-                <div class="card-header text-white bg-warning text-center">
+                <div class="card-header text-white bg-warning text-center" @contextmenu="indifiltros">
                 Filtros de busqueda
                 </div>
                  
@@ -64,14 +64,15 @@
                             <div class="row p-1">
                         <div class="col col-md-4">Salario:</div>
                         <div class="col col-md-4">
-                            <input title="SALARIO" required type="number" step="0.01" pattern="[0-9]{3,10}"  class="form-control" style="width : 250px">
+                            <input title="SALARIO" required type="number" step="0.01" pattern="[0-9]{3,10}" v-model="salario" class="form-control" style="width : 250px">
                         </div>
                     </div>
                     <div class="row p-1" >
                             <div   visibility="hidden" class="col col-md-4">Tipo de comercio:</div>
                             <div class="col col-md-4">
-                                <select  v-model="comercio.tipo" class="form-select" aria-label=".form-select-sm example" style="width : 250px">
+                                <select  v-model="tipo" class="form-select"  aria-label=".form-select-sm example" style="width : 250px" >
                                     <option  selected>Selecciona Tipo De Empresa</option>
+                                    <option value="Todas">Todas</option>
                                     <option value="Pequeña Empresa">Pequeña Empresa</option>
                                     <option value="Mediana Empresa">Mediana Empresa</option>
                                     <option value="Gran Empresa">Gran Empresa</option>
@@ -84,7 +85,7 @@
 
                         <div class="col col-md-7" >
                             Buscar productos
-                            <table class="table table-light table-striped" id="tabla">
+                            <table class="table table-light table-striped scroll" id="tabla">
                             <thead>
                                 <tr>
                                     <th colspan="8">
@@ -99,6 +100,7 @@
                                     <th>Nombre</th>
                                     <th>Precio Sugerido</th>
                                     <th>Cantidad</th>
+                                    
                                 
                                 </tr>
                             </thead>
@@ -129,25 +131,25 @@
                         </div>
                         <div class="col border border-dark">
                             Lista de productos
-                            <table class="table table-light table-striped" id="tablalista" >
+                            <table class="table table-light table-striped scroll" id="tablalista" style="width: 400px">
                             <thead>
                                 <tr>
-                                    <th colspan="8">
+                                    <th colspan="10">
                                     
-                                        <div class="col col-md-12"  id="res3"  >Resultados: </div>
+                                        <div class="col col-md-12"  id="res3" style="width: 400px" >Resultados: </div>
                                         <div class="col col-md-12"  id="total" value="0">Total: </div>
                                         
                                     </th>
                                 </tr>
                                 
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th >Nombre</th>
                                     <th>Precio Sugerido</th>
                                     <th>Cantidad</th>
                                 
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="height: 466px;">
                                 <tr v-for="item in lista" :key="item.idBase">
                                     <td>{{item.nombre}}</td>
                                     <td>{{item.precio}}</td>
@@ -161,15 +163,15 @@
                         </table>
                         
 
-                        <button type="button" class="btn btn-warning"  @click="filtrarComercio()">Filtrar</button>
+                        <button type="button" class="btn btn-warning text-white"  @click="filtrarComercio()">Filtrar</button>
                         </div>
                         <div class="col border border-dark">
                             Comercios Disponibles
-                        <table class="table table-light table-striped" id="tabla" style="width: 500px" >
+                        <table class="table table-light table-striped scroll" id="tabla" style="width: 500px" @contextmenu="indiCom" >
                             <thead>
                                 <tr>
                                     <th colspan="8">
-                                        <div class="col col-md-12"  id="rescom" >Resultados: </div>
+                                        <div class="col col-md-12"  id="rescom" style="width: 400px">Resultados: </div>
                                     </th>
                                 </tr>
                                 
@@ -180,7 +182,7 @@
                                 
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="height: 190px;">
                                 <tr  v-for="item in comerciosfil" :key="item.idComercio">
                                     <td>{{item.nombre}}</td>
                                     <td>{{item.direccion}}</td>
@@ -199,28 +201,29 @@
                        
                        
                             Productos Disponibles
-                        <table class="table table-light table-striped" id="tabla" style="width: 500px">
+                        <table class="table table-light table-striped scroll" id="tabla" style="width: 500px">
                             <thead>
                                 <tr>
                                     <th colspan="8">
-                                        <div class="col col-md-12"  id="respo" >Resultados: </div>
+                                        <div class="col col-md-12"  id="respo" style="width: 400px">Resultados: </div>
+                                        <div class="col col-md-12"  id="totalpo" value="0">Total: </div>
                                     </th>
                                 </tr>
                                 
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Precio Base</th>
-                                    <th>Precio Especial</th>
-                                    <th>Fecha Final (precio especial)</th>
+                                    <th style="width: 150px">Nombre</th>
+                                    <th style="width: 150px">Precio Base</th>
+                                    <th style="width: 150px">Precio Especial</th>
+                                    <th style="width: 150px">Fecha Final (precio especial)</th>
                                 
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="height: 150px;">
                                 <tr v-for="item in productosfil" :key="item.idProducto">
-                                    <td>{{item.nombre}}</td>
-                                    <td>{{item.precio}}</td>
-                                    <td>{{item.precioe}}</td>
-                                    <td>{{item.fechaf}}</td>
+                                    <td style="width: 150px">{{item.nombre}}</td>
+                                    <td style="width: 150px">{{item.precio}}</td>
+                                    <td style="width: 150px">{{item.precioe}}</td>
+                                    <td style="width: 150px">{{item.fechaf}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -252,7 +255,7 @@
                     :zoom="14"
 
                     map-type-id="roadmap"
-                    style="width: 1200px; height: 400px; margin: 32px auto"
+                    style="width: 1300px; height: 600px; margin-left: 1px;"
                     >
                     <Gmap-info-window 
                     :option="infoWindowOptions" 
@@ -267,7 +270,7 @@
                     
                     </Gmap-info-window>
                     <GmapMarker
-                        v-for="item in comercios"
+                        v-for="item in comerciosfil"
                         :key="item.id"
                        :position="getMark(item)"
                        :clickable="true"
@@ -446,6 +449,8 @@
                 lista: [],
                 buscar1: '',
                 cantidad: '',
+                salario: '',
+                tipo: '',
                 comercio:{
                     accion : 'nuevo',
                     id : 0,
@@ -499,14 +504,24 @@
                 this.productosfil.splice(0, this.productosfil.length);
 
 
-
                 this.productos.forEach(productos =>{
-                   if(item.id == productos.idComercio){
+                   if(item.idComercio == productos.idComercio){
+                    this.lista.forEach(basicos =>{
+                        if(basicos.idBase == productos.idBase){
+                            this.productosfil.push({idProducto : productos.idProducto, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+                        };
 
-                    this.productosfil.push({idProducto : productos.idProducto, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+                    });
+                    if(this.lista.length==0){
+                        this.productosfil.push({idProducto : productos.idProducto, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+                    };
+
+                    
 
                    }    
                 });
+
+
                 
             }, 
             handleInfoWindowClose(){
@@ -537,7 +552,12 @@
                 });
 
                 if(repe == 0){
-                    this.lista.push({idBase : item.idBase, nombre : item.nombre, precio : item.precio, cantidad : this.cantidad});
+                    if(this.cantidad != "" && this.cantidad >= 1){
+                        this.lista.push({idBase : item.idBase, nombre : item.nombre, precio : item.precio, cantidad : this.cantidad});
+                    }else{
+                        alertify.error(`Por favor agrega una cantidad valida`)
+                    };
+                    
                 }else{
                     alertify.error(`Ya tienes este producto agregado`)
                 };
@@ -554,14 +574,31 @@
                  cantidad = productos.cantidad;
 
                  total = total + precio * cantidad;
+                 if(this.salario == "" || this.salario > total){
+                    
+                }else{
+                    alertify.error(`Te has pasado del salario establecido`)
+                    total = total - precio * cantidad;
+                    this.lista.splice(this.lista.length - 1, this.lista.length);
+                    
+
+                };
                 });
 
-                document.getElementById("total").innerHTML = "Total: " + total;
+                
+
+                
+
+                
+                
+
+                document.getElementById("total").innerHTML = "Total: " + total.toFixed(2);
 
                 
             },
 
             eliminarProductobase(item){
+                
 
               
                 let var1 = 0;
@@ -603,11 +640,11 @@
 
             },
 
-            filtrarComercio(valor=''){
+            obtenerProducto(valor=''){
 
-                //productos
+                 //productos
 
-                let store = this.abrirStore('producto', 'readonly'),
+                 let store = this.abrirStore('producto', 'readonly'),
                     data = store.getAll();
                 data.onsuccess = e=>{
                     if( data.result.length<=0 ){
@@ -637,32 +674,64 @@
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los productos ${e.target.error}`);
                 };
-                
-                
+
+            },
+
+            filtrarComercio(){
+
+                this.productosfil.splice(0, this.productosfil.length);
+                document.getElementById("respo").innerHTML = "Resultados: " + this.productosfil.length;
+                this.obtenerProducto();
+
+                if(this.lista.length == 0){
+                    this.comerciosfil.splice(0, this.comerciosfil.length);
+                    this.comercios.forEach(comercios =>{
+                        if(comercios.tipo == this.tipo || this.tipo == "" || this.tipo == "Todas" || this.tipo == "Selecciona Tipo De Empresa"){
+                            this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
+                        };
+                        
+                    
+                    });
+                };
+
+                let numcom = 0;
                 
 
+                if(this.lista.length > 0){
 
-
-                //comercios 
-                
-
-                this.comerciosfil.splice(0, this.comerciosfil.length);
-                if(this.lista.length>0){
-                    this.obtenerDatos();
-                    let numcom = 0;
-                    this.lista.forEach(basicos =>{
+                        this.comerciosfil.splice(0, this.comerciosfil.length);
+                        this.lista.forEach(basicos =>{
                         this.productos.forEach(productos =>{
-
+                            
                          if(basicos.idBase == productos.idBase){
                             numcom = numcom + 1;
-                            if(numcom>0){
-
+                            if(numcom > 0){
                                 this.comercios.forEach(comercios =>{
 
-                                    if(comercios.id == productos.idComercio){
 
-                                        this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
+                                    if(comercios.id == productos.idComercio){
+                                        if(this.comerciosfil.length > 0){
+                                            this.comerciosfil.forEach(comerciosfil =>{
+                                            if(comerciosfil.idComercio !=  productos.idComercio){
+                                                if(comercios.tipo == this.tipo || this.tipo == "" || this.tipo == "Todas" || this.tipo == "Selecciona Tipo De Empresa"){
+                                                    this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
+                                                };
+                                                
+                                            }else{
+                                                
+                                            };
+                                        });
+                                        }else{
+                                            if(comercios.tipo == this.tipo || this.tipo == "" || this.tipo == "Todas" || this.tipo == "Selecciona Tipo De Empresa"){
+                                                this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
+                                            };
+                                            
+                                        };
+                                        
+                                        
                                     };
+
+                                    
 
                                     
 
@@ -680,25 +749,17 @@
 
                         
                     });
-                    this.comercios.splice(0, this.comercios.length);
-                    this.comercios = this.comerciosfil;
-                };
-                    
+
 
                     
-
-                    if(this.lista.length == 0){
-                            this.comercios.forEach(comercios =>{
-                            this.comerciosfil.push({idComercio : comercios.id, direccion : comercios.direccion, nombre : comercios.nombre, latitude : comercios.latitude,  longitude : comercios.longitude, tipo : comercios.tipo});
-                        });
-                        this.obtenerDatos();
-                    };
-
-                    
-
-
                    
-                    document.getElementById("rescom").innerHTML = "Resultados: " + this.comerciosfil.length;
+                };
+
+                    
+
+
+                document.getElementById("rescom").innerHTML = "Resultados: " + this.comerciosfil.length;
+                    
                
 
 
@@ -706,19 +767,57 @@
 
             },
 
+
             verProducto(item){
 
                 this.productosfil.splice(0, this.productosfil.length);
 
 
                 this.productos.forEach(productos =>{
-                   if(item.id == productos.idComercio){
+                   if(item.idComercio == productos.idComercio){
+                    this.lista.forEach(basicos =>{
+                        if(basicos.idBase == productos.idBase){
+                            this.productosfil.push({idProducto : productos.idProducto, idBase : productos.idBase, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+                        };
 
-                    this.productosfil.push({idProducto : productos.idProducto, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+                    });
+                    if(this.lista.length==0){
+                        
+                        this.productosfil.push({idProducto : productos.idProducto, idBase : productos.idBase, IdComercio : productos.idComercio, nombre : productos.nombre, precio : productos.precio,  precioe : productos.precioe, fechaf : productos.fechaf});
+                    };
+
+                    
 
                    }    
                 });
 
+                document.getElementById("respo").innerHTML = "Resultados: " + this.productosfil.length;
+
+                let precio = 0;
+                let cantidad = 0;
+                let total = 0;
+                let fecha = new Date();
+                fecha = fecha.toISOString();
+                fecha = fecha.slice(0, 10)
+
+                this.productosfil.forEach(productos =>{
+                    this.lista.forEach(lista =>{
+                        if(lista.idBase == productos.idBase){
+                            if(productos.fechaf < fecha){
+                                precio =  productos.precio;
+                            };
+                            if(productos.fechaf >= fecha){
+                                precio =  productos.precioe;
+                            };
+                            
+                            
+                            cantidad = lista.cantidad;
+                            total = total + precio * cantidad;
+                        };
+                    });
+                });
+
+                document.getElementById("totalpo").innerHTML = "Total: " + total;
 
             },
             verUbicacion(item){
@@ -819,10 +918,13 @@
                     }
                     this.comercios = data.result.filter(comercio=>comercio.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.tipo.toLowerCase().indexOf(valor.toLowerCase())>-1 || comercio.codigo.toLowerCase().indexOf(valor.toLowerCase())>-1);
                     
+                    
                 };
                 data.onerror = e=>{
                     this.comercio.msg = `Error al obtener los comercios ${e.target.error}`;
                 };
+
+                
 
                 //otener productos base 
 
@@ -919,7 +1021,15 @@
             },
             indigps(){
                 document.oncontextmenu = function(){return false;};
-                alertify.alert(`El filtro de ubicación accede a tu ubicación actual siempre y cuando hayas dado el permiso requerido.`)
+                alertify.alert(`El filtro de ubicación accede a tu ubicación actual siempre y cuando hayas dado el permiso requerido.`).setHeader('<img  src="image/logo2.png" width="100" height="30">');
+            },
+            indifiltros(){
+                document.oncontextmenu = function(){return false;};
+                alertify.alert(`Con el uso de los filtros puedes especificar el salario y tipo de comercio que deseas buscar. además de crear la lista de productos que necesites. también puedes solamente ver los comercios disponibles que se encuentran en la aplicación y usar los filtros de navegación para guiarte. Empiezas la búsqueda al oprimir el botón ‘Filtrar’`).setHeader('<img  src="image/logo2.png" width="100" height="30">'); 
+            },
+            indiCom(){
+                document.oncontextmenu = function(){return false;};
+                alertify.alert(`En este apartado veras los comercios que coinciden con tus criterios de búsqueda. Al hacer clic en "Ver Productos" en un comercio de la tabla veras el listado de productos y el precio orientado a tus valores de búsqueda`).setHeader('<img  src="image/logo2.png" width="100" height="30">'); 
             },
            
         },
