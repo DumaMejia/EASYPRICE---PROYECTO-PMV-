@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header text-white  bg-primary">{{ __('Verifica Tu Direccion de Email') }}</div>
                 <div class="card-body">
-                <p align="center"><img  src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="150" height="150"></p>
+                <p align="center"><img alt="" src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="150" height="150"></p>
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('Un Nuevo Link De Verificacion Ha Sido Enviado') }}

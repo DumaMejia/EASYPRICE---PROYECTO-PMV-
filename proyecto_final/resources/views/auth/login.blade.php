@@ -60,8 +60,8 @@
 
                                 <a href="{{ route('login.google') }}">
                                         <button type="button" class="btn btn-outline-primary">
-                                            <i class="fa fa-google mr-2"></i>
-                                            <img  src="image/google1.png" width="20" height="20">
+                                            <em class="fa fa-google mr-2"></em>
+                                            <img alt="" src="image/google1.png" width="20" height="20">
                                             {{ __('Iniciar sesion con google') }}
                                         </button>
                                     </a>

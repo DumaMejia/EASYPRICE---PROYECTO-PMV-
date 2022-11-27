@@ -7609,7 +7609,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       fecha = fecha.slice(0, 10);
 
       if (this.producto.precio > this.producto.precioe) {
-        if (this.producto.fechai < this.producto.fechaf || this.producto.fechai == "" & this.producto.fechaf == "") {
+        if (this.producto.fechai < this.producto.fechaf || this.producto.fechai == "" && this.producto.fechaf == "") {
           if (this.producto.fechai >= fecha) {
             var metodo = 'PUT',
                 url = "/producto/".concat(this.producto.id);
