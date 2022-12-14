@@ -80,9 +80,17 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Opciones</a>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('NewPassword') }}">Mi Cuenta</a></li>
-                            <li><a class="dropdown-item" href="#">Permisos</a></li>
-                            <li><a class="dropdown-item" href="#">Notificaciónes</a></li>
+                            <li><a class="dropdown-item"  href="{{ route('NewPassword') }}">Mi Cuenta</a></li>
+                            <li>
+                            <div class="form-check form-switch">
+                            <input class="form-check-input" @click="this.gps()" type="checkbox" role="switch" id="SwitchGps">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">GPS</label>
+                            </div></li>
+                            <li><div class="form-check form-switch">
+                            <input class="form-check-input" @click="this.notification()" type="checkbox" role="switch" id="SwitchNoti">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Notificaciones</label>
+                            </div></li>
+                            <li><a @click="abrirayudaCu()" class="dropdown-item" href="#">Ayuda</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -99,6 +107,93 @@
     <script src="https://unpkg.com/vue-resizable@1"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+            
+            function cargar(){
+                this.$refs['mapa'].obtenerDatos();
+            };
+            window.onload = function cargarcomentarios(){
+
+                navigator.geolocation.getCurrentPosition(sucess, error);
+                
+                if(Notification.permission == "granted"){
+                    document.getElementById('SwitchNoti').disabled = true;
+                    document.getElementById('SwitchNoti').checked = true;
+                };
+                if(Notification.permission !== "granted"){
+                    document.getElementById('SwitchNoti').checked = false;
+                };
+                if(Notification.permission !== "granted"){
+                        Notification.requestPermission(susnot);
+                    };
+
+            };
+
+
+            function gps(){
+                if(document.getElementById('SwitchGps').checked){
+                    if (navigator.geolocation){
+                            navigator.geolocation.getCurrentPosition(sucess, error); 
+                     };
+                }else{
+                    
+                };
+            };
+
+            function sucess(geolocationPosition){
+                document.getElementById('SwitchGps').checked = true;
+                document.getElementById('SwitchGps').disabled = true;
+                let coords = geolocationPosition.coords;
+                 localStorage.setItem('lat', coords.latitude);
+                localStorage.setItem('lng', coords.longitude);
+             };
+
+             function error(err){
+                alertify.alert('Si quieres usar las funciones de GPS primero debes otorgar permisos de ubicacion a la aplicacion en tu navegador').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+                document.getElementById('SwitchGps').checked = false;
+                document.getElementById('SwitchGps').checked;
+             };
+
+             function notification(){
+                if(document.getElementById('SwitchNoti').checked){
+                    if(!Notification){
+                        alertify.alert('El navegador no soporta notificaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+
+                        return
+                    };
+                    if(Notification.permission !== "granted"){
+                        Notification.requestPermission();
+                        if(Notification.permission == "granted"){
+                            document.getElementById('SwitchNoti').checked = true;
+                            document.getElementById('SwitchNoti').disabled = true;
+                        }else{
+                            alertify.alert('Si quieres usar las funciones de GPS primero debes otorgar permisos de notificaciones a la aplicacion en tu navegador').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+                            document.getElementById('SwitchNoti').checked = false;
+
+                        };
+                    };
+                };
+
+             };
+
+             function susnot(granted){
+
+                if(Notification.permission !== "granted"){
+                    document.getElementById('SwitchNoti').checked = false;
+                    document.getElementById('SwitchNoti').disabled = false;
+                };
+                if(Notification.permission == "granted"){
+                    document.getElementById('SwitchNoti').checked = true;
+                    document.getElementById('SwitchNoti').disabled = true;
+                };
+
+
+             };
+
+
+
+
+        </script>
     
 </body>
 

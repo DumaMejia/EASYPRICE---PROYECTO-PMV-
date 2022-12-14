@@ -35,7 +35,6 @@
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ url('/') }}">Inicio</a></li>
                             <li><a id="admi" class="dropdown-item" href="{{ url('/welcome') }}">Administracion</a></li>
-                            <li><a class="dropdown-item" href="#">Chat de usuarios</a></li>
                             </ul>
                         </li>
                     </ul>

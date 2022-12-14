@@ -25,7 +25,7 @@
     </head>
             
     <body> 
-    <div id="app">
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-dark bg-primary  text-white">
             <div class="container-fluid">
             <img alt="" src="image/easypricelogo.png" width="100" height="30">
@@ -34,10 +34,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Menu</a>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inicio</a></li>
-                            <li><a id="admi" class="dropdown-item" href="{{ url('/welcome') }}">Administracion</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/chat') }}">Chat de usuarios</a></li>
-                            <li><a @click="abrirForm('mapa')" class="dropdown-item" href="#">Mapa</a></li>
+                            <li><a @click="abririnicio('inicio')" class="dropdown-item" href="#">Inicio</a></li>
+                            <li><a id="admi" class="dropdown-item"  href="{{ url('/welcome') }}">Administracion</a></li>
+                            <li><a @click="abrirmapa('mapa')" class="dropdown-item" href="#">Mapa</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -80,8 +79,16 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Opciones</a>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item"  href="{{ route('NewPassword') }}">Mi Cuenta</a></li>
-                            <li><a class="dropdown-item" href="#">Permisos</a></li>
-                            <li><a class="dropdown-item" href="#">Notificaciónes</a></li>
+                            <li>
+                            <div class="form-check form-switch">
+                            <input class="form-check-input" @click="this.gps()" type="checkbox" role="switch" id="SwitchGps">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">GPS</label>
+                            </div></li>
+                            <li><div class="form-check form-switch">
+                            <input class="form-check-input" @click="this.notification()" type="checkbox" role="switch" id="SwitchNoti">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Notificaciones</label>
+                            </div></li>
+                            <li><a @click="abrirayuda('favoritos')" class="dropdown-item" href="#">Ayuda</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -89,20 +96,112 @@
             </div>
         </nav>
         <mapa-component v-bind:form="forms" ref="mapa" v-show="forms['mapa'].mostrar" ></mapa-component>
+        <favoritos-component v-bind:form="forms" ref="favoritos" v-show="forms['favoritos'].mostrar" ></favoritos-component>
+        <inicio-component v-bind:form="forms" ref="inicio" v-show="forms['inicio'].mostrar" ></inicio-component>
     </div>
     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.min.js"></script>
         <script src="https://unpkg.com/vue-resizable@1"></script>
-        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> 
         <script src="{{ asset('js/app.js') }}"></script> 
         <script>
             if("{{ Auth::user()->name }}"!='admin'){
                         document.getElementById('admi').style.display = 'none';
-                    }
+             };
+            
             window.onload = function cargarcomentarios(){
-                alertify.alert('Bienvenido a EASYPRICE. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">'); ;
+
+                
+
+                navigator.geolocation.getCurrentPosition(sucess, error);
+                
+                if(Notification.permission == "granted"){
+                    document.getElementById('SwitchNoti').disabled = true;
+                    document.getElementById('SwitchNoti').checked = true;
+                };
+                if(Notification.permission !== "granted"){
+                    document.getElementById('SwitchNoti').checked = false;
+                };
+                if(Notification.permission !== "granted"){
+                        Notification.requestPermission(susnot);
+                    };
+
+                    
             };
+
+
+            function gps(){
+                if(document.getElementById('SwitchGps').checked){
+                    if (navigator.geolocation){
+                            navigator.geolocation.getCurrentPosition(sucess, error); 
+                     };
+                }else{
+                    
+                };
+            };
+
+            function sucess(geolocationPosition){
+                document.getElementById('SwitchGps').checked = true;
+                document.getElementById('SwitchGps').disabled = true;
+                let coords = geolocationPosition.coords;
+                 localStorage.setItem('lat', coords.latitude);
+                localStorage.setItem('lng', coords.longitude);
+             };
+
+             function error(err){
+                alertify.alert('Si quieres usar las funciones de GPS primero debes otorgar permisos de ubicacion a la aplicacion en tu navegador').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+                document.getElementById('SwitchGps').checked = false;
+                document.getElementById('SwitchGps').checked;
+             };
+
+             function notification(){
+                if(document.getElementById('SwitchNoti').checked){
+                    if(!Notification){
+                        alertify.alert('El navegador no soporta notificaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+
+                        return
+                    };
+                    if(Notification.permission !== "granted"){
+                        Notification.requestPermission();
+                        if(Notification.permission == "granted"){
+                            document.getElementById('SwitchNoti').checked = true;
+                            document.getElementById('SwitchNoti').disabled = true;
+                        }else{
+                            alertify.alert('Si quieres usar las funciones de GPS primero debes otorgar permisos de notificaciones a la aplicacion en tu navegador').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+                            document.getElementById('SwitchNoti').checked = false;
+
+                        };
+                    };
+                };
+
+             };
+
+             function susnot(granted){
+
+                if(Notification.permission !== "granted"){
+                    document.getElementById('SwitchNoti').checked = false;
+                    document.getElementById('SwitchNoti').disabled = false;
+                };
+                if(Notification.permission == "granted"){
+                    document.getElementById('SwitchNoti').checked = true;
+                    document.getElementById('SwitchNoti').disabled = true;
+                };
+
+
+             };
+
+             function ayuda(){
+                alert('si');
+
+            this.form['inicio'].mostrar = false;
+            this.form['mapa'].mostrar = false;
+
+             };
+
+
+
         </script>
+        
 
     </body>
 </html>

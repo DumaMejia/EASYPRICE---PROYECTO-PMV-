@@ -56,7 +56,7 @@
                     <tr>
                         <th colspan="8">
                             <input title="Introduzca el texto a buscar" placeholder="Buscar" @keyup="buscandoTipo" v-model="buscar" class="form-control" type="text">
-                            <div class="col col-md-12"  id="res2" >Resultados: </div>
+                            <div class="col col-md-12"  id="res3" >Resultados: </div>
                         </th>
                     </tr>
                     
@@ -216,7 +216,8 @@
                             });
                     }
                     this.tipos = data.result.filter(tipo=>tipo.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
-                    document.getElementById("res2").innerHTML = "Resultados: " + this.tipos.length;
+                    document.getElementById("res3").innerHTML = "Resultados: " + this.tipos.length;
+                    
                 };
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los categoria ${e.target.error}`);

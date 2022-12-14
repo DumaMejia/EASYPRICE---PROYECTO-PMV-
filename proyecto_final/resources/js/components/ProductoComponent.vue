@@ -75,6 +75,13 @@
                         </div>
 
                         <div class="row p-1">
+                        <div class="col col-md-2">Imagen:</div>
+                        <div class="col col-md-3">
+                            <input title="Ingrese la categoria" v-model="producto.imagen"  required type="text" class="form-control" style="width : 300px" >
+                        </div>
+                        </div>
+
+                        <div class="row p-1">
                             <div class="col col-md-2" >
                             <input class="btn btn-warning" type="reset" value="Nuevo">
                         </div>
@@ -113,7 +120,7 @@
                                     <td>{{item.codigo}}</td>
                                     <td>{{item.nombre}}</td>
                                     <td>{{item.precio}}</td>
-                                    <td>{{item.tipo.label}}</td>
+                                    <td>{{item.ncategoria}}</td>
                                     <td>
                                         
                                         <button type="button" class="btn btn-success" @click="obtenerProductobase(item)">Insertar</button>
@@ -158,6 +165,7 @@
                         <th>Fecha Inicio (Precio Especial)</th>
                         <th>Fecha Final (Precio Especial)</th> 
                         <th>Categoria</th>
+                        <th>Imagen</th>
                         
                     </tr>
                 </thead>
@@ -165,12 +173,13 @@
                     <tr  v-for="item in productos" @click='modificarProducto( item )' :key="item.idProducto">
                         <td>{{item.codigo}}</td>
                         <td>{{item.nombre}}</td>
-                        <td>{{item.comercio.label}}</td>
+                        <td>{{item.nombrecomercio}}</td>
                         <td>{{item.precio}}</td>
                         <td>{{item.precioe}}</td>
                         <td>{{item.fechai}}</td>
                         <td>{{item.fechaf}}</td>
                         <td>{{item.ncategoria}}</td>
+                        <td>{{item.imagen}}</td>
                         <td>
                             <button type="button" class="btn btn-danger" @click="eliminarProducto(item)">Eliminar</button>
                             <button type="button" class="btn btn-success" @click="modificarProducto(item)">Modificar</button>
@@ -214,6 +223,7 @@
             fechaf: '',
             idCategoria:'',
             ncategoria:'',
+            imagen:'',
             }
         }
         },
@@ -232,9 +242,22 @@
                         producto.id = resp.data.id;
                         this.insertarLocal(producto);//actualizar el id del producto que se genero en el servidor con laravel y mysql
                         alertify.success(`Producto procesado con exito`);
+                        if( permitirNotificaciones=='granted' ){
+                         let notificacion;
+                            notificacion = new Notification('Productos Nuevos', {
+                            body : 'Hay Productos Nuevos disponibles',
+                            });
+                        };
                     }
                     if(producto.accion=='modificar'){
                         alertify.success(`Producto procesado con exito`);
+                        if( permitirNotificaciones=='granted' ){
+                         let notificacion;
+                            notificacion = new Notification('Productos Nuevos', {
+                            icon : "image/logo3.png",
+                            body : 'Hay Productos Nuevos disponibles',
+                            });
+                        };
                     }
                     
                 })
@@ -287,8 +310,8 @@
                 this.nuevoProducto();
 
                 this.producto.idBase = datos.idBase;
-                this.producto.ncategoria = datos.tipo.label;
-                this.producto.idCategoria = datos.tipo.id;
+                this.producto.ncategoria = datos.ncategoria;
+                this.producto.idCategoria = datos.idCategoria;
                 this.producto.nombre = datos.nombre;
                // this.producto = JSON.parse(JSON.stringify(datos));
                 
@@ -497,6 +520,7 @@
             this.producto.fechaf = '';
             this.producto.idCategoria ='';
             this.producto.ncategoria ='';
+            this.producto.imagen ='';
             this.producto.comercio = {
                     id:'',
                     label:'',
@@ -521,6 +545,18 @@
         },
         created(){
             //this.obtenerDatosComercio();
+            if(!Notification){
+            alertify.error('El navegador no soporta notificaciones');
+            }
+            window.permitirNotificaciones = 'default';
+
+            if(Notification.permission !== 'denied'){
+                Notification.requestPermission(function(permission){
+                    permitirNotificaciones = permission;
+                });
+            } else {
+                permitirNotificaciones = 'denied';
+            };
         },
     }
 </script>

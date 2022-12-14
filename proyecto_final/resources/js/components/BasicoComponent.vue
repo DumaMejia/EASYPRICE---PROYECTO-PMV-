@@ -73,7 +73,7 @@
                     <tr>
                         <th colspan="8">
                          <input title="Introduzca el texto a buscar" placeholder="Buscar" @keyup="buscandoBasico" v-model="buscar" class="form-control" type="text">
-                            <div class="col col-md-12"  id="res1" >Resultados: </div>
+                            <div class="col col-md-12"  id="res4" >Resultados: </div>
                         </th>
                     </tr>
                     
@@ -90,7 +90,7 @@
                         <td>{{item.codigo}}</td>
                         <td>{{item.nombre}}</td>
                         <td>{{item.precio}}</td>
-                        <td>{{item.tipo.label}}</td>
+                        <td>{{item.ncategoria}}</td>
                         <td>
                             <button type="button" class="btn btn-danger" @click="eliminarBasico(item)">Eliminar</button>
                             <button type="button" class="btn btn-success" @click="modificarBasico(item)">Modificar</button>
@@ -239,7 +239,7 @@
                             });
                     }
                     this.basicos = data.result.filter(basico=>basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase())>-1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
-                    document.getElementById("res1").innerHTML = "Resultados: " + this.basicos.length;
+                    document.getElementById("res4").innerHTML = "Resultados: " + this.basicos.length;
                 };
                 data.onerror = e=>{
                     alertify.error(`Error al obtener los productos ${e.target.error}`);

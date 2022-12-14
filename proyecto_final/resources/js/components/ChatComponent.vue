@@ -84,7 +84,7 @@
                      notificacion = new Notification('Chat de usuario', {
                     body : 'Acabas de mandar un mensaje',
                 });
-            }
+            };
                     
                 } else{
                     console.log('Mensaje vacio');
@@ -113,7 +113,7 @@
                 });
             } else {
                 permitirNotificaciones = 'denied';
-            }
+            };
         }
     }
 </script>

@@ -5555,7 +5555,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.basicos = data.result.filter(function (basico) {
           return basico.ncategoria.toLowerCase().indexOf(valor.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
-        document.getElementById("res1").innerHTML = "Resultados: " + _this4.basicos.length;
+        document.getElementById("res4").innerHTML = "Resultados: " + _this4.basicos.length;
       };
 
       data.onerror = function (e) {
@@ -5739,6 +5739,8 @@ __webpack_require__.r(__webpack_exports__);
             body: 'Acabas de mandar un mensaje'
           });
         }
+
+        ;
       } else {
         console.log('Mensaje vacio');
       }
@@ -5769,6 +5771,8 @@ __webpack_require__.r(__webpack_exports__);
     } else {
       permitirNotificaciones = 'denied';
     }
+
+    ;
   }
 });
 
@@ -6206,10 +6210,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MapaComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MapaComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FavoritosComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FavoritosComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6256,6 +6260,473 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['form'],
+  data: function data() {
+    return {
+      basicos: [],
+      tipos: [],
+      buscar: '',
+      basico: {
+        accion: 'nuevo',
+        id: 0,
+        idBase: '',
+        codigo: '',
+        nombre: '',
+        precio: '',
+        tipo: {
+          id: '',
+          label: ''
+        },
+        idCategoria: '',
+        ncategoria: ''
+      }
+    };
+  },
+  methods: {
+    abrirForma: function abrirForma() {
+      this.form['favoritos'].mostrar = false;
+      this.form['inicio'].mostrar = true; //alertify.alert('Bienvenido a la pestaña del mapa. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    abrirMapa: function abrirMapa() {
+      this.form['favoritos'].mostrar = false;
+      this.form['mapa'].mostrar = true; //alertify.alert('Bienvenido a la pestaña del mapa. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    }
+  },
+  created: function created() {
+    //this.obtenerDatosComercio();
+    this.form['inicio'].mostrar = false;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InicioComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InicioComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['form'],
+  data: function data() {
+    return {
+      basicos: [],
+      tipos: [],
+      buscar: '',
+      basico: {
+        accion: 'nuevo',
+        id: 0,
+        idBase: '',
+        codigo: '',
+        nombre: '',
+        precio: '',
+        tipo: {
+          id: '',
+          label: ''
+        },
+        idCategoria: '',
+        ncategoria: ''
+      }
+    };
+  },
+  methods: {
+    abrirForma: function abrirForma() {
+      this.form['inicio'].mostrar = false;
+      this.form['favoritos'].mostrar = true; //alertify.alert('Bienvenido a la pestaña del mapa. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    abrirMapa: function abrirMapa() {
+      this.form['inicio'].mostrar = false;
+      this.form['mapa'].mostrar = true; //alertify.alert('Bienvenido a la pestaña del mapa. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    }
+  },
+  created: function created() {
+    //this.obtenerDatosComercio();
+    if (localStorage.getItem('token') == 1) {
+      this.form['favoritos'].mostrar = true;
+      var token = 0;
+      localStorage.setItem('token', token);
+    } else {
+      this.form['inicio'].mostrar = true;
+    }
+
+    ; //this.form['mapa'].mostrar = false;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MapaComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MapaComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 //
 //
 //
@@ -6681,8 +7152,8 @@ __webpack_require__.r(__webpack_exports__);
         tipo: ''
       },
       base: {
-        idBase: '',
-        nombre: '',
+        id: '',
+        label: '',
         precio: ''
       },
       ubicacion: {
@@ -6722,6 +7193,7 @@ __webpack_require__.r(__webpack_exports__);
             if (basicos.idBase == productos.idBase) {
               _this.productosfil.push({
                 idProducto: productos.idProducto,
+                idBase: productos.idBase,
                 IdComercio: productos.idComercio,
                 nombre: productos.nombre,
                 precio: productos.precio,
@@ -6736,6 +7208,7 @@ __webpack_require__.r(__webpack_exports__);
           if (_this.lista.length == 0) {
             _this.productosfil.push({
               idProducto: productos.idProducto,
+              idBase: productos.idBase,
               IdComercio: productos.idComercio,
               nombre: productos.nombre,
               precio: productos.precio,
@@ -6747,6 +7220,35 @@ __webpack_require__.r(__webpack_exports__);
           ;
         }
       });
+      document.getElementById("respo").innerHTML = "Resultados: " + this.productosfil.length;
+      var precio = 0;
+      var cantidad = 0;
+      var total = 0;
+      var fecha = new Date();
+      fecha = fecha.toISOString();
+      fecha = fecha.slice(0, 10);
+      this.productosfil.forEach(function (productos) {
+        _this.lista.forEach(function (lista) {
+          if (lista.idBase == productos.idBase) {
+            if (productos.fechaf < fecha) {
+              precio = productos.precio;
+            }
+
+            ;
+
+            if (productos.fechaf >= fecha) {
+              precio = productos.precioe;
+            }
+
+            ;
+            cantidad = lista.cantidad;
+            total = total + precio * cantidad;
+          }
+
+          ;
+        });
+      });
+      document.getElementById("totalpo").innerHTML = "Total: " + total;
     },
     handleInfoWindowClose: function handleInfoWindowClose() {
       this.activeComercio = {};
@@ -6764,12 +7266,12 @@ __webpack_require__.r(__webpack_exports__);
         lng: parseFloat(item.longitude)
       };
     },
-    obtenerProductobase: function obtenerProductobase(item) {
+    obtenerProductobase: function obtenerProductobase() {
       var _this2 = this;
 
       var repe = 0;
       this.lista.forEach(function (productos) {
-        if (item.idBase == productos.idBase) {
+        if (_this2.base.id == productos.idBase) {
           repe = repe + 1;
         }
       });
@@ -6777,9 +7279,9 @@ __webpack_require__.r(__webpack_exports__);
       if (repe == 0) {
         if (this.cantidad != "" && this.cantidad >= 1) {
           this.lista.push({
-            idBase: item.idBase,
-            nombre: item.nombre,
-            precio: item.precio,
+            idBase: this.base.id,
+            nombre: this.base.label,
+            precio: this.base.precio,
             cantidad: this.cantidad
           });
         } else {
@@ -6969,7 +7471,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       ;
-      document.getElementById("rescom").innerHTML = "Resultados: " + this.comerciosfil.length;
     },
     verProducto: function verProducto(item) {
       var _this5 = this;
@@ -7043,7 +7544,7 @@ __webpack_require__.r(__webpack_exports__);
       this.ubicacion.lng = parseFloat(item.longitude);
       this.activeComercio = item;
       this.infoWindowOpened = true;
-      window.scroll(0, 800);
+      window.scroll(0, 0);
     },
     mapCenter: function mapCenter() {
       if (this.depmun.valor == "ahuachapan") {
@@ -7091,7 +7592,7 @@ __webpack_require__.r(__webpack_exports__);
     mapCentergps: function mapCentergps() {
       var _this6 = this;
 
-      var gps;
+      var gps = 0;
       this.$getLocation({}).then(function (gps) {
         _this6.ubicacion = gps;
       });
@@ -7172,11 +7673,14 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
 
-        var valor1 = "";
-        _this7.basicos = databa.result.filter(function (basico) {
-          return basico.ncategoria.toLowerCase().indexOf(valor1.toLowerCase()) > -1 || basico.nombre.toLowerCase().indexOf(valor1.toLowerCase()) > -1;
+        _this7.basicos = databa.result.map(function (base) {
+          return {
+            id: base.idBase,
+            label: base.nombre,
+            precio: base.precio
+          };
         });
-        document.getElementById("res2").innerHTML = "Resultados: " + _this7.basicos.length;
+        console.log(_this7.comercios);
       };
 
       data.onerror = function (e) {
@@ -7258,6 +7762,17 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       alertify.alert("En este apartado veras los comercios que coinciden con tus criterios de b\xFAsqueda. Al hacer clic en \"Ver Productos\" en un comercio de la tabla veras el listado de productos y el precio orientado a tus valores de b\xFAsqueda").setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    alert: function alert() {
+      alertify.alert('Bienvenido a EASYPRICE. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    abrirForma: function abrirForma() {
+      this.form['mapa'].mostrar = false;
+      this.form['inicio'].mostrar = true; //alertify.alert('Bienvenido a la pestaña del mapa. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
+    },
+    abrirAyuda: function abrirAyuda() {
+      this.form['mapa'].mostrar = false;
+      this.form['favoritos'].mostrar = true; //alertify.alert('Bienvenido a la pestaña del mapa. Si tienes dudas sobre el uso de la aplicacion haz click derecho sobre los elementos en pantalla para recibir indicaciones').setHeader('<img  src="image/logo2.png" width="100" height="30">');
     }
   },
   created: function created() {//this.obtenerDatos();
@@ -7285,6 +7800,15 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7499,7 +8023,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         fechai: '',
         fechaf: '',
         idCategoria: '',
-        ncategoria: ''
+        ncategoria: '',
+        imagen: ''
       }
     };
   },
@@ -7529,10 +8054,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     //actualizar el id del producto que se genero en el servidor con laravel y mysql
                     alertify.success("Producto procesado con exito");
+
+                    if (permitirNotificaciones == 'granted') {
+                      var notificacion;
+                      notificacion = new Notification('Productos Nuevos', {
+                        body: 'Hay Productos Nuevos disponibles'
+                      });
+                    }
+
+                    ;
                   }
 
                   if (producto.accion == 'modificar') {
                     alertify.success("Producto procesado con exito");
+
+                    if (permitirNotificaciones == 'granted') {
+                      var _notificacion;
+
+                      _notificacion = new Notification('Productos Nuevos', {
+                        icon: "image/logo3.png",
+                        body: 'Hay Productos Nuevos disponibles'
+                      });
+                    }
+
+                    ;
                   }
                 })["catch"](function (err) {});
 
@@ -7599,8 +8144,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     obtenerProductobase: function obtenerProductobase(datos) {
       this.nuevoProducto();
       this.producto.idBase = datos.idBase;
-      this.producto.ncategoria = datos.tipo.label;
-      this.producto.idCategoria = datos.tipo.id;
+      this.producto.ncategoria = datos.ncategoria;
+      this.producto.idCategoria = datos.idCategoria;
       this.producto.nombre = datos.nombre; // this.producto = JSON.parse(JSON.stringify(datos));
     },
     guardarProducto: function guardarProducto() {
@@ -7816,6 +8361,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.producto.fechaf = '';
       this.producto.idCategoria = '';
       this.producto.ncategoria = '';
+      this.producto.imagen = '';
       this.producto.comercio = {
         id: '',
         label: ''
@@ -7835,7 +8381,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return db.transaction(store, modo).objectStore(store);
     }
   },
-  created: function created() {//this.obtenerDatosComercio();
+  created: function created() {
+    //this.obtenerDatosComercio();
+    if (!Notification) {
+      alertify.error('El navegador no soporta notificaciones');
+    }
+
+    window.permitirNotificaciones = 'default';
+
+    if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        permitirNotificaciones = permission;
+      });
+    } else {
+      permitirNotificaciones = 'denied';
+    }
+
+    ;
   }
 });
 
@@ -8112,7 +8674,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.tipos = data.result.filter(function (tipo) {
           return tipo.nombre.toLowerCase().indexOf(valor.toLowerCase()) > -1;
         });
-        document.getElementById("res2").innerHTML = "Resultados: " + _this4.tipos.length;
+        document.getElementById("res3").innerHTML = "Resultados: " + _this4.tipos.length;
       };
 
       data.onerror = function (e) {
@@ -8257,6 +8819,8 @@ vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('tipo-component', (__webpa
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('mapa-component', (__webpack_require__(/*! ./components/MapaComponent.vue */ "./resources/js/components/MapaComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('chat-component', (__webpack_require__(/*! ./components/ChatComponent.vue */ "./resources/js/components/ChatComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('basico-component', (__webpack_require__(/*! ./components/BasicoComponent.vue */ "./resources/js/components/BasicoComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('favoritos-component', (__webpack_require__(/*! ./components/FavoritosComponent.vue */ "./resources/js/components/FavoritosComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('inicio-component', (__webpack_require__(/*! ./components/InicioComponent.vue */ "./resources/js/components/InicioComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('v-select-comercios', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('v-select-tipos', (vue_select__WEBPACK_IMPORTED_MODULE_0___default()));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_2___default()));
@@ -8287,6 +8851,12 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
       },
       basico: {
         mostrar: false
+      },
+      favoritos: {
+        mostrar: false
+      },
+      inicio: {
+        mostrar: false
       }
     }
   },
@@ -8295,8 +8865,27 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this.forms[form].mostrar = !this.forms[form].mostrar;
       this.$refs[form].obtenerDatos();
     },
-    abrir: function abrir(form) {
+    abrirmapa: function abrirmapa(form) {
+      this.forms['inicio'].mostrar = false;
+      this.forms['favoritos'].mostrar = false;
       this.forms[form].mostrar = !this.forms[form].mostrar;
+      this.$refs[form].obtenerDatos();
+    },
+    abririnicio: function abririnicio(form) {
+      this.forms['mapa'].mostrar = false;
+      this.forms['favoritos'].mostrar = false;
+      this.forms[form].mostrar = !this.forms[form].mostrar;
+    },
+    abrirayuda: function abrirayuda(form) {
+      this.forms['inicio'].mostrar = false;
+      this.forms['mapa'].mostrar = false;
+      this.forms[form].mostrar = !this.forms[form].mostrar;
+    },
+    abrirayudaCu: function abrirayudaCu(form) {
+      var token = 0;
+      token = 1;
+      localStorage.setItem('token', token);
+      location.href = "home";
     },
     abrirBd: function abrirBd() {
       /**
@@ -13449,7 +14038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{--vs-colors--lightest:rgba(60,60,60,0.26);--vs-colors--light:rgba(60,60,60,0.5);--vs-colors--dark:#333;--vs-colors--darkest:rgba(0,0,0,0.15);--vs-search-input-color:inherit;--vs-search-input-placeholder-color:inherit;--vs-font-size:1rem;--vs-line-height:1.4;--vs-state-disabled-bg:#f8f8f8;--vs-state-disabled-color:var(--vs-colors--light);--vs-state-disabled-controls-color:var(--vs-colors--light);--vs-state-disabled-cursor:not-allowed;--vs-border-color:var(--vs-colors--lightest);--vs-border-width:1px;--vs-border-style:solid;--vs-border-radius:4px;--vs-actions-padding:4px 6px 0 3px;--vs-controls-color:var(--vs-colors--light);--vs-controls-size:1;--vs-controls--deselect-text-shadow:0 1px 0 #fff;--vs-selected-bg:#f0f0f0;--vs-selected-color:var(--vs-colors--dark);--vs-selected-border-color:var(--vs-border-color);--vs-selected-border-style:var(--vs-border-style);--vs-selected-border-width:var(--vs-border-width);--vs-dropdown-bg:#fff;--vs-dropdown-color:inherit;--vs-dropdown-z-index:1000;--vs-dropdown-min-width:160px;--vs-dropdown-max-height:350px;--vs-dropdown-box-shadow:0px 3px 6px 0px var(--vs-colors--darkest);--vs-dropdown-option-bg:#000;--vs-dropdown-option-color:var(--vs-dropdown-color);--vs-dropdown-option-padding:3px 20px;--vs-dropdown-option--active-bg:#5897fb;--vs-dropdown-option--active-color:#fff;--vs-dropdown-option--deselect-bg:#fb5858;--vs-dropdown-option--deselect-color:#fff;--vs-transition-timing-function:cubic-bezier(1,-0.115,0.975,0.855);--vs-transition-duration:150ms}.v-select{font-family:inherit;position:relative}.v-select,.v-select *{box-sizing:border-box}:root{--vs-transition-timing-function:cubic-bezier(1,0.5,0.8,1);--vs-transition-duration:0.15s}@-webkit-keyframes vSelectSpinner{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes vSelectSpinner{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.vs__fade-enter-active,.vs__fade-leave-active{pointer-events:none;transition:opacity var(--vs-transition-duration) var(--vs-transition-timing-function)}.vs__fade-enter,.vs__fade-leave-to{opacity:0}:root{--vs-disabled-bg:var(--vs-state-disabled-bg);--vs-disabled-color:var(--vs-state-disabled-color);--vs-disabled-cursor:var(--vs-state-disabled-cursor)}.vs--disabled .vs__clear,.vs--disabled .vs__dropdown-toggle,.vs--disabled .vs__open-indicator,.vs--disabled .vs__search,.vs--disabled .vs__selected{background-color:var(--vs-disabled-bg);cursor:var(--vs-disabled-cursor)}.v-select[dir=rtl] .vs__actions{padding:0 3px 0 6px}.v-select[dir=rtl] .vs__clear{margin-left:6px;margin-right:0}.v-select[dir=rtl] .vs__deselect{margin-left:0;margin-right:2px}.v-select[dir=rtl] .vs__dropdown-menu{text-align:right}.vs__dropdown-toggle{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);border-radius:var(--vs-border-radius);display:flex;padding:0 0 4px;white-space:normal}.vs__selected-options{display:flex;flex-basis:100%;flex-grow:1;flex-wrap:wrap;padding:0 2px;position:relative}.vs__actions{align-items:center;display:flex;padding:var(--vs-actions-padding)}.vs--searchable .vs__dropdown-toggle{cursor:text}.vs--unsearchable .vs__dropdown-toggle{cursor:pointer}.vs--open .vs__dropdown-toggle{border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0}.vs__open-indicator{fill:var(--vs-controls-color);transform:scale(var(--vs-controls-size));transition:transform var(--vs-transition-duration) var(--vs-transition-timing-function);transition-timing-function:var(--vs-transition-timing-function)}.vs--open .vs__open-indicator{transform:rotate(180deg) scale(var(--vs-controls-size))}.vs--loading .vs__open-indicator{opacity:0}.vs__clear{fill:var(--vs-controls-color);background-color:transparent;border:0;cursor:pointer;margin-right:8px;padding:0}.vs__dropdown-menu{background:var(--vs-dropdown-bg);border:var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);border-radius:0 0 var(--vs-border-radius) var(--vs-border-radius);border-top-style:none;box-shadow:var(--vs-dropdown-box-shadow);box-sizing:border-box;color:var(--vs-dropdown-color);display:block;left:0;list-style:none;margin:0;max-height:var(--vs-dropdown-max-height);min-width:var(--vs-dropdown-min-width);overflow-y:auto;padding:5px 0;position:absolute;text-align:left;top:calc(100% - var(--vs-border-width));width:100%;z-index:var(--vs-dropdown-z-index)}.vs__no-options{text-align:center}.vs__dropdown-option{clear:both;color:var(--vs-dropdown-option-color);cursor:pointer;display:block;line-height:1.42857143;padding:var(--vs-dropdown-option-padding);white-space:nowrap}.vs__dropdown-option--highlight{background:var(--vs-dropdown-option--active-bg);color:var(--vs-dropdown-option--active-color)}.vs__dropdown-option--deselect{background:var(--vs-dropdown-option--deselect-bg);color:var(--vs-dropdown-option--deselect-color)}.vs__dropdown-option--disabled{background:var(--vs-state-disabled-bg);color:var(--vs-state-disabled-color);cursor:var(--vs-state-disabled-cursor)}.vs__selected{align-items:center;background-color:var(--vs-selected-bg);border:var(--vs-selected-border-width) var(--vs-selected-border-style) var(--vs-selected-border-color);border-radius:var(--vs-border-radius);color:var(--vs-selected-color);display:flex;line-height:var(--vs-line-height);margin:4px 2px 0;padding:0 .25em;z-index:0}.vs__deselect{fill:var(--vs-controls-color);-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:0;cursor:pointer;display:inline-flex;margin-left:4px;padding:0;text-shadow:var(--vs-controls--deselect-text-shadow)}.vs--single .vs__selected{background-color:transparent;border-color:transparent}.vs--single.vs--loading .vs__selected,.vs--single.vs--open .vs__selected{opacity:.4;position:absolute}.vs--single.vs--searching .vs__selected{display:none}.vs__search::-webkit-search-cancel-button{display:none}.vs__search::-ms-clear,.vs__search::-webkit-search-decoration,.vs__search::-webkit-search-results-button,.vs__search::-webkit-search-results-decoration{display:none}.vs__search,.vs__search:focus{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:1px solid transparent;border-left:none;box-shadow:none;color:var(--vs-search-input-color);flex-grow:1;font-size:var(--vs-font-size);line-height:var(--vs-line-height);margin:4px 0 0;max-width:100%;outline:none;padding:0 7px;width:0;z-index:1}.vs__search::-moz-placeholder{color:var(--vs-search-input-placeholder-color)}.vs__search:-ms-input-placeholder{color:var(--vs-search-input-placeholder-color)}.vs__search::placeholder{color:var(--vs-search-input-placeholder-color)}.vs--unsearchable .vs__search{opacity:1}.vs--unsearchable:not(.vs--disabled) .vs__search{cursor:pointer}.vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search{opacity:.2}.vs__spinner{align-self:center;-webkit-animation:vSelectSpinner 1.1s linear infinite;animation:vSelectSpinner 1.1s linear infinite;border:.9em solid hsla(0,0%,39%,.1);border-left-color:rgba(60,60,60,.45);font-size:5px;opacity:0;overflow:hidden;text-indent:-9999em;transform:translateZ(0) scale(var(--vs-controls--spinner-size,var(--vs-controls-size)));transition:opacity .1s}.vs__spinner,.vs__spinner:after{border-radius:50%;height:5em;transform:scale(var(--vs-controls--spinner-size,var(--vs-controls-size)));width:5em}.vs--loading .vs__spinner{opacity:1}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{--vs-colors--lightest:rgba(60,60,60,0.26);--vs-colors--light:rgba(60,60,60,0.5);--vs-colors--dark:#333;--vs-colors--darkest:rgba(0,0,0,0.15);--vs-search-input-color:inherit;--vs-search-input-placeholder-color:inherit;--vs-font-size:1rem;--vs-line-height:1.4;--vs-state-disabled-bg:#f8f8f8;--vs-state-disabled-color:var(--vs-colors--light);--vs-state-disabled-controls-color:var(--vs-colors--light);--vs-state-disabled-cursor:not-allowed;--vs-border-color:var(--vs-colors--lightest);--vs-border-width:1px;--vs-border-style:solid;--vs-border-radius:4px;--vs-actions-padding:4px 6px 0 3px;--vs-controls-color:var(--vs-colors--light);--vs-controls-size:1;--vs-controls--deselect-text-shadow:0 1px 0 #fff;--vs-selected-bg:#f0f0f0;--vs-selected-color:var(--vs-colors--dark);--vs-selected-border-color:var(--vs-border-color);--vs-selected-border-style:var(--vs-border-style);--vs-selected-border-width:var(--vs-border-width);--vs-dropdown-bg:#fff;--vs-dropdown-color:inherit;--vs-dropdown-z-index:1000;--vs-dropdown-min-width:160px;--vs-dropdown-max-height:350px;--vs-dropdown-box-shadow:0px 3px 6px 0px var(--vs-colors--darkest);--vs-dropdown-option-bg:#000;--vs-dropdown-option-color:var(--vs-dropdown-color);--vs-dropdown-option-padding:3px 20px;--vs-dropdown-option--active-bg:#5897fb;--vs-dropdown-option--active-color:#fff;--vs-dropdown-option--deselect-bg:#fb5858;--vs-dropdown-option--deselect-color:#fff;--vs-transition-timing-function:cubic-bezier(1,-0.115,0.975,0.855);--vs-transition-duration:150ms}.v-select{font-family:inherit;position:relative}.v-select,.v-select *{box-sizing:border-box}:root{--vs-transition-timing-function:cubic-bezier(1,0.5,0.8,1);--vs-transition-duration:0.15s}@keyframes vSelectSpinner{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.vs__fade-enter-active,.vs__fade-leave-active{pointer-events:none;transition:opacity var(--vs-transition-duration) var(--vs-transition-timing-function)}.vs__fade-enter,.vs__fade-leave-to{opacity:0}:root{--vs-disabled-bg:var(--vs-state-disabled-bg);--vs-disabled-color:var(--vs-state-disabled-color);--vs-disabled-cursor:var(--vs-state-disabled-cursor)}.vs--disabled .vs__clear,.vs--disabled .vs__dropdown-toggle,.vs--disabled .vs__open-indicator,.vs--disabled .vs__search,.vs--disabled .vs__selected{background-color:var(--vs-disabled-bg);cursor:var(--vs-disabled-cursor)}.v-select[dir=rtl] .vs__actions{padding:0 3px 0 6px}.v-select[dir=rtl] .vs__clear{margin-left:6px;margin-right:0}.v-select[dir=rtl] .vs__deselect{margin-left:0;margin-right:2px}.v-select[dir=rtl] .vs__dropdown-menu{text-align:right}.vs__dropdown-toggle{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);border-radius:var(--vs-border-radius);display:flex;padding:0 0 4px;white-space:normal}.vs__selected-options{display:flex;flex-basis:100%;flex-grow:1;flex-wrap:wrap;padding:0 2px;position:relative}.vs__actions{align-items:center;display:flex;padding:var(--vs-actions-padding)}.vs--searchable .vs__dropdown-toggle{cursor:text}.vs--unsearchable .vs__dropdown-toggle{cursor:pointer}.vs--open .vs__dropdown-toggle{border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0}.vs__open-indicator{fill:var(--vs-controls-color);transform:scale(var(--vs-controls-size));transition:transform var(--vs-transition-duration) var(--vs-transition-timing-function);transition-timing-function:var(--vs-transition-timing-function)}.vs--open .vs__open-indicator{transform:rotate(180deg) scale(var(--vs-controls-size))}.vs--loading .vs__open-indicator{opacity:0}.vs__clear{fill:var(--vs-controls-color);background-color:transparent;border:0;cursor:pointer;margin-right:8px;padding:0}.vs__dropdown-menu{background:var(--vs-dropdown-bg);border:var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);border-radius:0 0 var(--vs-border-radius) var(--vs-border-radius);border-top-style:none;box-shadow:var(--vs-dropdown-box-shadow);box-sizing:border-box;color:var(--vs-dropdown-color);display:block;left:0;list-style:none;margin:0;max-height:var(--vs-dropdown-max-height);min-width:var(--vs-dropdown-min-width);overflow-y:auto;padding:5px 0;position:absolute;text-align:left;top:calc(100% - var(--vs-border-width));width:100%;z-index:var(--vs-dropdown-z-index)}.vs__no-options{text-align:center}.vs__dropdown-option{clear:both;color:var(--vs-dropdown-option-color);cursor:pointer;display:block;line-height:1.42857143;padding:var(--vs-dropdown-option-padding);white-space:nowrap}.vs__dropdown-option--highlight{background:var(--vs-dropdown-option--active-bg);color:var(--vs-dropdown-option--active-color)}.vs__dropdown-option--deselect{background:var(--vs-dropdown-option--deselect-bg);color:var(--vs-dropdown-option--deselect-color)}.vs__dropdown-option--disabled{background:var(--vs-state-disabled-bg);color:var(--vs-state-disabled-color);cursor:var(--vs-state-disabled-cursor)}.vs__selected{align-items:center;background-color:var(--vs-selected-bg);border:var(--vs-selected-border-width) var(--vs-selected-border-style) var(--vs-selected-border-color);border-radius:var(--vs-border-radius);color:var(--vs-selected-color);display:flex;line-height:var(--vs-line-height);margin:4px 2px 0;padding:0 .25em;z-index:0}.vs__deselect{fill:var(--vs-controls-color);-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:0;cursor:pointer;display:inline-flex;margin-left:4px;padding:0;text-shadow:var(--vs-controls--deselect-text-shadow)}.vs--single .vs__selected{background-color:transparent;border-color:transparent}.vs--single.vs--loading .vs__selected,.vs--single.vs--open .vs__selected{opacity:.4;position:absolute}.vs--single.vs--searching .vs__selected{display:none}.vs__search::-webkit-search-cancel-button{display:none}.vs__search::-ms-clear,.vs__search::-webkit-search-decoration,.vs__search::-webkit-search-results-button,.vs__search::-webkit-search-results-decoration{display:none}.vs__search,.vs__search:focus{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:1px solid transparent;border-left:none;box-shadow:none;color:var(--vs-search-input-color);flex-grow:1;font-size:var(--vs-font-size);line-height:var(--vs-line-height);margin:4px 0 0;max-width:100%;outline:none;padding:0 7px;width:0;z-index:1}.vs__search::-moz-placeholder{color:var(--vs-search-input-placeholder-color)}.vs__search:-ms-input-placeholder{color:var(--vs-search-input-placeholder-color)}.vs__search::placeholder{color:var(--vs-search-input-placeholder-color)}.vs--unsearchable .vs__search{opacity:1}.vs--unsearchable:not(.vs--disabled) .vs__search{cursor:pointer}.vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search{opacity:.2}.vs__spinner{align-self:center;animation:vSelectSpinner 1.1s linear infinite;border:.9em solid hsla(0,0%,39%,.1);border-left-color:rgba(60,60,60,.45);font-size:5px;opacity:0;overflow:hidden;text-indent:-9999em;transform:translateZ(0) scale(var(--vs-controls--spinner-size,var(--vs-controls-size)));transition:opacity .1s}.vs__spinner,.vs__spinner:after{border-radius:50%;height:5em;transform:scale(var(--vs-controls--spinner-size,var(--vs-controls-size)));width:5em}.vs--loading .vs__spinner{opacity:1}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32563,6 +33152,84 @@ component.options.__file = "resources/js/components/ComercioComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/FavoritosComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/FavoritosComponent.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FavoritosComponent_vue_vue_type_template_id_92b01cca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FavoritosComponent.vue?vue&type=template&id=92b01cca& */ "./resources/js/components/FavoritosComponent.vue?vue&type=template&id=92b01cca&");
+/* harmony import */ var _FavoritosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FavoritosComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/FavoritosComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FavoritosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FavoritosComponent_vue_vue_type_template_id_92b01cca___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FavoritosComponent_vue_vue_type_template_id_92b01cca___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FavoritosComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/InicioComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/InicioComponent.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _InicioComponent_vue_vue_type_template_id_3198b07d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InicioComponent.vue?vue&type=template&id=3198b07d& */ "./resources/js/components/InicioComponent.vue?vue&type=template&id=3198b07d&");
+/* harmony import */ var _InicioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InicioComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/InicioComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _InicioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InicioComponent_vue_vue_type_template_id_3198b07d___WEBPACK_IMPORTED_MODULE_0__.render,
+  _InicioComponent_vue_vue_type_template_id_3198b07d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/InicioComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/MapaComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/MapaComponent.vue ***!
@@ -32725,6 +33392,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComercioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ComercioComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ComercioComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComercioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FavoritosComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/FavoritosComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FavoritosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FavoritosComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FavoritosComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FavoritosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/InicioComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/InicioComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InicioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InicioComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InicioComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InicioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -32998,6 +33697,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComercioComponent_vue_vue_type_template_id_51049172___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComercioComponent_vue_vue_type_template_id_51049172___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ComercioComponent.vue?vue&type=template&id=51049172& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ComercioComponent.vue?vue&type=template&id=51049172&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FavoritosComponent.vue?vue&type=template&id=92b01cca&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/FavoritosComponent.vue?vue&type=template&id=92b01cca& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FavoritosComponent_vue_vue_type_template_id_92b01cca___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FavoritosComponent_vue_vue_type_template_id_92b01cca___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FavoritosComponent_vue_vue_type_template_id_92b01cca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FavoritosComponent.vue?vue&type=template&id=92b01cca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FavoritosComponent.vue?vue&type=template&id=92b01cca&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/InicioComponent.vue?vue&type=template&id=3198b07d&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/InicioComponent.vue?vue&type=template&id=3198b07d& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InicioComponent_vue_vue_type_template_id_3198b07d___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InicioComponent_vue_vue_type_template_id_3198b07d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InicioComponent_vue_vue_type_template_id_3198b07d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InicioComponent.vue?vue&type=template&id=3198b07d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InicioComponent.vue?vue&type=template&id=3198b07d&");
 
 
 /***/ }),
@@ -33460,7 +34193,7 @@ var render = function () {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col col-md-12", attrs: { id: "res1" } },
+                      { staticClass: "col col-md-12", attrs: { id: "res4" } },
                       [_vm._v("Resultados: ")]
                     ),
                   ]),
@@ -33489,7 +34222,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.precio))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.tipo.label))]),
+                      _c("td", [_vm._v(_vm._s(item.ncategoria))]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -34363,6 +35096,1009 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FavoritosComponent.vue?vue&type=template&id=92b01cca&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FavoritosComponent.vue?vue&type=template&id=92b01cca& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "appBasico" } }, [
+    _c(
+      "div",
+      { staticClass: "container px-4 py-5", attrs: { id: "featured-3" } },
+      [
+        _c("h2", { staticClass: "pb-2 border-bottom" }, [
+          _vm._v("Pregutas frecuentes"),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row g-4 py-5 row-cols-1 row-cols-lg-3" }, [
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#collection" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("¿Donde busco los productos y precios?")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Al inicio de la aplicación luego de iniciar sesion se desplegara el menu principal en el cual podras visualizar la barra de navegacion la cual contiene las pestañas a las distintas paginas de la aplicacion, en ella encontraras la pestaña de Mapa."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#people-circle" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("¿Como inicio sesion con mi cuenta Google?")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Primero verifica que estas en la pestaña de inicio de sesion de EasyPrice. luego da clic en el boton de Iniciar Sesion Con Google, se desplegara la pestaña para que selecciones una cuenta activa o en su defecto que ingreses un correo y contraseñea validos"
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#toggles2" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("¿Que hago si olvido mi contraseña?")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Puedes recuperar tu contraseña siempre y cuando tengas acceso al correo registrado a la cuenta. desde el menu de login selecciona el hipervinculo: ¿Olvidaste la contraseña?. se te pedira que ingreses el correo y se enviara un mensaje en el cual tendras las indicaciones para reestablecer la contraseña"
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+        ]),
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container px-4 py-5", attrs: { id: "featured-3" } },
+      [
+        _c("h2", { staticClass: "pb-2 border-bottom" }, [
+          _vm._v("Uso de la aplicacion"),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row g-4 py-5 row-cols-1 row-cols-lg-3" }, [
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#collection" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Filtros de busqueda")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Párrafo de texto debajo del encabezado para explicar el encabezado. Lo agregaremos con otra oración y probablemente sigamos hasta que nos quedemos sin palabras."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#people-circle" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Navegacion por el mapa Google")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Párrafo de texto debajo del encabezado para explicar el encabezado. Lo agregaremos con otra oración y probablemente sigamos hasta que nos quedemos sin palabras."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#toggles2" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Visualizacion de Resultados")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Párrafo de texto debajo del encabezado para explicar el encabezado. Lo agregaremos con otra oración y probablemente sigamos hasta que nos quedemos sin palabras."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#toggles2" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Comercios Destacados")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Párrafo de texto debajo del encabezado para explicar el encabezado. Lo agregaremos con otra oración y probablemente sigamos hasta que nos quedemos sin palabras."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#toggles2" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Configuracion de Mi Cuenta")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Párrafo de texto debajo del encabezado para explicar el encabezado. Lo agregaremos con otra oración y probablemente sigamos hasta que nos quedemos sin palabras."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "feature col" }, [
+            _c("div", { staticClass: "feature-icon bg-primary bg-gradient" }, [
+              _c(
+                "svg",
+                { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                [_c("use", { attrs: { "xlink:href": "#toggles2" } })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Navegacion por la Aplicacion")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Párrafo de texto debajo del encabezado para explicar el encabezado. Lo agregaremos con otra oración y probablemente sigamos hasta que nos quedemos sin palabras."
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "icon-link",
+                attrs: {
+                  href: "https://getbootstrap.esdocu.com/docs/5.1/examples/features/#",
+                },
+              },
+              [
+                _vm._v("\nLlamada a la acción\n"),
+                _c(
+                  "svg",
+                  { staticClass: "bi", attrs: { width: "1em", height: "1em" } },
+                  [_c("use", { attrs: { "xlink:href": "#chevron-right" } })]
+                ),
+              ]
+            ),
+          ]),
+        ]),
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "footer",
+      { staticClass: "text-center text-lg-start bg-light text-muted" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("section", {}, [
+          _c(
+            "div",
+            { staticClass: "container text-center text-md-start mt-5" },
+            [
+              _c("div", { staticClass: "row mt-3" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" },
+                  [
+                    _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+                      _vm._v("\n            Ventanas\n          "),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-reset",
+                          attrs: { href: "#!" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.abrirForma()
+                            },
+                          },
+                        },
+                        [_vm._v("Inicio")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-reset",
+                          attrs: { href: "#!" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.abrirMapa()
+                            },
+                          },
+                        },
+                        [_vm._v("Mapa")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+              ]),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(6),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      {
+        staticClass:
+          "d-flex justify-content-center justify-content-lg-between p-4 border-bottom",
+      },
+      [
+        _c("div", { staticClass: "me-5 d-none d-lg-block" }, [
+          _c("span", [_vm._v("Sigue en contacto con nosotros:")]),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-facebook-f" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-twitter" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-google" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-instagram" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-linkedin" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-github" }),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _c("i", { staticClass: "fas fa-gem me-3" }),
+          _vm._v("EasyPrice Company\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n            Esperamos que su experiencia en EasyPrice sea grata y de utlidad.\n            aqui te dejamos unos enlaces que pueden resultarte utiles.\n            tambien tienes  nuestros contactos de empresa por si buscas ayuda.\n          "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c(
+        "a",
+        {
+          staticClass: "text-reset",
+          attrs: { href: "http://127.0.0.1:8000/NewPassword" },
+        },
+        [_vm._v("Mi Cuenta")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("a", { staticClass: "text-reset", attrs: { href: "#!" } }, [
+        _vm._v("Ayuda"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _vm._v("\n            Enlaces Utiles\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.defensoria.gob.sv/" },
+            },
+            [_vm._v("D. Del Consumidor")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.superselectos.com/" },
+            },
+            [_vm._v(" Super Selectos")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.walmart.com.sv/" },
+            },
+            [_vm._v("Walmart")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _vm._v("Contacto"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-home me-3" }),
+          _vm._v(" Usulutan, Usulutan, SV"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-envelope me-3" }),
+          _vm._v("\n            easyprice@info.com\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-phone me-3" }),
+          _vm._v(" + 503 7209-9091"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-print me-3" }),
+          _vm._v(" + 503 2626-6767"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "text-center p-4",
+        staticStyle: { "background-color": "rgba(0, 0, 0, 0.05)" },
+      },
+      [
+        _vm._v("\n    © 2022 Copyright:\n    "),
+        _c(
+          "a",
+          {
+            staticClass: "text-reset fw-bold",
+            attrs: { href: "https://easyprice.tk" },
+          },
+          [_vm._v("EasyPrice Company")]
+        ),
+      ]
+    )
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InicioComponent.vue?vue&type=template&id=3198b07d&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InicioComponent.vue?vue&type=template&id=3198b07d& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "appBasico" } }, [
+    _c("div", { staticClass: "container col-xxl-8 px-4 py-5" }, [
+      _c(
+        "div",
+        { staticClass: "row flex-lg-row-reverse align-items-center g-5 py-5" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("h1", { staticClass: "display-5 fw-bold lh-1 mb-3" }, [
+              _vm._v("Una alternativa para buscar los mejores precios"),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "lead" }, [
+              _vm._v(
+                "Con el uso de EasyPrice haras del buscar los mejores precios a los productos que buscas la tarea mas facil y sencilla posible por que no solo contamos con los principales comerciales a nivel nacional si no tambien con esos pequeños y medianos comerciantes los cuales nos brindan sus productos y precios los cuales puedes consultar mediante el uso de la aplicacion. ¡Que estas esperando, empieza a buscar ya! "
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "d-grid gap-2 d-md-flex justify-content-md-start",
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-lg px-4 me-md-2",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.abrirMapa()
+                      },
+                    },
+                  },
+                  [_vm._v("Mapa")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-secondary btn-lg px-4",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.abrirForma()
+                      },
+                    },
+                  },
+                  [_vm._v("¿Necesitas ayuda?")]
+                ),
+              ]
+            ),
+          ]),
+        ]
+      ),
+    ]),
+    _vm._v(" "),
+    _c(
+      "footer",
+      { staticClass: "text-center text-lg-start bg-light text-muted" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("section", {}, [
+          _c(
+            "div",
+            { staticClass: "container text-center text-md-start mt-5" },
+            [
+              _c("div", { staticClass: "row mt-3" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" },
+                  [
+                    _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+                      _vm._v("\n            Ventanas\n          "),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-reset",
+                          attrs: { href: "#!" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.abrirMapa()
+                            },
+                          },
+                        },
+                        [_vm._v("Mapa")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-reset",
+                          attrs: { href: "#!" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.abrirForma()
+                            },
+                          },
+                        },
+                        [_vm._v("Ayuda")]
+                      ),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+              ]),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(7),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-10 col-sm-8 col-lg-6" }, [
+      _c("img", {
+        attrs: {
+          src: "image/promo.png",
+          alt: "Bootstrap Themes",
+          width: "600",
+          height: "350",
+        },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      {
+        staticClass:
+          "d-flex justify-content-center justify-content-lg-between p-4 border-bottom",
+      },
+      [
+        _c("div", { staticClass: "me-5 d-none d-lg-block" }, [
+          _c("span", [_vm._v("Sigue en contacto con nosotros:")]),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-facebook-f" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-twitter" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-google" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-instagram" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-linkedin" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-github" }),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _c("i", { staticClass: "fas fa-gem me-3" }),
+          _vm._v("EasyPrice Company\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n            Esperamos que su experiencia en EasyPrice sea grata y de utlidad.\n            aqui te dejamos unos enlaces que pueden resultarte utiles.\n            tambien tienes  nuestros contactos de empresa por si buscas ayuda.\n          "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("a", { staticClass: "text-reset", attrs: { href: "#!" } }, [
+        _vm._v("Inicio"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c(
+        "a",
+        {
+          staticClass: "text-reset",
+          attrs: { href: "http://127.0.0.1:8000/NewPassword" },
+        },
+        [_vm._v("Mi Cuenta")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _vm._v("\n            Enlaces Utiles\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.defensoria.gob.sv/" },
+            },
+            [_vm._v("D. Del Consumidor")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.superselectos.com/" },
+            },
+            [_vm._v(" Super Selectos")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.walmart.com.sv/" },
+            },
+            [_vm._v("Walmart")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _vm._v("Contacto"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-home me-3" }),
+          _vm._v(" Usulutan, Usulutan, SV"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-envelope me-3" }),
+          _vm._v("\n            easyprice@info.com\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-phone me-3" }),
+          _vm._v(" + 503 7209-9091"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-print me-3" }),
+          _vm._v(" + 503 2626-6767"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "text-center p-4",
+        staticStyle: { "background-color": "rgba(0, 0, 0, 0.05)" },
+      },
+      [
+        _vm._v("\n    © 2022 Copyright:\n    "),
+        _c(
+          "a",
+          {
+            staticClass: "text-reset fw-bold",
+            attrs: { href: "https://easyprice.tk" },
+          },
+          [_vm._v("EasyPrice Company")]
+        ),
+      ]
+    )
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MapaComponent.vue?vue&type=template&id=3ba01b9d&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MapaComponent.vue?vue&type=template&id=3ba01b9d& ***!
@@ -34382,211 +36118,7 @@ var render = function () {
   return _c("div", [
     _c("div", { staticClass: "card text-dark bg-light mb-3" }, [
       _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "container m-3" }, [
-          _c("form", { attrs: { align: "center" } }, [
-            _c("div", { staticClass: "input-group mb-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.depmun.valor,
-                    expression: "depmun.valor",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", "aria-describedby": "button-addon2" },
-                domProps: { value: _vm.depmun.valor },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.depmun, "valor", $event.target.value)
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-primary",
-                  attrs: { type: "button", id: "button-addon2" },
-                  on: { click: _vm.mapCenter },
-                },
-                [_vm._v("Buscar")]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn-group" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.depmun.valor,
-                      expression: "depmun.valor",
-                    },
-                  ],
-                  staticClass: "form-select btn-warning",
-                  attrs: {
-                    placeholder: "Seleccione Un Departamento",
-                    "aria-label": "Default select example",
-                  },
-                  on: {
-                    click: _vm.mapCenter,
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.depmun,
-                        "valor",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                  },
-                },
-                [
-                  _c(
-                    "option",
-                    { staticClass: "btn btn-light", attrs: { selected: "" } },
-                    [_vm._v("Seleccione un Departamento")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "ahuachapan" },
-                    },
-                    [_vm._v("Ahuachapan")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "san salvador" },
-                    },
-                    [_vm._v("San Salvador")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "usulutan" },
-                    },
-                    [_vm._v("Usulután")]
-                  ),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn-group" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-info",
-                  attrs: { type: "button" },
-                  on: { contextmenu: _vm.indigps, click: _vm.mapCentergps },
-                },
-                [
-                  _c("i", { staticClass: "fa fa-google mr-2" }),
-                  _vm._v(" "),
-                  _c("img", {
-                    attrs: { src: "image/gps2.png", width: "20", height: "20" },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn-group" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.depmun.valor,
-                      expression: "depmun.valor",
-                    },
-                  ],
-                  staticClass: "form-select  btn-warning",
-                  attrs: {
-                    placeholder: "Seleccione Municipio",
-                    "aria-label": "Default select example",
-                  },
-                  on: {
-                    click: _vm.mapCenter,
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.depmun,
-                        "valor",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                  },
-                },
-                [
-                  _c(
-                    "option",
-                    { staticClass: "btn btn-light", attrs: { selected: "" } },
-                    [_vm._v("Seleccione Un Municipio")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "santa maria" },
-                    },
-                    [_vm._v("Santa Maria")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "santa elena" },
-                    },
-                    [_vm._v("Santa Elena")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "option",
-                    {
-                      staticClass: "btn btn-light",
-                      attrs: { value: "alegria" },
-                    },
-                    [_vm._v("Alegria")]
-                  ),
-                ]
-              ),
-            ]),
-          ]),
-        ]),
+        _c("div", { staticClass: "container m-3" }),
         _vm._v(" "),
         _c(
           "div",
@@ -34604,7 +36136,7 @@ var render = function () {
                 _c("div", { staticClass: "col border border-dark" }, [
                   _c("div", { staticClass: "row p-1" }, [
                     _c("div", { staticClass: "col col-md-4" }, [
-                      _vm._v("Salario:"),
+                      _vm._v("Presupuesto:"),
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col col-md-4" }, [
@@ -34710,118 +36242,468 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row p-1" }, [
-                    _c("div", { staticClass: "col col-md-7" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col col-md-4",
+                        attrs: { visibility: "hidden" },
+                      },
+                      [_vm._v("Departamento:")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-4" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.depmun.valor,
+                              expression: "depmun.valor",
+                            },
+                          ],
+                          staticClass: "form-select btn-warning",
+                          attrs: {
+                            placeholder: "Seleccione Un Departamento",
+                            "aria-label": "Default select example",
+                          },
+                          on: {
+                            click: _vm.mapCenter,
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.depmun,
+                                "valor",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { selected: "" },
+                            },
+                            [_vm._v("Seleccione un Departamento")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { value: "ahuachapan" },
+                            },
+                            [_vm._v("Ahuachapan")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { value: "san salvador" },
+                            },
+                            [_vm._v("San Salvador")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { value: "usulutan" },
+                            },
+                            [_vm._v("Usulután")]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "btn-group" }, [
+                    _c("div", { staticClass: "col col-md-5" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-info",
+                          attrs: { type: "button" },
+                          on: {
+                            contextmenu: _vm.indigps,
+                            click: _vm.mapCentergps,
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-google mr-2" }),
+                          _vm._v(" "),
+                          _c("img", {
+                            attrs: {
+                              src: "image/gps2.png",
+                              width: "20",
+                              height: "20",
+                            },
+                          }),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row p-1" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col col-md-4",
+                        attrs: { visibility: "hidden" },
+                      },
+                      [_vm._v("Municipio:")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-4" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.depmun.valor,
+                              expression: "depmun.valor",
+                            },
+                          ],
+                          staticClass: "form-select  btn-warning",
+                          attrs: {
+                            placeholder: "Seleccione Municipio",
+                            "aria-label": "Default select example",
+                          },
+                          on: {
+                            click: _vm.mapCenter,
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.depmun,
+                                "valor",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { selected: "" },
+                            },
+                            [_vm._v("Seleccione Un Municipio")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { value: "santa maria" },
+                            },
+                            [_vm._v("Santa Maria")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { value: "santa elena" },
+                            },
+                            [_vm._v("Santa Elena")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticClass: "btn btn-light",
+                              attrs: { value: "alegria" },
+                            },
+                            [_vm._v("Alegria")]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col border border-dark" }, [
+                    _c("div", { staticClass: "row p-1" }, [
+                      _c("div", { staticClass: "col col-md-4" }, [
+                        _vm._v("Producto:"),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col col-md-4" },
+                        [
+                          _c("v-select-comercios", {
+                            staticClass: "form-control",
+                            staticStyle: { width: "250px" },
+                            attrs: {
+                              title: "Seleccione el Producto",
+                              options: _vm.basicos,
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.base,
+                              callback: function ($$v) {
+                                _vm.base = $$v
+                              },
+                              expression: "base",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row p-1" }, [
+                      _c("div", { staticClass: "col col-md-4" }, [
+                        _vm._v("cantidad:"),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-md-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.cantidad,
+                              expression: "cantidad",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          staticStyle: { width: "250px" },
+                          attrs: {
+                            required: "",
+                            type: "number",
+                            step: "1.00",
+                            pattern: "[0-9]{3,10}",
+                          },
+                          domProps: { value: _vm.cantidad },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.cantidad = $event.target.value
+                            },
+                          },
+                        }),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row p-1" }, [
+                      _c("div", { staticClass: "col col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.obtenerProductobase()
+                              },
+                            },
+                          },
+                          [_vm._v("Agregar")]
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row p-1" }, [
+                    _vm._v(
+                      "\n            Lista de productos\n                            "
+                    ),
+                    _c(
+                      "table",
+                      {
+                        staticClass: "table table-light table-striped scroll",
+                        staticStyle: { width: "400px" },
+                        attrs: { id: "tablalista" },
+                      },
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          { staticStyle: { height: "200px" } },
+                          _vm._l(_vm.lista, function (item) {
+                            return _c("tr", { key: item.idBase }, [
+                              _c("td", [_vm._v(_vm._s(item.nombre))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.precio))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.cantidad))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.eliminarProductobase(item)
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("Eliminar")]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning text-white",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.filtrarComercio()
+                          },
+                        },
+                      },
+                      [_vm._v("Filtrar")]
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col border border-dark" }, [
+                  _c(
+                    "div",
+                    { staticClass: "container m-3 " },
+                    [
+                      _c(
+                        "GmapMap",
+                        {
+                          staticStyle: {
+                            width: "800px",
+                            height: "400px",
+                            "margin-left": "1px",
+                          },
+                          attrs: {
+                            center: _vm.ubicacion,
+                            zoom: 14,
+                            "map-type-id": "roadmap",
+                          },
+                        },
+                        [
+                          _c(
+                            "Gmap-info-window",
+                            {
+                              attrs: {
+                                option: _vm.infoWindowOptions,
+                                position: _vm.infoWindowPosition(),
+                                opened: _vm.infoWindowOpened,
+                              },
+                              on: { closeclick: _vm.handleInfoWindowClose },
+                            },
+                            [
+                              _c("div", { staticClass: "info-window" }, [
+                                _c("h2", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.activeComercio.nombre
+                                    ),
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("h5", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.activeComercio.direccion
+                                    ),
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("p", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.activeComercio.tipo
+                                    ),
+                                  },
+                                }),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.comerciosfil, function (item) {
+                            return _c("GmapMarker", {
+                              key: item.id,
+                              attrs: {
+                                position: _vm.getMark(item),
+                                clickable: true,
+                                draggable: false,
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.handleMarkclicked(item)
+                                },
+                              },
+                            })
+                          }),
+                        ],
+                        2
+                      ),
                       _vm._v(
-                        "\n                            Buscar productos\n                            "
+                        "\n\n                 Productos Disponibles\n                 "
                       ),
                       _c(
                         "table",
                         {
                           staticClass: "table table-light table-striped scroll",
+                          staticStyle: { width: "800px" },
                           attrs: { id: "tabla" },
                         },
                         [
-                          _c("thead", [
-                            _c("tr", [
-                              _c("th", { attrs: { colspan: "8" } }, [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.buscar1,
-                                      expression: "buscar1",
-                                    },
-                                  ],
-                                  staticClass: "form-control",
-                                  staticStyle: { width: "355px" },
-                                  attrs: {
-                                    title: "Introduzca el texto a buscar",
-                                    placeholder: "Buscar Producto",
-                                    type: "text",
-                                  },
-                                  domProps: { value: _vm.buscar1 },
-                                  on: {
-                                    keyup: _vm.buscandoProductoBase,
-                                    input: function ($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.buscar1 = $event.target.value
-                                    },
-                                  },
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "col col-md-12",
-                                    attrs: { id: "res2" },
-                                  },
-                                  [_vm._v("Resultados: ")]
-                                ),
-                                _vm._v(" "),
-                                _c("div", {
-                                  staticClass: "col col-md-12",
-                                  attrs: { id: "" },
-                                }),
-                              ]),
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(0),
-                          ]),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c(
                             "tbody",
-                            _vm._l(_vm.basicos, function (item) {
-                              return _c("tr", { key: item.idBase }, [
-                                _c("td", [_vm._v(_vm._s(item.nombre))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(item.precio))]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.cantidad,
-                                        expression: "cantidad",
-                                      },
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      required: "",
-                                      type: "number",
-                                      step: "1.00",
-                                      pattern: "[0-9]{3,10}",
-                                    },
-                                    domProps: { value: _vm.cantidad },
-                                    on: {
-                                      input: function ($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.cantidad = $event.target.value
-                                      },
-                                    },
-                                  }),
+                            { staticStyle: { height: "150px" } },
+                            _vm._l(_vm.productosfil, function (item) {
+                              return _c("tr", { key: item.idProducto }, [
+                                _c("td", { staticStyle: { width: "200px" } }, [
+                                  _vm._v(_vm._s(item.nombre)),
                                 ]),
                                 _vm._v(" "),
-                                _c("td", [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-success",
-                                      attrs: { type: "button" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.obtenerProductobase(item)
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Agregar")]
-                                  ),
+                                _c("td", { staticStyle: { width: "200px" } }, [
+                                  _vm._v(_vm._s(item.precio)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticStyle: { width: "200px" } }, [
+                                  _vm._v(_vm._s(item.precioe)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticStyle: { width: "200px" } }, [
+                                  _vm._v(_vm._s(item.fechaf)),
                                 ]),
                               ])
                             }),
@@ -34829,173 +36711,8 @@ var render = function () {
                           ),
                         ]
                       ),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col border border-dark" }, [
-                  _vm._v(
-                    "\n                            Lista de productos\n                            "
-                  ),
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-light table-striped scroll",
-                      staticStyle: { width: "400px" },
-                      attrs: { id: "tablalista" },
-                    },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        { staticStyle: { height: "466px" } },
-                        _vm._l(_vm.lista, function (item) {
-                          return _c("tr", { key: item.idBase }, [
-                            _c("td", [_vm._v(_vm._s(item.nombre))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.precio))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.cantidad))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.eliminarProductobase(item)
-                                    },
-                                  },
-                                },
-                                [_vm._v("Eliminar")]
-                              ),
-                            ]),
-                          ])
-                        }),
-                        0
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-warning text-white",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function ($event) {
-                          return _vm.filtrarComercio()
-                        },
-                      },
-                    },
-                    [_vm._v("Filtrar")]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col border border-dark" }, [
-                  _vm._v(
-                    "\n                            Comercios Disponibles\n                        "
-                  ),
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-light table-striped scroll",
-                      staticStyle: { width: "500px" },
-                      attrs: { id: "tabla" },
-                      on: { contextmenu: _vm.indiCom },
-                    },
-                    [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        { staticStyle: { height: "190px" } },
-                        _vm._l(_vm.comerciosfil, function (item) {
-                          return _c("tr", { key: item.idComercio }, [
-                            _c("td", [_vm._v(_vm._s(item.nombre))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.direccion))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.tipo))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.verProducto(item)
-                                    },
-                                  },
-                                },
-                                [_vm._v("Ver Productos")]
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.verUbicacion(item)
-                                    },
-                                  },
-                                },
-                                [_vm._v("Ver Ubicacion")]
-                              ),
-                            ]),
-                          ])
-                        }),
-                        0
-                      ),
-                    ]
-                  ),
-                  _vm._v(
-                    "\n                       \n                       \n                            Productos Disponibles\n                        "
-                  ),
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-light table-striped scroll",
-                      staticStyle: { width: "500px" },
-                      attrs: { id: "tabla" },
-                    },
-                    [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        { staticStyle: { height: "150px" } },
-                        _vm._l(_vm.productosfil, function (item) {
-                          return _c("tr", { key: item.idProducto }, [
-                            _c("td", { staticStyle: { width: "150px" } }, [
-                              _vm._v(_vm._s(item.nombre)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticStyle: { width: "150px" } }, [
-                              _vm._v(_vm._s(item.precio)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticStyle: { width: "150px" } }, [
-                              _vm._v(_vm._s(item.precioe)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticStyle: { width: "150px" } }, [
-                              _vm._v(_vm._s(item.fechaf)),
-                            ]),
-                          ])
-                        }),
-                        0
-                      ),
-                    ]
+                    ],
+                    1
                   ),
                 ]),
               ]),
@@ -35003,100 +36720,126 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _c("div", [
-          _c(
-            "div",
-            { staticClass: "container m-3 " },
-            [
-              _c(
-                "GmapMap",
-                {
-                  staticStyle: {
-                    width: "1300px",
-                    height: "600px",
-                    "margin-left": "1px",
-                  },
-                  attrs: {
-                    center: _vm.ubicacion,
-                    zoom: 14,
-                    "map-type-id": "roadmap",
-                  },
-                },
-                [
-                  _c(
-                    "Gmap-info-window",
-                    {
-                      attrs: {
-                        option: _vm.infoWindowOptions,
-                        position: _vm.infoWindowPosition(),
-                        opened: _vm.infoWindowOpened,
-                      },
-                      on: { closeclick: _vm.handleInfoWindowClose },
-                    },
-                    [
-                      _c("div", { staticClass: "info-window" }, [
-                        _c("h2", {
-                          domProps: {
-                            textContent: _vm._s(_vm.activeComercio.nombre),
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("h5", {
-                          domProps: {
-                            textContent: _vm._s(_vm.activeComercio.direccion),
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", {
-                          domProps: {
-                            textContent: _vm._s(_vm.activeComercio.tipo),
-                          },
-                        }),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.comerciosfil, function (item) {
-                    return _c("GmapMarker", {
-                      key: item.id,
-                      attrs: {
-                        position: _vm.getMark(item),
-                        clickable: true,
-                        draggable: false,
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.handleMarkclicked(item)
-                        },
-                      },
-                    })
-                  }),
-                ],
-                2
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(4),
-        ]),
+        _c("div"),
       ]),
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-header text-white bg-secondary text-center" },
+      [_vm._v("\n                Comercios Destacados\n    ")]
+    ),
+    _vm._v(" "),
+    _c("table", { staticClass: "table" }, [
+      _vm._m(2),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.comercios, function (item) {
+          return _c("tr", { key: item.idComercio }, [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.nombre))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.tipo))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.direccion))]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.verUbicacion(item)
+                    },
+                  },
+                },
+                [_vm._v("Ver Ubicacion")]
+              ),
+            ]),
+          ])
+        }),
+        0
+      ),
+    ]),
+    _vm._v(" "),
+    _c(
+      "footer",
+      { staticClass: "text-center text-lg-start bg-light text-muted" },
+      [
+        _vm._m(3),
+        _vm._v(" "),
+        _c("section", {}, [
+          _c(
+            "div",
+            { staticClass: "container text-center text-md-start mt-5" },
+            [
+              _c("div", { staticClass: "row mt-3" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" },
+                  [
+                    _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+                      _vm._v("\n            Ventanas\n          "),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-reset",
+                          attrs: { href: "#!" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.abrirForma()
+                            },
+                          },
+                        },
+                        [_vm._v("Inicio")]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-reset",
+                          attrs: { href: "#!" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.abrirAyuda()
+                            },
+                          },
+                        },
+                        [_vm._v("Ayuda")]
+                      ),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _vm._m(8),
+              ]),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(9),
+      ]
+    ),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Nombre")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Precio Sugerido")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Cantidad")]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -35146,34 +36889,6 @@ var staticRenderFns = [
             {
               staticClass: "col col-md-12",
               staticStyle: { width: "400px" },
-              attrs: { id: "rescom" },
-            },
-            [_vm._v("Resultados: ")]
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Direccion")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Tipo de comercio")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { colspan: "8" } }, [
-          _c(
-            "div",
-            {
-              staticClass: "col col-md-12",
-              staticStyle: { width: "400px" },
               attrs: { id: "respo" },
             },
             [_vm._v("Resultados: ")]
@@ -35191,15 +36906,15 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("tr", [
-        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Nombre")]),
+        _c("th", { staticStyle: { width: "200px" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "150px" } }, [_vm._v("Precio Base")]),
+        _c("th", { staticStyle: { width: "200px" } }, [_vm._v("Precio Base")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "150px" } }, [
+        _c("th", { staticStyle: { width: "200px" } }, [
           _vm._v("Precio Especial"),
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "150px" } }, [
+        _c("th", { staticStyle: { width: "200px" } }, [
           _vm._v("Fecha Final (precio especial)"),
         ]),
       ]),
@@ -35209,433 +36924,207 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ubicacion")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      {
+        staticClass:
+          "d-flex justify-content-center justify-content-lg-between p-4 border-bottom",
+      },
+      [
+        _c("div", { staticClass: "me-5 d-none d-lg-block" }, [
+          _c("span", [_vm._v("Sigue en contacto con nosotros:")]),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-facebook-f" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-twitter" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-google" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-instagram" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-linkedin" }),
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "me-4 text-reset", attrs: { href: "" } }, [
+            _c("i", { staticClass: "fab fa-github" }),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _c("i", { staticClass: "fas fa-gem me-3" }),
+          _vm._v("EasyPrice Company\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n            Esperamos que su experiencia en EasyPrice sea grata y de utlidad.\n            aqui te dejamos unos enlaces que pueden resultarte utiles.\n            tambien tienes  nuestros contactos de empresa por si buscas ayuda.\n          "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("a", { staticClass: "text-reset", attrs: { href: "#!" } }, [
+        _vm._v("Mapa"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c(
+        "a",
+        {
+          staticClass: "text-reset",
+          attrs: { href: "http://127.0.0.1:8000/NewPassword" },
+        },
+        [_vm._v("Mi Cuenta")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _vm._v("\n            Enlaces Utiles\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.defensoria.gob.sv/" },
+            },
+            [_vm._v("D. Del Consumidor")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.superselectos.com/" },
+            },
+            [_vm._v(" Super Selectos")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "a",
+            {
+              staticClass: "text-reset",
+              attrs: { href: "https://www.walmart.com.sv/" },
+            },
+            [_vm._v("Walmart")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" },
+      [
+        _c("h6", { staticClass: "text-uppercase fw-bold mb-4" }, [
+          _vm._v("Contacto"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-home me-3" }),
+          _vm._v(" Usulutan, Usulutan, SV"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-envelope me-3" }),
+          _vm._v("\n            easyprice@info.com\n          "),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-phone me-3" }),
+          _vm._v(" + 503 7209-9091"),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("i", { staticClass: "fas fa-print me-3" }),
+          _vm._v(" + 503 2626-6767"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       {
-        staticClass: "carousel carousel-dark slide",
-        attrs: {
-          id: "carouselExampleDark",
-          "data-bs-ride": "carousel",
-          width: "1000",
-          height: "100",
-          align: "center",
-        },
+        staticClass: "text-center p-4",
+        staticStyle: { "background-color": "rgba(0, 0, 0, 0.05)" },
       },
       [
-        _c("div", { staticClass: "carousel-indicators" }, [
-          _c("button", {
-            staticClass: "active",
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleDark",
-              "data-bs-slide-to": "0",
-              "aria-current": "true",
-              "aria-label": "Slide 1",
-            },
-          }),
-          _vm._v(" "),
-          _c("button", {
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleDark",
-              "data-bs-slide-to": "1",
-              "aria-label": "Slide 2",
-            },
-          }),
-          _vm._v(" "),
-          _c("button", {
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleDark",
-              "data-bs-slide-to": "2",
-              "aria-label": "Slide 3",
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "carousel-inner" }, [
-          _c(
-            "div",
-            {
-              staticClass: "carousel-item active",
-              attrs: { "data-bs-interval": "10000" },
-            },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "https://cdn-pro.elsalvador.com/wp-content/uploads/2019/10/Imagen-shutterstock_152186840.jpg",
-                          alt: "Card image cap",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v("Canasta basica"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v("Productos en oferta"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                          },
-                          [_vm._v("Ver aqui")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "https://copades.com/monec/wp-content/uploads/2021/07/ca-1-720x340.jpg",
-                          alt: "Card image cap",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v("Canasta basica"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v("Productos en oferta"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                          },
-                          [_vm._v("Ver aqui")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "https://s3.amazonaws.com/prod-wp-hrn/wp-content/uploads/2021/02/canasta-basica-subio.png",
-                          alt: "Card image cap",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v("Canasta basica"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v("Productos en oferta"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                          },
-                          [_vm._v("Ver aqui")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "carousel-item",
-              attrs: { "data-bs-interval": "2000" },
-            },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "https://cdn-pro.elsalvador.com/wp-content/uploads/2019/10/Imagen-shutterstock_152186840.jpg",
-                          alt: "Card image cap",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v("Canasta basica"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v("Productos en oferta"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                          },
-                          [_vm._v("Ver aqui")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "https://copades.com/monec/wp-content/uploads/2021/07/ca-1-720x340.jpg",
-                          alt: "Card image cap",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v("Canasta basica"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v("Productos en oferta"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                          },
-                          [_vm._v("Ver aqui")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "https://s3.amazonaws.com/prod-wp-hrn/wp-content/uploads/2021/02/canasta-basica-subio.png",
-                          alt: "Card image cap",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v("Canasta basica"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v("Productos en oferta"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                          },
-                          [_vm._v("Ver aqui")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "carousel-item" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card", staticStyle: { width: "18rem" } },
-                  [
-                    _c("img", {
-                      staticClass: "card-img-top",
-                      attrs: {
-                        src: "https://cdn-pro.elsalvador.com/wp-content/uploads/2019/10/Imagen-shutterstock_152186840.jpg",
-                        alt: "Card image cap",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v("Canasta basica"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v("Productos en oferta"),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { href: "#" },
-                        },
-                        [_vm._v("Ver aqui")]
-                      ),
-                    ]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card", staticStyle: { width: "18rem" } },
-                  [
-                    _c("img", {
-                      staticClass: "card-img-top",
-                      attrs: {
-                        src: "https://copades.com/monec/wp-content/uploads/2021/07/ca-1-720x340.jpg",
-                        alt: "Card image cap",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v("Canasta basica"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v("Productos en oferta"),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { href: "#" },
-                        },
-                        [_vm._v("Ver aqui")]
-                      ),
-                    ]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card", staticStyle: { width: "18rem" } },
-                  [
-                    _c("img", {
-                      staticClass: "card-img-top",
-                      attrs: {
-                        src: "https://s3.amazonaws.com/prod-wp-hrn/wp-content/uploads/2021/02/canasta-basica-subio.png",
-                        alt: "Card image cap",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v("Canasta basica"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v("Productos en oferta"),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { href: "#" },
-                        },
-                        [_vm._v("ver aqui")]
-                      ),
-                    ]),
-                  ]
-                ),
-              ]),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
+        _vm._v("\n    © 2022 Copyright:\n    "),
         _c(
-          "button",
+          "a",
           {
-            staticClass: "carousel-control-prev",
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleDark",
-              "data-bs-slide": "prev",
-            },
+            staticClass: "text-reset fw-bold",
+            attrs: { href: "https://easyprice.tk" },
           },
-          [
-            _c("span", {
-              staticClass: "carousel-control-prev-icon",
-              attrs: { "aria-hidden": "true" },
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "visually-hidden" }, [
-              _vm._v("Previous"),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "carousel-control-next",
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleDark",
-              "data-bs-slide": "next",
-            },
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-next-icon",
-              attrs: { "aria-hidden": "true" },
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "visually-hidden" }, [_vm._v("Next")]),
-          ]
+          [_vm._v("EasyPrice Company")]
         ),
       ]
     )
@@ -35987,6 +37476,41 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "row p-1" }, [
+                  _c("div", { staticClass: "col col-md-2" }, [
+                    _vm._v("Imagen:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-md-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.producto.imagen,
+                          expression: "producto.imagen",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "300px" },
+                      attrs: {
+                        title: "Ingrese la categoria",
+                        required: "",
+                        type: "text",
+                      },
+                      domProps: { value: _vm.producto.imagen },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.producto, "imagen", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+                _vm._v(" "),
                 _vm._m(0),
               ]
             ),
@@ -36061,7 +37585,7 @@ var render = function () {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(item.precio))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.tipo.label))]),
+                            _c("td", [_vm._v(_vm._s(item.ncategoria))]),
                             _vm._v(" "),
                             _c("td", [
                               _c(
@@ -36170,7 +37694,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.nombre))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.comercio.label))]),
+                      _c("td", [_vm._v(_vm._s(item.nombrecomercio))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.precio))]),
                       _vm._v(" "),
@@ -36181,6 +37705,8 @@ var render = function () {
                       _c("td", [_vm._v(_vm._s(item.fechaf))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(item.ncategoria))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.imagen))]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -36278,6 +37804,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Fecha Final (Precio Especial)")]),
       _vm._v(" "),
       _c("th", [_vm._v("Categoria")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Imagen")]),
     ])
   },
 ]
@@ -36459,7 +37987,7 @@ var render = function () {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col col-md-12", attrs: { id: "res2" } },
+                      { staticClass: "col col-md-12", attrs: { id: "res3" } },
                       [_vm._v("Resultados: ")]
                     ),
                   ]),

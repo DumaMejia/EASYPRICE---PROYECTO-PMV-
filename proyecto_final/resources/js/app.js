@@ -70,6 +70,8 @@ Vue.component('tipo-component', require('./components/TipoComponent.vue').defaul
 Vue.component('mapa-component', require('./components/MapaComponent.vue').default);
 Vue.component('chat-component', require('./components/ChatComponent.vue').default);
 Vue.component('basico-component', require('./components/BasicoComponent.vue').default);
+Vue.component('favoritos-component', require('./components/FavoritosComponent.vue').default);
+Vue.component('inicio-component', require('./components/InicioComponent.vue').default);
 Vue.component('v-select-comercios', vSelect);
 Vue.component('v-select-tipos', vSelect);
 Vue.use(VueGeolocation);
@@ -90,16 +92,40 @@ const app = new Vue({
             mapa:{mostrar:false},
             chat:{mostrar:false},
             basico:{mostrar:false},
+            favoritos:{mostrar:false},
+            inicio:{mostrar:false},
         }
     },
     methods:{
         abrirForm(form){
+            
+
             this.forms[form].mostrar = !this.forms[form].mostrar;
             this.$refs[form].obtenerDatos();
             
         },
-        abrir(form){
+        abrirmapa(form){
+            this.forms['inicio'].mostrar = false;
+            this.forms['favoritos'].mostrar = false;
             this.forms[form].mostrar = !this.forms[form].mostrar;
+            this.$refs[form].obtenerDatos();
+        },
+        abririnicio(form){
+            this.forms['mapa'].mostrar = false;
+            this.forms['favoritos'].mostrar = false;
+            this.forms[form].mostrar = !this.forms[form].mostrar;
+        },
+        abrirayuda(form){
+            this.forms['inicio'].mostrar = false;
+            this.forms['mapa'].mostrar = false;
+            this.forms[form].mostrar = !this.forms[form].mostrar;
+        },
+        abrirayudaCu(form){
+            let token = 0;
+            token = 1;
+            localStorage.setItem('token', token);
+            location.href = "home"
+            
         },
         abrirBd(){
             /**
